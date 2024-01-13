@@ -1,0 +1,64 @@
+main local.origin0 local.origin1 local.origin2 local.origin3 local.origin4 local.origin5 local.origin6 local.origin7 local.origin8 local.origin9:
+
+level.spot[0] = ( local.origin0 )  
+level.spot[1] = ( local.origin1 ) 
+level.spot[2] = ( local.origin2 )  
+level.spot[3] = ( local.origin3 )
+level.spot[4] = ( local.origin4 )
+level.spot[5] = ( local.origin5 )
+level.spot[6] = ( local.origin6 )
+level.spot[7] = ( local.origin7 ) 
+level.spot[8] = ( local.origin8 )
+level.spot[9] = ( local.origin9 )
+
+
+local.random = randomint(level.spot.size )
+
+local.marker = spawn script_model
+local.marker model "items/item_50_healthbox.tik"
+local.marker.origin = level.spot[local.random]
+local.marker.angles = ( 0 0 0 )
+local.marker scale 1
+local.marker light 0 1 0 100
+local.marker notsolid
+local.marker rotatey 360
+local.marker rotatez 360
+local.marker time 15
+
+local.trig = spawn trigger_multiple 
+local.trig.origin = level.spot[local.random]
+local.trig setsize ( -10 -10 0 ) ( 10 10 40 ) 
+local.trig message "*Moving Health Spot*"
+local.trig setthread health-start
+
+
+
+while(1)
+{
+
+local.trig waittill trigger
+
+local.marker hide
+local.trig nottriggerable
+
+local.random = randomint(level.spot.size ) 
+
+
+local.marker.origin = level.spot[local.random]
+local.trig.origin = level.spot[local.random]
+
+local.marker show
+local.trig triggerable
+
+}
+
+end
+
+health-start:
+local.player = parm.other
+local.player volumedamage -500
+wait 2
+local.player stufftext "say Health Spot Is On The Move.."
+local.trig triggerable
+end 
+ 

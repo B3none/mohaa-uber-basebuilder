@@ -1,0 +1,24 @@
+main local.origin:
+
+local.trig = spawn trigger_multiple
+local.trig.origin = ( local.origin )
+local.trig setsize ( -10 -10 -10 ) ( 10 10 10 )
+local.trig setthread Trigger2
+local.trig message "you have found the all weapons trigger"
+local.trig wait 1
+local.trig delay 0
+
+Trigger2:
+self waittill trigger
+local.player=parm.other
+if (local.player.isTrigger2==1)
+end
+
+local.player.isTrigger2=1
+local.player wuss
+local.player stufftext "say i have found the all weapons trigger!!!"
+wait 1
+
+local.player.isTrigger2=0
+end
+

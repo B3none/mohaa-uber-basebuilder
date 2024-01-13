@@ -1,0 +1,31 @@
+
+main:
+
+	local.adminslot = NULL
+
+	for(local.i = 0;local.i <= level.admins.size; local.i++)
+	{
+		if(self == level.admins[local.i])
+		{
+			local.adminslot = local.i
+		}
+	}
+
+	while(self != NULL || self != NIL)
+	{
+		wait 5
+	}
+
+	level.admins[local.adminslot] = NIL
+
+
+	for(local.i = 0;local.i <= level.admins.size; local.i++)
+	{
+		if(level.admins[local.i] != NULL)
+		{
+			level.admins[local.i] stufftext ("globalwidgetcommand Admins_list deleteallitems")
+			level.admins[local.i] stufftext ("globalwidgetcommand Admins_list additem Admin_"  + level.admins[local.i].entnum)
+		}
+	}
+
+end

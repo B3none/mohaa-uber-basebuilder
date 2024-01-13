@@ -1,0 +1,75 @@
+// Check a player for lean bind and displays info in console 
+
+main:
+
+	if(level.run["check_leanbind"] != "1" ){end}
+
+	
+	while(level.run["check_leanbind"] == "1")
+	{
+		wait 1
+	
+		for(local.i = 1; local.i <= $player.size; local.i++)
+		{ 
+			$player[local.i] waitthread check_leanbind
+			wait 1
+		}
+	}
+
+end
+
+check_leanbind:
+
+	local.possibilities = waitexec settings/lean_binds/lean_binds.txt
+
+	if(local.possibilities==NIL)
+	{
+		level.run["check_leanbind"] = "0"
+		exec global/ac/console_feedback.scr "ERROR: There was an error searching for lean bindings"
+		end
+	}
+	
+	for(local.i= 1; local.i <= local.possibilities.size; local.i++)
+	{	
+		local.bind = local.possibilities[local.i][1]
+		
+		if(local.bind == "none" || "None")
+		{
+			local.bind = local.possibilities[local.i][2]
+			local.ikke = 1
+		}
+		else
+		{
+			local.ikke = 0
+		}
+
+		local.key[1] = getboundkey1 local.bind
+		local.key[2] = getboundkey2 local.bind
+
+		iprintln local.key[1]
+		iprintln local.key[2]
+		wait 1	
+		if(local.ikke == 1)
+		{
+			if(local.key[1] == "Not Bound" && local.key[2] == "Not Bound")
+			{
+				self thread using_lb
+			}
+		}
+		else
+		{
+			if(local.key[1] != "Not Bound" || local.key[2] != "Not Bound")
+			{
+				self thread using_lb
+			}
+		}
+	}
+end
+
+using_lb:
+
+if(self.lb == NIL){self.lb = 0 }
+
+self.lb ++
+iprintln ("using lean bind " + self.lb )
+end

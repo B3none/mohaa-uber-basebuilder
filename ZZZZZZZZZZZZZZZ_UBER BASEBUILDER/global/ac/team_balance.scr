@@ -1,0 +1,81 @@
+main:
+
+	if(level.run["team-balance"]!="1"){end}
+
+	//local.is_teams = getcvar "g_gametype"
+	
+	//if(local.is_teams == "1")
+	//{
+	//	end //no ppint in running ona  ffa match
+	//}
+	while(level.run["team-balance"]=="1")
+	{
+		local.scantime = waitexec global/settings.scr::getcmd "scan-wait"
+		wait local.scantime
+
+		if($player.size > 1 )
+		{
+			local.team[allies] = 0
+			local.team[axis] = 0
+				
+			for(local.i = 1 ; local.i <= $player.size ; local.i++)
+			{
+				if($player[local.i].dmteam != "spectator")
+				{
+					local.team[$player[local.i].dmteam] ++
+				}
+			}
+
+			if(local.team[allies] !=  local.team[axis] ) 
+			{
+				if(local.team[allies] - local.team[axis] > 1 || local.team[allies] - local.team[axis] < -1) //if they are more then 1 ahead then u can equal out
+				{
+					if(local.team[allies] > local.team[axis])
+					{
+						local.menneske = waitthread pick_random_player "allies" 
+						local.menneske waitthread swap_team
+					}
+					else
+					{
+						local.menneske = waitthread pick_random_player "axis" 
+						local.menneske waitthread swap_team
+					}
+				}
+			}
+		}
+	}
+end
+
+
+pick_random_player local.team:
+
+	local.nummer = $player.size
+
+	local.er = 0	//didnt get player
+
+	while(local.er == 0)
+	{		
+		local.kanskje = randomint( local.nummer )  + 1
+
+		//find a dead player to swap
+		if($player[local.kanskje].dmteam == local.team && !(isalive $player[local.kanskje]))
+		{
+			local.er = 1
+			end $player[local.kanskje]
+		}
+		
+		wait 1
+	}
+end
+
+	
+swap_team:
+	local.team = self.dmteam
+	self auto_join_team	//use anyway. 
+	wait 1
+	if (self.dmteam != local.team)
+	{
+		self iprint "You were randomly picked to swap teams to even them out" 1
+	}
+end
+	

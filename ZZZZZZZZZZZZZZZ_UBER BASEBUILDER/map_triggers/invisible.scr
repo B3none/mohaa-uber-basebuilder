@@ -1,0 +1,34 @@
+main local.origin:
+
+local.trig = spawn trigger_multiple
+local.trig.origin = ( local.origin )        
+local.trig setsize ( -10 -10 -10 ) ( 10 10 10 )  
+local.trig setthread  Trigger5 
+local.trig message "you have found the invisible trigger, you are invisible for 120 seconds"
+local.trig wait 1    
+local.trig delay 0 
+
+Trigger5:  
+self waittill trigger   
+local.player=parm.other 
+if (local.player.isTrigger5==1) 
+end    
+
+local.player.isTrigger5=1  
+local.player hide 
+local.player stufftext "say i have found the invisible trigger, i am invisible for 120 seconds!!!"
+wait 1
+$player stopwatch 120
+wait 120
+local.player show
+local.player stufftext "say i am now visible...come and kill me!!!" 
+local.player.isTrigger5=0
+end   
+
+
+
+
+
+
+
+

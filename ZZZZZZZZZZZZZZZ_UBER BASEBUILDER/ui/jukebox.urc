@@ -1,0 +1,138 @@
+menu "camper_jukebox" 640 480 NONE 0
+include "Admin_menu/jukebox.inc"
+
+
+
+
+
+
+
+
+
+resource
+Label
+{
+name "Default"
+rect 0 0 640 480
+fgcolor 0.00 0.00 0.00 1.00
+bgcolor 0.00 0.00 1.00 0.70
+borderstyle "RAISED"
+}
+resource
+Button
+{
+title "Audio Options"
+name "Default"
+rect 350 440 200 30
+fgcolor 0.00 0.00 0.00 1.00
+bgcolor 0.00 1.00 1.00 1.00
+borderstyle "RAISED"
+stuffcommand "pushmenu audio_options"
+clicksound "menu/sound/apply.wav"
+hoversound "menu/sound/scroll.wav"
+font facfont-20
+shader "menu_button_trans"
+hovershader "menu_button_glow"
+
+}
+resource
+Slider
+{
+title "Master Volume Slider"
+name "Default"
+rect 240 450 100 10
+fgcolor 0.00 0.00 0.00 1.00
+bgcolor 0.50 0.50 0.50 1.00
+borderstyle "RAISED"
+linkcvar "s_volume"
+shader "textures/menu/slider"
+slidertype float
+setrange 0 1
+stepsize 0.1
+
+}
+resource
+Button
+{
+title "Play"
+name "Default"
+rect 10 420 50 50
+fgcolor 0.00 0.00 0.00 1.00
+bgcolor 0.00 1.00 1.00 1.00
+borderstyle "RAISED"
+stuffcommand "playtrack"
+clicksound "menu/sound/apply.wav"
+hoversound "menu/sound/scroll.wav"
+shader "menu_button_trans"
+hovershader "menu_button_glow"
+
+}
+resource
+Button
+{
+title "Stop"
+name "Default"
+rect 65 430 40 40
+fgcolor 0.00 0.00 0.00 1.00
+bgcolor 0.00 1.00 1.00 1.00
+borderstyle "RAISED"
+stuffcommand "stopmp3"
+clicksound "menu/sound/apply.wav"
+
+hoversound "menu/sound/scroll.wav"
+shader "menu_button_trans"
+hovershader "menu_button_glow"
+
+}
+resource
+Button
+{
+title "<"
+name "Default"
+rect 120 440 30 30
+fgcolor 0.00 0.00 0.00 1.00
+bgcolor 0.00 1.00 1.00 1.00
+borderstyle "RAISED"
+stuffcommand "prevtrack"
+clicksound "menu/sound/apply.wav"
+
+hoversound "menu/sound/scroll.wav"
+shader "menu_button_trans"
+hovershader "menu_button_glow"
+
+}
+resource
+Button
+{
+title ">"
+name "Default"
+rect 155 440 30 30
+fgcolor 0.00 0.00 0.00 1.00
+bgcolor 0.00 1.00 1.00 1.00
+borderstyle "RAISED"
+stuffcommand "nexttrack"
+clicksound "menu/sound/apply.wav"
+
+hoversound "menu/sound/scroll.wav"
+shader "menu_button_trans"
+hovershader "menu_button_glow"
+
+}
+resource
+Button
+{
+title "M"
+name "Default"
+rect 200 440 30 30
+fgcolor 0.00 0.00 0.00 1.00
+bgcolor 0.00 1.00 1.00 1.00
+borderstyle "RAISED"
+stuffcommand "set s_volume 0"
+clicksound "menu/sound/apply.wav"
+
+hoversound "menu/sound/scroll.wav"
+shader "menu_button_trans"
+hovershader "menu_button_glow"
+
+}
+end.

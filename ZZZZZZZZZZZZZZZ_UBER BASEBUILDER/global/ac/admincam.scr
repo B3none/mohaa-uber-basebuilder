@@ -1,0 +1,122 @@
+// Admin cam 
+// main self is plaer to spec, local.admin is passed admin
+
+main local.admin:
+
+	if(local.admin == NIL)
+	{
+		exec global/ac/console_feedback.scr "You must specify a admin after camme"
+		exec global/ac/console_feedback.scr "eg. admin-cmd 1 camme 2"
+		end
+	}
+
+	local.admin = waitexec global/nagle.scr::find_player local.admin
+
+	if(self == local.admin)
+	{
+		local.admin iprint "You can not use camme yourself"
+		end
+	}
+
+	if(level.admincamon == local.admin)
+	{
+		local.admin iprint "Admin Cam is already being used"
+		end
+	}
+
+	level.admincamon = local.admin
+	
+	local.admin nodamage
+	local.admin hide
+	local.admin notsolid
+	local.admin noclip
+
+	local.origin = local.admin.origin
+
+	local.admin iprint "Press Fire to toggle between eye view" 1
+	local.admin iprint "Press USE to toggle stay" 1
+	
+	
+	/*
+	local.cam = "admincam" + randomint 1000 // make sure it's unique
+	local.camera = spawn Camera targetname local.cam
+	local.cam_trigger = spawn TriggerCameraUse target local.cam
+	local.cam_trigger doUse local.admin
+	local.camera targetname ""
+
+	local.camera orbit local.player // self
+	*/
+
+//
+//	local.player = spawn animate
+//	local.player.model = self.brushmodel
+//	local.player hide
+//	local.player notsolid
+//	local.player.origin = self.origin
+//	local.player.angles = self.angles
+//	local.player show
+
+	
+	group.eye = 0
+	group.end = 0
+
+	local.player = self
+
+	thread check 
+
+	while(group.end == 0)
+	{
+		waitframe
+
+		if(group.eye == 0)
+		{
+			local.admin.origin = local.player.origin - local.player.forwardvector * 56 //distance back
+			local.admin.origin +=  ( 0 0 24 ) //dist up
+		}
+		else
+		{
+			local.admin.origin = local.player.origin
+
+			local.vertical = (self getcontrollerangles 0)[2] //self.viewangles[2]
+	
+			local.admin.viewangles = ( self.viewangles[0] self.viewangles[1] local.vertical )
+				
+		}
+	}
+
+	local.admin.origin = local.origin 
+	local.admin show
+	local.admin takedamage
+	local.admin solid
+	local.admin noclip
+	local.admin iprint "Ending Admin Cam"
+	level.admincamon = NIL
+end
+
+check:
+
+	while(self != NULL && self != NIL && self.dmteam != "spectator")
+	{
+		if(self.fireheld == 1 )
+		{
+			if( group.eye == 1 )
+			{
+				group.eye = 0
+			}
+			else
+			{
+				group.eye = 1
+			}
+		}
+
+		if(self.useheld == 1)
+		{
+			group.end = 1
+			end
+		}
+
+		wait 0.2
+
+	}
+end
+

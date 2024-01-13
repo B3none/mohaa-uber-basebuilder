@@ -1,0 +1,105 @@
+
+main:
+
+	if(level.run["time-alive"] =="1")
+	{
+		local.time[seconds] = 0
+		local.time[minutes] = 0
+		local.time[hours] = 0
+
+		local.team = self.dmteam
+
+		while(isalive self && self.dmteam == local.team ) //&& self.forcespawn != 1 ) 
+		{
+			
+//			for(local.wait = 0;local.wait <= 1;local.wait += 0.05)
+//			{
+//				waitframe
+//				if(self.forcespawn == 1 ) 
+//				{
+//					break
+//				}
+//			}
+
+
+			wait 1
+
+			local.time[seconds]++
+
+			if(self==NULL || self == NIL ||  self.dmteam == spectator )
+			{
+				end	
+			}
+
+			if(local.time[seconds]==60)
+			{
+				local.time[minutes]++
+				local.time[seconds] = 0
+			}
+
+			if(local.time[minutes]==60)
+			{
+				local.time[hours]++
+				local.time[minutes] = 0
+			}
+		}
+	
+		local.timestr[1] = "seconds"
+		local.timestr[2] = "minutes"
+		local.timestr[3] = "hours"
+		
+		local.time_total = ""
+
+		if(game.time_alive_type == 1)
+		{
+			for(local.i = 1; local.i <= local.timestr.size; local.i++)
+			{
+				local.yey = local.timestr[local.i]
+
+				local.time[local.yey] = string local.time[local.yey]
+				
+				if(local.time[local.timestr[local.i]].size < 2)
+				{
+					local.time[local.timestr[local.i]] = ("0" + local.time[local.timestr[local.i]])
+				}
+			}
+				
+				
+			local.time_total = ( local.time[hours] + ":" + local.time[minutes] + ":" + local.time[seconds] )
+		}
+		else
+		{
+			if(local.time[hours] != 0)
+			{
+				if(local.time[hours] > 1)
+				{
+					local.time_total =  local.time_total + (local.time[hours] + " hours ")
+				}
+				else
+				{
+					local.time_total =  local.time_total + (local.time[hours] + " hour ")
+				}	
+			}
+
+			if(local.time[minutes] != 0)
+			{
+				if(local.time[minutes] > 1)
+				{
+					local.time_total =  local.time_total + (local.time[minutes] + " minutes ")
+				}
+				else
+				{
+					local.time_total =  local.time_total + (local.time[minutes] + " minute ")
+				}			
+			}
+			
+			if(local.time[seconds] != 0)
+			{
+				local.time_total =  local.time_total + (local.time[seconds] + " seconds ")	
+			}
+		}
+			
+		self iprint ("Time alive: " + local.time_total ) 1
+	}
+
+end

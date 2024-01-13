@@ -1,0 +1,591 @@
+// file for, shooting. being shot, and wepaons
+
+
+main local.action:
+
+	switch(local.action)
+	{
+	case "BOMB":
+		self zoomoff	
+		self waitthread bomb
+	break
+	case "SHOOT":
+		self thread shoot
+		self.shooting=1
+		wait self.shootdelay
+		self.shooting=0
+	break
+	case "CHANGE_WEAPON":
+		self.canchange = 0 
+		self thread change_weapon
+		wait self.changedelay 
+		self.canchange = 1 
+	break
+	}
+end
+
+shoot:
+
+	local.fwd_vec = angles_toforward self.viewangles
+	local.start = self gettagposition "eyes bone"
+	local.hit = trace (local.start + local.fwd_vec * 64 ) (local.start + local.fwd_vec * 22000 ) 0
+	
+	switch(self.planeweap)
+	{
+	case 1: //mg
+		self.plane playsound mg42_gun_snd_fire
+		self thread checkhit local.hit
+	break
+	case 2: //30 call
+		self.plane playsound jeep_snd_fire
+		self thread checkhit local.hit
+	break	
+	case 3: 
+		self thread rocket local.hit
+	break
+	default:
+		self thread checkhit local.hit
+
+	}
+
+/*
+	self.plane light 1 1 0 10
+	waitframe
+	self.plane light 0 0 0 0
+
+	local.dirtleft = spawn script_model
+	local.dirtleft model "models/fx/corona_red.tik"
+	local.dirtleft.origin = local.hit
+	local.dirtleft.scale = .5
+	local.dirtleft notsolid
+	local.dirtleft commanddelay 1.0 remove
+*/
+end
+
+checkhit local.place: 
+
+   self thread mgeffect local.place 
+
+   for(local.i = 1; local.i <= $player.size; local.i++) 
+   { 
+      local.player= $player[local.i]    
+      if(local.player!=self && local.player != NIL) 
+      { 
+         local.end_or_not = waitthread team_check local.player self 
+
+         if(local.end_or_not==1) 
+         { 
+            end //end if same team and team team killing is not on 
+         } 
+
+         if(local.player.flying==1) 
+         { 
+
+            if(local.player.plane.scale == .75) 
+            { 
+               local.hitvec = local.place - local.player.plane.origin 
+
+               local.hitvec_fwd = local.hitvec * local.player.plane.forwardvector 
+               local.hitvec_lf = local.hitvec * local.player.plane.leftvector 
+               local.hitvec_up = local.hitvec * local.player.plane.upvector 
+
+               local.is_hit_fwd = (abs local.hitvec_fwd) <= 200.0 
+               local.is_hit_lf = (abs local.hitvec_lf) <= 200.0 
+               local.is_hit_up = local.hitvec_up >= 0.0 && local.hitvec_up <= 35.0 
+               local.damage = 20 
+            } 
+            else 
+            { 
+
+
+               local.hitvec = local.place - local.player.plane.origin 
+
+               local.hitvec_fwd = local.hitvec * local.player.plane.forwardvector 
+               local.hitvec_lf = local.hitvec * local.player.plane.leftvector 
+               local.hitvec_up = local.hitvec * local.player.plane.upvector 
+
+
+               local.is_hit_fwd = (abs local.hitvec_fwd) <= 120.0 
+               local.is_hit_lf = (abs local.hitvec_lf) <= 120.0 
+               local.is_hit_up = local.hitvec_up >= 0.0 && local.hitvec_up <= 15.0 
+               local.damage = 30 
+            } 
+
+         } 
+         else 
+         { 
+            local.hitvec = local.place - local.player.origin 
+
+            local.hitvec_fwd = local.hitvec * local.player.forwardvector 
+            local.hitvec_lf = local.hitvec * local.player.leftvector 
+            local.hitvec_up = local.hitvec * local.player.upvector 
+
+            local.is_hit_fwd = (abs local.hitvec_fwd) <= 32.0 
+            local.is_hit_lf = (abs local.hitvec_lf) <= 32.0 
+            local.is_hit_up = local.hitvec_up >= 0.0 && local.hitvec_up <= 92.0 
+            local.damage = 45 
+         } 
+
+         if(local.is_hit_fwd && local.is_hit_lf && local.is_hit_up) 
+         { 
+            local.player damage self local.damage self.plane local.player.origin self.forwardvector (0 0 0) 10 1 18 -1 
+         } 
+      } 
+
+   } 
+   for(local.i = 1; local.i <= level.botlastid; local.i++) 
+   { 
+      local.player= level.actualbots[local.i] 
+      if(local.player!=self && local.player != NIL) 
+      { 
+         local.end_or_not = waitthread team_check local.player self 
+
+         if(local.end_or_not==1) 
+         { 
+            end //end if same team and team team killing is not on 
+         } 
+
+         local.hitvec = local.place - local.player.origin 
+
+         local.hitvec_fwd = local.hitvec * local.player.forwardvector 
+         local.hitvec_lf = local.hitvec * local.player.leftvector 
+         local.hitvec_up = local.hitvec * local.player.upvector 
+
+         local.is_hit_fwd = (abs local.hitvec_fwd) <= 32.0 
+         local.is_hit_lf = (abs local.hitvec_lf) <= 32.0 
+         local.is_hit_up = local.hitvec_up >= 0.0 && local.hitvec_up <= 92.0 
+         local.damage = 45 
+
+         if(local.is_hit_fwd && local.is_hit_lf && local.is_hit_up) 
+         { 
+            local.player damage self local.damage self.plane local.player.origin self.forwardvector (0 0 0) 10 1 18 -1 
+         } 
+      } 
+
+   } 
+
+end 
+
+
+team_check local.player local.shooter:
+	
+	local.gametype = getcvar "g_gametype"
+	
+	if(local.gametype=="1")
+	{
+		end 0
+	}
+	
+	local.ff =  getcvar "g_teamdamage"
+
+	if(local.ff=="0")
+	{
+		if(local.player.dmteam == local.shooter.dmteam)
+		{
+			end 1
+		}
+	}
+
+end 0
+	
+mgeffect local.place:
+
+	if(self.spawnedmg==0)
+	{
+		self.spawnedmg=1
+		local.left = ( self.plane gettagposition "tag_barrel01")
+
+		self.plane.gunleft = spawn statweapons/mg42_gun_fake.tik "targetname" ("planesmgleft" + self.entnum)  spawnflags 1
+		self.plane.gunleft.angles = self.plane.angles
+		self.plane.gunleft.origin = local.left
+		self.plane.gunleft attach self.plane "tag_barrel01"
+		self.plane.gunleft setPlayerUsable 0
+
+		if(self.dmteam=="axis")
+		{
+			local.right = ( self.plane gettagposition "tag_barrel02")  
+			self.plane.gunright = spawn statweapons/mg42_gun_fake.tik targetname ("planesmgright" + self.entnum) spawnflags 1
+			self.plane.gunright.angles = self.plane.angles
+			self.plane.gunright.origin = local.right
+			self.plane.gunright attach self.plane "tag_barrel02"
+			self.plane.gunright setPlayerUsable 0
+		}
+		else
+		{
+			local.right = ( self.plane gettagposition "tag_barrel04") 
+			self.plane.gunright = spawn statweapons/mg42_gun_fake.tik "targetname" ("planesmgright" + self.entnum)  spawnflags 1
+			self.plane.gunright.angles = self.plane.angles
+			self.plane.gunright.origin = local.right
+			self.plane.gunright attach self.plane "tag_barrel04"
+			self.plane.gunright setPlayerUsable 0
+		}
+
+		self.plane.gunright hide
+		self.plane.gunleft hide
+		self.plane.gunright notsolid
+		self.plane.gunleft notsolid
+	}
+
+		local.org = spawn script_origin 
+		local.org.origin = local.place
+
+		self.plane.gunright.angles = self.viewangles
+		self.plane.gunleft.angles = self.viewangles
+
+		self.plane.gunright setaimtarget local.org
+		self.plane.gunleft setaimtarget local.org
+
+		self.plane.gunleft anim fire
+		self.plane.gunright anim fire
+
+		local.org remove
+	//self.plane anim blast
+
+end
+
+////////////shot down////////////
+
+shotdown_setup:
+	local.shoot = spawn trigger_multiple "spawnflags" "128" "targetname" ("planehit" + self.entnum)
+	
+	if(self.plane.scale == .75)
+	{
+		local.shoot setsize ( -100 -100 -5 ) ( 100 100 30 )
+	}
+	else if(self.plane.scale == .2)
+	{
+		local.shoot setsize ( -60 -60 -5 ) ( 60 60 10 )
+	}
+
+	local.shoot.origin = self.plane.origin
+	local.shoot setthread shotdown
+	self.shottrig = local.shoot
+	local.shoot bind self.plane
+end
+		
+shotdown:
+
+	if(self != parm.other.shottrig && parm.other != $("world"))
+	{
+		local.player= parm.other
+
+		if(local.player!=NULL || isalive local.player)
+		{
+			for(local.i = 1; local.i <= $player.size; local.i++)
+			{
+				if($player[local.i].shottrig == self)
+				{
+
+					local.end_or_not = waitthread team_check $player[local.i] local.player
+		
+					if(local.end_or_not==1)
+					{
+						end //end if same team and team team killing is not on
+					}
+
+					$player[local.i] damage local.player level.plane_hit_damage local.player $player[local.i].origin local.player.forwardvector (0 0 0) 10 1 0 -1
+					end
+				}
+			}
+			
+		}
+	}
+end
+
+
+////////////^^shot down////////////
+
+/*
+rocket local.origin:
+
+	self.rocketside++
+	if(self.rocketside>2)
+	{
+		self.rocketside=1
+	}
+
+	if(self.rocket_ammo==0)
+	{
+		self iprint "0 Rockets"
+		self playsound bazooka_snd_noammo
+		end
+	}
+
+	local.org = spawn script_origin "origin" local.origin
+
+	self.rocket_ammo--
+
+	self iprint ("Fired Rocket " + self.rocket_ammo)
+
+	self playsound bazooka_snd_fire 
+
+	if(self.rocketside==1)
+	{
+		local.place = ( self.plane gettagposition "tag_barrel01")
+	}
+	else
+	{
+		if(self.dmteam=="axis")
+		{
+			local.place = ( self.plane gettagposition "tag_barrel02")
+		}
+		else
+		{
+			local.place = ( self.plane gettagposition "tag_barrel04")
+		}	
+	}
+
+	local.place += self.plane.forwardvector * 200
+	local.place += self.plane.upvector * -5
+	local.shell = spawn script_model "model" "projectiles/bazookashell_dm.tik" "targetanme "rocket" //"milkshape/missile/missile.tik" //
+	local.shell.origin = local.place
+//	local.shell notsolid //if they are solid when they hit things like tanks or anyhting that gets in the way it makes bashes it out the way
+	local.shell scale .2
+	
+local.shell light 1 0 0 300
+	local.shell.gravity = 0
+
+
+	local.shell.angles =   self.viewangles
+	
+		thread whit local.shell
+local.shell physics_on
+	
+	local.speed = self.speed
+	while(local.shell.hit != 1)
+	{
+		waitframe
+	local.velocity =  local.shell.forwardvector * ( local.speed  + 100 ) //local.shell.forwardvector * ( self.speed + 5000 )
+	//local.velocity = ( local.velocity[0] local.velocity[1] 0.00)
+	local.shell.velocity = local.velocity
+	}
+
+	self.firingshell=0
+
+	local.shell waittill touch
+	local.origin = local.shell.origin
+
+	self waitthread explode local.origin 
+	local.shell remove	
+end
+
+whit local.shell:
+
+	local.shell waittill touch
+	local.shell.hit = 1
+end
+
+*/
+
+
+rocket local.pos:
+
+	self.rocketside++
+	if(self.rocketside>2)
+	{
+		self.rocketside=1
+	}
+
+	if(self.rocket_ammo==0)
+	{
+		self iprint "0 Rockets"
+		self playsound bazooka_snd_noammo
+		end
+	}
+
+	self.rocket_ammo--
+
+	self iprint ("Fired Rocket " + self.rocket_ammo)
+
+	self playsound bazooka_snd_fire 
+
+	if(self.rocketside==1)
+	{
+		local.place = ( self.plane gettagposition "tag_barrel01")
+	}
+	else
+	{
+		if(self.dmteam=="axis")
+		{
+			local.place = ( self.plane gettagposition "tag_barrel02")
+		}
+		else
+		{
+			local.place = ( self.plane gettagposition "tag_barrel04")
+		}	
+	}
+
+
+	local.shell = spawn script_model "model" "projectiles/bazookashell_dm.tik" //"milkshape/missile/missile.tik" //
+	local.shell.angles = self.angles
+	local.shell.origin = local.place
+	local.shell notsolid //if they are solid when they hit things like tanks or anyhting that gets in the way it makes bashes it out the way
+	local.shell scale .5
+
+	local.shell speed 2000
+	local.shell moveto local.pos
+	local.shell waitmove	
+	self thread explode local.shell.origin
+	local.shell remove
+
+
+
+end
+
+change_weapon:
+	self.planeweap++
+
+	if(self.planeweap > 3)
+	{
+		self.planeweap=1
+	}	
+
+	switch(self.planeweap)
+	{
+	case 1: //mg
+		self iprint ("Using MG") 1	
+	break
+	case 2:
+		self iprint ("Using 30 Cal") 1
+	break
+	case 3:
+		self iprint ("Using Rockets") 1
+	break
+	default:
+		self iprint ("Using MG") 1
+	}
+	
+end
+
+explode local.explosionplace: 
+
+   thread bang local.explosionplace 
+   local.radius = 200.00 * 200.00 
+
+   for(local.i = 1; local.i <= $player.size; local.i++) 
+   { 
+      local.player= $player[local.i] 
+      local.distance =  (local.player.origin - local.explosionplace) * (local.player.origin - local.explosionplace) 
+
+      //local.distance = local.distance * local.distance 
+
+      if(local.distance <= local.radius) 
+      { 
+         if(local.player != self) 
+         { 
+            local.end_or_not = waitthread team_check local.player self 
+       
+            if(local.end_or_not==1) 
+            { 
+               end //end if same team and team team killing is not on 
+            } 
+
+            local.dmg_fact = 1 - local.distance / local.radius 
+            local.dmg = 150 * local.dmg_fact + 30 
+            local.player damage self local.dmg self (0 0 0) (0 0 0) (0 0 0) 0 1 15 -1 
+         } 
+      } 
+
+   } 
+   for(local.i = 1; local.i <= level.botlastid; local.i++) 
+   { 
+      local.player= level.actualbots[local.i] 
+      local.distance =  (local.player.origin - local.explosionplace) * (local.player.origin - local.explosionplace) 
+
+      //local.distance = local.distance * local.distance 
+
+      if(local.distance <= local.radius) 
+      { 
+         if(local.player != self) 
+         { 
+            local.end_or_not = waitthread team_check local.player self 
+       
+            if(local.end_or_not==1) 
+            { 
+               end //end if same team and team team killing is not on 
+            } 
+
+            local.dmg_fact = 1 - local.distance / local.radius 
+            local.dmg = 150 * local.dmg_fact + 30 
+            local.player damage self local.dmg self (0 0 0) (0 0 0) (0 0 0) 0 1 15 -1 
+         } 
+      } 
+
+   } 
+
+
+end
+
+bang local.place:
+
+	local.Exp3 = spawn "fx/scriptbazookaexplosion.tik"
+	local.Exp4 = spawn "animate/fx_mortar_dirt.tik"
+	local.Exp3 radiusdamage 0
+	local.Exp3.origin = local.place
+	local.Exp4.origin = local.place
+	local.Exp3 anim start
+	local.Exp4 anim start
+
+	wait 1
+	local.Exp3 remove	
+	local.Exp4 remove
+ 
+end
+
+bomb:
+	if(self.candrop==0)
+	{
+		self iprint "No bombs"
+		self playsound bazooka_snd_noammo
+		end
+	}
+
+	self iprint ("Bomb :" + self.candrop)
+	self.candrop--
+
+	local.bomb = spawn script_model "targetname" "planebomb"
+	local.bomb model "ammo/us_bomb.tik" 
+	local.bomb.origin = self.plane.origin - ( 0 0 50 )
+
+	local.bomb.angles = ( self.plane.angles + ( 0 90 0 ) )
+	local.bomb notsolid 
+
+	thread bombtwist local.bomb
+	local.bomb physics_on
+
+	local.bomb.velocity = self.plane.velocity 
+	local.bomb playsound leadinmp2
+	local.didnt=1
+
+	while(local.didnt==1)
+	{
+		local.bomb waittill touch
+		if!(parm.other==self || parm.other == self.plane)
+		{
+			local.didnt=0
+		}
+	}
+	
+	self thread explode local.bomb.origin
+	local.bomb remove
+
+	
+end
+
+
+bombtwist local.bomb:
+
+	for(local.i=0;local.i<=90 ;local.i+=5)
+	{
+
+		waitframe
+		if(local.bomb==NULL || local.bomb==NIL)
+		{
+			end
+		}
+		else
+		{
+			local.bomb.angles = (  local.bomb.angles[0] local.bomb.angles[1] local.i )
+		}
+	}
+end

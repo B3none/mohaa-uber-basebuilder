@@ -1,0 +1,37 @@
+main:
+
+if (level.alx_blahblah != 1)
+{
+
+level waittill spawn
+
+	level.alx_blahblah = 1
+
+	while (1)
+	{
+		//Curent Map
+		local.mapname = getcvar(mapname)
+
+huddraw_virtualsize 202 1
+huddraw_align 202 right top
+huddraw_font 202 "verdana-12"
+huddraw_rect 202 -150 80 200 14
+huddraw_color 202 1 0 0
+huddraw_alpha 202 1.0
+huddraw_string 202 ("Vehicle Wars")
+
+huddraw_virtualsize 203 1
+huddraw_align 203 right top
+huddraw_font 203 "verdana-12"
+huddraw_rect 203 -150 90 200 14
+huddraw_color 203 0 1 0
+huddraw_alpha 203 1.0
+huddraw_string 203 ("By SearingWolfe")
+
+	wait 1
+	}
+
+}
+
+
+end

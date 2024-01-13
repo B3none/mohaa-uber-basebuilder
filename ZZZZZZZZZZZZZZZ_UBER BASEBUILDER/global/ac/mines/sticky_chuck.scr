@@ -1,0 +1,78 @@
+main local.player local.model local.scale:
+
+
+	local.vertical = (local.player getcontrollerangles 0)[0] //local.player.viewangles[2]
+
+	local.player safeholster 1
+
+	local.vertical = 0 - local.vertical 
+	wait 1
+
+	local.player attachmodel local.model "tag_weapon_right" 1.0 "mdlattach" 1 // 1.0 // 1.0  1.0 1.0 ( 0 0 0 )
+	//local.player viewmodelanim multiplayer/mp_grenade_throw.skc		crossblend 0.05
+
+	local.player forcetorsostate MINE
+	wait .1
+	local.player playsound m2frag_snd_grenade_throw weapon
+	wait 1
+
+	local.player safeholster 0
+
+	local.start = self gettagposition "eyes bone" //"tag_weapon_right"
+	local.fwd_vec = angles_toforward local.player.viewangles
+	local.hit_location =  local.start + local.fwd_vec * 16
+
+	local.dest = trace (local.start + local.fwd_vec * 64) (local.start + local.fwd_vec * 500) 1
+
+	local.mine = spawn script_model "targetname" ("mine") "model" local.model
+	local.mine solid
+	local.mine.scale =  local.scale
+
+	local.org = local.player.origin
+	local.org[2] = 	local.org[2] + 90
+
+	local.mine.origin = local.hit_location //local.org
+	local.vect = (local.dest - local.player.origin)
+	local.vect = vector_normalize (local.vect)
+
+	local.dist = vector_length (local.player.origin - local.dest)
+	
+	local.vect[0] = 	local.vect[0] * (local.dist / 1.5) * 3
+	local.vect[1] = 	local.vect[1] * (local.dist / 1.5) * 3
+	local.vect[2] = 	local.vect[2] * local.dist * ( local.vertical / 5 )
+
+			//local.vect[2] = local.vect[2] + 300
+
+	local.vect[2] = local.vect[2] + local.vertical
+
+	local.mine physics_on
+
+	local.mine rotateX (local.vect[0] / 3)
+
+	local.mine physics_velocity local.vect
+
+	local.isplayer =1
+
+	while(local.isplayer ==1 )
+	{
+		local.mine waittill touch
+
+		local.hit  =parm.other
+
+		if!(local.hit==local.player)
+		{
+			local.isplayer = 0
+			local.mine rotateX 0
+			local.mine.angles = ( 0 0 0 )
+			local.mine physics_off
+			local.mine.velocity = ( 0 0 0 )
+		}
+		
+	}
+
+	if (local.hit == $player)
+	{
+		local.mine attach local.hit "Bip01 Head"
+	}
+
+end local.mine

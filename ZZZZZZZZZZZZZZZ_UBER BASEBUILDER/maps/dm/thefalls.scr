@@ -1,0 +1,292 @@
+
+main:
+// set scoreboard messages
+setcvar "g_obj_alliedtext1" "The Falls"
+setcvar "g_obj_alliedtext2" "UBER BASEBUILDER by"
+setcvar "g_obj_alliedtext3" "])ar]{Gen.SearingWolfe"
+setcvar "g_obj_axistext1" "be a member at"
+setcvar "g_obj_axistext2" "www.freewebs.com/"
+setcvar "g_obj_axistext3" "mohaa-DarK-clan"
+
+setcvar "g_scoreboardpic" "mohdm1"
+
+
+setcvar "g_gametype" "2"
+setcvar "cheats" "1"
+setcvar "thereisnomonkey" "1"
+
+
+
+setcvar "fraglimit" "0"
+setcvar "timelimit" "50"
+
+
+exec alienx/basebuild.scr::main 2000 10000
+
+		
+	level waitTill prespawn
+
+
+//everything
+
+exec alienx/basebuild.scr::basebuild ( -2476 2472 -2031 ) "static/bodies_tarp.tik" 0 1 0 1 90 .9 1 0 1
+exec alienx/basebuild.scr::basebuild ( -2376 2472 -2031 ) "static/indycrate.tik" 0 0 1 0 90 .9 0 0 1
+exec alienx/basebuild.scr::basebuild ( -2276 2472 -2031 ) "statweapons/mg42_gun.tik" 0 1 0 0 90 .9 0 0 1
+exec alienx/basebuild.scr::basebuild ( -2176 2472 -2031 ) "static/sandbag_link_main.tik" 0 0 0 1 90 .9 0 0 1
+exec alienx/basebuild.scr::basebuild ( -2076 2472 -2031 ) "static/bunkertable.tik" 0 1 1 0 90 .9 0 1 1
+exec alienx/basebuild.scr::basebuild ( -1976 2472 -2031 ) "miscobj/beef.tik" 0 0 1 0 90 .9 0 0 1
+exec alienx/basebuild.scr::basebuild ( -1876 2472 -2031 ) "emitters/inferno.tik" 0 1 1 0 91 .9 0 0 1end
+exec alienx/basebuild.scr::basebuild ( -1776 2472 -2031 ) "static/bodies_tarp.tik"0 1 0 0 91 .9 0 0 1	
+exec alienx/basebuild.scr::basebuild ( -1676 2472 -2031 ) "static/static_nazibanner2.tik"0 0 1 0 90 .9 0 0 1
+exec alienx/basebuild.scr::basebuild ( -1576 2472 -2031 ) "player/allied_Manon.tik" 0 1 1 0 90 .9 0 0 1
+exec alienx/basebuild.scr::basebuild ( -1476 2472 -2031 ) "static/bush_regularbush.tik" 0 0 1 0 90 .9 0 0 3
+exec alienx/basebuild.scr::basebuild ( -1376 2472 -2031 ) "static/body_usvest06.tik" 0 1 1 0 91 .9 0 0 1
+exec alienx/basebuild.scr::basebuild ( -1276 2472 -2031 ) "static/body_us04.tik" 0 0 1 1 90 .9 0 0 1
+exec alienx/basebuild.scr::basebuild ( -1176 2472 -2031 ) "static/single_bed.tik" 0 1 1 0 90 .9 0 0 1
+exec alienx/basebuild.scr::basebuild ( -1076 2472 -2031 ) "static/toilet.tik" 0 0 1 0 90 .9 0 0 1
+exec alienx/basebuild.scr::basebuild ( -976 2472 -2031 ) "static/tablewithumbrella.tik " 0 1 1 0 90 .9 0 0 1
+exec alienx/basebuild.scr::basebuild ( -876 2472 -2031 ) "furniture/woodchair.tik"0 0 1 0 90 .9 0 0 1	
+exec alienx/basebuild.scr::basebuild ( -776 2472 -2031 ) "static/lightpost_triple.tik" 0 1 0 0 90 .9 0 0 1
+exec alienx/basebuild.scr::basebuild ( -676 2472 -2031 ) "static/mg42ammoboxwbelt.tik" 0 0 0 1 90 .9 0 0 1
+exec alienx/basebuild.scr::basebuild ( -576 2472 -2031 ) "furniture/woodchair.tik" 0 0 1 1 90 .9 0 0 1
+exec alienx/basebuild.scr::basebuild ( -476 2472 -2031 ) "player/allied_Pilot.tik" 0 1 1 0 90 .9 0 0 1
+exec alienx/basebuild.scr::basebuild ( -376 2472 -2031 ) "furniture/table.tik" 0 1 0 1 90 .9 0 0 1
+exec alienx/basebuild.scr::basebuild ( -276 2472 -2031 ) "items/bratwurst.tik" 0 1 0 1 90 .9 0 0 1
+exec alienx/basebuild.scr::basebuild ( -176 2472 -2031 ) "static/winecasks.tik" 0 0 1 1 90 .9 0 0 1 
+exec alienx/basebuild.scr::basebuild ( -76 2472 -2031 ) "static/indycrate.tik" 0 0 1 1 90 .9 0 0 1 
+exec alienx/basebuild.scr::basebuild ( 176 2472 -2031 ) "static/static_cablespool_full.tik" 0 0 1 1 90 .9 0 0 1
+exec alienx/basebuild.scr::basebuild ( 276 2472 -2031 ) "static/bathroomsink.tik" 0 0 1 1 90 .9 0 0 1
+exec alienx/basebuild.scr::basebuild ( 376 2472 -2031 ) "static/bathtubwithshowerhead.tik" 0 0 0 1 90 .9 0 0 1
+exec alienx/basebuild.scr::basebuild ( 476 2472 -2031 ) "static/fireplaceset.tik" 0 1 1 0 90 .9 0 0 1
+exec alienx/basebuild.scr::basebuild ( 576 2472 -2031 ) "static/lightpost_globe.tik" 0 0 0 1 90 .9 0 0 1
+exec alienx/basebuild.scr::basebuild ( 676 2472 -2031 ) "static/piano.tik" 0 0 1 0 90 .9 0 0 1
+exec alienx/basebuild.scr::basebuild ( 776 2472 -2031 ) "static/static_torpedo.tik" 0 0 1 1 90 .9 0 0 1
+exec alienx/basebuild.scr::basebuild ( 876 2472 -2031 ) "static/heat_crate.tik" 0 1 0 1 90 .9 0 0 1
+exec alienx/basebuild.scr::basebuild ( 976 2472 -2031 ) "static/bunkerbench.tik" 0 1 1 0 90 .9 0 0 1
+exec alienx/basebuild.scr::basebuild ( 1076 2472 -2031 ) "items/item_100_healthbox.tik" 0 1 0 1 90 .9 0 0 1
+exec alienx/basebuild.scr::basebuild ( 1176 2472 -2031 ) "static/bunkerstove_ns.tik" 0 1 1 0 90 .9 0 0 1
+exec alienx/basebuild.scr::basebuild ( 1276 2472 -2031 ) "static/curtain.tik" 0 0 1 0 90 .9 0 0 1end
+exec alienx/basebuild.scr::basebuild ( 1376 2472 -2031 ) "static/bush_full.tik" 0 1 1 0 90 .9 0 0 1end
+exec alienx/basebuild.scr::basebuild ( 1476 2472 -2031 ) "miscobj/radio_military.tik" 0 0 1 0 90 .9 0 0 1
+exec alienx/basebuild.scr::basebuild ( 1576 2472 -2031 ) "lights/hang5lamp.tik" 0 1 1 0 90 .9 0 0 1
+exec alienx/basebuild.scr::basebuild ( 1676 2472 -2031 ) "lights/tiffanylamp.tik" 0 1 0 1 90 .9 0 0 1
+exec alienx/basebuild.scr::basebuild ( 1776 2472 -2031 ) "static/loveseat.tik" 0 0 0 1 90 .9 0 0 1
+exec alienx/basebuild.scr::basebuild ( 1876 2472 -2031 ) "static/indycrate.tik" 0 0 1 0 90 .9 0 0 1
+exec alienx/basebuild.scr::basebuild ( 1976 2472 -2031 ) "furniture/armchairposh.tik" 0 1 0 0 90 .9 0 0 3
+exec alienx/basebuild.scr::basebuild ( 2076 2472 -2031 ) "static/sandbag_longsegment.tik" 0 0 0 1 90 .9 0 0 1
+exec alienx/basebuild.scr::basebuild ( 2176 2472 -2031 ) "static/bunkertable.tik" 0 1 1 0 90 .9 0 1 1
+exec alienx/basebuild.scr::basebuild ( 2276 2472 -2031 ) "miscobj/searchlight.tik" 0 0 1 0 90 .9 0 0 1
+exec alienx/basebuild.scr::basebuild ( 2376 2472 -2031 ) "miscobj/hidden_cabinet_a.tik" 0 0 1 0 90 .9 0 0 1	
+exec alienx/basebuild.scr::basebuild ( 2476 2472 -2031 ) "static/bookcase.tik" 0 0 1 0 90 .9 0 0 1
+exec alienx/basebuild.scr::basebuild ( 2536 2472 -2031 ) "static/bigbed.tik" 0 0 0 1 90 .9 0 0 1
+exec alienx/basebuild.scr::basebuild ( 2536 2172 -2031 ) "static/barbwire.tik" 0 1 1 0 90 .9 0 0 1
+exec alienx/basebuild.scr::basebuild ( 2536 2072 -2031 ) "static/static_nazibanner2.tik" 0 0 1 0 90 .9 0 0 3	
+exec alienx/basebuild.scr::basebuild ( 2536 1972 -2031 ) "static/static_naziflag2.tik" 0 1 1 0 90 .9 0 0 3
+exec alienx/basebuild.scr::basebuild ( 2536 1872 -2031 ) "static/bathtub.tik" 0 0 1 1 90 .9 0 0 1
+exec alienx/basebuild.scr::basebuild ( 2536 1772 -2031 ) "static/bush_regularbush.tik" 0 1 1 0 90 .9 0 0 3
+exec alienx/basebuild.scr::basebuild ( 2536 1672 -2031 ) "animal/german_shepherd.tik" 0 0 1 1 90 .9 0 0 3
+exec alienx/basebuild.scr::basebuild ( 2536 1572 -2031 ) "static/cabinet_large.tik" 0 1 1 1 90 .9 0 0 1
+exec alienx/basebuild.scr::basebuild ( 2536 1472 -2031 ) "static/nazi_crate.tik" 0 0 1 0 90 .9 0 0 1
+exec alienx/basebuild.scr::basebuild ( 2536 1372 -2031 ) "static/mg42ammoboxwbelt.tik" 0 0 0 1 90 .9 0 0 1
+exec alienx/basebuild.scr::basebuild ( 2536 1272 -2031 ) "static/static_naziflag1.tik" 0 1 0 0 90 .9 0 0 1
+exec alienx/basebuild.scr::basebuild ( 2536 1172 -2031 ) "static/bucket.tik" 0 0 1 0 90 .9 0 0 1
+exec alienx/basebuild.scr::basebuild ( 2536 1072 -2031 ) "static/banquet_table.tik" 0 0 0 1 90 .9 0 0 1
+exec alienx/basebuild.scr::basebuild ( 2536 972 -2031 ) "miscobj/bottle_condiment.tik" 0 1 0 0 90 2 0 0 1
+exec alienx/basebuild.scr::basebuild ( 2536 872 -2031 ) "miscobj/bottle_medicine.tik" 0 0 1 0 90 2 0 0 1
+exec alienx/basebuild.scr::basebuild ( 2536 772 -2031 ) "miscobj/bottle_rum.tik" 0 0 0 1 90 2 0 0 1
+exec alienx/basebuild.scr::basebuild ( 2536 672 -2031 ) "miscobj/bottle_wine.tik" 0 1 1 0 90 2 0 0 1
+exec alienx/basebuild.scr::basebuild ( 2536 572 -2031 ) "miscobj/coffee_kettle.tik" 0 1 0 1 90 2 0 0 1
+exec alienx/basebuild.scr::basebuild ( 2536 472 -2031 ) "miscobj/drinkglass.tik" 0 0 1 1 90 2 0 0 1
+exec alienx/basebuild.scr::basebuild ( 2536 372 -2031 ) "miscobj/shortglass.tik" 0 1 0 0 90 2 0 0 1
+exec alienx/basebuild.scr::basebuild ( 2536 272 -2031 ) "miscobj/tallglass.tik" 0 0 1 0 90 2 0 0 1
+exec alienx/basebuild.scr::basebuild ( 2536 172 -2031 ) "static/dish.tik" 0 0 0 1 90 2 0 0 1
+exec alienx/basebuild.scr::basebuild ( 2536 72 -2031 ) "static/flowerplate.tik" 0 1 1 0 90 2 0 0 1
+exec alienx/basebuild.scr::basebuild ( 2536 -172 -2031 ) "static/servingplate.tik" 0 0 1 1 90 2 0 0 1
+
+exec global/jetpack.scr ( -2208 1268 -1607 ) //allies
+exec global/jetpack.scr ( 2122 -982 476 ) //axis
+
+exec global/dog.scr ( -2144 -24 -1413 )
+
+exec guidedmissile/spawntrigger.scr ( -1879 1501 -1607 ) //allies
+exec guidedmissile/spawntrigger.scr ( 2011 -593 423 ) //axis
+
+	//*** Precache Dm Stuff
+	exec global/DMprecache.scr
+
+	//hud
+	exec alienx/hud.scr::main
+
+	level.script = maps/dm/mohdm1.scr
+	exec global/ambient.scr mohdm1
+
+	//exec global/ambient.scr mohdm2
+
+
+exec map_triggers/allweapons.scr ( 929 -546 -998 )
+exec map_triggers/giant.scr ( -1269 -601 -1588 )
+exec map_triggers/invisible.scr ( 2315 865 779 )
+exec map_triggers/invulnerable.scr ( 2178 1737 604 )
+exec map_triggers/midget.scr ( 1424 2013 -1671 )
+exec map_triggers/normal.scr ( 2032 1633 -67 )
+exec map_triggers/camo.scr ( -1055 -1602 -925 )
+exec map_triggers/health.scr ( -902 1343 -1789 ) ( -995 1300 -1319 ) ( -272 1268 -1208 ) ( -1612 90 -1275 ) ( -1256 -535 -1671 ) ( 2129 811 607 ) ( 2026 -1696 622 ) ( 1022 -1964 -2019 ) ( -2397 1225 -960 ) ( 473 1010 -77 )
+
+	setcvar "r_fastsky" "1"
+	$world farplane 10000
+	$world farplane_color (0 0 0)
+
+	exec server_planes/trigger.scr ( -2046 1399 -1607 ) "allies" .2 // Place a trigger 
+	exec server_planes/trigger.scr ( 2013 -218 527 ) "axis" .2 //place a trigger
+
+thread elevator_preparation
+
+thread port1
+thread port2
+
+	waittill spawn
+
+end
+
+
+//-----------------------------------------------------------
+
+elevator_preparation:
+println "Preparing elevator"
+
+$elevator moveto $waypoint_down // Put the elevator in the down position.
+local.elepos = 0
+goto elevator_standby
+
+end
+
+//-----------------------------------------------------------
+
+elevator_standby:
+
+if (local.elepos == 0) // if the lift is down
+{
+ println "Elevator is standby in bottom waypoint"
+ $elevator_button_bottom waittill trigger // wait for the bottom trigger
+ $elevator_button_bottom playsound door_metal_locked_clue
+} else {
+ println "Elevator is standby in top waypoint"
+ $elevator_button_top waittill trigger // wait for the top trigger
+ $elevator_button_top playsound door_metal_locked_clue
+}
+
+if (local.elepos == 0) // if the lift is down
+{
+ goto lift_move_up     // move up
+} else { 
+ goto lift_move_down   // else move down
+} 
+
+end
+
+//-----------------------------------------------------------
+
+lift_move_up:
+println "Elevator is moving up"
+iprintlnbold "The FSC SeilBahn is now going up..."
+wait 2
+
+$elevator playsound elevator_start
+$elevator time 1 // amount of seconds to move between waypoints
+$elevator moveto $waypoint_1 //move the lift to the first waypoint
+$elevator playsound elevator_run
+$elevator waitmove // wait till the move is finished
+$elevator time 8 // amount of seconds to move between waypoints
+$elevator moveto $waypoint_2 //move the lift to the second waypoint
+$elevator waitmove // wait till the move is finished
+$elevator time 22 // amount of seconds to move between waypoints
+$elevator moveto $waypoint_3 //move the lift to the third waypoint
+$elevator waitmove // wait till the move is finished
+$elevator time 4 // amount of seconds to move between waypoints
+$elevator moveto $waypoint_up //move the lift to the last waypoint
+$elevator waitmove // wait till the move is finished
+
+$elevator playsound elevator_stop
+$elevator playsound elevator_gate
+
+wait 2
+iprintlnbold "The FSC SeilBahn has arrived on the top level..."
+
+local.elepos = 1       // the elevator is up now, so we set the local.elepos to 1 
+goto elevator_standby
+
+end
+
+//-----------------------------------------------------------
+
+lift_move_down: 
+println "Elevator is moving down"
+iprintlnbold "The FSC SeilBahn is now going down..."
+wait 2
+
+$elevator playsound elevator_start
+$elevator time 2 // amount of seconds to move between waypoints
+$elevator moveto $waypoint_3 //move the lift to the first waypoint
+$elevator playsound elevator_run
+$elevator waitmove  // wait till the move is finished
+$elevator time 20 // amount of seconds to move between waypoints
+$elevator moveto $waypoint_2 //move the lift to the second waypoint
+$elevator waitmove // wait till the move is finished
+$elevator time 8 // amount of seconds to move between waypoints
+$elevator moveto $waypoint_1 //move the lift to the third waypoint
+$elevator waitmove // wait till the move is finished
+$elevator time 3 // amount of seconds to move between waypoints
+$elevator moveto $waypoint_down //move the lift to the last waypoint
+$elevator waitmove // wait till the move is finished
+
+$elevator playsound elevator_stop
+$elevator playsound elevator_gate
+
+wait 2
+iprintlnbold "The FSC SeilBahn has arrived on the bottom level..."
+
+local.elepos = 0      // the elevator is down now, so we set the local.elepos to 0 
+goto elevator_standby
+
+end
+
+port1:
+
+local.portlight = spawn script_model
+local.portlight model "fx/corona_red.tik" 
+local.portlight.origin = ( 509 1383 -1547 ) // starting point
+local.portlight.scale = 5
+
+local.trig = spawn trigger_use
+local.trig targetname port1 
+local.trig.origin = ( 509 1383 -1547 ) // starting point
+local.trig setsize ( -30 -30 0 ) ( 30 30 80 )
+$port1 waittill trigger
+local.player = parm.other
+local.player tele ( 972 1986 -1781 ) // destination
+local.portlight remove
+$port1 remove
+wait 0
+thread port1
+end
+
+port2:
+
+local.portlight = spawn script_model
+local.portlight model "fx/corona_red.tik" 
+local.portlight.origin = ( -275 1965 -1981 ) // starting point
+local.portlight.scale = 5
+local.portlight ghost
+
+local.trig = spawn trigger_use
+local.trig targetname port2 
+local.trig.origin = ( -275 1965 -1981 ) // starting point
+local.trig setsize ( -20 -20 0 ) ( 20 20 80 )
+$port2 waittill trigger
+local.player = parm.other
+local.player tele ( 1029 1414 -1371 ) // destination
+local.portlight remove
+$port2 remove
+wait 0
+thread port2
+end

@@ -1,0 +1,75 @@
+//The mod will choose between a random number of starting positions. 
+//I only added one but you can add as many as you want.
+//By adding them into an array of local.origin and then ending with the local.origin variable.
+//Each tiemyou add a ogiin use the same format btu increase the number by one for the index, for example.
+//
+//main:
+//
+//	local.origin[0] = ( 504 -5128 -447 )
+//	local.origin[1] = ( -1414 162 -127 )
+//	local.origin[2] = ( 120 96 9 )
+//
+//end  local.origin
+
+main:
+
+	local.origin[0] = ( 120 96 9 )
+
+	local.origin[1] = ( -21.25 841.47 -151.88 )
+	// local.temp.angles = ( 15.10 -178.55 0.00 )
+
+	local.origin[2] = ( -764.02 -176.02 -130.84 )
+	// local.temp.angles = ( 10.85 -167.41 0.00 )
+
+	local.origin[3] = ( -673.24 781.73 -151.81 )
+	// local.temp.angles = ( 10.48 64.30 0.00 )
+
+	local.origin[4] = ( 126.01 82.34 -150.70 )
+	// local.temp.angles = ( 11.33 2.27 0.00 )
+
+	local.origin[5] = ( 676.66 -637.14 -143.88 )
+	// local.temp.angles = ( 17.27 34.46 0.00 )
+
+	local.origin[6] = ( -120.85 -584.36 -151.88 )
+	// local.temp.angles = ( 7.93 80.72 0.00 )
+
+	local.origin[7] = ( -264.88 -467.25 32.13 )
+	// local.temp.angles = ( 13.88 105.93 0.00 )
+
+	local.origin[8] = ( -149.65 -671.14 272.13 )
+	// local.temp.angles = ( 17.27 -167.69 0.00 )
+
+	local.origin[9] = ( -908.87 -695.13 272.13 )
+	// local.temp.angles = ( 20.20 -129.36 0.00 )
+
+	local.origin[10] = ( -973.44 -426.81 256.13 )
+	// local.temp.angles = ( 15.57 85.25 0.00 )
+
+	local.origin[11] = ( -832.97 308.96 48.13 )
+	// local.temp.angles = ( 20.20 -9.06 0.00 )
+
+	local.origin[12] = ( -1196.87 496.87 48.13 )
+	// local.temp.angles = ( 21.62 77.04 0.00 )
+
+	local.origin[13] = ( -163.02 453.40 48.13 )
+	// local.temp.angles = ( 13.22 -25.58 0.00 )
+
+	local.origin[14] = ( 368.57 315.31 160.13 )
+	// local.temp.angles = ( 15.57 -26.71 0.00 )
+
+	local.origin[15] = ( 306.05 -39.19 364.88 )
+	// local.temp.angles = ( 59.47 -111.77 0.00 )
+
+	local.origin[16] = ( 239.13 -299.30 224.12 )
+	// local.temp.angles = ( 22.84 80.76 0.00 )
+
+	local.origin[17] = ( 696.63 124.46 224.12 )
+	// local.temp.angles = ( 13.59 75.66 0.00 )
+
+	local.origin[18] = ( 919.13 -304.87 224.13 )
+	// local.temp.angles = ( 12.08 141.27 0.00 )
+
+	local.origin[19] = ( -366.58 77.06 326.63 )
+	// local.temp.angles = ( -11.99 5.14 0.00 )
+end  local.origin
+

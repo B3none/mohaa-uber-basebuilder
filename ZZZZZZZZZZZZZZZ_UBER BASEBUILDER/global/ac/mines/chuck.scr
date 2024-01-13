@@ -1,0 +1,54 @@
+main local.player local.model local.scale:
+
+	local.player safeholster 1
+	wait 1
+/*
+	local.player useweaponclass grenade
+	local.player weaponcommand duel model "items/explosive.tik"
+	wait 1
+	local.player weaponcommand duel model "items/explosive.tik"
+
+	local.player weaponcommand duel model "items/explosive.tik"
+	local.player weaponcommand duel dmprojectile "items/explosive.tik"
+*/
+	local.player attachmodel local.model "tag_weapon_right" 1.0 "mdlattach" 1 -1 -1 -1 -1 ( 0 0 0 )
+	$mdlattach.angles = ( 0 0 90 )
+
+	//local.player viewmodelanim multiplayer/mp_grenade_throw.skc		crossblend 0.05
+
+	local.player forcetorsostate MINE
+	wait .1
+	local.player playsound m2frag_snd_grenade_throw weapon
+	wait 1
+
+	local.player safeholster 0
+
+	local.start = self gettagposition "eyes bone" //"tag_weapon_right"
+	local.fwd_vec = angles_toforward self.viewangles
+	local.start =  local.start + local.fwd_vec * 32
+
+	local.mine = spawn script_model "targetname" ("mine") "model" local.model
+	local.mine solid
+	local.mine.scale =  1 //local.scale
+
+	local.mine.origin = local.start
+	local.mine physics_on
+	local.mine.velocity = local.fwd_vec * 300 + ( 0 0 250 )
+
+	
+	local.mine rotateX 50
+	local.isplayer =1
+	while(local.isplayer ==1 )
+	{
+		local.mine waittill touch
+
+		if!(parm.other==local.player)
+		{
+			local.mine.gravity = 4
+			local.mine rotateX 0
+			local.mine.angles = ( 0 0 0 )
+			local.isplayer = 0
+		}
+	}
+
+end local.mine

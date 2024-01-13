@@ -1,0 +1,24 @@
+
+getgame:
+	local.game = getcvar "version"
+	local.i=15
+
+	if(local.game[local.i]==" ")
+	{
+		local.i= 16
+	}
+
+	switch(local.game[local.i])
+	{
+	case "A":
+		game.game = "AA"
+	break 
+	case "S":
+		game.game = "SH"
+	break
+	case "B":
+		game.game = "BT"
+	break
+	}
+
+end local.cmdwant 

@@ -1,0 +1,39 @@
+main:
+	
+	self hide
+	self notsolid
+
+	self.origin = self.plane_start
+
+	self physics_off
+
+	if(game.plane_instructions == NIL || game.plane_instructions == NULL)
+	{
+		game.plane_instructions = waitexec game.file["settings/flyable-planes"]::instructions
+	}
+	
+	for(local.i = 1; local.i <= game.plane_instructions.size; local.i++)
+	{
+		if(self.useheld!=1)
+		{
+			self waitthread printmsg game.plane_instructions[local.i][1]  game.plane_instructions[local.i][2]
+		}
+	}
+
+	self physics_on	
+	
+	self.instructed=1
+end	
+		
+
+printmsg local.msg local.duration:
+
+	local.duration = int local.duration
+
+	if(self.useheld!=1)
+	{	
+		self iprint local.msg 1
+		wait local.duration
+	}	
+
+end

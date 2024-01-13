@@ -1,0 +1,212 @@
+menu "menus" 194 407 NONE 0
+bgcolor 0 0 0 0
+fgcolor 1 1 1 1
+borderstyle £D_BORDER
+align center center
+
+
+
+
+
+
+
+
+
+
+resource
+Label
+{
+name "Default"
+rect 12 12 182 306
+fgcolor 0.00 0.00 0.00 1.00
+bgcolor 0.50 0.50 0.00 60.00
+borderstyle "3D_BORDER"
+}
+resource
+Button
+{
+title "Animate3"
+name "Default"
+rect 17 33 172 21
+fgcolor 1.00 1.00 1.00 1.00
+bgcolor 0.50 0.50 0.25 60.00
+borderstyle "RAISED"
+stuffcommand "pushmenu animate2"
+clicksound "menu/sound/apply.wav"
+hoversound "menu/sound/scroll.wav"
+font facfont-20
+shader "menu_button_trans"
+hovershader "menu_button_glow"
+
+}
+resource
+Button
+{
+title "Camera"
+name "Default"
+rect 17 75 172 21
+fgcolor 1.00 1.00 1.00 1.00
+bgcolor 0.50 0.50 0.25 1.00
+borderstyle "RAISED"
+stuffcommand "pushmenu camera"
+clicksound "menu/sound/apply.wav"
+hoversound "menu/sound/scroll.wav"
+font facfont-20
+shader "menu_button_trans"
+hovershader "menu_button_glow"
+
+}
+resource
+Button
+{
+title "CinemaQuickmenu"
+name "Default"
+rect 17 54 172 21
+fgcolor 1.00 1.00 1.00 1.00
+bgcolor 0.50 0.50 0.25 1.00
+borderstyle "RAISED"
+stuffcommand "pushmenu CinemaQuickmenu"
+clicksound "menu/sound/apply.wav"
+hoversound "menu/sound/scroll.wav"
+font facfont-20
+shader "menu_button_trans"
+hovershader "menu_button_glow"
+
+}
+resource
+Button
+{
+title "Decals"
+name "Default"
+rect 17 96 172 21
+fgcolor 1.00 1.00 1.00 1.00
+bgcolor 0.50 0.50 0.25 1.00
+borderstyle "RAISED"
+stuffcommand "pushmenu decals"
+clicksound "menu/sound/apply.wav"
+hoversound "menu/sound/scroll.wav"
+font facfont-20
+shader "menu_button_trans"
+hovershader "menu_button_glow"
+
+}
+resource
+Button
+{
+title "Emitter"
+name "Default"
+rect 17 117 172 21
+fgcolor 1.00 1.00 1.00 1.00
+bgcolor 0.50 0.50 0.25 1.00
+borderstyle "RAISED"
+stuffcommand "pushmenu emitter"
+clicksound "menu/sound/apply.wav"
+hoversound "menu/sound/scroll.wav"
+font facfont-20
+shader "menu_button_trans"
+hovershader "menu_button_glow"
+
+}
+resource
+Button
+{
+title "LevelDesign"
+name "Default"
+rect 17 138 172 21
+fgcolor 1.00 1.00 1.00 1.00
+bgcolor 0.50 0.50 0.25 1.00
+borderstyle "RAISED"
+stuffcommand "pushmenu LevelDesign"
+clicksound "menu/sound/apply.wav"
+hoversound "menu/sound/scroll.wav"
+font facfont-20
+shader "menu_button_trans"
+hovershader "menu_button_glow"
+
+}
+resource
+Button
+{
+title "LODTool"
+name "Default"
+rect 17 159 172 21
+fgcolor 1.00 1.00 1.00 1.00
+bgcolor 0.50 0.50 0.25 1.00
+borderstyle "RAISED"
+stuffcommand "pushmenu LODTool"
+clicksound "menu/sound/apply.wav"
+hoversound "menu/sound/scroll.wav"
+font facfont-20
+shader "menu_button_trans"
+hovershader "menu_button_glow"
+
+}
+resource
+Button
+{
+title "Smoke"
+name "Default"
+rect 17 180 172 21
+fgcolor 1.00 1.00 1.00 1.00
+bgcolor 0.50 0.50 0.25 1.00
+borderstyle "RAISED"
+stuffcommand "pushmenu smoke"
+clicksound "menu/sound/apply.wav"
+hoversound "menu/sound/scroll.wav"
+font facfont-20
+shader "menu_button_trans"
+hovershader "menu_button_glow"
+
+}
+resource
+Button
+{
+title "zound"
+name "Default"
+rect 17 201 172 21
+fgcolor 1.00 1.00 1.00 1.00
+bgcolor 0.50 0.50 0.25 1.00
+borderstyle "RAISED"
+stuffcommand "pushmenu zound"
+clicksound "menu/sound/apply.wav"
+hoversound "menu/sound/scroll.wav"
+font facfont-20
+shader "menu_button_trans"
+hovershader "menu_button_glow"
+
+}
+resource
+Button
+{
+title "listmenus - See console"
+name "Default"
+rect 17 243 172 21
+fgcolor 1.00 1.00 1.00 1.00
+bgcolor 0.50 0.50 0.25 1.00
+borderstyle "RAISED"
+stuffcommand "listmenus"
+clicksound "menu/sound/apply.wav"
+hoversound "menu/sound/scroll.wav"
+font facfont-20
+shader "menu_button_trans"
+hovershader "menu_button_glow"
+
+}
+resource
+Button
+{
+title "Close"
+name "Default"
+rect 17 285 172 21
+fgcolor 1.00 1.00 1.00 1.00
+bgcolor 0.50 0.50 0.25 1.00
+borderstyle "RAISED"
+stuffcommand "popmenu 0"
+clicksound "sound/menu/back.wav"
+hoversound "menu/sound/scroll.wav"
+font facfont-20
+shader "menu_button_trans"
+hovershader "menu_button_glow"
+
+}
+end.

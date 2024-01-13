@@ -1,0 +1,367 @@
+// file for the command that has extra stuff. like u can set 3rd param that does soemthing . like hel or reset.
+// local.words is a array of the line.
+// local.words[1] is the command
+//
+// also used to turn on and off scripts, 
+// end normal, or end 0 - set the command also
+
+main local.words: 
+
+	switch(local.words[1])
+	{
+	case "imadmin":
+
+		if( local.words[2] == NIL)
+		{
+			end
+		}
+
+		local.words[2] = int local.words[2]
+		for(local.i = 1; local.i <= $player.size; local.i++)
+		{
+			if(local.words[2] == $player[local.i].entnum)
+			{
+
+				local.player = $player[local.i]
+				local.player.admin = 1
+
+				if(level.admins==NIL)
+				{
+					for(local.k = 1; local.k <= $player.size; local.k++)
+					{
+						$player[local.i] stufftext ("globalwidgetcommand Admins_list deleteallitems")
+					}
+					level.admins[0] = local.player
+				}
+				else
+				{
+					level.admins[lecel.admins.size + 1] = local.player
+				}	
+
+				local.player stufftext ("set admins_inform Player " + local.player.entnum )
+				//local.player stufftext ("ui_hud 0")
+				local.player stufftext "showmenu inform"
+				wait 3
+				local.player stufftext "hidemenu inform"
+				//local.player stufftext ("ui_hud 1")
+
+				local.player stufftext ("globalwidgetcommand Admins_list additem Admin_"  + string( local.words[2] ))
+					
+				local.player exec global/ac/track_admins.scr
+				break
+			}
+		}
+	break
+	case "inputtype":
+		if( local.words[2] == "windows")
+		{
+			game.input_type = "linux"
+		}
+		else if( local.words[2] == "windows")
+		{
+			game.input_type = "windows"
+		}
+		else
+		{
+			exec global/ac/console_feedback.scr "Input-type must be either windows or linux"
+		}
+	break
+	case "setcvar":
+		setcvar local.words[2] local.words[3]
+		exec global/ac/console_feedback.scr ( local.words[2] + " set to " + local.words[3 ])
+	break
+	case "help":
+		if(local.words[2]=="reset")
+		{			
+			exec global/ac/console_feedback.scr (  "Reset is set to: " + game.reset ) 
+		}
+		else
+		{
+			local.is_script = waitthread check_isscript local.words
+
+			if(local.is_script != 1)
+			{
+				exec global/help.scr::help local.words[2]
+			}
+		}
+	break
+	case "teamwin":
+		teamwin local.words[2]
+	break
+	case "reset":
+		if(local.words[2]=="reset")
+		{
+			setcvar "AP_scripts" ""
+			exec global/ac/admin_feedback.scr "Admin-Pro Mod Reset"
+			exec global/ac/console_feedback.scr "Admin-Pro Mod Reset"
+
+			exec global/reset_settings.scr
+		}
+	break
+	case "music":
+
+		if(local.words[2] == "0" || local.words[2] == "1")
+		{
+			local.return = waitthread turnoff local.words
+
+			if(local.return == 0 )
+			{
+				end 0
+			}
+			else
+			{
+				end
+			}
+		}
+		else
+		{
+			for(local.i = 1; local.i <= game.scripts.size; local.i++)
+			{
+				if(local.words[1] == game.scripts[local.i][1])
+				{
+					local.thread = waitexec global/settings.scr::getcmd local.words[1] 4 
+					
+					if(local.words[2]=="track")
+					{
+						exec local.thread local.words[2] local.words[3]
+					}
+					else
+					{
+						exec local.thread local.words[2]
+					}				
+					end 1
+				}
+			}
+			
+			exec global/ac/console_feedback.scr "bad music command"	
+		}
+		
+	break
+	case "all":
+		local.actual = waitexec global/strings.scr::Combine local.words 3
+
+		local.said = 0
+		for(local.i=1; local.i <= $player.size; local.i++) 
+		{   
+			local.player = $player[local.i]
+			local.mhm = waitexec global/ac/command_post/console.scr 2 local.words local.actual local.player
+	
+			if(local.mhm != 1 )
+			{	
+				if(local.said ==0 )
+				{
+					local.said = 1
+					exec global/ac/console_feedback.scr "Bad command "
+					exec global/ac/console_feedback.scr "All must be followed by a valid player commands."
+				}
+			}	
+		}
+
+	break
+	case "axis":
+	case "allies":
+	case "spectator":
+	case "spectators":
+
+
+		if(local.words[1] == "spectators")
+		{
+			local.words[1] = "spectator"
+		}
+
+		local.actual = waitexec global/strings.scr::Combine local.words 3
+
+		local.said = 0
+		for(local.i=1; local.i <= $player.size; local.i++) 
+		{   
+			local.player = $player[local.i]
+
+			if(local.player.dmteam== local.words[1])
+			{
+				local.mhm = waitexec global/ac/command_post/console.scr 2 local.words local.actual local.player
+			}
+
+			if(local.mhm != 1 )
+			{	
+				if(local.said ==0 )
+				{
+					local.said = 1
+					exec global/ac/console_feedback.scr "Bad command "
+					exec global/ac/console_feedback.scr "Team must be followed by a valid player commands."
+				}
+			}	
+		}
+	break
+	case "limitweap":
+		self thread limitweapons local.words
+	break
+	case "jumpheight":
+
+		local.word = int local.words[2]
+		if(local.word == 0)
+		{
+			local.word = 56
+			exec global/ac/console_feedback.scr "jump height seemed to be 0, reseting to 56"				
+		}
+		game.jump_height = local.word
+
+		exec global/ac/console_feedback.scr ( "jump height set to " + local.word )		
+
+	break
+	case "dmrespawning":
+		level.dmrespawning  = local.words[2]
+	break
+	case "earthquake":
+		earthquake local.words[2] local.words[3] local.words[4] local.words[5]
+	break
+	case "plantingteam":
+		level.planting_team  = local.words[2]
+	break
+	case "iprintlnbold":
+		local.actual = waitexec global/strings.scr::Combine local.words 2
+		iprintlnbold_noloc local.actual
+	break
+	case "iprintln":
+		local.actual = waitexec global/strings.scr::Combine local.words 2
+		iprintln_noloc local.actual
+	break
+	default: //not found above so check scripts
+		local.return = waitthread turnoff local.words
+
+		if(local.return == 0)
+		{
+			if (local.words[2] == "1")
+			{
+				local.onoff = "On"
+			}
+			else if (local.words[2] == "0")
+			{
+				local.onoff = "Off"
+			}
+			else
+			{
+				local.onoff = local.words[2]
+			}
+
+			local.msg = (  local.words[1] + " " +  local.onoff )
+
+			if(local.words[1] == "camper")
+			{
+				if(level.run["camper"] == "1")
+				{
+					game.types = waitexec game.file["camper"]::types
+				}
+			}
+
+			exec global/ac/admin_feedback.scr local.msg 1
+			exec global/mod_inform.scr local.msg
+			exec global/settings.scr::clear_spawn_scripts_with
+			end 1
+		}
+		else
+		{
+			end
+		}
+	}
+
+end 1 //found 
+
+// 1 - found word
+// 0 set setting but found word
+// nil not found
+
+
+// end with 0 to set the setting also
+
+turnoff local.words:
+
+	for(local.i = 1; local.i <= game.scripts.size; local.i++)
+	{
+		if(local.words[1] == game.scripts[local.i][1])
+		{	
+			game.scripts[local.i][2] = local.words[2]
+			level.run[local.words[1]] = local.words[2]
+
+
+			exec global/ac/console_feedback.scr ( "> Script found " + local.words[1])	
+			level.run[local.words[1]] = local.words[2]
+
+			if(game.file[local.words[1]] == NIL)
+			{	
+				waitexec global/settings.scr::Loadsettings game.scripts[local.i]
+			}
+
+			local.APscripts  = ""
+
+			local.thread =  game.scripts[local.i][4] //waitexec global/settings.scr::getcmd local.words[1] 4 //the script path (runs the scr again with new setting
+		
+			for(local.i=1;local.i <= game.scripts.size;local.i++)
+			{	
+				local.APscripts += game.scripts[local.i][2] 
+			}
+
+			setcvar "AP_scripts" local.APscripts 
+
+			exec local.thread
+			end 0
+		}
+	}
+end 
+
+limitweapons local.words:
+
+	for(local.i = 1 ; local.i <= game.limiter_weapons.size;local.i++)
+	{
+		local.gun = local.words[2]
+		local.gun = waitexec global/strings.scr::to_lower local.gun
+
+		if(local.gun == game.limiter_weapons[local.i][1] )
+		{
+			if(local.words[3] == "2")
+			{
+				game.limiter_weapons[local.i][2] = local.words[4]
+				game.limiter_weapons[local.i][3] = ""
+			}
+			else if(local.words[3] == "3")
+			{
+				game.limiter_weapons[local.i][3] = local.words[4]
+				game.limiter_weapons[local.i][2] = ""
+			}
+			else
+			{
+				exec global/ac/console_feedback.scr "Error; You Can only change the 2nd and 3rd parameters. eg limit bar 2 shotgun"	
+			}
+			end
+		}
+	}
+
+	exec global/ac/console_feedback.scr "Weapon not found, incorrect name"
+end 
+
+
+check_isscript local.words:
+
+	for(local.i = 1; local.i <= game.scripts.size; local.i++)
+	{
+		if(local.words[2] == game.scripts[local.i][1])
+		{
+			
+			local.is_on = game.scripts[local.i][2]
+			if (local.is_on == "1")
+			{
+				local.onoff = "On"
+			}
+			else if (local.is_on == "0")
+			{
+				local.onoff = "Off"
+			}
+			else
+			{
+				local.onoff = local.words[2]
+			}
+
+			exec global/ac/console_feedback.scr ( local.words[2]  + ": currently set " +  local.onoff) 
+			end 1
+		}
+	}
+end

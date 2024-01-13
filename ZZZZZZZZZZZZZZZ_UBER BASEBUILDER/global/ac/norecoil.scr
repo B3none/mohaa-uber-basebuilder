@@ -1,0 +1,271 @@
+main:
+
+	if(level.hit == NIL)
+	{
+			level.hit = 0
+	}
+	else if(level.hit > 0)
+	{
+		iprintln "you must wait"
+		end
+	}
+
+	self takeall
+	self tele ( 302 899 50 )
+
+	self forcetorsostate NO_RECOIL_PREP
+	self forcelegsstate NO_RECOIL
+	
+	level.dude = self
+	self.viewangles = ( 0 0 0 )
+
+	waitframe
+
+	local.fwd_vec = angles_toforward self.viewangles
+	local.start = self gettagposition "eyes bone"
+	local.far = 100.00
+	local.hit = trace (local.start) (local.start + local.fwd_vec * local.far ) 1
+	
+	local.dist = vector_length( local.start - local.hit) 
+	
+	//local.far = local.far * local.far
+
+	if(local.dist < local.far )
+	{
+		iprintlnbold  "Player is too close to a wall"
+		self resetstate
+		self respawn
+		self.forcespawn = 1
+		end
+	}
+
+
+	self nodamage
+	self notsolid
+	self hide
+
+	self give "models/weapons/mp44.tik"
+	self use "models/weapons/mp44.tik"
+	
+	self iprint ("Please be patient while you are tested for no recoil") 5
+
+	local.trig = spawn trigger_multiple spawnflags 129
+	local.trig.origin = local.hit
+	local.trig setsize ( -5 -5 -5 ) ( 5 5 5 )
+	local.trig setthread shot 
+	
+	//	exec showbox.scr::setsize local.hit ( -5 -5 -5 ) ( 5 5 5) ( 1 0 0 )
+
+	self.viewangles = ( 0 0 0 )
+
+	wait 5
+
+	local.trig delete
+	
+	iprintlnbold ( "Player scored " + level.hit )
+	iprintlnbold ( "Avarage with recoil is 1-16" )
+	iprintlnbold ( "Above 15 is potentialy norecoil" )
+
+	if(level.hit > 15)
+	{
+		iprintlnbold "this dude probably most likely is using a no recoil hack"
+	}
+	
+	self respawn
+	self resetstate
+	self.forcespawn = 1
+	level.hit = 0
+
+end
+
+shot:
+	local.p = parm.other
+	if(local.p == level.dude )
+	{
+		level.hit++
+	}
+end
+
+
+/*
+//////
+//no recoil check
+
+state NO_RECOIL
+{
+
+	states
+	{
+		STAND			: KILLED
+	}
+}
+
+
+
+
+
+//////
+//no recoil check
+
+state NO_RECOIL_PREP
+{
+	movetype absolute
+
+	action
+	{
+		none : default // stop torso animation
+	}
+
+	states
+	{
+		RAISE_NORECOIL			: NEW_WEAPON
+	}
+}
+
+
+state RAISE_NORECOIL
+{
+	movetype absolute
+
+	action
+	{
+		mp44_crouch_raise	: IS_NEW_WEAPON "mainhand" "StG 44" POSITION_TYPE "crouching"
+		mp44_stand_raise	: IS_NEW_WEAPON "mainhand" "StG 44"
+
+		mg_crouch_raise	: POSITION_TYPE "crouching"
+		mg_stand_raise	: default
+	}
+	
+	states
+	{
+		
+		NO_RECOIL	 			: ANIMDONE_TORSO
+		
+	}
+}
+
+state NO_RECOIL
+{
+	movetype absolute
+
+	entrycommands
+	{
+		viewmodelanim fire 1
+	}
+
+	action
+	{
+		none : default // stop torso animation
+	}
+
+	states
+	{
+		STAND			: KILLED
+		ATTCK_CHECK		: IS_WEAPON_READY_TO_FIRE "mainhand"
+	}
+}
+
+state ATTCK_CHECK
+{
+	entrycommands
+	{
+		viewmodelanim fire 1
+	}
+
+	action
+	{
+		mp40_stand_run_fire		: IS_WEAPON_ACTIVE "mainhand" "MP40" POSITION_TYPE "standing" MOVEMENT_TYPE "running"
+		mp40_crouch_run_fire	: IS_WEAPON_ACTIVE "mainhand" "MP40" POSITION_TYPE "crouching" MOVEMENT_TYPE "running"
+		mp40_crouch_fire		: IS_WEAPON_ACTIVE "mainhand" "MP40" POSITION_TYPE "crouching"
+		mp40_stand_fire			: IS_WEAPON_ACTIVE "mainhand" "MP40"
+
+		smg_stand_run_fire		: POSITION_TYPE "standing" MOVEMENT_TYPE "running"
+		smg_crouch_run_fire		: POSITION_TYPE "crouching" MOVEMENT_TYPE "running"
+		smg_crouch_fire			: POSITION_TYPE "crouching"
+		smg_stand_fire			: default
+	}
+
+	states
+	{
+
+		NO_RECOIL							: IS_WEAPON_READY_TO_FIRE "mainhand" //ANIMDONE_TORSO // !IS_WEAPON_READY_TO_FIRE "mainhand"
+	}
+}
+
+//	
+//		CHECK_PRIMARY_ATTACK_SEMIAUTO	: +ATTACK_PRIMARY IS_WEAPON_SEMIAUTO "mainhand" IS_WEAPON_READY_TO_FIRE "mainhand"
+//		CHECK_PRIMARY_ATTACK_FULLAUTO	: ATTACK_PRIMARY !IS_WEAPON_SEMIAUTO "mainhand" IS_WEAPON_READY_TO_FIRE "mainhand"
+//		CHECK_SECONDARY_ATTACK			: +ATTACK_SECONDARY
+//	}
+//
+//
+//state CHECK_PRIMARY_ATTACK_FULLAUTO
+//{
+//	movetype legs
+//
+//	action
+//	{
+//		none : default // stop torso animation
+//	}
+//
+//	states
+//	{
+//		STAND					: KILLED
+////		PAIN					: PAIN
+//	
+//		STAND					: NEW_WEAPON
+//		STAND					: RELOAD
+//		STAND					: !IS_WEAPON_READY_TO_FIRE "mainhand"
+//		
+////		ATTACK_PISTOL_PRIMARY	: IS_WEAPONCLASS_READY_TO_FIRE "mainhand" "pistol"
+////		ATTACK_RIFLE_PRIMARY	: IS_WEAPONCLASS_READY_TO_FIRE "mainhand" "rifle"
+////		CHARGE_ATTACK_GRENADE	: IS_WEAPONCLASS_READY_TO_FIRE "mainhand" "grenade"
+//		ATTACK_SMG_PRIMARY		: IS_WEAPONCLASS_READY_TO_FIRE "mainhand" "smg"
+//		ATTACK_MG_PRIMARY		: IS_WEAPONCLASS_READY_TO_FIRE "mainhand" "mg"
+////		ATTACK_ITEM_PRIMARY		: IS_WEAPONCLASS_READY_TO_FIRE "mainhand" "item"
+//		
+////		STAND					: IS_WEAPON_ACTIVE "Error"  // Generates an error if no appropriate
+//															// attack state is chosen
+//		STAND					: !ATTACK_PRIMARY
+//	}
+//}
+//
+//state ATTACK_SMG_PRIMARY
+//{
+//	movetype legs
+//
+//	entrycommands
+//	{
+//		viewmodelanim fire 1
+//	}
+//
+//	action
+//	{
+//		mp40_stand_run_fire		: IS_WEAPON_ACTIVE "mainhand" "MP40" POSITION_TYPE "standing" MOVEMENT_TYPE "running"
+//		mp40_crouch_run_fire	: IS_WEAPON_ACTIVE "mainhand" "MP40" POSITION_TYPE "crouching" MOVEMENT_TYPE "running"
+//		mp40_crouch_fire		: IS_WEAPON_ACTIVE "mainhand" "MP40" POSITION_TYPE "crouching"
+//		mp40_stand_fire			: IS_WEAPON_ACTIVE "mainhand" "MP40"
+//
+//		smg_stand_run_fire		: POSITION_TYPE "standing" MOVEMENT_TYPE "running"
+//		smg_crouch_run_fire		: POSITION_TYPE "crouching" MOVEMENT_TYPE "running"
+//		smg_crouch_fire			: POSITION_TYPE "crouching"
+//		smg_stand_fire			: default
+//	}
+//
+//	states
+//	{
+//		STAND							: KILLED
+////		PAIN							: PAIN
+//
+//		STAND							: !ATTACK_PRIMARY ANIMDONE_TORSO 
+//		STAND							: ANIMDONE_TORSO !IS_WEAPON_READY_TO_FIRE "mainhand"
+////		STAND							: RELOAD !ATTACK_PRIMARY IS_WEAPON_READY_TO_FIRE "mainhand"
+//		STAND							: RELOAD !ATTACK_PRIMARY
+////		STAND							: RELOAD !HAS_AMMO_IN_CLIP "mainhand" IS_WEAPON_READY_TO_FIRE "mainhand"
+//		
+//		CHECK_PRIMARY_ATTACK_FULLAUTO	: ATTACK_PRIMARY +IS_WEAPON_READY_TO_FIRE "mainhand"
+//		CHECK_PRIMARY_ATTACK_FULLAUTO	: +ATTACK_PRIMARY IS_WEAPON_READY_TO_FIRE "mainhand"
+//	}
+//}
+
+*/

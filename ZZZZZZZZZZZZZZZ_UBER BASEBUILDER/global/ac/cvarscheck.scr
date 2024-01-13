@@ -1,0 +1,222 @@
+//handles all the input through console.
+
+main:
+	thread setupadmins
+
+	while(1)
+	{
+		wait 1
+		local.help = getcvar "admin_cmd"
+
+		if(local.help!="")
+		{	
+			setcvar "admin_cmd" ""
+
+			exec global/ac/console_feedback.scr " "
+			exec global/ac/console_feedback.scr "> searching for command. Please wait to enter cvars again."
+			exec global/ac/console_feedback.scr " "
+
+			thread split_cmd local.help	
+
+		}
+	}
+	
+end
+
+setupadmins:
+	
+	if (game.scan_at_start == 1)
+	{
+		local.rcon = getcvar "rconpassword"
+		
+		if(local.rcon == "")
+		{
+			local.text = ("admin_cmd")
+		}
+		else
+		{
+			local.text = ("rcon admin_cmd")
+		}
+		
+		while(1)
+		{
+			waitframe
+			for(local.i = 1; local.i <= $player.size ; local.i++)
+			{
+				if($player[local.i].admin == NIL)
+				{
+					local.textt = local.text + " `imadmin_" + $player[local.i].entnum
+					$player[local.i] stufftext (  local.textt)
+					$player[local.i].admin = 0
+				}
+
+				wait 3
+			}
+		}
+	}
+end
+
+
+
+// This section is when a admin_cmd is enterd. 
+split_cmd local.info:
+
+	if (game.input_type == "linux")
+	{
+		local.info =  waitexec global/strings.scr::Format_replace local.info "_" " "
+	}
+
+	local.wordsarray = waitexec global/strings.scr::split_line local.info
+	local.actual = local.wordsarray[3]
+	waitthread split_cmds local.wordsarray local.actual
+	exec global/ac/console_feedback.scr ( "> Finished " + local.actual)
+end
+
+split_cmds local.wordsarray local.actual:
+
+	local.words = local.wordsarray[1]
+	local.wordcount = local.wordsarray[2]
+	
+	for(local.i=1;local.i<= game.all_commands.size;local.i++)
+	{
+		if(local.words[1] == game.all_commands[local.i][1])	//run through commands to check agaisnt what was enterd
+		{
+			if(local.words[2])				// found a command to be the same
+			{
+				//first check scripts
+				
+				local.mhm = waitexec global/ac/command_post/console.scr 3 local.words
+
+				if(local.mhm != 1 ) //if its 1 it was found and not asked to be changed
+				{
+					if(local.words[3])			// if a given index has been specified
+					{
+						local.j = int local.words[3]	//if its a valid index
+						local.j = int local.j 
+						if(local.j == 0 )
+						{
+							local.j  = 2	//no? use index 2
+						}
+					}
+					else
+					{
+						local.j  = 2	// no index so use 2 
+					}
+
+					// Change the settings
+					local.print = game.all_commands[local.i][local.j]
+					local.print2 = local.words[2]
+					local.print =( local.print + " changed to ")
+					game.all_commands[local.i] [local.j] = local.words[2]
+					exec global/ac/console_feedback.scr ( "Changing parameters of " + game.all_commands[local.i][1]) 
+					exec global/ac/console_feedback.scr ( local.print + local.print2 )
+				}
+
+				end
+			}
+			else
+			{
+				// check the command list first
+				local.mhm = waitexec global/ac/command_post/console.scr 1 local.words[1]
+				// if a cmd was enterd that also a setting but no cmd was found for the setting it must be wrong.
+				if(local.mhm != 1 )
+				{
+					exec global/ac/console_feedback.scr  "2nd param seems to be NIL. Make sure you have quotes around your line" 
+				//	exec global/ac/console_feedback.scr '"' 1
+			//		exec global/ac/console_feedback.scr " around your line."
+					exec global/ac/console_feedback.scr  " ------------------------------- "
+					exec global/ac/console_feedback.scr  " If only the first word is being detected then change the input type by typing "
+					exec global/ac/console_feedback.scr  " rcon admin_cmd input_toggle"
+					exec global/ac/console_feedback.scr  " You can then use a space as a spacer or _ as a spacer"
+					exec global/ac/console_feedback.scr  " ------------------------------- "
+				}
+				end
+			}
+		}
+	}
+
+	local.maybeplayer = int local.words[1]
+
+	if(local.maybeplayer== 0 && local.words[1].size > 1)	// is it a player?, no?
+	{
+		if(local.words[2])				// found a command to be the same
+		{
+			//first check scripts
+			local.mhm = waitexec global/ac/command_post/console.scr 3 local.words
+
+			if(local.mhm == 0 ) //if its 1 it was found and not asked to be changed
+			{
+				if(local.words[3])			// if a given index has been specified
+				{
+					local.j = int local.words[3]	//if its a valid index
+					local.j = int local.j 
+					if(local.j == 0 )
+					{
+						local.j  = 2	//no? use index 2
+					}
+				}
+				else
+				{
+					local.j  = 2	// no index so use 2 
+				}
+
+				// Change the settings
+				local.print = game.all_commands[local.i][local.j]
+				local.print2 = local.words[2]
+				local.print =( local.print + " changed to ")
+				game.all_commands[local.i] [local.j] = local.words[2]
+				exec global/ac/console_feedback.scr ( "Changing parameters of " + game.all_commands[local.i][1]) 
+				exec global/ac/console_feedback.scr ( local.print + local.print2 )
+			}
+			else if(local.mhm != 1 )
+			{
+				exec global/ac/console_feedback.scr "Bad command"
+				end
+			}
+		}
+		else
+		{
+			// check the command list first
+			local.mhm = waitexec global/ac/command_post/console.scr 1 local.words[1]
+			if(local.mhm != 1 )
+			{		
+				exec global/ac/console_feedback.scr "Bad command "
+			}
+		}
+
+
+		end
+	}
+
+
+	if(local.words[2] == NIL)
+	{
+		exec global/ac/console_feedback.scr "Bad command"
+		end
+	}
+
+	
+	local.actual = waitexec global/strings.scr::Combine local.words 3
+
+	// its  a console cmd so find what one and do what is asked!
+
+	for(local.i=1; local.i <= $player.size; local.i++) //loop through and find the player
+	{   
+		if(local.maybeplayer == $player[local.i].entnum) //if the number is what was enterd into console then work
+		{
+			local.player = $player[local.i]
+			exec global/ac/console_feedback.scr ("> " + local.words[2] + " " + local.actual )
+
+			local.mhm = waitexec global/ac/command_post/console.scr 2 local.words local.actual local.player
+	
+			if(local.mhm != 1 )
+			{		
+				exec global/ac/console_feedback.scr "Bad command "
+			}
+			end
+		}         
+	}   
+
+	exec global/ac/console_feedback.scr "Possible Bad player ID"
+end
+

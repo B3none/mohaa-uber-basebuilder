@@ -1,0 +1,71 @@
+main local.origin:
+
+local.portlight2 = spawn script_model
+local.portlight2 model "static/bush_full.tik"
+local.portlight2.origin = local.origin // starting point
+local.portlight2.scale = 1
+local.portlight2 rotatey 0
+local.portlight2 notsolid
+
+
+local.trig = spawn trigger_multiple
+local.trig.origin = local.origin
+local.trig setsize ( -10 -10 -10 ) ( 10 10 10 )
+local.trig setthread camo_trig
+local.trig message "you have found the camo trigger"
+local.trig wait 1
+
+end
+
+camo_trig:
+local.player=parm.other
+if (local.player.packon == 1)
+{
+end
+}
+local.player.packon = 1
+
+local.static = spawn script_model
+local.static model "static/bush_full.tik"
+local.static notsolid
+local.static.scale= 1
+local.static.origin = (local.player.origin + ( 0 0 0 ))
+
+local.static glue local.player
+local.player hide
+local.player stufftext "say I have found the camo trigger!!!"
+
+local.team = local.player.dmteam
+while(1)
+{
+if (local.team != local.player.dmteam)
+{
+local.player_exists = 1
+break
+}
+
+if !(isAlive local.player)
+{
+local.player_exists = 1
+break
+}
+
+if !(local.player)
+{
+local.player_exists = 0
+break
+}
+
+wait 0.4
+}
+
+if (local.player_exists == 1)
+{
+local.static unglue
+// local.player show
+local.player.packon = 0
+}
+
+local.static remove
+
+end

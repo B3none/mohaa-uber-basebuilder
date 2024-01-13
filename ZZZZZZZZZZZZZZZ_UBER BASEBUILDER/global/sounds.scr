@@ -1,0 +1,21 @@
+//cache file
+
+main:
+	//cache sounds
+	local.master = spawn ScriptMaster
+
+	// aliascache (?alias?) snd wavfile soundparms basevol volmod basepitch pitchmod minDist maxDist channel loaded|streamed maps "mapstr1 mapstring2 mapstring3 ..."
+
+	//Camper mod
+	local.master aliascache streamed_dfr_scripted_M3L1_016a sound/dialogue/m3l1/A/dfr_scripted_M3L1_016a.wav soundparms 1.5 0.0 1.0 0.0 200 1500 dialog streamed subtitle "You stay in one spot, you're a dead man!" maps level.mapname
+	local.master aliascache camper_bombtick sound/items/Item_Timer_01.wav soundparms 0.7 0.0 1.0 0.0 200 500 local loaded maps level.mapname
+	local.master aliascache camper_final_countdown sound/items/final_countdown.wav soundparms 1.5 0.0 1.0 0.0 200 500 local loaded maps level.mapname
+
+	// punishments
+	local.master aliascache alarm_switch sound/mechanics/Mec_Switch_05.wav soundparms 1.5 0.0 1.0 0.0 800 3000 auto loaded maps level.mapname
+	local.master aliascache snd_landing_stone1 sound/characters/fs_stone_land_01.wav soundparms 0.9 0.2 0.9 0.2 200 2500 auto loaded maps level.mapname
+
+	local.master aliascache thunder1 sound/amb/Amb_Thunder_01.wav soundparms 1.0 0.0 1.0 0.0 3000 6000 auto streamed maps level.mapname
+	local.master aliascache rain_ext sound/amb/Amb_RainExt_01.wav soundparms 1.0 0.0 1.0 0.0 3000 6000 local streamed maps level.mapname
+
+//	local.master aliascache leadinmp2 sound/weapons/explo/Exp_LeadIn_07.wav soundparms 0.8 0.2 0.7 0.5 160 3000 auto loaded maps level.mapnamestring

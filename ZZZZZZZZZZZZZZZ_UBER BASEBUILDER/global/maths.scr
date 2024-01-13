@@ -1,0 +1,52 @@
+
+// big thanx to jv for letting me use his maths functions
+// jv wrote this file btw:P
+
+main:
+level.PI = 3.14159
+end
+// sin(x), x in rad
+ // sin(x), x in rad
+sin local.x:
+end (waitthread cos(local.x - 0.5 * level.PI))
+
+// cos(x), x in rad
+cos local.x:
+	// reduce to [0,2pi]
+	if(local.x > 2.0 * level.PI)
+	{
+	  local.x -= (int (local.x / (2.0 * level.PI))) * 2.0 * level.PI
+	}
+	else if(local.x < 0.0)
+	{
+	  local.x += ((int ( -local.x / (2.0 * level.PI))) + 1) * 2.0 * level.PI
+	}   
+
+	// reduce to [-pi,pi]
+	if(local.x > level.PI)
+	{
+	  local.x -= 2.0 * level.PI
+	}
+
+	local.x2 = local.x * local.x
+	local.x4 = local.x2 * local.x2
+	local.x6 = local.x4 * local.x2
+	local.x8 = local.x6 * local.x2
+
+	// taylor series expansion
+	local.cosx = 1.0 - 0.5 * local.x2 + 0.04167 * local.x4 - 0.00139 * local.x6 + 0.00002 * local.x8
+
+	if(local.cosx < -1.0)
+	{
+	  local.cosx = -1.0
+	}
+	else if(local.cosx > 1.0)
+	{
+	  local.cosx = 1.0
+	}
+
+end local.cosx
+
+// tan(x), x in rad, undefined for x = (1/2 + k) * PI with k arbitrary int
+tan local.x:
+end ((waitthread sin local.x) / (waitthread cos local.x))

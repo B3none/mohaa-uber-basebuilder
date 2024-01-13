@@ -1,0 +1,200 @@
+/*
+
+main:
+
+	while (level.run["mines"] == "1")
+	{
+		for(level.i = 1; level.i <= $player.size; level.i++)
+		{
+			if ($player[level.i].mine_check!=1 && $player[level.i] != NIL)
+			{
+				$player.mines = 0
+				$player[level.i].mine_check=1
+				$player thread hold_check
+			}
+
+		}
+	waitframe
+	}
+end
+*/
+
+main:
+
+	if(level.run["mines"] != "1")
+	{
+		end
+	}
+
+	local.replenish = waitexec global/settings.scr::getcmd "mine-replenish"
+
+	if(self.mines == NIL || local.replenish != "0")
+	{
+		self.mines = 1
+	}
+
+
+	local.weaponscheck = waitexec global/settings.scr::getcmd "mine-weapons"
+	
+	if(local.weaponscheck == "1")
+	{
+		local.end =  waitthread check_weapon self
+
+		if(local.end == "0")
+		{
+			end
+		}
+
+	}
+
+	local.holdtime = waitexec global/settings.scr::getcmd "mine-holdtime"
+	local.holdtime = int local.holdtime
+
+	local.team = self.dmteam
+
+	while(level.run["mines"] == "1" && self != NULL && self != NIL && isalive self  && self.dmteam == local.team)
+	{
+
+		wait 1 //wait 1 second
+
+		if(self == NULL || self == NIL)
+		{
+			end
+		}
+
+		local.skip = (self.no_usemine == 1 || self.ARMED || self.WALKIETALKIED || self.DETONATORED || self.flying || self.dmteam == "spectator")
+
+		if(local.skip != 1)
+		{	
+			if(self.useheld == 1)
+			{
+				local.held_for = local.holdtime
+				while(self.useheld == 1)
+				{
+					for(local.i=0;local.i<=1;local.i = local.i + 0.05)
+					{
+						waitframe
+
+						if(self.useheld == 0)
+						{
+							local.held_for = 3
+							break
+						}
+					}
+					
+					local.skip = (self.no_usemine == 1 || self.ARMED || self.WALKIETALKIED || self.DETONATORED || self.flying || self.dmteam == "spectator")
+
+					if( local.skip != 1)
+					{
+						self stufftext ("subtitle3 Mine-in-" + local.held_for )
+
+						local.held_for--
+
+						if(local.held_for == 0)
+						{
+							self stufftext ("subtitle3 Using-Mine")
+							waitexec level.hold_script
+							local.held_for = 3
+						}
+					}
+					else
+					{
+						local.held_for = 3
+						break
+					}
+
+				}
+			}
+		}
+	}	
+
+end
+
+
+check_weapon local.player:
+
+	if(local.player.dmteam=="spectator" || local.player == NIL || local.player == NULL)
+	{
+		end
+	}
+
+	if(game.mine_weapons==NIL)
+	{
+		waitthread load_weapons 
+	}
+
+	self.weapon = NIL	
+
+	self waitexec global/get_weapon.scr
+
+	local.true = 1
+	for(local.true =0;local.true <= 1; local.true++)
+	{
+		wait 1
+		if(self.weapon==NIL)
+		{
+			while(self.weapon==NIL)
+			{
+				if(self == NULL || self == NIL)
+				{
+					end
+				}
+				waitframe
+			}
+		}
+
+		if(self.weapon != "models/weapons/unarmed.tik")
+		{
+			local.true = 2
+		}
+
+		waitexec global/get_weapon.scr
+
+	}
+
+	for(local.load=game.mine_weap_start;local.load<=game.all_commands.size;local.load++)
+	{
+		if((self.weapon + "-mine") == ("models/weapons/" + game.all_commands[local.load][1]))
+		{
+			local.mines = game.all_commands[local.load] [2]
+			end local.mines
+		}
+	}
+
+end local.mines
+
+load_weapons:
+
+	switch(game.game)
+	{
+	case "AA":
+		game.mine_weapons =  waitexec game.file["mines"]::weaponsaa
+	break
+	case "SH":
+		game.mine_weapons =  waitexec game.file["mines"]::weaponssh
+	break
+	case "BT":
+		game.mine_weapons =  waitexec game.file["mines"]::weaponsbt
+	break
+	}
+
+	local.i = game.all_commands.size
+	game.mine_weap_start = local.i
+
+	for(local.n=1;local.n<=game.mine_weapons.size;local.n++)
+	{
+		local.i++
+		for(local.s=1;local.s <= game.mine_weapons[local.n].size; local.s++ )
+		{
+			if(local.s == 1)
+			{
+				game.all_commands[local.i][local.s] = (game.mine_weapons[local.n][local.s] + ".tik-mine")
+			}
+			else
+			{
+				game.all_commands[local.i][local.s] = (game.mine_weapons[local.n][local.s])
+			}
+		}
+	}
+end
+

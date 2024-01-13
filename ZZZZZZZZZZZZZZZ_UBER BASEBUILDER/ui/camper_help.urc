@@ -1,0 +1,36 @@
+menu "camper_help" 640 480 NONE 0
+
+
+
+resource
+Button
+{
+title "Close"
+name "Default"
+rect 590 0 50 30
+fgcolor 0.00 0.00 0.00 1.00
+bgcolor 0.50 0.50 0.50 1.00
+borderstyle "RAISED"
+stuffcommand "popmenu 0"
+}
+resource
+Label
+{
+title "Help"
+name "Default"
+rect 0 0 590 30
+fgcolor 0.00 0.00 0.00 1.00
+bgcolor 0.50 0.50 0.50 1.00
+borderstyle "RAISED"
+}
+resource
+Label
+{
+title "Sorry but i dont know what help to write. e-mail me at elgan.sayer@gmail.com \n visit www.mods-r-us.net and ask in the forums."
+name "Default"
+rect 0 30 640 450
+fgcolor 0.00 0.00 0.00 1.00
+bgcolor 0.50 0.50 0.50 1.00
+borderstyle "RAISED"
+}
+end.

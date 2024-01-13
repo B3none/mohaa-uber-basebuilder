@@ -1,0 +1,69 @@
+// Script for exec scripts ...hmm.hehe..anyway. ja
+//
+// it will exec the scripts in order until a word is found.
+
+// game.player_scripts holds a array of scripts with a switch or list of words and things to do to players. 
+// game.one_word_scripts holds an array of scripts that get executed when one word is enterd into console. like campercmd  "help"
+// game.commands_with_extra_scripts holds an array of scripts that get executed when more then one word is enterd. it searches for the first word, 
+//
+main local.script local.info local.info2 local.player: // script type to exec. info to send.
+
+// 1 = one word
+// 2 - player
+// 3 = one with extra
+
+
+	if(game.command_scripts != 1)	//if not loaded, load the script files
+	{
+		waitexec  game.file["settings/advanced"]::console_scripts
+	}
+
+	switch(local.script)
+	{
+	case 1:
+		local.scripts = game.one_word_scripts 
+		local.info = waitexec global/strings.scr::to_lower local.info
+	break
+	case 2:
+		local.scripts = game.player_scripts
+		local.info[2] = waitexec global/strings.scr::to_lower local.info[2]
+	break
+	case 3:
+		local.scripts = game.commands_with_extra_scripts
+		local.info[1] = waitexec global/strings.scr::to_lower local.info[1]
+	break
+	default:
+		exec global/ac/console_feedback.scr "command_post/cosnole.scr being exec wrong. Please fix."
+	}
+
+
+	for(local.i = 1; local.i <= local.scripts.size; local.i++)
+	{
+		if(local.scripts[local.i][2].size < 5)
+		{
+			if(local.scripts[local.i][2] == "all" || local.scripts[local.i][2] == game.game)
+			{
+				local.return = waitexec ( "global/ac/command_post/" + local.scripts[local.i][1] ) local.info local.info2 local.player
+			}
+		}
+		else
+		{	
+			local.words = exec global/strings.scr::split_line local.scripts[local.i][2] 1
+			
+			if(local.words[1][1] == game.game || local.words[1][2] == game.game)
+			{
+				local.return = waitexec ( "global/ac/command_post/" + local.scripts[local.i][1] ) local.info local.info2 local.player
+			}
+		}
+
+		if(local.return != NIL)
+		{
+			end local.return
+		}
+	}
+
+	//if it gets here its probably wrong
+	//exec global/ac/console_feedback.scr "Bad command"
+
+
+end 

@@ -1,0 +1,229 @@
+//
+// Version 2
+// Permanent Dead Bodies and Blood Trails
+// Developed by ScorpioMidget
+// Thanks to Poolmaster for helping me test it and find the bugs.
+// 1st public release 22 Jul 2003
+// Tested on MOHAA
+// it might work on SH, i dunno
+// Tested on obj_team1 ... 4 , all worked ok
+//
+// If you find any bugs, let me know what they are so i can releae a fixed verision
+// scorpiomidget@hotmail.com
+//
+// FEEL FREE TO USE THIS SCRIPT, BUT PLEASE DONT REMOVE THIS HEADER !.
+// IF YOU MAKE AMENDMENTS, JUST MAKE A NOTE OF THEM BELOW, THANK-YOU
+//
+// ----- change log -------
+// V2 Released 23 Jul 2003
+// ... Added in code so spectators can be ghosts ;)
+// ... altered body code, so head isn't buried in ground
+// V1 Released 22 Jul 2003
+// ------------------------
+//
+// ----- How 2 use --------
+// put this after 'level waittill spawn' in the main map script
+// it spawns permanent dead bodies, and blood trails if player takes enough damage
+// pass parameters <bodies> <blood> <health> <ghost_specators>
+// where bodies = 0 or 1, blood = 0 or 1, health = health points below which blood is left as a trail, <ghost> = 0 or 1
+// ------------------------
+
+setup local.bodies local.blood local.health local.ghost:
+	if (local.health < 1 || local.health == NIL)
+		local.health = 50
+
+	if (local.ghost==NIL)
+		local.ghost=0
+
+	if (local.blood==NIL)
+		local.blood=0
+
+	if (local.bodies==NIL)
+		local.bodies=0
+
+	if (local.bodies==0 && local.blood==0)
+		end
+
+	if (level.deadbodies==1)
+		end
+
+	level.deadbodies=1;
+
+	// setup player scanner
+	for (local.p=1;local.p<=32;local.p++)
+	{
+		thread spawnstuff local.p local.bodies local.blood
+		if (local.ghost==1) thread spectator_ghost local.p
+	}
+end
+
+spectator_ghost local.p:
+	while (1)
+	{
+		while (local.p>$player.size)
+			waitframe
+	
+		local.player = $player[local.p]
+
+		while (local.player==NULL || local.player.dmteam!="spectator")
+			waitframe
+
+		local.player hide
+		local.counter = 0
+		local.switchmode = 0.5
+		local.hidden = 1
+
+		while (local.player!=NULL && local.player.dmteam=="spectator")
+		{
+			wait .1
+			local.counter ++
+			
+			if (local.counter>=local.switchmode)
+			{
+				if (local.hidden==1)
+				{
+					local.player show
+					local.hidden = 0
+					local.switchmode = randomint(1) + 0.2
+				}
+				else
+				{
+					local.player hide
+					local.hidden = 1
+					local.switchmode = randomint(5) + 2
+				}
+				local.counter=0
+			}
+		}
+
+		if (local.player!=NULL && local.player.dmteam!="spectator")
+			local.player show
+
+		waitframe
+	}
+end
+
+spawnstuff local.p local.bodies local.blood:
+	while (1)
+	{
+		restartspawndeadbodyloop:
+
+		while (local.p>$player.size)
+			waitframe
+	
+		local.player = $player[local.p]
+
+		while (local.player == NULL || local.player.dmteam=="spectator")
+			waitframe
+
+		while (local.player!=NULL && IsAlive local.player)
+		{
+			if (local.player.dmteam == "specatator")
+				goto restartspawndeadbodyloop
+	
+			if (local.blood==1)
+				thread spawnblood local.player
+
+			waitframe
+		}
+
+		if (local.bodies==1)
+		{
+			local.fx = local.player.brushmodel	
+			// up a bit so head isn't buried in floor	
+			local.o = local.player.origin + (0 0 5)
+			local.a = local.player.angles
+			local.a[0] = 90
+
+			// wait for the standard mohaa body to disappear
+			wait 12
+
+			// spawn a body
+			local.body = spawn script_model model local.fx
+			local.body.origin = local.o
+			local.body.angles = local.a
+			local.body notsolid
+
+			// make sure it's drops to floor in case we died midair
+			local.body droptofloor
+			// wait for drop
+			wait 3
+			// move up slightly so head isn't buried in floor ;)
+			local.o = local.body.origin
+			local.body.origin = local.o + (0 0 5)
+		}
+	}
+end
+
+spawnblood local.player:
+	if (local.player.bleading == 1)
+		end
+
+	thread debugtext "SPAWN BLOOD ! for player " local.player.entnum
+
+	local.player.bleading = 1
+
+	local.fx = "models/fx/barrel_oil_long.tik"
+
+	thread debugtext "BLOOD Model is " local.fx
+
+	local.lo = local.player.origin
+
+	for (local.b=0;local.b<=10;local.b++)
+	{
+		local.blood[local.b] = spawn script_model model local.fx
+		local.blood[local.b].targetname = local.targetname
+		local.blood[local.b] hide
+		local.blood[local.b] notsolid
+	}
+
+	local.b = 0
+
+	while (IsAlive local.player)
+	{
+		while (local.player!=NULL && local.player.health > 50)
+			wait .1
+
+		if (local.player==NULL)
+			break
+	
+		if ((IsAlive local.player) && (local.player.origin != local.lo))
+		{	
+			local.player iprint ("You are bleeding !")
+
+			local.b = local.b + 1
+			if (local.b > 10)
+				local.b = 1
+
+			local.targetname=("blood_" + local.b)
+
+			local.blood[local.b].origin = local.player.origin
+			local.a = local.player.viewangles
+			local.a[2] = 0
+			local.blood[local.b].angles = local.a
+			local.blood[local.b].scale = randomint (8) + 8
+			local.blood[local.b] show
+
+			local.lo = local.player.origin
+
+			wait 1
+		}
+
+		waitframe
+	}
+
+	for (local.b=1;local.b<=local.blood.size;local.b++)
+	{
+		if (local.blood[local.b] != NULL)
+			local.blood[local.b] remove
+		wait 1
+	}
+
+	local.player.bleading = 0
+end
+
+// text only output if debug mode is turned on
+debugtext local.text:
+	if (level.debug == 1)
+		println ("DEBUG DeadBodiesAndBlood: [" + parm.previousthread + "] > " + local.text)
+end

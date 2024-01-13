@@ -1,0 +1,381 @@
+list of commands for anti camper {sfx} 1.00 Crime stoppers edition.
+
+
+
+
+=======================================================================================================================
+
+	Available commands for admin_cmd
+
+	
+	when using admin_cmd you must quote what you enter into it! 
+	
+
+	admin_cmd "PLAYERid COMMAND PARAMS"
+		eg. admin_cmd "0 type bomb" - bomb player
+		eg2. admin_cmd "2 noclip" - noclip player
+
+	inputtype (string windows or linux)
+		set if the psace for input is " " or "_"
+		linux is "_" on soem servers
+		windows works with spaces
+
+	takedamage 
+		used ona  aplyer this will make them take 
+		damage like normal. Normal used to clear nodamage
+
+	nodamage	
+		used on a player like dog.(god) Will make them immune
+
+	dmrespawning ( Integer allow_respawn )     
+		set to 1 to turn on wave-based DM, 
+		to 0 to disable respawns within a round
+	
+	adminscan	
+		scan for new admins.
+
+	earthquake ( Float duration, Float magnitude, Float no_rampup, Float no_rampdown )    
+		Create an earthquake
+	
+	plantingteam ( String axis_or_allies )     
+		Sets which is planting the bomb, 'axis' or 'allies'
+`
+	iprintlnbold ( String string )     
+		Prints a string.followed by a newline in a bold/important way.
+
+	iprintln ( String string )     
+		Prints a string.followed by a newline.
+
+	teamwin ( String axis_or_allies )     
+		Sets that the 'axis' or the 'allies' have won the map.
+	
+	Stufftext ( string's) 
+		admin_cmd playerid stufftext strings.
+		Stufftexts the player with what u typed.
+		eg.
+		admin_cmd "1 stufftext say i smell of wee"
+
+	type ( string type ) ( duration )
+		player type string type
+		Runs this type on the player.
+
+	iprint ( string's) 
+		admin_cmd playerid iprint strings.
+		iprint. Prints to the player under the compass
+		eg.
+		admin_cmd "1 iprint how are u ?"
+
+	iprintbold ( string's) 
+		admin_cmd playerid iprintbold strings.
+		iprint. Prints to the player under the compass
+		eg.
+		admin_cmd "1 iprint how are u ?"
+		prints it in bold
+
+	jointeam *string team)
+
+		caused the player to join the specified team
+
+	deadbody      
+		Spawn a dead body
+
+	velocity ( vector velocity )
+		Set players velocity		
+	
+	face ( Vector angles )     
+		Force angles to specified vector
+
+	forcelegsstate ( String legsstate )     
+		Force the player's legs to a certain state
+
+	forcetorsostate ( String torsostate )     
+		Force the player's torso to a certain state
+
+	fullheal      
+		Heals player.
+
+	give ( String name )     
+		Gives the player the specified thing (weapon, ammo, item, etc.)
+
+	jumpxy ( Float forwardmove, Float sidemove, Float speed )    
+		Makes the sentient jump.
+
+	leaveteam      
+		Leave the current team
+
+	modheight ( String height )     
+		change the maximum height of the player
+		can specify 'stand', 'duck', 'duckrun', 'prone', or a specific height
+	
+	noclip      
+		Toggles the noclip cheat.
+
+	notready      
+		makes this player not ready for the round to start
+
+	physicsoff      
+		turn player physics off.
+
+	physicson      
+		turn player physics on.
+
+	primarydmweapon ( String weaptype )     
+		Sets the player's primary DM weapon
+
+	ready      
+		makes this player ready for the round to start
+
+	resetstate      
+		Reset the player's state table.
+	
+	respawn      	
+		Respawns the player.
+	
+	show      
+		show the entity, opposite of hide.
+
+	hide     
+		hide the entity, opposite of show.
+
+	tele ( Vector location )     
+		Teleport to location
+
+	turn ( Float yawangle )     
+		Causes player to turn the specified amount.
+
+	turnlegs ( Float yawangle )     
+		Turns the players legs instantly by the specified amount.
+
+	usestuff      
+		Makes the player try to use whatever is in front of her.
+
+	viewangles ( Vector newAngles )     
+		set the view angles of the entity to newAngles.
+	
+	voicetype ( String voice_name )     
+		Sets the voice type to use the player.
+
+	vote ( String arg1 )     
+		Player votes either yes or no
+
+	wuss      
+		Gives player all weapons.
+
+	help ( cmd for help on )
+		Displays a list of help and information.
+
+	reset
+		resets the mod
+
+	resethaveitem ( String weapon_name )     
+		Resets the game var that keeps track that we have got this weapon
+
+	safeholster ( Boolean putaway )     
+		Holsters all wielded weapons, or unholsters previously put away weapons
+		preserves state, so it will not holster or unholster unless necessary
+
+	safezoom ( Boolean zoomin )     
+		0 turns off zoom, and 1 returns zoom to previous setting
+
+	stopwatch ( Integer duration )     
+		Starts a stopwatch for a given duration... use 0 to clear the stopwatch
+
+	takepain ( Boolean bool )     
+		Set whether or not to take pain
+
+	turnupdate ( Float yaw, Float timeleft )     
+		Causes player to turn the specified amount.
+
+	tweakladderpos      
+		Tweaks the player's position on a ladder to be proper
+
+	unattachfromladder      
+		Unattaches the sentient from a ladder
+
+	viewmodelanim ( String anim, [Integer force_restart] )    
+		Sets the player's view model animation
+
+	watchactor ( Entity actor_to_watch )     
+		Makes the player's camera watch the specified actor.
+
+
+	weaponcommand ( String hand, [String arg1], [String arg2], [String arg3], [String arg4], [String arg5], [String arg6], [String arg7] )    
+		Pass the args to the active weapon in the specified hand
+
+	music ( str cmd) ( int args1)
+		Send music cmd, "next" "prev", "track" (tracknum) or "random" or 0 for off.
+
+	
+	jumpheight (int)
+		set a new jump height. Default: 56
+
+	miniplane
+		turn someone into a flyable mini plane
+
+	plane
+		turn someone into a flyable plane scale .75
+
+	all (command)
+		exec a command on all players
+	
+	axis (command) 
+		exec a command on all axis
+	
+	allias (command) 
+		exec a command on all allias 
+
+	spectator (command) 
+		exec a command on all spectator
+
+	kill 
+		kills a player (suicide)
+		admin_cmd "all kill"
+	
+	say
+		make a player say soemthing
+		admin_cmd "0 say hell i smell"
+
+
+	scale ( size)
+		set a player to this scale
+	
+	limitweap ( string weapon name , int parameter 2 or 3, string /int new setting )
+		effects the weapon limiter directly
+
+	eg
+		limitweap Bazooka 2 shotgun 
+
+	result : Replaced Bazooka with shotgun
+
+	eg2
+		limitweap Bazooka 3 0
+
+	result : Dissabled Bazooka
+
+	eg3
+		limitweap Bazooka 3 2
+
+	result : limits bazooka to 2
+
+	__________
+
+	themed cmds
+
+	__________
+
+
+	rinspin
+		spins them
+
+	ghost
+		bashes to death
+
+	sparks
+		sparks of doom
+
+	runt
+		bash to death
+
+	shortstack	
+		makes them shrink
+
+	snype
+		snipe yourself
+
+	bigpoppa
+		makes them grow
+
+	twister 
+		spins the screen
+
+	myst
+		mist everywhere
+
+	wolfpack
+		invisible dogs chase them do death
+
+	stonecold
+		they turn into a stone
+
+	flip (distance)
+		flips their view
+
+	inferno 
+		set them on fire
+
+	kickwarn
+		warn them they will be kicked 
+
+	disarm
+		takes away their weapons
+
+	rindog
+		dog chases them
+
+	jumpglitch
+		they jump
+
+	track
+		tracks your coordinates
+
+	storm
+		storm above them
+
+	yomama
+		picture in front of their face
+	
+	sheriff
+		turns you into a noclipping plane
+
+	fugitive
+		they glow and sirens sound
+
+	rocketdud
+		they cant shoot rockets
+
+	stackem
+		bombs above their head stack up and explode
+
+	crusher
+		piano falls from the sky and crushes them
+
+	pigpen	
+		they smell and flies appear
+
+
+	
+
+
+	SH and BT only
+
+	--------------
+
+
+
+	killtrace
+		no idea
+
+	rocketsmoke
+		no idea
+
+	rocketammo
+		no idea
+
+	rocketmod ( params )
+		no idea
+	
+	thrasher
+		no idea
+
+
+
+	_________
+
+
+	addkills ( int )
+		give a player number of kills
+
+	takekills ( int )
+		take a players number of kills
+
+=======================================================================================================================

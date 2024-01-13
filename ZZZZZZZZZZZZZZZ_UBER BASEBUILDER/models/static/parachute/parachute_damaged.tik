@@ -1,0 +1,31 @@
+TIKI
+setup
+{
+	scale 0.52					
+	path models/static/parachute
+	skelmodel chute.skd
+	surface canopy shader chute
+	surface rope1 shader rope
+	surface rope2 shader rope
+}
+
+init
+{
+	server
+	{
+		classname animate
+		setsize "-8 -8 -8" "8 8 8"
+	}
+	client
+	{
+	}
+}
+
+animations
+{
+	idle chute.skc
+}
+
+/*QUAKED sfx_Parachute-damaged (0.0 0.0 0.0) (-50 -40 0) (50 40 60)
+chute
+*/

@@ -1,0 +1,151 @@
+main local.team:
+
+	//only do one at a time instead of 2
+
+	local.times[1] = "minutes"
+	local.times[2] = "seconds"
+
+
+	local.total = ""
+
+	for(local.o = 1; local.o <= local.times.size ;local.o++)
+	{
+		local.time = level.countdown[local.team][local.times[local.o]]
+		local.time = string local.time
+
+		if(local.time.size > 1)
+		{
+			local.total +=local.time 
+		}
+		else
+		{
+			local.total += "0" + local.time 
+		}
+
+		if (local.o == 1)
+		{
+			local.total += ":"
+		}
+	}
+	
+
+	if(local.team == "allies")
+	{
+		thread update_axis local.total
+	}
+	else
+	{
+		thread update_allies local.total
+	}
+
+end
+
+update_axis local.total:
+	//axis
+
+	huddraw_align 61 right top
+	huddraw_font 61 facfont-20
+	huddraw_rect 61 -50 100 100 100
+
+	if(level.hudcolour["allies"] == 1)
+	{
+		huddraw_color 61 1 0 0
+	}
+	else
+	{
+		if(level.hudyellow  == "allies")
+		{
+			huddraw_color 61 1 1 0
+		}
+		else
+		{
+			huddraw_color 61 1 1 1
+		}
+	}
+
+	huddraw_alpha 61 1.0
+	huddraw_string 61 (local.total)
+
+end
+
+update_allies local.total:
+	//allies 
+	
+	huddraw_align 63 right top
+	huddraw_font 63 facfont-20
+	huddraw_rect 63 -50 80 100 100
+
+	if(level.hudcolour["axis"] == 1)
+	{
+		huddraw_color 63 1 0 0
+	}
+	else
+	{
+		if(level.hudyellow  == "axis")
+		{
+			huddraw_color 63 1 1 0
+		}
+		else
+		{
+			huddraw_color 63 1 1 1
+		}
+	}
+
+	huddraw_alpha 63 1.0
+	huddraw_string 63 (local.total)
+
+end
+
+countdown:
+	//hehehe
+
+	thread main "allies"
+	thread main "axis"
+
+	huddraw_align 60 right top
+	huddraw_font 60 facfont-20
+	huddraw_rect 60 -80 55 80 20
+	huddraw_color 60 0.50 0.50 0.25 
+	huddraw_alpha 60 1.0
+	huddraw_string 60 ("Countdown")
+
+	huddraw_shader 64 ("textures/hud/allies")
+	huddraw_align 64 right top
+	huddraw_rect 64 -80 73 25 25
+	huddraw_color 64 1 1 1
+	huddraw_alpha 64 1.0
+
+	huddraw_shader 62 ("textures/hud/axis")
+	huddraw_align 62 right top
+	huddraw_rect 62 -80 98 25 25
+	huddraw_color 62 1 1 1
+	huddraw_alpha 62 1.0
+
+end
+
+location local.location local.locate_time:
+	//hehehe
+	huddraw_align 65 left bottom
+	huddraw_font 65 facfont-20
+	huddraw_rect 65 15 -110 100 100
+	huddraw_color 65 1 0 0
+	huddraw_string 65 local.location
+
+	for (local.i = 0; local.i <= 1; local.i += .1)
+	{
+		huddraw_alpha 65 local.i
+		waitframe
+	}
+
+	huddraw_alpha 65 1.0
+//	huddraw_virtualsize 65 1
+
+	wait 3
+
+	for (local.i = 1; local.i >= 0; local.i -= .1)
+	{
+		huddraw_alpha 65 local.i
+		waitframe
+	}
+	
+end

@@ -1,0 +1,24 @@
+// This file is all the things that it checks for when u enter for a player into admin_cmd. eg admin_cmd 4 type fire.
+
+// local.words - all the words in a array
+// local.actual- the words in a  string array after the 3rd word., 1st and second wud be player and command
+
+
+main local.words local.actual local.player:
+
+	switch(local.words[2])
+	{
+	case "addkills"
+		local.actual = int local.actual
+		local.player addkills local.actual
+	break
+	case "takekills"
+	local.actual = int local.actual
+		local.take = 0 - local.actual
+		local.player addkills local.take
+	break
+	default:
+		//exec global/ac/console_feedback.scr " Bad command"
+		end 
+	}
+end 1

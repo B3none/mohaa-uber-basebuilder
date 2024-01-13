@@ -1,0 +1,187 @@
+main:
+	local.settings = makearray
+		//command			//setting			//help	
+		"mines-ammo"			"3"				" Count of mines each player is allowed"
+		"stopwatch" 			"1"	 			" Display a stopwatch, 0 no, 1 - yes"			
+		"hide-mines"			"0"				" When a mine is activated it is then hidden ( not sticky bombs ) "
+		"mine-weapons"			"1"				" Use weapon settings for mines. To check if the weapon they have allows mines"
+		"mine-replenish"		"1"				" If 1 the players get their mines replenished when they respawn. Otherwise they only get the mines ammo over the round"
+		"disarmable"			"1"				" Give the players a chance to disarm the bombs"
+		"disarm-time"			"3"				" Time they have to HOLD use to disarm the bomb"
+		"disarm-tick"			"4"				" Time they have to disarm the bomb before it explodes"
+		"mine-holdtime"			"3"				" Time in seconds the user has to hold USE to plant a mine"
+	endarray
+
+end local.settings
+
+
+mines:
+	// 1 = on
+	// 0 = off
+
+	//If only one is set on, only that will be used
+
+	local.mines = makearray
+		"proximity-plant" 	"1"		"Allow proximity mines you plant to be randomly selected to run"
+		"proximity-chuck"	"1"		"Allow proximity mines you throw to be randomly selected to run"
+		"sticky-bombs"	        "1"		"Allow proximity mines you plant to be randomly selected to run"
+	endarray
+
+end local.mines
+	
+
+
+maps:
+	//MAPS
+	local.maplist = makeArray
+		//dm maps
+		"dm/mohdm1"
+		"dm/mohdm2"
+		"dm/mohdm3"
+		"dm/mohdm4"
+		"dm/mohdm5"
+		"dm/mohdm6"	
+		"dm/mohdm7"
+		//objective maps
+		"obj/obj_team1"
+		"obj/obj_team2"
+		"obj/obj_team3"
+		"obj/obj_team4"
+		"DM/MP_Bahnhof_DM"
+		"DM/MP_Bazaar_DM"
+		"DM/MP_Brest_DM"
+		"DM/MP_Gewitter_DM"
+		"DM/MP_Holland_DM"		
+		"DM/MP_Stadt_DM"
+		"DM/MP_Unterseite_DM"
+		"DM/MP_Verschneit_DM"
+		//BT only / DM/
+		"DM/MP_Palermo_DM"
+		"DM/mp_malta_dm"
+		//SH + BT /OBJ
+		"OBJ/MP_Ardennes_TOW"
+		"OBJ/MP_Berlin_TOW"
+		"OBJ/MP_Flughafen_TOW"
+		"OBJ/MP_Druckkammern_TOW"
+		//BT only /OBJ
+		"OBJ/MP_Palermo_OBJ"
+		"OBJ/MP_MonteCassino_TOW"
+		"OBJ/MP_MonteBattaglia_TOW"
+		"OBJ/MP_Kasserine_TOW"
+		"OBJ/mp_castello_obj"
+		"OBJ/MP_Bologna_OBJ"
+		//BT only /LIB
+		"LIB/mp_tunisia_lib"
+		"LIB/mp_bizerteharbor_lib"
+		"LIB/mp_anzio_lib"
+		"LIB/mp_ship_lib"
+		//custom maps	
+	endArray
+
+
+
+end local.maplist
+
+
+gametypes:
+	
+	local.gametypes = makeArray
+	//game type #	// String- just for refrence
+		"1"	//FFA	
+		"2"	//TDM
+		"3"	//RBM
+		"4"	//OBJ
+		"5"	//TOW
+		"6"	//LIB
+	endArray
+
+end local.gametypes
+
+// Allow players to plant mines with these weapons. 1 = allow. 0 = dont allow
+// Note: if they holster their weapon or use grenade or pistol it counts as unarmed.
+
+weaponsaa:
+	//if u put them at rediculasly  low times the type will cancel itself out if they camp when camping already
+	local.weapons =  makearray
+		//weapon name			//weapon time			//help
+		"bar" 				"1"			" Allows use of mines with this weapon"			
+		"bazooka" 			"1"			" Allows use of mines with this weapon"
+		"kar98" 			"1"			" Allows use of mines with this weapon"
+		"kar98sniper" 			"1"			" Allows use of mines with this weapon"
+		"m1_garand" 			"1"			" Allows use of mines with this weapon"
+		"mp40" 				"1"			" Allows use of mines with this weapon"
+		"mp44" 				"1"			" Allows use of mines with this weapon"
+		"panzerschreck" 		"1"			" Allows use of mines with this weapon"
+		"shotgun"			"1"			" Allows use of mines with this weapon"
+		"springfield" 			"1"			" Allows use of mines with this weapon"
+		"thompsonsmg" 			"1"			" Allows use of mines with this weapon"
+		"unarmed" 			"1"			" Allows use of mines with this weapon"
+	endarray
+end local.weapons
+
+// Allow players to plant mines with these weapons. 1 = allow. 0 = dont allow
+// Note: if they holster their weapon or use grenade or pistol it counts as unarmed.
+
+weaponssh:
+	local.weapons =  makearray
+		//weapon name			//weapon time			//help
+		"bar" 				"1"			" Allows use of mines with this weapon"
+		"bazooka" 			"1"			" Allows use of mines with this weapon"
+		"kar98" 			"1"			" Allows use of mines with this weapon"
+		"kar98sniper" 			"1"			" Allows use of mines with this weapon"
+		"m1_garand" 			"1"			" Allows use of mines with this weapon"
+		"mp40" 				"1"			" Allows use of mines with this weapon"
+		"mp44" 				"1"			" Allows use of mines with this weapon"
+		"panzerschreck" 		"1"			" Allows use of mines with this weapon"
+		"shotgun"			"1"			" Allows use of mines with this weapon"
+		"springfield" 			"1"			" Allows use of mines with this weapon"
+		"thompsonsmg" 			"1"			" Allows use of mines with this weapon"
+		"enfield" 			"1"			" Allows use of mines with this weapon"
+		"g43" 				"1"			" Allows use of mines with this weapon"
+		"mosin_nagant_rifle" 		"1"			" Allows use of mines with this weapon"
+		"ppsh_smg" 			"1"			" Allows use of mines with this weapon"
+		"sten" 				"1"			" Allows use of mines with this weapon"
+		"svt_rifle" 			"1"			" Allows use of mines with this weapon"
+		"kar98_mortar" 			"1"			" Allows use of mines with this weapon"
+		"unarmed" 			"1"			" Allows use of mines with this weapon"
+	endarray
+end local.weapons
+
+// Allow players to plant mines with these weapons. 1 = allow. 0 = dont allow
+// Note: if they holster their weapon or use grenade or pistol it counts as unarmed.
+
+weaponsbt:
+	local.weapons =  makearray
+		//weapon name			//weapon time			//help
+		"bar"				"1"			" Allows use of mines with this weapon"			
+		"bazooka"			"1"			" Allows use of mines with this weapon"		
+		"delisle"			"1"			" Allows use of mines with this weapon"
+		"enfield"			"1"			" Allows use of mines with this weapon"
+		"g43"				"1"			" Allows use of mines with this weapon"
+		"gr_w_minedetector"		"1"			" Allows use of mines with this weapon"
+		"it_w_breda"			"1"			" Allows use of mines with this weapon"		
+		"it_w_carcano"			"1"			" Allows use of mines with this weapon"
+		"2it_w_howitzerdes"		"1"			" Allows use of mines with this weapon"
+		"it_w_moschetto"		"1"			" Allows use of mines with this weapon"
+		"kar98"				"1"			" Allows use of mines with this weapon"
+		"kar98sniper"			"1"			" Allows use of mines with this weapon"
+		"kar98_mortar"			"1"			" Allows use of mines with this weapon"
+		"m1_garand"			"1"			" Allows use of mines with this weapon"
+		"mosin_nagant_rifle"		"1"			" Allows use of mines with this weapon"
+		"mp40"				"1"			" Allows use of mines with this weapon"
+		"mp44"				"1"			" Allows use of mines with this weapon"
+		"panzerschreck"			"1"			" Allows use of mines with this weapon"
+		"ppsh_smg"			"1"			" Allows use of mines with this weapon"
+		"shotgun"			"1"			" Allows use of mines with this weapon"
+		"springfield"			"1"			" Allows use of mines with this weapon"
+		"sten"				"1"			" Allows use of mines with this weapon"
+		"svt_rifle"			"1"			" Allows use of mines with this weapon"
+		"thompsonsmg"			"1"			" Allows use of mines with this weapon"
+		"1uk_w_l42a1"			"1"			" Allows use of mines with this weapon"
+		"uk_w_piat"			"1"			" Allows use of mines with this weapon"
+		"uk_w_vickers"			"1"			" Allows use of mines with this weapon"
+		"us_w_minedetector"		"1"			" Allows use of mines with this weapon"
+		"unarmed" 			"1"			" Allows use of mines with this weapon"
+	endarray
+end local.weapons
+

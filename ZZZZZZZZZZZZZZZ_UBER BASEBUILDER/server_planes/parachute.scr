@@ -1,0 +1,92 @@
+// Global chute script for allied assault
+
+main:
+
+	if(self.ejecting==1)
+	{
+		self gravity 1
+		self.ejecting=0
+	}
+end
+
+parachute:
+
+	local.eject = waitexec global/settings.scr::getcmd "eject"
+
+	if(local.eject == "0")
+	{
+		self iprint "Eject dissabled"
+		end
+	}
+
+	local.player = self
+
+	self.ejecting=1
+
+	waitframe
+	local.player show
+	local.player solid
+
+	local.player.in_para_drop=1
+
+	local.vec = local.player.velocity
+	local.velocity_get = -390
+
+	local.player forcelegsstate STAND
+	local.player forcetorsostate STAND
+
+	local.player.viewangles = ( local.player.viewangles[0] local.player.viewangles[1] 0 )
+
+	local.chute = spawn script_model
+
+	if(local.player.dmteam!="axis")
+	{
+		local.chute model "static/parachute_white_canvas.tik"
+	}
+	else
+	{
+		local.chute model "static/parachute.tik"
+	}
+
+	local.chute.origin = ( local.player gettagposition "Bip01 Spine1" )
+	local.chute notsolid
+	local.chute scale 2
+	local.chute.angles = local.player.angles
+	//local.chute.angles[1] = local.chute.angles[1]
+
+	local.chute1 = spawn script_origin
+	local.chute1.origin = ( local.player gettagposition "Bip01 Spine1" ) + ( 0 0 100)
+
+	local.chute1 attach local.player "Bip01 Spine1"
+	local.chute glue local.chute1
+	// local.chute attach local.player "Bip01 Spine1"
+
+	while(local.player.ejecting==1)
+	{
+		if(local.player.health>2)
+		{
+			local.vec[0] = local.player.velocity[0]
+			local.vec[1] = local.player.velocity[1]
+			local.vec[2] = local.velocity_get
+
+			local.player.velocity = local.vec
+		}
+		else
+		{
+			local.player.ejecting=0
+		}
+		
+		if(local.player.dmteam=="spectator")
+		{
+			local.player.ejecting=0
+			local.chute remove
+		}
+
+		waitframe
+	}
+
+	local.chute detach local.player
+	//local.chute waittill animdone
+	wait .3
+	local.chute remove
+end

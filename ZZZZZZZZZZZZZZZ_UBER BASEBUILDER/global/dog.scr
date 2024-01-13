@@ -1,0 +1,333 @@
+main local.origin:
+
+local.cache = spawn scriptmaster
+
+local.cache aliascache dog_bark1 sound/characters/dog_bark_1.wav soundparms 1.5 0.0 0.8 0.4 160 4000 voice loaded maps "dm obj m"
+local.cache aliascache dog_bark2 sound/characters/dog_bark_2.wav soundparms 1.5 0.0 0.8 0.4 160 4000 voice loaded maps "dm obj m"
+local.cache aliascache dog_bark3 sound/characters/dog_bark_3.wav soundparms 1.5 0.0 0.8 0.4 160 4000 voice loaded maps "dm obj m"
+local.cache aliascache dog_sniff sound/characters/dog_bark_4.wav soundparms 1.5 0.0 0.8 0.4 160 4000 voice loaded maps "dm obj m"
+
+local.cache aliascache dog_pain1 sound/characters/dog_growl_1.wav soundparms 1.5 0.0 0.8 0.4 500 4000 voice loaded maps "dm obj m"
+local.cache aliascache dog_pain2 sound/characters/dog_growl_2.wav soundparms 1.5 0.0 0.8 0.4 500 4000 voice loaded maps "dm obj m"
+local.cache aliascache dog_pain3 sound/characters/dog_growl_3.wav soundparms 1.5 0.0 0.8 0.4 500 4000 voice loaded maps "dm obj m"
+local.cache aliascache dog_pain4 sound/characters/dog_growl_4.wav soundparms 1.5 0.0 0.8 0.4 500 4000 voice loaded maps "dm obj m"
+local.cache aliascache dog_pain5 sound/characters/dog_growl_5.wav soundparms 1.5 0.0 0.8 0.4 500 4000 voice loaded maps "dm obj m"
+
+local.cache aliascache dog_death1 sound/characters/dog_growl_1.wav soundparms 1.5 0.0 0.8 0.4 500 4000 voice loaded maps "dm obj m"
+local.cache aliascache dog_death2 sound/characters/dog_growl_2.wav soundparms 1.5 0.0 0.8 0.4 500 4000 voice loaded maps "dm obj m"
+local.cache aliascache dog_death3 sound/characters/dog_growl_3.wav soundparms 1.5 0.0 0.8 0.4 500 4000 voice loaded maps "dm obj m"
+local.cache aliascache dog_death4 sound/characters/dog_growl_4.wav soundparms 1.5 0.0 0.8 0.4 500 4000 voice loaded maps "dm obj m"
+local.cache aliascache dog_death5 sound/characters/dog_growl_5.wav soundparms 1.5 0.0 0.8 0.4 500 4000 voice loaded maps "dm obj m"
+
+local.cache aliascache dog_bite1 sound/characters/dog_bite_1.wav soundparms 1.5 0.0 0.8 0.4 500 4000 voice loaded maps "dm obj m"
+local.cache aliascache dog_bite2 sound/characters/dog_bite_2.wav soundparms 1.5 0.0 0.8 0.4 500 4000 voice loaded maps "dm obj m"
+local.cache aliascache dog_bite3 sound/characters/dog_bite_3.wav soundparms 1.5 0.0 0.8 0.4 500 4000 voice loaded maps "dm obj m"
+local.cache aliascache dog_bite4 sound/characters/dog_bite_4.wav soundparms 1.5 0.0 0.8 0.4 500 4000 voice loaded maps "dm obj m"
+
+local.cache aliascache dog_collar1 sound/characters/dog_collar_1.wav soundparms 0.8 0.2 0.8 0.3 160 2000 auto loaded maps "dm obj m"
+local.cache aliascache dog_collar2 sound/characters/dog_collar_3.wav soundparms 0.8 0.2 0.8 0.3 160 2000 auto loaded maps "dm obj m"
+local.cache aliascache dog_collar3 sound/characters/dog_collar_4.wav soundparms 0.8 0.2 0.8 0.3 160 2000 auto loaded maps "dm obj m"
+
+local.cache aliascache dog_fs1 sound/characters/dog_footstep_1.wav soundparms 0.5 0.25 0.8 0.3 160 4000 auto loaded maps "dm obj m"
+local.cache aliascache dog_fs2 sound/characters/dog_footstep_2.wav soundparms 0.5 0.25 0.8 0.3 160 4000 auto loaded maps "dm obj m"
+local.cache aliascache dog_fs3 sound/characters/dog_footstep_3.wav soundparms 0.5 0.25 0.8 0.3 160 4000 auto loaded maps "dm obj m"
+local.cache aliascache dog_fs4 sound/characters/dog_footstep_4.wav soundparms 0.5 0.25 0.8 0.3 160 4000 auto loaded maps "dm obj m"
+local.cache aliascache dog_fs5 sound/characters/dog_footstep_5.wav soundparms 0.5 0.25 0.8 0.3 160 4000 auto loaded maps "dm obj m"
+local.cache aliascache dog_fs6 sound/characters/dog_footstep_6.wav soundparms 0.5 0.25 0.8 0.3 160 4000 auto loaded maps "dm obj m"
+local.cache aliascache dog_fs7 sound/characters/dog_footstep_7.wav soundparms 0.5 0.25 0.8 0.3 160 4000 auto loaded maps "dm obj m"
+local.cache aliascache dog_fs8 sound/characters/dog_footstep_8.wav soundparms 0.5 0.25 0.8 0.3 160 4000 auto loaded maps "dm obj m"
+
+local.cache aliascache dog_growl1 sound/characters/dog_growl_1.wav soundparms 1.0 0.2 0.8 0.3 320 2000 voice loaded maps "dm obj m"
+local.cache aliascache dog_growl2 sound/characters/dog_growl_2.wav soundparms 1.0 0.2 0.8 0.3 320 2000 voice loaded maps "dm obj m"
+local.cache aliascache dog_growl3 sound/characters/dog_growl_3.wav soundparms 1.0 0.2 0.8 0.3 320 2000 voice loaded maps "dm obj m"
+local.cache aliascache dog_growl4 sound/characters/dog_growl_4.wav soundparms 1.0 0.2 0.8 0.3 320 2000 voice loaded maps "dm obj m"
+local.cache aliascache dog_growl5 sound/characters/dog_growl_5.wav soundparms 1.0 0.2 0.8 0.3 320 2000 voice loaded maps "dm obj m"
+
+local.cache aliascache dog_pant1 sound/characters/dog_pant_1.wav soundparms 0.6 0.2 0.8 0.3 320 2000 voice loaded maps "dm obj m"
+local.cache aliascache dog_pant2 sound/characters/dog_pant_2.wav soundparms 0.6 0.2 0.8 0.3 320 2000 voice loaded maps "dm obj m"
+local.cache aliascache dog_pant3 sound/characters/dog_pant_3.wav soundparms 0.6 0.2 0.8 0.3 320 2000 voice loaded maps "dm obj m"
+local.cache aliascache dog_pant4 sound/characters/dog_pant_4.wav soundparms 0.6 0.2 0.8 0.3 320 2000 voice loaded maps "dm obj m"
+local.cache aliascache dog_pant5 sound/characters/dog_pant_5.wav soundparms 0.6 0.2 0.8 0.3 320 2000 voice loaded maps "dm obj m"
+local.cache aliascache dog_pant6 sound/characters/dog_bark_4.wav soundparms 0.6 0.2 0.8 0.3 320 2000 voice loaded maps "dm obj m"
+local.cache aliascache dog_pant7 sound/characters/dog_bark_5.wav soundparms 0.6 0.2 0.8 0.3 320 2000 voice loaded maps "dm obj m"
+
+local.thing = spawn trigger_use origin local.origin
+local.thing model models/animal/german_shepherd.tik
+local.thing setthread player
+local.thing setsize ( -100 -100 0 ) ( 100 100 100 )
+local.thing anim dog_stand_curious
+local.thing show
+local.thing droptofloor
+local.thing light 0 1 0 100
+
+level waittill spawn
+
+while(1)
+	{
+	local.thing anim dog_stand_curious
+	wait 6
+	}
+
+
+end
+
+player:
+
+	self nottriggerable
+
+	local.player = parm.other
+
+	if(local.player.isdog)
+	{
+	self triggerable
+	end
+	}
+
+	local.player.isdog = 1
+	local.specorg = local.player.origin 
+	local.specang = (angles_toforward local.player.viewangles)
+	local.anim = spawn script_model model self.model
+	local.anim.angles = local.player.angles
+	local.anim anim idle
+	local.player takeall
+	local.player hide
+	local.anim notsolid
+	local.player thread get_movement
+	local.pos = local.anim gettagposition "tag_mouth"
+	local.anim.trigger = spawn trigger_multiple origin local.pos
+	local.anim.trigger setsize ( -5 -5 -5 ) ( 5 5 5 )
+	local.anim.trigger setthread bite
+	local.anim.trigger nottriggerable
+	local.anim.trigger.player = local.player
+	local.anim.trigger glue local.anim
+	local.anim.origin = (local.specorg + ((local.specang[0]) (local.specang[1]) (0)) * 50)
+	local.player.dog = local.anim
+	local.anim thread move local.player
+	self triggerable
+
+end
+
+bite:
+
+	local.player = parm.other
+	if(local.player == self.player || local.player.bitten == 1)
+		end
+	else
+		{
+		local.player.bitten = 1
+		local.player hurt 100 
+		wait 1
+		local.player.bitten = 0
+		}
+
+end
+	
+
+move local.player:
+
+	local.anim = dog_stand_idle
+
+	local.team = local.player.dmteam
+
+	while(1)
+		{
+
+		if(local.player == NULL || local.player.dmteam != local.team)
+			{
+			self anim dog_death
+			wait 10
+			self remove
+			end
+			}
+
+		local.specang = (angles_toforward local.player.viewangles)
+		local.specorg = local.player.origin
+		self.velocity = local.player.velocity
+		self.origin = (local.specorg + ((local.specang[0]) (local.specang[1]) (0)) * 50)
+		self.angles = local.player.angles
+
+		if(local.anim != local.player.dog_anim)
+			{
+			if(local.player.dog_anim == dog_death)
+				{
+				self anim local.player.dog_anim
+				wait 10
+				self remove
+				end
+				}
+			self anim local.player.dog_anim
+			local.anim = local.player.dog_anim
+			}
+
+		waitframe
+
+		}
+
+end
+
+get_movement:
+
+local.team = self.dmteam
+
+	while(1)
+		{
+		if(self == NULL || self.dmteam != local.team)
+			end
+		else
+			{
+
+			local.position = self getposition 
+			local.movement = self getmovement 
+
+
+			if(local.position == standing && local.movement == standing)
+				{
+				self.dog_anim = dog_stand_idle
+				}
+			
+			if(local.position == standing && local.movement == running)
+				{
+				self.dog_anim = dog_run
+				}
+
+			if(local.position == crouching && local.movement == standing)
+				{
+
+				waitframe 
+				waitframe
+				waitframe 
+				waitframe
+				local.position = self getposition
+
+				if(local.position == offground)
+					{
+					self.dog_anim = dog_leap
+					}
+
+				else if(local.position == crouching && local.movement == standing)
+					{
+					self.dog_anim = dog_rest
+					}
+				}
+
+			if(local.position == crouching && local.movement == running)
+				{
+				self.dog_anim = dog_run
+				}
+
+			if!(isalive self)
+				{
+				self.dog_anim = dog_death
+				self scale 0
+
+				while!(isalive self)
+					{
+					if(self == NULL || self.dmteam != local.team)
+						end
+					else
+						waitframe
+					}
+
+				self scale 1
+				self.isdog = 0
+				end
+				}
+
+			if(self.fireheld)
+				{
+				if(self.viewangles[0] > 0)
+					{
+					self.dog.trigger triggerable
+					self.dog_anim = dog_bite_face
+					wait .75
+					self.dog.trigger nottriggerable
+					}
+				else
+					{
+					self.dog.trigger triggerable
+					self.dog_anim = dog_bite_leg
+					wait .75
+					self.dog.trigger nottriggerable
+					}
+
+				while(self.fireheld)
+					{
+					
+					if(self == NULL || self.dmteam != local.team)
+						end
+					else
+						{
+
+						local.position = self getposition 
+						local.movement = self getmovement 
+
+						if(local.position == standing && local.movement == standing)
+							{
+							self.dog_anim = idle
+							}
+			
+						if(local.position == standing && local.movement == running)
+							{
+							self.dog_anim = dog_run
+							}
+
+						if(local.position == crouching && local.movement == standing)
+							{
+
+							waitframe 
+							waitframe
+							waitframe 
+							waitframe
+							local.position = self getposition
+
+							if(local.position == offground)
+								{
+								self.dog_anim = dog_leap
+								}
+
+							else if(local.position == crouching && local.movement == standing)
+								{
+								self.dog_anim = dog_rest
+								}
+							}
+
+						if(local.position == crouching && local.movement == running)
+							{
+							self.dog_anim = dog_run
+							}
+
+						if!(isalive self)
+							{
+
+							self.dog_anim = dog_death
+							self scale 0
+
+							while!(isalive self)
+								{
+								if(self == NULL || self.dmteam != local.team)
+									end
+								else
+									waitframe
+								}
+
+							self scale 1
+							self.isdog = 0
+							end
+
+							}
+
+							waitframe
+
+						}
+
+					}
+
+				}
+			}
+
+
+		waitframe
+
+		}
+
+end

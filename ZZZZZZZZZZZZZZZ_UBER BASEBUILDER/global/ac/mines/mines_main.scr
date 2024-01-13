@@ -1,0 +1,207 @@
+
+main:
+
+	local.player = self
+
+	level.limit = waitexec global/settings.scr::getcmd "mines-ammo"
+	level.limit = int  level.limit
+
+	if(local.player.mines >  level.limit )
+	{
+		self iprint "Out of mines" 1
+		end
+	}
+
+	local.player iprint ( "Mine: " + local.player.mines + "/" + level.limit)
+	local.player.mines++
+
+	switch(level.mine_script)
+	{
+	case "proximity-chuck":
+		local.wait = 1
+		local.mine = waitexec global/ac/mines/chuck.scr local.player "items/explosive.tik" 1
+	break
+	case "proximity-plant":
+		local.wait = 5
+		local.mine = spawn script_model  "targetname" ("mine")
+		local.mine model  "items/explosive.tik"
+		local.mine.origin = local.player.origin + local.player.forwardvector * 16
+		local.mine notsolid
+	break
+	default:
+		local.wait = 1
+		local.mine = waitexec global/ac/mines/chuck.scr local.player "items/explosive.tik" 1
+	}
+
+	local.mine_trig = spawn trigger_multiple "spawnflags" "128"  "targetname" ("minetrig_shot")
+	local.mine_trig.origin = local.mine.origin
+	local.mine_trig setsize ( -15 -15 -15 ) ( 15 15 15 )
+	local.mine_trig setthread shot
+	local.mine_trig glue local.mine
+	local.mine_trig.mine = local.mine
+
+	local.mine_trig_walk = spawn trigger_multiple  "targetname" ("minetrig_walk")
+	local.mine_trig_walk.origin = local.mine.origin
+	local.mine_trig_walk setsize ( -15 -15 -15 ) ( 15 15 15 )
+	local.mine_trig_walk setthread stepped_on
+	local.mine_trig_walk glue local.mine
+	local.mine_trig_walk.mine = local.mine
+
+	local.mine_trig_walk nottriggerable
+	local.mine.shot = local.mine_trig
+	local.mine.walk = local.mine_trig_walk
+	local.mine.player = local.player
+
+
+	if(level.mine_script != "proximity-chuck")
+	{
+		local.watch = waitexec global/settings.scr::getcmd "stopwatch" 
+		if(local.watch=="1")
+		{
+			local.player stopwatch local.wait
+		}
+	}
+	
+	for(local.i = 0; local.i <=  local.wait; local.i++)
+	{
+		wait 1
+		if(local.mine == NULL)
+		{
+			local.player stopwatch 0
+			end
+		}
+	}
+
+	if(local.mine != NULL)
+	{
+		local.mine_trig_walk triggerable
+
+		local.player iprint "Mine Activated"
+
+		local.hide = waitexec global/settings.scr::getcmd "hide-mines"
+
+		if (local.hide == "1")
+		{
+			local.mine hide
+		}
+
+		local.player playsound plantbomb1
+	}
+
+end
+
+stepped_on:
+
+	local.player = parm.other
+		
+	local.mine = self.mine
+	local.end_or_not = waitexec global/ac/mines/explode.scr::team_check local.player local.mine.player
+	
+	if(local.end_or_not==1)
+	{
+		if(local.player.dmteam=="axis")
+		{
+			self.mine light 1 0 0 50
+		}
+		else
+		{
+			self.mine light 0 0 1 50
+		}
+
+		wait 3
+
+		if(self.mine)
+		{
+			local.mine light 0 0 0 0
+		}
+
+		end //end if same team and team team killing is not on
+	}
+
+	local.end_or_not = waitexec global/settings.scr::getcmd "disarmable"
+
+	if(local.end_or_not == "1")
+	{
+		self nottriggerable
+
+		self.no_usemine = 1
+
+		local.end_or_not = waitthread disarm local.player local.mine.origin
+
+		if(local.end_or_not==1)
+		{
+			local.mine.player exec global/ac/mines/explode.scr local.mine.origin local.mine
+		}
+		else
+		{
+			local.mine.shot delete
+			local.mine.walk delete
+			local.mine delete
+		}
+
+		wait 1
+		local.player.no_usemine = 0
+	}
+	else
+	{
+		local.mine.player exec global/ac/mines/explode.scr local.mine.origin local.mine
+	}
+
+
+end
+	
+shot:
+	local.player = parm.other
+				
+	local.mine = self.mine
+
+	local.player exec global/ac/mines/explode.scr local.mine.origin local.mine 1
+end
+
+
+disarm local.player local.origin:
+
+	local.player.no_usemine = 1
+	//local.origin = local.mine.origin
+	local.camper_radius = 150
+
+	local.camper_radius = int local.camper_radius
+
+	local.time = 0
+
+	local.tick = waitexec global/settings.scr::getcmd "disarm-tick"
+	local.hold_time = waitexec global/settings.scr::getcmd "disarm-time"
+
+	local.tick = int local.tick
+	local.hold_time = int local.hold_time
+
+	local.player  iprint ( "You have " + local.hold_time + " seconds to disarm the mine. If you move to far it will explode" ) 1
+	local.player  iprint "Hold USE (E) To disarm the mine"
+
+	for(local.i = local.tick;local.i != 0;local.i--)
+	{
+		for(local.t = 0;local.t <= 1;local.t = local.t + 0.05)
+		{
+			local.inradius =  vector_within local.origin local.player.origin local.camper_radius  
+			
+			if(local.inradius == 0)
+			{
+				end 1
+			}
+			waitframe
+		}
+
+		if(local.player.useheld == 1)
+		{
+			local.time++
+		}
+
+		if(local.time >= local.hold_time)
+		{
+			local.player iprint "Mine disarmed" 1
+			end 0
+
+		}
+	}
+
+end 1

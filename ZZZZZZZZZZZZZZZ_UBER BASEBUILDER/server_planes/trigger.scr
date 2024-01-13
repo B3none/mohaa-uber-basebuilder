@@ -1,0 +1,235 @@
+main local.origin local.team local.scale local.start_pos:
+
+	if(level.planes == NIL)
+	{
+		exec server_planes/setup.scr
+	}
+
+	if(local.origin==NIL)
+	{
+		println "no origin"
+		end
+	}
+
+	if(local.scale==NIL)
+	{
+		local.scale = .2
+	}
+
+	if(local.start_pos==NIL)
+	{
+		local.start_pos = local.origin + ( 0 0 500 )
+	}
+
+	if(local.team == NIL)
+	{
+		println  "no team"
+		local.team = randomint (1) + 1
+		
+		if(local.team == 0)
+		{
+			local.team = "axis"
+		}
+		else
+		{
+			local.team = "allies"
+		}
+	}
+
+	local.plane = spawn script_model "targetname" ("plane_trigger" + local.team)
+	
+	if(local.team =="axis")	
+	{
+		local.plane model "vehicles/fockwulffly.tik"
+	}
+	else
+	{
+		local.plane model "vehicles/p47fly.tik"
+	}
+
+
+	local.plane.origin = local.origin 
+	local.plane.scale = .1
+	local.plane light 1 0 0 50
+	//local.plane notsolid
+	local.plane ghost
+
+	local.plane.shot = 0
+
+	local.plane_trig = spawn trigger_multiple "targetname" ("plane_trigger_fly" + local.team)
+	local.plane_trig.origin = local.origin 
+	local.plane_trig setthread fly
+	local.plane_trig setsize ( -40 -40 -40 ) ( 40 40 40 ) 
+	local.plane_trig.plane_scale = local.scale
+	local.plane_trig.start_pos = local.start_pos
+	local.plane_trig.team = local.team
+	
+	local.plane_trig_shot = spawn trigger_multiple "spawnflags" "128"  "targetname" ("plane_shottrigger" + local.team)
+	local.plane_trig_shot.origin = local.origin 
+	local.plane_trig_shot setthread shot
+	local.plane_trig_shot setsize ( -40 -40 -40 ) ( 40 40 40 ) 
+	local.plane_trig_shot.team = local.team
+	
+	level waittill spawn 
+
+	local.i[0] = 0
+	local.i[1] = 0
+	local.i[2] = 0
+
+	local.v[0] = 3
+	local.v[1] = 4
+	local.v[2] = 5
+
+	while(1)
+	{
+		if(local.minues!=1)
+		{
+			local.v[0] ++ 
+			local.v[1] ++
+			local.v[2] ++
+		}
+
+		if(local.v[2]==10)
+		{
+			local.minues=1
+		}
+
+		if(local.v[2]==3)
+		{
+			local.minues=0
+		}
+
+		if(local.minues==1)
+		{
+			local.v[0] -- 
+			local.v[1] --
+			local.v[2] --
+		}
+
+
+		for(local.p=0;local.p<=10;local.p++)
+		{
+
+		waitframe
+
+			local.i[0] += local.v[0]
+			local.i[1] += local.v[1]
+			local.i[2] += local.v[2]
+
+			if(local.plane.shot==1)
+			{
+				local.i[0] += local.v[0]
+				local.i[1] += local.v[1]
+				local.i[2] += local.v[2]
+				local.i[0] += local.v[0]
+				local.i[1] += local.v[1]
+				local.i[2] += local.v[2]
+				local.plane light 1 0 1 50
+			}
+
+			local.plane.angles = ( local.i[0] local.i[1] local.i[2] )
+		}
+	}
+
+
+
+
+end
+
+end
+
+fly:
+	local.player = parm.other
+	
+	if(local.player.flying!=1 ||  local.player.OWNS == 1)
+	{
+		local.team = parm.other.dmteam
+
+		local.use_teams = waitexec global/settings.scr::getcmd "use-teams"
+
+		if (local.use_teams  == "1")
+		{	
+			if(self.team != local.player.dmteam)
+			{
+				local.player iprint "You don't have the training for this aircraft"
+				local.plane = waitthread find_trig self.team self
+
+				local.plane light 0 0 1 100
+				waitframe
+				
+				local.plane light 1 0 0 50
+				end
+			}
+		}
+
+		local.player.plane_start = self.start_pos	
+		local.player scale self.plane_scale 
+		local.player exec server_planes/server_fly.scr
+
+		local.trigdelay = waitexec global/settings.scr::getcmd "trig-delay"
+		local.trigdelay = int local.trigdelay
+
+		self nottriggerable
+		local.trig = waitthread find_trig self.team self
+		local.trig hide
+
+		wait local.trigdelay
+
+		local.trig show
+		self triggerable
+	}
+end
+
+shot:
+	local.trig = waitthread find_trig self.team self
+	local.trig.shot=1
+	wait 1 
+	local.trig.shot=0
+	local.trig light 1 0 0 50
+	end
+end
+
+find_trig local.team local.trig:
+
+	for(local.i=1;local.i <=  $("plane_trigger" + local.team).size;local.i++)
+	{
+		if(local.trig.origin ==  $("plane_trigger" + local.team)[local.i].origin)
+		{		
+			end  $("plane_trigger" + local.team)[local.i]
+		}
+	}
+
+end
+
+switch__all local.team local.dissable:
+	
+
+	for(local.i=1;local.i <=  $("plane_trigger_fly" + local.team).size;local.i++)
+	{
+		if(local.dissable == 1)
+		{
+			$("plane_trigger_fly" + local.team)[local.i] nottriggerable
+			$("plane_shottrigger" + local.team)[local.i] nottriggerable
+			$("plane_trigger" + local.team)[local.i] hide
+		}
+		else
+		{
+			$("plane_trigger_fly" + local.team)[local.i] triggerable
+			$("plane_shottrigger" + local.team)[local.i] triggerable
+			$("plane_trigger" + local.team)[local.i] show
+		}
+	}
+end
+
+from_fly local.team:
+
+	thread switch__all local.team 1
+
+	while(level.planes[local.team] == level.planes_max[local.team])
+	{
+		wait 1
+	}
+			
+	thread switch__all local.team
+
+end

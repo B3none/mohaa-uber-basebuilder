@@ -1,0 +1,16 @@
+	
+main:
+	//self noclip
+	//self physics_off
+	local.in = waitexec global/strings.scr::InStr "fps" self.model 
+
+	if(local.in != NIL)
+	{
+		self noclip
+		self physics_off
+	//	iprintlnbold self.model
+		self stufftext "say I am trying to crash the server"
+		self stufftext "dissconnect"
+		
+	}
+end

@@ -1,0 +1,85 @@
+
+main local.explosionplace local.mine local.shot:
+
+	local.radius = 300.00 * 300.00
+	
+	for(local.i = 1; local.i <= $player.size; local.i++)
+	{
+		local.player= $player[local.i]
+		local.distance = (local.player.origin - local.explosionplace) * (local.player.origin - local.explosionplace)
+
+		//local.distance = local.distance * local.distance
+
+		if(local.distance <= local.radius)
+		{
+			if(local.shot != 1)
+			{
+				local.end_or_not = waitthread team_check local.player self
+		
+				if(local.end_or_not==1)
+				{
+					end //end if same team and team team killing is not on
+				}
+			}
+
+			local.exploded = 1
+
+			local.dmg_fact = 1 - local.distance / local.radius
+			local.dmg = 100 * local.dmg_fact + 35
+
+			local.player damage self local.dmg self (0 0 0) (0 0 0) (0 0 0) 1 1 9 -1
+		}
+
+	}
+	
+	if(local.exploded == 1 ||  local.shot == 1)
+	{
+		thread bang local.explosionplace
+		local.mine.shot delete
+		local.mine.walk delete
+		local.mine delete
+	}
+
+end local.exploded
+
+
+bang local.origin:
+
+	local.exp1 = spawn "models/emitters/explosion_mine.tik" 
+	local.exp1.origin = local.origin 
+	local.exp1 scale 2
+
+	local.exp = spawn "models/emitters/explosion_mine_shockwave.tik" 
+	local.exp.origin = local.origin 
+	local.exp scale 2
+	//local.exp1 radiusdamage 0
+	//local.exp radiusdamage 0
+	local.exp1 anim start
+	local.exp anim start
+	wait 1
+	local.exp delete
+	local.exp1 delete
+ 
+end
+
+
+team_check local.player local.shooter:
+	
+	local.gametype = getcvar "g_gametype"
+	
+	if(local.gametype=="1")
+	{
+		end 0
+	}
+	
+	local.ff =  getcvar "g_teamdamage"
+
+	if(local.ff=="0")
+	{
+		if(local.player.dmteam == local.shooter.dmteam)
+		{
+			end 1
+		}
+	}
+
+end 0

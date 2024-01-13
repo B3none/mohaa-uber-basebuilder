@@ -1,0 +1,37 @@
+main local.cvar local.script:
+
+	if(local.script == NIL)
+	{
+		self stufftext ( "add " + local.cvar + " 1" )
+
+		if(local.cvar == "times_killed")
+		{
+			if(level.killed_scripts!=NIL)
+			{
+				for(local.i = 1; local.i <= level.killed_scripts.size ;local.i++)
+				{
+					self exec level.killed_scripts[local.i]
+				}
+				
+			}
+		}
+	}
+	else
+	{
+		if(level.killed_scripts==NIL)
+		{
+			level.killed_scripts[1] = local.cvar
+		}
+		else
+		{
+			local.i = level.killed_scripts.size
+			local.i++
+			level.killed_scripts[local.i] = local.cvar
+		}
+		end
+	}
+
+
+
+	//exec skill_balancer/dodeath.scr
+end

@@ -1,0 +1,20 @@
+main:
+	while(1)
+	{	
+
+		for (local.i = 1;local.i <= $player.size; local.i++ )
+		{
+			if($player[local.i].gotbomb != 1 && $player[local.i].dmteam != "spectator")
+			{
+				$player[local.i] attachmodel "items/explosive.tik" "Bip01 Pelvis" 0.8 "pelvis_bomb" 0 -1 -1 -1 -1 ( 1.5 -4 10.0 )
+				$pelvis_bomb[$pelvis_bomb.size].angles = ( 0 90 90 )
+				$player[local.i].gotbomb = 1
+				$player playsound plantbomb1
+			}
+		}
+
+		wait 1
+		
+		exec HTR/hud.scr::countdown
+	}
+end

@@ -1,0 +1,72 @@
+main:
+
+if (level.alx_blahblah != 1)
+{
+
+level waittill spawn
+
+	level.alx_blahblah = 1
+
+	while (1)
+	{
+		//Curent Map
+		local.mapname = getcvar(mapname)
+
+		huddraw_alpha 24 0
+		huddraw_virtualsize 24 1
+		huddraw_alpha 24 .8
+		huddraw_font 24 "verdana-12"
+		huddraw_color 24 1 0 0
+		huddraw_rect 24 230 -180 250 20 
+		huddraw_string 24 ("*Uber*BASEBUILDER*Planes*Jetpacks*")
+
+
+		huddraw_alpha 26 0
+		huddraw_virtualsize 26 1
+		huddraw_alpha 26 .8
+		huddraw_font 26 "verdana-12"
+		huddraw_color 26 1 0 0
+		huddraw_rect 26 230 -170 250 20 
+		huddraw_string 26 ("Guided Missiles*Midget-Giant-Normal-")
+
+
+		huddraw_alpha 28 0
+		huddraw_virtualsize 28 1
+		huddraw_alpha 28 .8
+		huddraw_font 28 "verdana-12"
+		huddraw_color 28 1 0 0
+		huddraw_rect 28 230 -160 250 20 
+		huddraw_string 28 ("Invisible-Invulnerable-All Weapons Spots*")
+
+
+		huddraw_alpha 30 0
+		huddraw_virtualsize 30 1
+		huddraw_alpha 30 .8
+		huddraw_font 30 "verdana-12"
+		huddraw_color 30 1 0 0
+		huddraw_rect 30 230 -150 250 20 
+		huddraw_string 30 ("Camo Trigger*Non-Basebuilder Maps*")
+
+
+		huddraw_alpha 32 0
+		huddraw_virtualsize 32 1
+		huddraw_alpha 32 .8
+		huddraw_font 32 "verdana-12"
+		huddraw_color 32 1 1 0
+		huddraw_rect 32 230 -140 250 20 
+		huddraw_string 32 ("**The Very Best--Version 6!!!**")
+
+
+
+
+
+
+
+
+	wait 1
+	}
+
+}
+
+
+end

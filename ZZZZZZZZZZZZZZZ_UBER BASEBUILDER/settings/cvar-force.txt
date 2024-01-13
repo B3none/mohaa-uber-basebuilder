@@ -1,0 +1,32 @@
+
+//--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+//
+// Cvar Forcing 
+//
+// This will force cvars on players using stufftext. 
+// Add what cvars you want to the list and what setting you want to force. 
+// 
+// This can be used to force skins and cheat cvars to what you want.
+//
+//-----------------
+// example
+//	
+//	local.cvar_force = makearray
+//		// cvar				// Setting
+//     		"dm_playergermanmodel"  	"german_wehrmacht_soldier"
+//         	"dm_playermodel" 		"american_ranger"
+//       	"cg_forcemodel" 		"1"
+//	endarray
+//
+//
+//--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+
+cvar_force:
+	
+	local.cvar_force = makearray
+		// cvar				// Setting
+	endarray
+
+end local.cvar_force
+

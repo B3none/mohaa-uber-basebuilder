@@ -1,0 +1,105 @@
+
+main:
+
+// set scoreboard messages
+setcvar "g_obj_alliedtext1" "Stalingrad
+setcvar "g_obj_alliedtext2" "UBER BASEBUILDER by"
+setcvar "g_obj_alliedtext3" "])ar]{Gen.SearingWolfe"
+setcvar "g_obj_axistext1" "be a member at"
+setcvar "g_obj_axistext2" "www.freewebs.com/"
+setcvar "g_obj_axistext3" "mohaa-DarK-clan"
+
+setcvar "g_scoreboardpic" "mohdm6"
+
+setcvar "g_gametype" "2"
+setcvar "fraglimit" "0"
+setcvar "timelimit" "50"
+
+setcvar "cheats" "1"
+setcvar "thereisnomonkey" "1"
+
+exec alienx/basebuild.scr::main 1000 10000
+
+
+
+	level waittill prespawn
+
+removeclass TurretGun 
+
+level.dmrespawning = 1
+
+//                                              note all these must have a value!
+//                                                                                    +----------------- light on or off ( 1 = on, 0 = off )
+//                                                                                    | +--------------- red (1 is the max, so for a little red, use 0.5)
+//                                                                                    | | +------------- green (same for red)
+//                                                                                    | | | +----------- blue (same for red)
+//                                                                                    | | | | ++-------- rotation speed (keep it sensiable lol)
+//                                                                                    | | | | || ++----- the scale of the pickup object, 1 is default
+//                                                                                    | | | | || || +--- lift creator ( 1 = on, 0 = off )
+//---| script                      |-| origin                |-|  model name        | | | | | || || |
+exec alienx/basebuild.scr::basebuild ( 1205.34  573.19 304.13 ) "static/indycrate.tik" 1 1 0 0 90 .5 0 0 1
+exec alienx/basebuild.scr::basebuild ( 1205.34 473.19 304.13 ) "statweapons/mg42_gun.tik" 1 0 1 0 90 .5 0 0 1
+exec alienx/basebuild.scr::basebuild ( 1205.34 373.19 304.13 ) "static/sandbag_link_main.tik" 1 0 0 1 90 .5 0 0 1
+exec alienx/basebuild.scr::basebuild ( 1205.34 273.19 304.13 ) "static/bodies_tarp.tik" 1 .5 0 .5 90 .5 1 0 1
+exec alienx/basebuild.scr::basebuild ( 1205.34 173.19 304.13 ) "static/piano.tik" 1 1 1 0 90 .5 0 1 1
+exec alienx/basebuild.scr::basebuild ( 1205.34 73.19 304.13 ) "static/bookcase.tik" 1 0 1 1 90 .5 0 0 1
+exec alienx/basebuild.scr::basebuild ( 1205.34 -27.19 304.13 ) "static/sandbag_longsegment.tik" 1 1 1 1 90 .5 0 0 1
+exec alienx/basebuild.scr::basebuild ( 1075.34 624.11 304.11 ) "static/bush_full.tik" 1 1 1 1 90 .5 0 0 3
+
+exec alienx/basebuild.scr::basebuild ( -1135.84 121.09 496.13 ) "static/indycrate.tik" 1 1 0 0 90 .5 0 0 1
+exec alienx/basebuild.scr::basebuild ( -1135.84 221.09 496.13 ) "statweapons/mg42_gun.tik" 1 0 1 0 90 .5 0 0 1
+exec alienx/basebuild.scr::basebuild ( -1135.84 321.09 496.13 ) "static/sandbag_link_main.tik" 1 0 0 1 90 .5 0 0 1
+exec alienx/basebuild.scr::basebuild ( -1135.84 421.09 496.13 ) "static/bodies_tarp.tik" 1 .5 0 .5 90 .5 1 0 1
+exec alienx/basebuild.scr::basebuild ( -1135.84 521.09 496.13 ) "static/bodies_tarp.tik" 1 1 1 0 90 .5 0 1 1
+exec alienx/basebuild.scr::basebuild ( -1135.84 621.09 496.13 ) "static/static_naziflag1.tik" 1 0 1 1 90 .5 0 0 1
+exec alienx/basebuild.scr::basebuild ( -1006.07 90.76 496.12 ) "static/indycrate.tik" 1 1 0 1 90 .5 1 0 1
+
+exec alienx/basebuild.scr::basebuild ( -152 -238 -151 ) "static/indycrate.tik" 1 1 0 0 90 .5 0 0 1
+exec alienx/basebuild.scr::basebuild ( -252 -238 -151 ) "statweapons/mg42_gun.tik" 1 0 1 0 90 .5 0 0 1
+exec alienx/basebuild.scr::basebuild ( -352 -238 -135 ) "static/sandbag_link_main.tik" 1 0 0 1 90 .5 0 0 1
+exec alienx/basebuild.scr::basebuild ( -452 -238 -121 ) "static/bodies_tarp.tik" 1 .5 0 .5 90 .5 1 0 1
+exec alienx/basebuild.scr::basebuild ( -552 -238 -135 ) "static/bodies_tarp.tik" 1 1 1 0 90 .5 0 1 1
+exec alienx/basebuild.scr::basebuild ( -652 -238 -150 ) "static/static_naziflag1.tik" 1 0 1 1 90 .5 0 0 1
+exec alienx/basebuild.scr::basebuild ( -752 -238 -134 ) "static/bookcase.tik" 1 1 1 1 90 .5 0 0 1
+exec alienx/basebuild.scr::basebuild ( 24 -240 -151 ) "static/banquet_table.tik" 1 1 1 1 90 .5 0 0 1
+	
+	exec server_planes/trigger.scr ( -735.70 197.06 -140.31 ) "allies" .2 
+	exec server_planes/trigger.scr ( 1181.32 -263.85 304.13 ) "axis" .2 
+
+exec global/dog.scr ( 464.87 -208.87 32.12 )
+
+exec global/jetpack.scr ( 1144.03 -368.87 304.13 ) //axis
+exec global/jetpack.scr ( -780.02 359.34 -126.56 ) //allies
+
+exec guidedmissile/spawntrigger.scr ( -784.72 18.52 -131.25 ) //allies
+exec guidedmissile/spawntrigger.scr ( 1253.66 -144.65 304.13 ) //axis
+
+	//*** precache dm stuff
+	exec global/dmprecache.scr
+
+	//hud
+	exec alienx/hud.scr::main
+	
+	level.script = maps/dm/mohdm6.scr
+	exec global/ambient.scr mohdm6
+
+	setcvar "r_fastsky" "1"
+	$world farplane 5000
+	$world farplane_color (0 0 0)
+
+exec map_triggers/allweapons.scr ( 719.13 1088.87 272.13 )
+exec map_triggers/giant.scr ( -559 1168 -151 )
+exec map_triggers/invisible.scr ( -736.87 -291.13 272.13 )
+exec map_triggers/invulnerable.scr ( 223.13 927.13 736.13 )
+exec map_triggers/midget.scr ( 128.88 93.19 7.91 )
+exec map_triggers/normal.scr ( -495.40 989.92 512.13 )
+exec map_triggers/camo.scr ( -782 -123 -123 )
+exec map_triggers/health.scr ( -737 415 256 ) ( 448 880 736 ) ( 719 1088 512 ) ( 368 1088 32 ) ( -24 879 512 ) ( -367 879 272 ) ( 176 1008 32 ) ( -744 -411 337 ) ( -736 -515 32 ) ( 697 -768 -143 )
+
+	
+thread global/door_locked.scr::lock
+
+	level waittill spawn
+
+
+end

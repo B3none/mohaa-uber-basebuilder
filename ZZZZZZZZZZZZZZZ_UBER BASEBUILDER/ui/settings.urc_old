@@ -1,0 +1,255 @@
+menu "camper_settings" 640 360 NONE 0
+
+showcommand "set rconfield \"\"; exec menu/rconmenu/showhome.cfg"
+
+
+
+
+
+
+
+
+
+
+
+
+
+			
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+resource
+Label
+{
+name "Default"
+rect 5 30 630 5
+fgcolor 0.00 0.00 0.00 1.00
+bgcolor 0.50 0.50 0.50 1.00
+borderstyle "RAISED"
+}
+resource
+Label
+{
+name "Default"
+rect 5 285 630 5
+fgcolor 0.00 0.00 0.00 1.00
+bgcolor 0.50 0.50 0.50 1.00
+borderstyle "3D_BORDER"
+}
+resource
+Button
+{
+title "B\na\nc\nk"
+name "Default"
+rect 600 295 30 60
+fgcolor 0.00 0.00 0.00 1.00
+bgcolor 0.50 0.50 0.50 1.00
+borderstyle "3D_BORDER"
+stuffcommand "popmenu 0"
+clicksound "sound/menu/back.wav"
+shader "menu_button_trans"
+hovershader "menu_button_glow"
+hoversound "menu/sound/scroll.wav"
+
+}
+resource
+Button
+{
+title "Server options"
+name "cmdoptions"
+rect 245 5 150 20
+fgcolor 0.00 0.00 0.00 1.00
+bgcolor 0.50 0.50 0.50 1.00
+borderstyle "3D_BORDER"
+stuffcommand "exec menu/rconmenu/showoptions.cfg"
+clicksound "menu/sound/apply.wav"
+hovershader "menu_button_glow"
+hoversound "menu/sound/scroll.wav"
+
+}
+resource
+Button
+{
+title "Game \n Cmd's"
+name "Default"
+rect 11 295 85 60
+fgcolor 0.00 0.00 0.00 1.00
+bgcolor 0.50 0.50 0.50 1.00
+borderstyle "3D_BORDER"
+stuffcommand "notepad server_cmds.txt"
+clicksound "menu/sound/apply.wav"
+hovershader "menu_button_glow"
+hoversound "menu/sound/scroll.wav"
+
+}
+resource
+Button
+{
+title "Rcon \n settings"
+name "cmdrcono"
+rect 535 295 60 60
+fgcolor 0.00 0.00 0.00 1.00
+bgcolor 0.50 0.50 0.50 1.00
+borderstyle "3D_BORDER"
+stuffcommand "exec menu/rconmenu/showrcon.cfg"
+clicksound "menu/sound/apply.wav"
+hovershader "menu_button_glow"
+hoversound "menu/sound/scroll.wav"
+
+}
+resource
+Button
+{
+title "Help"
+name "Default"
+rect 555 5 80 20
+fgcolor 0.00 0.00 0.00 1.00
+bgcolor 0.50 0.50 0.50 1.00
+borderstyle "RAISED"
+stuffcommand "pushmenu camper_help"
+clicksound "menu/sound/apply.wav"
+hovershader "menu_button_glow"
+hoversound "menu/sound/scroll.wav"
+
+}
+resource
+Button
+{
+title "Camper Rcon"
+name "Default"
+rect 400 5 150 20
+fgcolor 0.00 0.00 0.00 1.00
+bgcolor 0.50 0.50 0.50 1.00
+borderstyle "3D_BORDER"
+stuffcommand "pushmenu camperrcon"
+clicksound "menu/sound/apply.wav"
+hovershader "menu_button_glow"
+hoversound "menu/sound/scroll.wav"
+
+}
+resource
+Button
+{
+title "Home"
+name "cmdhome"
+rect 5 5 80 20
+fgcolor 0.00 0.00 0.00 1.00
+bgcolor 0.50 0.50 0.50 1.00
+borderstyle "INDENT_BORDER"
+stuffcommand "exec menu/rconmenu/showhome.cfg"
+clicksound "menu/sound/apply.wav"
+hovershader "menu_button_glow"
+hoversound "menu/sound/scroll.wav"
+
+}
+resource
+Button
+{
+title "Server Settings"
+name "cmdsettings"
+rect 90 5 150 20
+fgcolor 0.00 0.00 0.00 1.00
+bgcolor 0.50 0.50 0.50 1.00
+borderstyle "3D_BORDER"
+stuffcommand "exec menu/rconmenu/showsettings.cfg"
+clicksound "menu/sound/apply.wav"
+hovershader "menu_button_glow"
+hoversound "menu/sound/scroll.wav"
+
+}
+resource
+Label
+{
+title "Type parameters below and press enter"
+name "Default"
+rect 100 295 300 30
+fgcolor 0.00 0.00 0.00 1.00
+bgcolor 0.50 0.50 0.00 1.00
+borderstyle "NONE"
+}
+resource
+Field
+{
+name "rconfield2"
+rect 100 325 300 30
+fgcolor 0.00 0.00 0.00 1.00
+bgcolor 1.00 1.00 1.00 1.00
+borderstyle "INDENT_BORDER"
+stuffcommand "rcon "
+linkcvar "rconfield"
+clicksound "sound/menu/scroll.wav"
+shader "menu_button_trans"
+hovershader "menu_button_glow"
+
+}
+resource
+Button
+{
+title "Clear"
+name "Default"
+rect 405 295 60 60
+fgcolor 0.00 0.00 0.00 1.00
+bgcolor 0.50 0.50 0.50 1.00
+borderstyle "3D_BORDER"
+stuffcommand "reset rconfield"
+clicksound "menu/sound/apply.wav"
+hovershader "menu_button_glow"
+hoversound "menu/sound/scroll.wav"
+
+}
+resource
+Button
+{
+title "Change \n map"
+name "Default"
+rect 470 295 60 60
+fgcolor 0.00 0.00 0.00 1.00
+bgcolor 0.50 0.50 0.50 1.00
+borderstyle "3D_BORDER"
+stuffcommand "pushmenu camper_maps"
+clicksound "menu/sound/apply.wav"
+hovershader "menu_button_glow"
+hoversound "menu/sound/scroll.wav"
+
+}
+end.

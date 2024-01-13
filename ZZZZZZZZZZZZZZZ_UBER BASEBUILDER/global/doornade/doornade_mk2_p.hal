@@ -1,0 +1,170 @@
+//***************************************************************************
+//global/doornade/doornade_mk2_p.hal
+//Scripting: @(...:.:...)@ / Hal
+//
+//The main script for the doornade fix. Is executed by 
+//state files when a player starts to cook a grenade. The 
+//script counts while checking if the player is still holding 
+//a grenade. If the player get's past the point when a grenade 
+//would explode, and is still alive he get's punished (as he 
+//must have held the nade into a door/wall to survive).
+//****************************************************************************
+main:
+	if(game.run_bugnadefix == 0)
+	{
+		end
+	}
+
+	self.iscookingnade = "1"
+	for(local.counter = 0;local.counter <= 54;local.counter += 1)
+	{
+		local.iscookingnade = int(self.iscookingnade)
+		if(local.iscookingnade == 0)
+		{
+			end
+		}
+		wait .1
+	}
+	local.iscookingnade = int(self.iscookingnade)
+//	if(local.iscookingnade == 1 && isalive self)
+//	{
+////		iprintlnbold "needs punishing 1"
+//	}
+//	else if(isalive self)
+//	{
+////		iprintlnbold "needs punishing 2"
+//	}
+//	
+	if( ! (isalive self) )
+	{
+		end
+	}
+
+	//get settings from bugnade.txt
+	exec settings/Bugnade.txt
+	waitframe
+	//level.bugnaderstufftext = level.bugnadesettings[2][1]
+	self stufftext ("say "+(level.bugnadesettings[2][1])+"")
+	self kill
+	self commanddelay 0 addkills level.bugnadesettings[1][1]
+	iprintln level.bugnadesettings[3][1]
+	self iprint level.bugnadesettings[4][1]
+
+
+end
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+//I was going to have the player being slapped to death, but I decided a simple suicide would be best :)
+/*
+//punishment section.
+//tell the client and other players what is going on:
+	self stufftext "say I was bugnading*, and will now be slapped to death."
+	iprintln "Bugnading = blowing up grenades through walls/doors, to either prevent your own death, or kill people on the other side"
+	self stufftext "wait 3000" //- wait 3 seconds. Should be the time it takes the client to die from slapping. About 30 seconds?
+	self iprint "You have been caught bugnading. E.G you held a grenade in or through a door/wall untill it blew up."
+	self iprint "You have lost 2 kills and will now be bitchslapped to death. Don't try to disconnect, because it won't work :D"
+	self forcetorsostate "RELEASE_ATTACK_GRENADE"
+	wait .5
+	self takeall
+	self fullhead
+	self immune grenade
+	self immune bullet
+	self immune fast_bullet
+	self immune explosion
+	self immune rocket
+	self immune grenade
+	self immune bullet
+	self immune fast_bullet
+	self immune explosion
+	self immune rocket
+	self fullheal
+
+//slap the player
+	wait 2
+	iprintlnbold "Let the slapping commence O_o"
+	wait 1
+	local.timesslapped = 0
+	while(self.health > 2) //after that he falls to crater :)
+	{
+		local.timesslapped += 1
+
+	//	lots of random numbers needed :D
+
+		local.forwardmove = randomfloat 200
+		local.forwardmove += local.timesslapped
+
+		local.sidemove = randomfloat 200
+		local.positivenegative = randomint 1
+
+		if(local.positivenegative != 1)
+		{
+			//should give negative number :)
+			local.sidemove1 = local.sidemove
+			local.sidemove -= local.sidemove1
+			local.sidemove -= local.sidemove1
+			local.sidemove -= local.timesslapped
+		}
+		else
+		{
+			local.sidemove += local.timesslapped
+		}
+		local.jumpxyspeed = randomfloat 200
+		
+		self hurt 1
+		self jumpxy local.forwardmove local.sidemove local.jumpxyspeed
+		//add sound for slap hit, and perhaps more pain sound
+
+		wait 0.7
+	}
+*/

@@ -1,0 +1,94 @@
+
+
+main:
+
+
+	if(level.run["mines"] != "1")
+	{
+		end
+	}
+	
+	if (level.mef_gametype == "ft" || level.mef_gametype == "ftobj" || level.mef_gametype == "fttow" || level.mef_gametype == "ftctf" || level.mef_gametype == "ftdem")
+	{
+		end
+	}
+
+	if(level.mines_serup != 1)
+	{
+		level.mines_serup = 1
+		//exec global/killed.scr "global/ac/mines/dead.scr" 1
+		//exec global/ac/spawn_detect.scr global/ac/mines/hold_check.scr
+
+		local.master = spawn ScriptMaster
+		local.master aliascache plantbomb1 sound/items/Item_BangaloreAssemble_01.wav soundparms 1.0 0.0 1.0 0.0 100 2000 item loaded maps "m dm moh obj train"
+
+	}
+
+	
+	local.mines = waitexec game.file["mines"]::mines
+
+	local.numscripts = 0
+
+	for(local.i=1;local.i<= local.mines.size;local.i++)
+	{
+		if (local.mines[local.i][2] == "1")
+		{
+			local.numscripts++
+			local.scripts[local.numscripts] = local.mines[local.i][1]
+		}
+	}
+
+	local.randnum = randomint(local.numscripts) + 1
+
+	//local.howmany = waitexec global/settings.scr::getcmd "mine-type"
+
+	level.mine_script  = local.scripts[local.randnum]
+
+	level.hold_script = global/ac/mines/mines_main.scr
+
+	switch(local.scripts[local.randnum])
+	{
+	case "proximity-chuck":
+		local.msg = makearray
+			"By holding USE down you can chuck proximity mines"
+			" You must hold E (USE) down for 3 seconds to chuck a mine"
+		endarray
+	
+	break
+	case "proximity-plant":
+
+		local.msg = makearray
+			"By holding USE down you can plant proximity mines"
+			" You must hold E (USE) down for 3 seconds to  plant proximity mines"
+		endarray
+	break
+	case "sticky-bombs":
+		level.hold_script = global/ac/mines/stickybombs.scr
+		local.msg = makearray
+			"By holding USE down you can chuck sticky bombs"
+			" You must hold E (USE) down for 3 seconds to chuck sticky bombs"
+		endarray
+	break
+	default:
+
+		local.msg = makearray
+			"By holding USE down you can chuck proximity mines"
+			" You must hold E (USE) down for 3 seconds to chuck a mine"
+		endarray
+	}
+		
+
+	while(1)
+	{
+		waitframe
+		for(local.i=1;local.i<=local.msg.size;local.i++)
+		{
+			wait 300 //five mins
+			waitexec global/ac/messaging/messages_fade.scr local.msg[local.i][1] 3 "fade"
+
+		}
+	}
+
+		
+
+end

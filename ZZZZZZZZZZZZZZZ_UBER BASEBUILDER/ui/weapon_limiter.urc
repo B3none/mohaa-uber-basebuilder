@@ -1,0 +1,228 @@
+menu "weapon_limiter" 640 480 NONE 0
+showcommand "exec menu/weapons/start.cfg;"
+
+
+
+
+
+
+
+
+resource
+Label
+{
+name "Default"
+rect 0 0 640 480
+fgcolor 0.00 0.00 0.00 1.00
+bgcolor 0.50 0.50 0.25 1.00
+borderstyle "RAISED"
+}
+resource
+ListBox
+{
+name "lstweaponsAA"
+rect 10 40 200 430
+fgcolor 0.00 0.00 0.00 1.00
+bgcolor 0.50 0.50 0.00 1.00
+borderstyle "RAISED"
+additem "Springfield '03 Sniper" "exec menu/weapons/enable.cfg ; append weaponlimit \"Springfield '03 Sniper\""
+additem "Bar" "exec menu/weapons/enable.cfg ; append weaponlimit \"Bar\""
+additem "Thompson" "exec menu/weapons/enable.cfg ; append weaponlimit \"Thompson\""
+additem "Bazooka" "exec menu/weapons/enable.cfg ; append weaponlimit \"Bazooka\""
+additem "M1 Garand" "exec menu/weapons/enable.cfg ; append weaponlimit \"M1 Garand\""
+additem "kar98" "exec menu/weapons/enable.cfg ; append weaponlimit \"kar98\""
+additem "KAR98 - Sniper" "exec menu/weapons/enable.cfg ; append weaponlimit \"KAR98 - Sniper\""
+additem "mp40" "exec menu/weapons/enable.cfg ; append weaponlimit \"mp40\""
+additem "mp44" "exec menu/weapons/enable.cfg ; append weaponlimit \"mp44\""
+additem "Panzerschreck" "exec menu/weapons/enable.cfg ; append weaponlimit \"Panzerschreck\""
+additem "Shotgun" "exec menu/weapons/enable.cfg ; append weaponlimit \"Shotgun\""
+
+}
+resource
+ListBox
+{
+name "lstweaponsSH"
+rect 10 40 200 430
+fgcolor 0.00 0.00 0.00 1.00
+bgcolor 0.50 0.50 0.00 1.00
+borderstyle "RAISED"
+additem "Springfield '03 Sniper" "exec menu/weapons/enable.cfg ; append weaponlimit \"Springfield '03 Sniper\""
+additem "Bar" "exec menu/weapons/enable.cfg ; append weaponlimit \"Bar\""
+additem "Thompson" "exec menu/weapons/enable.cfg ; append weaponlimit \"Thompson\""
+additem "Bazooka" "exec menu/weapons/enable.cfg ; append weaponlimit \"Bazooka\""
+additem "M1 Garand" "exec menu/weapons/enable.cfg ; append weaponlimit \"M1 Garand\""
+additem "kar98" "exec menu/weapons/enable.cfg ; append weaponlimit \"kar98\""
+additem "KAR98 - Sniper" "exec menu/weapons/enable.cfg ; append weaponlimit \"KAR98 - Sniper\""
+additem "mp40" "exec menu/weapons/enable.cfg ; append weaponlimit \"mp40\""
+additem "mp44" "exec menu/weapons/enable.cfg ; append weaponlimit \"mp44\""
+additem "Panzerschreck" "exec menu/weapons/enable.cfg ; append weaponlimit \"Panzerschreck\""
+additem "Shotgun" "exec menu/weapons/enable.cfg ; append weaponlimit \"Shotgun\""
+additem "Lee-Enfield" "exec menu/weapons/enable.cfg ; append weaponlimit \"Lee-Enfield\""
+additem "Mosin Nagant Rifle" "exec menu/weapons/enable.cfg ; append weaponlimit \"Mosin Nagant Rifle\""
+additem "PPSH SMG" "exec menu/weapons/enable.cfg ; append weaponlimit \"PPSH SMG\""
+additem "Sten Mark II" "exec menu/weapons/enable.cfg ; append weaponlimit \"Sten Mark II\""
+additem "SVT 40" "exec menu/weapons/enable.cfg ; append weaponlimit \"SVT 40\""
+additem "G 43" "exec menu/weapons/enable.cfg ; append weaponlimit \"G 43\""
+additem "Gewehrgranate" "exec menu/weapons/enable.cfg ; append weaponlimit \"Gewehrgranate\""
+
+}
+resource
+PulldownMenuContainer
+{
+title "Select game"
+name "gamechoose"
+rect 10 10 200 20
+fgcolor 0.00 0.00 0.00 1.00
+bgcolor 0.50 0.50 0.00 1.00
+borderstyle "RAISED"
+font facfont-20
+addpopup "Select a game" "Allied Assault" command "exec menu/weapons/aa.cfg"
+addpopup "Select a game" "Spearhead" command "exec menu/weapons/sh.cfg"
+addpopup "Select a game" "Breakthrough" command "exec menu/weapons/bt.cfg"
+
+}
+resource
+Label
+{
+title "What would you like to do?"
+name "limittitle"
+rect 220 10 410 20
+fgcolor 0.00 0.00 0.00 1.00
+bgcolor 0.50 0.50 0.00 1.00
+borderstyle "NONE"
+}
+resource
+Label
+{
+title "Choose another weapon from the list. \n Then select the text box below and press enter."
+name "infoswap"
+rect 220 190 410 60
+fgcolor 0.00 0.00 0.00 1.00
+bgcolor 0.50 0.50 0.00 1.00
+borderstyle "NONE"
+}
+resource
+Button
+{
+title "Reset"
+name "cmdweaponreset"
+rect 325 330 200 35
+fgcolor 0.00 0.00 0.00 1.00
+bgcolor 0.50 0.50 0.00 1.00
+borderstyle "RAISED"
+stuffcommand "exec menu/weapons/start.cfg"
+clicksound "sound/menu/back.wav"
+hoversound "menu/sound/scroll.wav"
+shader "menu_button_trans"
+hovershader "menu_button_glow"
+
+}
+resource
+Button
+{
+title "Exit"
+name "cmdweaponreset"
+rect 325 365 200 35
+fgcolor 0.00 0.00 0.00 1.00
+bgcolor 0.50 0.50 0.00 1.00
+borderstyle "RAISED"
+stuffcommand "popmenu 0"
+clicksound "sound/menu/back.wav"
+hoversound "menu/sound/scroll.wav"
+shader "menu_button_trans"
+hovershader "menu_button_glow"
+
+}
+resource
+ListBox
+{
+name "lstweaponsBT"
+rect 10 40 200 430
+fgcolor 0.00 0.00 0.00 1.00
+bgcolor 0.50 0.50 0.00 1.00
+borderstyle "RAISED"
+additem "Springfield '03 Sniper" "exec menu/weapons/enable.cfg ; append weaponlimit \"Springfield '03 Sniper\""
+additem "Bar" "exec menu/weapons/enable.cfg ; append weaponlimit \"Bar\""
+additem "Thompson" "exec menu/weapons/enable.cfg ; append weaponlimit \"Thompson\""
+additem "Bazooka" "exec menu/weapons/enable.cfg ; append weaponlimit \"Bazooka\""
+additem "M1 Garand" "exec menu/weapons/enable.cfg ; append weaponlimit \"M1 Garand\""
+additem "kar98" "exec menu/weapons/enable.cfg ; append weaponlimit \"kar98\""
+additem "KAR98 - Sniper" "exec menu/weapons/enable.cfg ; append weaponlimit \"KAR98 - Sniper\""
+additem "mp40" "exec menu/weapons/enable.cfg ; append weaponlimit \"mp40\""
+additem "mp44" "exec menu/weapons/enable.cfg ; append weaponlimit \"mp44\""
+additem "Panzerschreck" "exec menu/weapons/enable.cfg ; append weaponlimit \"Panzerschreck\""
+additem "Shotgun" "exec menu/weapons/enable.cfg ; append weaponlimit \"Shotgun\""
+additem "Lee-Enfield" "exec menu/weapons/enable.cfg ; append weaponlimit \"Lee-Enfield\""
+additem "Mosin Nagant Rifle" "exec menu/weapons/enable.cfg ; append weaponlimit \"Mosin Nagant Rifle\""
+additem "PPSH SMG" "exec menu/weapons/enable.cfg ; append weaponlimit \"PPSH SMG\""
+additem "Sten Mark II" "exec menu/weapons/enable.cfg ; append weaponlimit \"Sten Mark II\""
+additem "SVT 40" "exec menu/weapons/enable.cfg ; append weaponlimit \"SVT 40\""
+additem "G 43" "exec menu/weapons/enable.cfg ; append weaponlimit \"G 43\""
+additem "Gewehrgranate" "exec menu/weapons/enable.cfg ; append weaponlimit \"Gewehrgranate\""
+additem "Minedetector" "exec menu/weapons/enable.cfg ; append weaponlimit \"Minedetector\""
+additem "DeLisle" "exec menu/weapons/enable.cfg ; append weaponlimit \"DeLisle\""
+additem "Vickers-Berthier" "exec menu/weapons/enable.cfg ; append weaponlimit \"Vickers-Berthier\""
+additem "Enfield L42A1" "exec menu/weapons/enable.cfg ; append weaponlimit \"Enfield L42A1\""
+additem "PIAT" "exec menu/weapons/enable.cfg ; append weaponlimit \"PIAT\""
+additem "Mauser KAR 98K" "exec menu/weapons/enable.cfg ; append weaponlimit \"Mauser KAR 98K\""
+additem "Gewehrgranate" "exec menu/weapons/enable.cfg ; append weaponlimit \"Gewehrgranate\""
+additem "Minensuchgerat" "exec menu/weapons/enable.cfg ; append weaponlimit \"Minensuchgerat\""
+additem "Breda" "exec menu/weapons/enable.cfg ; append weaponlimit \"Breda\""
+additem "Moschetto" "exec menu/weapons/enable.cfg ; append weaponlimit \"Moschetto\""
+additem "Carcano" "exec menu/weapons/enable.cfg ; append weaponlimit \"Carcano\""
+
+}
+resource
+Button
+{
+title "Limit or dissable \nthis weapon"
+name "btnlimit"
+rect 325 40 200 35
+fgcolor 0.00 0.00 0.00 1.00
+bgcolor 0.50 0.50 0.00 1.00
+borderstyle "RAISED"
+stuffcommand "exec menu/weapons/limit.cfg"
+clicksound "sound/menu/back.wav"
+hoversound "menu/sound/scroll.wav"
+shader "menu_button_trans"
+hovershader "menu_button_glow"
+
+}
+resource
+Button
+{
+title "Swap this weapon"
+name "btnchange"
+rect 325 85 200 35
+fgcolor 0.00 0.00 0.00 1.00
+bgcolor 0.50 0.50 0.00 1.00
+borderstyle "RAISED"
+stuffcommand "exec menu/weapons/swap.cfg"
+clicksound "sound/menu/back.wav"
+hoversound "menu/sound/scroll.wav"
+shader "menu_button_trans"
+hovershader "menu_button_glow"
+
+}
+resource
+Label
+{
+title "Now enter a number to limit this weapon  to. Enter 0 to dissable this weapon. \n Then press enter. Should look something like Bar 3 4 - Limit to 4."
+name "infolimit"
+rect 220 130 410 60
+fgcolor 0.00 0.00 0.00 1.00
+bgcolor 0.50 0.50 0.00 1.00
+borderstyle "NONE"
+}
+resource
+Field
+{
+name "weaptxt"
+rect 220 440 410 30
+fgcolor 0.00 0.00 0.00 1.00
+bgcolor 1.00 1.00 1.00 1.00
+borderstyle "RAISED"
+stuffcommand "rcon admin_cmd \"limitweap "
+linkcvar "weaponlimit"
+}
+end.

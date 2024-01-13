@@ -1,0 +1,13 @@
+main:
+
+	println "[GuidedMissile]ERROR: No Settings file present - using backup."
+
+	//set these settings to zero for unlimited.
+
+	local.setting[1] = 0	//how many missiles allowed per team.
+	local.setting[2] = 0	//how many seconds flight time allowed
+	local.setting[3] = 1	//how much health the missile has.
+
+
+end local.setting
+	

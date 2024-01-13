@@ -1,0 +1,294 @@
+menu "camper_main" 194 407 FROM_LEFT 1
+bgcolor 0 0 0 0
+fgcolor 1 1 1 1
+borderstyle £D_BORDER
+align left
+showcommand "exec menu/hide_client.cfg; exec menu/hide_admin.cfg; wait 1000; globalwidgetcommand camper_main direction none 0" 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+resource
+Label
+{
+name "client"
+rect 12 200 182 159
+fgcolor 0.00 0.00 0.00 1.00
+bgcolor 0.50 0.50 0.00 60.00
+borderstyle "3D_BORDER"
+hide
+
+}
+resource
+Label
+{
+name "Default"
+rect 12 12 182 159
+fgcolor 0.00 0.00 0.00 1.00
+bgcolor 0.50 0.50 0.00 60.00
+borderstyle "3D_BORDER"
+}
+resource
+Button
+{
+title "Close"
+name "Default"
+rect 17 138 172 21
+fgcolor 1.00 1.00 1.00 1.00
+bgcolor 0.50 0.50 0.25 1.00
+borderstyle "RAISED"
+stuffcommand "popmenu 0; globalwidgetcommand camper_main direction FROM_LEFT 1"
+clicksound "sound/menu/back.wav"
+hoversound "menu/sound/scroll.wav"
+font facfont-20
+shader "menu_button_trans"
+hovershader "menu_button_glow"
+
+}
+resource
+Button
+{
+title "Statistics"
+name "client_btn4"
+rect 17 285 172 21
+fgcolor 1.00 1.00 1.00 1.00
+bgcolor 0.50 0.50 0.25 1.00
+borderstyle "RAISED"
+stuffcommand "pushmenu camper_stats"
+clicksound "sound/menu/back.wav"
+hoversound "menu/sound/scroll.wav"
+font facfont-20
+shader "menu_button_trans"
+hovershader "menu_button_glow"
+
+}
+resource
+Button
+{
+title "Jukebox"
+name "client_btn1"
+rect 17 222 172 21
+fgcolor 1.00 1.00 1.00 1.00
+bgcolor 0.50 0.50 0.25 1.00
+borderstyle "RAISED"
+stuffcommand "pushmenu camper_jukebox"
+clicksound "sound/menu/back.wav"
+hoversound "menu/sound/scroll.wav"
+font facfont-20
+shader "menu_button_trans"
+hovershader "menu_button_glow"
+hide
+
+}
+resource
+Button
+{
+title "Controls"
+name "client_btn2"
+rect 17 243 172 21
+fgcolor 1.00 1.00 1.00 1.00
+bgcolor 0.50 0.50 0.25 1.00
+borderstyle "RAISED"
+stuffcommand "pushmenu camper_controls"
+clicksound "sound/menu/back.wav"
+hoversound "menu/sound/scroll.wav"
+font facfont-20
+shader "menu_button_trans"
+hovershader "menu_button_glow"
+hide
+
+}
+resource
+Button
+{
+title "Back"
+name "client_btn5"
+rect 17 327 172 21
+fgcolor 1.00 1.00 1.00 1.00
+bgcolor 0.50 0.50 0.25 1.00
+borderstyle "RAISED"
+stuffcommand "exec menu/hide_client.cfg"
+clicksound "sound/menu/back.wav"
+hoversound "menu/sound/scroll.wav"
+font facfont-20
+shader "menu_button_trans"
+hovershader "menu_button_glow"
+
+}
+resource
+Button
+{
+title "Admin Sectiom"
+name "Default"
+rect 17 33 172 21
+fgcolor 1.00 1.00 1.00 1.00
+bgcolor 0.50 0.50 0.25 60.00
+borderstyle "RAISED"
+stuffcommand "exec menu/show_admin.cfg"
+clicksound "menu/sound/apply.wav"
+hoversound "menu/sound/scroll.wav"
+font facfont-20
+shader "menu_button_trans"
+hovershader "menu_button_glow"
+
+}
+resource
+Button
+{
+title "Menus"
+name "client_btn3"
+rect 17 264 172 21
+fgcolor 1.00 1.00 1.00 1.00
+bgcolor 0.50 0.50 0.25 1.00
+borderstyle "RAISED"
+stuffcommand "pushmenu menus"
+clicksound "sound/menu/back.wav"
+hoversound "menu/sound/scroll.wav"
+font facfont-20
+shader "menu_button_trans"
+hovershader "menu_button_glow"
+
+}
+resource
+Button
+{
+title "Client Sectiom"
+name "Default"
+rect 17 54 172 21
+fgcolor 1.00 1.00 1.00 1.00
+bgcolor 0.50 0.50 0.25 1.00
+borderstyle "RAISED"
+stuffcommand "exec menu/show_client.cfg"
+clicksound "menu/sound/apply.wav"
+hoversound "menu/sound/scroll.wav"
+font facfont-20
+shader "menu_button_trans"
+hovershader "menu_button_glow"
+
+}
+resource
+Button
+{
+title "Help"
+name "Default"
+rect 17 75 172 21
+fgcolor 1.00 1.00 1.00 1.00
+bgcolor 0.50 0.50 0.25 1.00
+borderstyle "RAISED"
+stuffcommand "pushmenu camper_help"
+clicksound "menu/sound/apply.wav"
+hoversound "menu/sound/scroll.wav"
+font facfont-20
+shader "menu_button_trans"
+hovershader "menu_button_glow"
+
+}
+resource
+Button
+{
+title "Back"
+name "admin3"
+rect 17 327 172 21
+fgcolor 1.00 1.00 1.00 1.00
+bgcolor 0.50 0.50 0.25 1.00
+borderstyle "RAISED"
+stuffcommand "exec menu/hide_admin.cfg"
+clicksound "sound/menu/back.wav"
+hoversound "menu/sound/scroll.wav"
+font facfont-20
+shader "menu_button_trans"
+hovershader "menu_button_glow"
+
+}
+resource
+Button
+{
+title "Basic Rcon"
+name "admin2"
+rect 17 243 172 21
+fgcolor 1.00 1.00 1.00 1.00
+bgcolor 0.50 0.50 0.25 1.00
+borderstyle "RAISED"
+stuffcommand "pushmenu rcon"
+clicksound "sound/menu/back.wav"
+hoversound "menu/sound/scroll.wav"
+font facfont-20
+shader "menu_button_trans"
+hovershader "menu_button_glow"
+hide
+
+}
+resource
+Button
+{
+title "Scripts"
+name "admin4"
+rect 17 264 172 21
+fgcolor 1.00 1.00 1.00 1.00
+bgcolor 0.50 0.50 0.25 1.00
+borderstyle "RAISED"
+stuffcommand "pushmenu camper_scripts"
+clicksound "sound/menu/back.wav"
+hoversound "menu/sound/scroll.wav"
+font facfont-20
+shader "menu_button_trans"
+hovershader "menu_button_glow"
+hide
+
+}
+resource
+Button
+{
+title "Settings"
+name "admin5"
+rect 17 285 172 21
+fgcolor 1.00 1.00 1.00 1.00
+bgcolor 0.50 0.50 0.25 1.00
+borderstyle "RAISED"
+stuffcommand "pushmenu camper_settings"
+clicksound "sound/menu/back.wav"
+hoversound "menu/sound/scroll.wav"
+font facfont-20
+shader "menu_button_trans"
+hovershader "menu_button_glow"
+hide
+
+}
+resource
+Button
+{
+title "Admin Rcon"
+name "admin1"
+rect 17 222 172 21
+fgcolor 1.00 1.00 1.00 1.00
+bgcolor 0.50 0.50 0.25 1.00
+borderstyle "RAISED"
+stuffcommand "pushmenu camperrcon"
+clicksound "sound/menu/back.wav"
+hoversound "menu/sound/scroll.wav"
+font facfont-20
+shader "menu_button_trans"
+hovershader "menu_button_glow"
+hide
+
+}
+end.

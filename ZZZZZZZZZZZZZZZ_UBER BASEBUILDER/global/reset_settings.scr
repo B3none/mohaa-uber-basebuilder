@@ -1,0 +1,93 @@
+main:
+
+	//first turn all the scripts off
+
+	for(local.i = 1;local.i <= game.scripts.size ;local.i++)
+	{
+		if(level.run[game.scripts[local.i][1]] == "1")
+		{
+			level.run[game.scripts[local.i][1]] = 0
+		}
+	}
+	
+	wait 1
+
+	//`level waittill spawn
+	//wait 1
+	exec settings/Advanced_universal.txt::extra_settings	// Find out reset setting
+
+	game.scripts = waitexec settings/Mods.txt 
+
+	//first sort out spawning
+	exec settings/Advanced_universal.txt::spawn_scripts				//Setup Spawn scripts first
+	game.spawn_scripts = level.spawn_scripts
+
+	// Sort what mods should run and should not run
+	for(local.i = 1;local.i <= game.scripts.size ;local.i++)
+	{
+		// have to use waitthread because mohaa updates it's memory too damn slow and then the spawn scripts are wrong oh oh , yeah damn mohaa
+		waitexec global/settings.scr::on_or_off game.scripts[local.i] local.i
+	}
+
+	// Clear spawn scripts that should not run
+	exec global/settings.scr::clear_spawn_scripts
+
+	if(game.reset == "1" || game.all_commands == NIL)									// if there are no settings or reset has been set reload the settings
+	{ 	
+		level.cmd_position = 1
+		//Work out the settings and exec the scripts
+		for(local.i = 1;local.i <= game.scripts.size ;local.i++)
+		{
+			waitexec global/settings.scr::getsettings game.scripts[local.i]
+		}
+		
+		// Now get the extra mods
+		local.mods = waitexec settings/Mods.txt::extra_settings
+		
+		for(local.i = 1;local.i <= local.mods.size ;local.i++)
+		{
+			waitexec global/settings.scr::getextrasettings local.mods[local.i]
+		}
+
+		//thread update_allcmds level.cmds	//Update all the commands gained from the settings files
+		waitexec global/settings.scr::update_allcmds level.cmds
+	}
+
+	//Do advanced.txt
+	exec global/settings.scr::advanced
+	//setup fixes straight away
+	waitexec global/settings.scr::getgame
+	
+	//Finaly exec all th scripts
+	for(local.i = 1;local.i <= game.scripts.size ;local.i++)
+	{
+		if(game.scripts[local.i][4] != "none")
+		{
+			exec game.scripts[local.i][4]
+		}
+	}
+
+	// Now if needed update the AP_Scripts cvar to keep track of the scripts
+	if(local.APscripts == "" || local.APscripts == "NIL")
+	{
+		for(local.i=1;local.i <= game.scripts.size;local.i++)
+		{
+			local.APscripts += game.scripts[local.i][2] 
+		}
+
+		setcvar "AP_scripts" local.APscripts 
+	}
+	
+	//clear this as it wont be used again
+	level.cmds = NIL
+
+	game.campersettings =  waitexec game.file["settings/advanced"]::cvars
+	waitexec global/settings.scr::register game.campersettings
+
+	if(level.run["camper"] == "1")
+	{
+		game.types = waitexec game.file["camper"]::types
+	}
+	
+end
+

@@ -1,0 +1,112 @@
+
+main:
+
+// set scoreboard messages
+setcvar "g_obj_alliedtext1" "Snowy Park"
+setcvar "g_obj_alliedtext2" "UBER BASEBUILDER by"
+setcvar "g_obj_alliedtext3" "])ar]{Gen.SearingWolfe"
+setcvar "g_obj_axistext1" "be a member at"
+setcvar "g_obj_axistext2" "www.freewebs.com/"
+setcvar "g_obj_axistext3" "mohaa-DarK-clan"
+
+setcvar "g_scoreboardpic" "mohdm5"
+
+setcvar "g_gametype" "2"
+setcvar "fraglimit" "0"
+setcvar "timelimit" "50"
+
+setcvar "cheats" "1"
+setcvar "thereisnomonkey" "1"
+
+exec alienx/basebuild.scr::main 1000 10000
+
+
+
+	level waittill prespawn
+
+//                                              note all these must have a value!
+//                                                                                    +----------------- light on or off ( 1 = on, 0 = off )
+//                                                                                    | +--------------- red (1 is the max, so for a little red, use 0.5)
+//                                                                                    | | +------------- green (same for red)
+//                                                                                    | | | +----------- blue (same for red)
+//                                                                                    | | | | ++-------- rotation speed (keep it sensiable lol)
+//                                                                                    | | | | || ++----- the scale of the pickup object, 1 is default
+//                                                                                    | | | | || || +--- lift creator ( 1 = on, 0 = off )
+//---| script                      |-| origin                |-|  model name        | | | | | || || |
+//pickup point - allied base
+exec alienx/basebuild.scr::basebuild ( 4853.21 -3430.43 188.29 ) "static/indycrate.tik" 1 1 0 0 90 .5 0 0 1
+exec alienx/basebuild.scr::basebuild ( 5003.02 -3750.35 175.80 ) "statweapons/mg42_gun.tik" 1 1 1 1 90 .5 0 0 1
+exec alienx/basebuild.scr::basebuild ( 5032.42 -4384.42 156.13 ) "static/sandbag_link_main.tik" 1 0 0 1 90 .5 0 0 1
+exec alienx/basebuild.scr::basebuild ( 5038.60 -4985.35 156.13 ) "static/bodies_tarp.tik" 1 .5 0 .5 90 .5 1 0 1
+exec alienx/basebuild.scr::basebuild ( 5027.19 -5405.05 156.13 ) "static/bush_winter_fullshrub.tik" 1 1 0 0 91 .5 0 0 3
+exec alienx/basebuild.scr::basebuild ( 5041.49 -5967.50 159.49 ) "static/fire.tik" 1 1 1 1 91 .5 0 0 3
+exec alienx/basebuild.scr::basebuild ( 5013.52 -6493.50 194.25 ) "miscobj/searchlight.tik" 1 0 0 1 90 .5 0 0 3
+exec alienx/basebuild.scr::basebuild ( 4411.93 -4439.62 154.78 ) "player/allied_Airborne.tik" 1 1 0 0 90 .5 0 0 1
+exec alienx/basebuild.scr::basebuild ( 3942.96 -4503.31 156.14 ) "static/body_us03.tik" 1 1 1 1 90 .5 0 0 1
+exec alienx/basebuild.scr::basebuild ( 3592.84 -4439.50 156.13 ) "static/banquet_table.tik" 1 0 0 1 90 .5 0 0 1
+exec alienx/basebuild.scr::basebuild ( 3659.20 -5493.31 160.70 ) "static/50cal_crate.tik" 1 1 0 0 90 .5 0 0 1
+exec alienx/basebuild.scr::basebuild ( 3909.00 -5444.78 519.13 ) "miscobj/beef.tik" 1 1 1 1 90 .5 0 0 1
+exec alienx/basebuild.scr::basebuild ( 4140.25 -4976.58 161.11 ) "static/static_naziflag1.tik" 1 0 0 1 90 .5 0 0 1
+exec alienx/basebuild.scr::basebuild ( -913.78 -3954.68 181.59 ) "static/rock_winter_medium.tik" 1 1 1 1 90 .5 0 0 3
+
+
+
+//pickup point - axis base  
+exec alienx/basebuild.scr::basebuild ( -1239.63 -6602.73 181.14 ) "static/indycrate.tik" 1 1 0 0 90 .5 0 0 1
+exec alienx/basebuild.scr::basebuild ( -1301.51 -6149.83 190.06 ) "statweapons/mg42_gun.tik" 1 1 1 1 90 .5 0 0 1
+exec alienx/basebuild.scr::basebuild ( -1307.46 -5663.03 184.32 ) "static/sandbag_link_main.tik" 1 0 0 1 90 .5 0 0 1
+exec alienx/basebuild.scr::basebuild ( -1302.82 -5224.97 155.47 ) "static/bodies_tarp.tik" 1 .5 0 .5 90 .5 1 0 1
+exec alienx/basebuild.scr::basebuild ( -1273.66 -4534.37 151.11 ) "static/bookcase.tik" 1 1 0 0 91 .5 0 0 3
+exec alienx/basebuild.scr::basebuild ( -1315.73 -3912.90 174.43 ) "static/fire.tik" 1 1 1 191 .5 0 0 3
+exec alienx/basebuild.scr::basebuild ( -1278.53 -3250.36 169.92 ) "miscobj/searchlight.tik" 1 0 0 1 91 .5 0 0 3
+exec alienx/basebuild.scr::basebuild ( -759.78 -4654.31 154.72 ) "player/german_Winter_1.tik" 1 1 0 0 90 .5 0 1 1
+exec alienx/basebuild.scr::basebuild ( -654.74 -5751.12 255.23 ) "static/barbwire.tik" 1 1 1 1 90 .5 0 0 1
+exec alienx/basebuild.scr::basebuild ( -265.32 -4607.05 134.35 ) "static/body_german01.tik" 1 0 0 1 90 .5 0 0 1
+exec alienx/basebuild.scr::basebuild (  511.56 -4958.78 135.53 ) "static/static_naziflag2.tik" 1 1 0 0 91 .5 0 0 3
+exec alienx/basebuild.scr::basebuild (  183.52 -5290.35 154.80 ) "static/static_nazibanner.tik" 1 1 1 1 91 .5 0 0 3	
+exec alienx/basebuild.scr::basebuild ( -438.75 -4735.20 139.40 ) "static/static_kriegsflag.tik" 1 0 0 1 91 .5 0 0 3
+exec alienx/basebuild.scr::basebuild ( 3166.37 -4871.60 152.48 ) "static/tree_winter_midpine.tik" 1 0 0 1 91 .5 0 0 3	
+
+	exec server_planes/trigger.scr ( 4712 -5281 162 ) "allies" .2 
+	exec server_planes/trigger.scr ( -840 -4887 162 ) "axis" .2 
+
+
+exec global/dog.scr ( 2112.30 -4842.13 -55.88 )
+
+exec global/jetpack.scr ( -874.61 -4722.83 132.33 ) //axis
+exec global/jetpack.scr ( 4624.11 -5131.02 122.32 ) //allies
+
+exec guidedmissile/spawntrigger.scr ( 4845.03 -5141.68 118.45 ) //allies
+exec guidedmissile/spawntrigger.scr ( -858.24 -5080.80 140.20 ) //axis
+
+
+//*** precache dm stuff
+	exec global/dmprecache.scr
+
+	//hud
+	exec alienx/hud.scr::main
+	
+	level.script = maps/dm/mohdm5.scr
+	exec global/ambient.scr mohdm5
+	
+	setcvar "r_fastsky" "1"
+	$world farplane 5000
+	$world farplane_color (0 0 0)
+
+exec map_triggers/allweapons.scr ( 2381.90 -6880.87 162.13 )
+exec map_triggers/giant.scr ( -1360.09 -4912.89 112.13 )
+exec map_triggers/invisible.scr ( 728.06 -2335.13 162.04 )
+exec map_triggers/invulnerable.scr ( 2061.09 -3168.25 262.64 )
+exec map_triggers/midget.scr ( 473.65 -5972.89 570.13 )
+exec map_triggers/normal.scr ( 5112.87 -4658.64 112.13 )
+exec map_triggers/camo.scr ( -431 -5295 142 )
+exec map_triggers/health.scr ( -465 -3840 519 ) ( 3397 -3008 519 ) ( 702 -2271 -55 ) ( 2394 -6944 -55 ) ( 2616 -2991 155 ) ( 3759 -5167 156 ) ( 3375 -6096 156 ) ( 1040 -6096 171 ) ( -431 -4560 139 ) ( -623 -2960 172 )
+
+
+thread global/door_locked.scr::lock
+
+	level waittill spawn
+
+
+
+end

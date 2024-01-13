@@ -1,0 +1,249 @@
+// Start of PreFab
+
+
+
+main:
+//KEEP THESE! DO NOT EDIT THIS BIT!
+setcvar "g_obj_alliedtext1" "m3l3"
+setcvar "g_obj_alliedtext2" "UBER BASEBUILDER by"
+setcvar "g_obj_alliedtext3" "])ar]{Gen.SearingWolfe"
+setcvar "g_obj_axistext1" "be a member at"
+setcvar "g_obj_axistext2" "www.freewebs.com/"
+setcvar "g_obj_axistext3" "mohaa-DarK-clan"
+
+setcvar "g_scoreboardpic" "M3L3" // A Scoreboard Pic
+setcvar "g_gametype" "2"
+
+setcvar "fraglimit" "0"
+setcvar "timelimit" "50" // 10 mins map time outta do
+setcvar "level.clockside" "kills" // Highest Team With Kills Wins
+
+setcvar "cheats" "1"
+setcvar "thereisnomonkey" "1"
+
+
+level.script = maps/M3l3.scr // your maps scripts name
+
+thread spawns // Gonna need this 
+
+removeclass Actor // This Line Removes the AI Actors
+
+$exploder remove
+
+exec alienx/basebuild.scr::main 1000 10000
+exec alienx/hud.scr::main
+
+level waittill prespawn
+
+//axis
+exec alienx/basebuild.scr::basebuild ( 579 -1721 -313 ) "static/indycrate.tik" 1 0 1 0 90 .5 0 0 1
+exec alienx/basebuild.scr::basebuild ( 679 -1721 -313 ) "static/indycrate.tik" 1 1 0 1 90 .5 1 0 1
+exec alienx/basebuild.scr::basebuild ( 779 -1721 -313 ) "statweapons/mg42_gun.tik" 1 1 0 0 90 .5 0 0 1
+exec alienx/basebuild.scr::basebuild ( 879 -1721 -313 ) "static/sandbag_link_main.tik" 1 0 0 1 90 .5 0 0 1
+exec alienx/basebuild.scr::basebuild ( 979 -1721 -313 ) "static/bodies_tarp.tik" 1 1 0 1 90 .5 1 0 1
+exec alienx/basebuild.scr::basebuild ( 1079 -1721 -313 ) "static/bunkertable.tik" 1 1 1 0 90 .5 0 1 1
+exec alienx/basebuild.scr::basebuild ( 1179 -1721 -313 ) "static/barbwire.tik" 1 0 1 1 90 .5 0 0 1
+exec alienx/basebuild.scr::basebuild ( 1279 -1721 -313 ) "static/cabinet_large.tik" 1 1 1 1 90 .5 0 0 1
+exec alienx/basebuild.scr::basebuild ( 1379 -1721 -313 ) "static/sandbag_longsegment.tik" 1 1 1 1 90 .2 0 0 1
+exec alienx/basebuild.scr::basebuild ( 1479 -1721 -313 ) "static/bodies_tarp.tik" 1 1 1 1 90 .5 0 0 1
+exec alienx/basebuild.scr::basebuild ( 1579 -1721 -313 ) "static/static_naziflag1.tik" 1 1 1 1 90 .2 0 0 1
+exec alienx/basebuild.scr::basebuild ( 1679 -1721 -313 ) "static/bookcase.tik" 1 1 0 1 90 .2 0 0 1
+exec alienx/basebuild.scr::basebuild ( 1779 -1721 -313 ) "static/bush_full.tik" 1 0 1 1 90 .5 0 0 1end
+exec alienx/basebuild.scr::basebuild ( 1879 -1721 -313 ) "static/banquet_table.tik" 1 1 0 0 90 .5 0 0 1
+
+
+//allies
+exec alienx/basebuild.scr::basebuild ( 2593 3556 -255 ) "static/indycrate.tik" 1 0 1 0 90 .5 0 0 1
+exec alienx/basebuild.scr::basebuild ( 2693 3556 -255 ) "static/indycrate.tik" 1 1 0 1 90 .5 1 0 1
+exec alienx/basebuild.scr::basebuild ( 2793 3556 -255 ) "statweapons/mg42_gun.tik" 1 1 0 0 90 .5 0 0 1
+exec alienx/basebuild.scr::basebuild ( 2893 3556 -255 ) "static/sandbag_link_main.tik" 1 0 0 1 90 .5 0 0 1
+exec alienx/basebuild.scr::basebuild ( 2993 3556 -255 ) "static/bodies_tarp.tik" 1 1 0 1 90 .5 1 0 1
+exec alienx/basebuild.scr::basebuild ( 3093 3556 -255 ) "static/bunkertable.tik" 1 1 1 0 90 .5 0 1 1
+exec alienx/basebuild.scr::basebuild ( 3193 3556 -255 ) "static/barbwire.tik" 1 0 1 1 90 .5 0 0 1
+exec alienx/basebuild.scr::basebuild ( 3293 3556 -255 ) "static/cabinet_large.tik" 1 1 1 1 90 .5 0 0 1
+exec alienx/basebuild.scr::basebuild ( 3393 3556 -255 ) "static/sandbag_longsegment.tik" 1 1 1 1 90 .2 0 0 1
+exec alienx/basebuild.scr::basebuild ( 3493 3556 -255 ) "static/bodies_tarp.tik" 1 1 1 1 90 .5 0 0 1
+exec alienx/basebuild.scr::basebuild ( 3593 3556 -255 ) "static/static_naziflag1.tik" 1 1 1 1 90 .2 0 0 1
+exec alienx/basebuild.scr::basebuild ( 3693 3556 -255 ) "static/bookcase.tik" 1 1 0 1 90 .2 0 0 1
+exec alienx/basebuild.scr::basebuild ( 3793 3556 -255 ) "static/bush_full.tik" 1 0 1 1 90 .5 0 0 1end
+exec alienx/basebuild.scr::basebuild ( 3893 3556 -255 ) "static/banquet_table.tik" 1 1 0 0 90 .5 0 0 1
+
+exec global/jetpack.scr ( 2392 3907 -240 ) //allies
+exec global/jetpack.scr ( 1281 -1568 -314 ) //axis
+
+exec global/dog.scr ( 4008 2300 -269 )
+
+exec guidedmissile/spawntrigger.scr ( 2327 3476 -245 ) //allies
+exec guidedmissile/spawntrigger.scr ( 1354 -1231 -327 ) //axis
+
+	//*** Precache Dm Stuff
+	exec global/DMprecache.scr
+
+	level.script = maps/obj/obj_team1.scr
+	exec global/ambient.scr obj_team1
+
+exec server_planes/trigger.scr ( 1314 -1441 -319 ) "axis" .2
+exec server_planes/trigger.scr ( 2269.22 3729.11 -246.83 ) "allies" .2
+ 
+   	setcvar "r_fastsky" "1"
+	$world farplane 5000
+	$world farplane_color (0 0 0)
+
+exec map_triggers/allweapons.scr ( 4208 2208 -251 )
+exec map_triggers/giant.scr ( 4351 2705 -255 )
+exec map_triggers/invisible.scr ( 1460 -2575 75 )
+exec map_triggers/invulnerable.scr ( 1327 -2551 456 )
+exec map_triggers/midget.scr ( 3235 4108 -30 )
+exec map_triggers/normal.scr ( 3696 3408 -272 )
+exec map_triggers/health.scr ( 2357 -2594 -182 ) ( 4986 -431 -347 ) ( 3096 183 -113 ) ( 4311 769 -167 ) ( 3332 1181 -234 ) ( 5655 1574 -303 ) ( 3166 4147 8 ) ( 2893 3130 -199 ) ( 2706 4024 -210 ) ( 1176 3791 -213 )
+
+       
+level waittill spawn
+
+
+
+
+local.fix1 = spawn script_model
+local.fix1 model "static/barbwire_long_two_post.tik" 
+local.fix1.origin = ( -225.74 -621.53 -289.01 )
+local.fix1.angles = (0 0 0)
+local.fix1.scale = 1
+local.fix1 solid
+
+local.fix1 = spawn script_model
+local.fix1 model "static/barbwire_long_two_post.tik" 
+local.fix1.origin = ( -178.60 5692.42 -171.64 )
+local.fix1.angles = (0 0 0)
+local.fix1.scale = 1
+local.fix1 solid
+
+local.fix1 = spawn script_model
+local.fix1 model "static/indycrate.tik" 
+local.fix1.origin = ( 3005.01 -1710.57 -347.49 )
+local.fix1.angles = (0 90 0)
+local.fix1.scale = 1
+local.fix1 solid
+
+local.fix1 = spawn script_model
+local.fix1 model "static/indycrate.tik" 
+local.fix1.origin = ( 3005.07 -1683.66 -300.18 )
+local.fix1.angles = (0 90 0)
+local.fix1.scale = 1
+local.fix1 solid
+
+local.fix1 = spawn script_model
+local.fix1 model "static/indycrate.tik" 
+local.fix1.origin = ( 3003.29 -1663.14 -252.87 )
+local.fix1.angles = (0 90 0)
+local.fix1.scale = 1
+local.fix1 solid
+
+local.fix1 = spawn script_model
+local.fix1 model "static/indycrate.tik" 
+local.fix1.origin = ( 3438.48 -1346.51 -342.31 )
+local.fix1.angles = (0 90 0)
+local.fix1.scale = 1
+local.fix1 solid
+
+local.fix1 = spawn script_model
+local.fix1 model "static/indycrate.tik" 
+local.fix1.origin = ( 3436.55 -1369.86 -295.00 )
+local.fix1.angles = (0 90 0)
+local.fix1.scale = 1
+local.fix1 solid
+
+local.fix1 = spawn script_model
+local.fix1 model "static/indycrate.tik" 
+local.fix1.origin = ( 3436.34 -1400.87 -247.69 )
+local.fix1.angles = (0 90 0)
+local.fix1.scale = 1
+local.fix1 solid
+
+local.fix1 = spawn script_model
+local.fix1 model "static/indycrate.tik" 
+local.fix1.origin = ( 3525.41 2660.45 -270.85 )
+local.fix1.angles = (0 90 0)
+local.fix1.scale = 1
+local.fix1 solid
+
+local.fix1 = spawn script_model
+local.fix1 model "static/indycrate.tik" 
+local.fix1.origin = ( 3526.03 2689.75 -223.54 )
+local.fix1.angles = (0 90 0)
+local.fix1.scale = 1
+local.fix1 solid
+
+local.fix1 = spawn script_model
+local.fix1 model "static/indycrate.tik" 
+local.fix1.origin = ( 3528.46 2719.65 -176.23 )
+local.fix1.angles = (0 90 0)
+local.fix1.scale = 1
+local.fix1 solid
+
+local.fix1 = spawn script_model
+local.fix1 model "static/indycrate.tik" 
+local.fix1.origin = ( 3518.05 2855.62 -270.00 )
+local.fix1.angles = (0 90 0)
+local.fix1.scale = 1
+local.fix1 solid
+
+local.fix1 = spawn script_model
+local.fix1 model "static/indycrate.tik" 
+local.fix1.origin = ( 3518.39 2822.48 -222.69 )
+local.fix1.angles = (0 90 0)
+local.fix1.scale = 1
+local.fix1 solid
+
+local.fix1 = spawn script_model
+local.fix1 model "static/indycrate.tik" 
+local.fix1.origin = ( 3518.60 2791.06 -175.38 )
+local.fix1.angles = (0 90 0)
+local.fix1.scale = 1
+local.fix1 solid
+
+end
+
+spawns:
+
+local.axis = spawn info_player_axis
+local.axis.origin = ( 163 -1857 -348 )
+
+local.axis = spawn info_player_axis
+local.axis.origin = ( 163 -2057 -348 )
+
+local.axis = spawn info_player_axis
+local.axis.origin = ( 163 -2257 -348 )
+
+local.axis = spawn info_player_axis
+local.axis.origin = ( 163 -2457 -348 )
+
+local.axis = spawn info_player_axis
+local.axis.origin = ( 163 -2657 -348 )
+
+local.axis = spawn info_player_axis
+local.axis.origin = ( 163 -2857 -348 )
+
+local.axis = spawn info_player_axis
+local.axis.origin = ( 163 -3057 -348 )
+
+local.axis = spawn info_player_allied
+local.axis.origin = ( 109.04 5911.23 -142.34 )
+
+local.axis = spawn info_player_allied
+local.axis.origin = ( -29.01 5571.58 -120.20 )
+
+local.axis = spawn info_player_allied
+local.axis.origin = ( 284.31 5798.21 -128.22 )
+
+local.axis = spawn info_player_allied
+local.axis.origin = ( 1304.97 4415.51 -165.06 )
+
+local.axis = spawn info_player_allied
+local.axis.origin = ( 2196.06 4218.31 -174.66 )
+
+local.axis = spawn info_player_allied
+local.axis.origin = ( 991.93 3813.82 -154.55 )
+
+end
+
+// End of PreFab 

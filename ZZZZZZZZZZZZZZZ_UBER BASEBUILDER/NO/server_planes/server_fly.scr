@@ -1,0 +1,252 @@
+main local.plane_start:
+	
+	if(self.flying == 1)
+	{
+		self.scale = 1
+		end
+	}
+
+	if(self.OWNS == 1)
+	{
+		self.scale = 1
+		self.flying = 0
+		end
+	}
+
+	self.no_usemine = 1 //stop them using a mine
+	self.no_usemedic = 1 //stop medics
+
+	self.flying = 1
+	self takedamage
+
+	local.team = self.dmteam
+
+	if(level.planes_max["allies"]== NIL)
+	{
+		waitexec server_planes/setup.scr
+	}
+
+	level.planes[local.team]++
+
+	local.allies = waitexec global/settings.scr::getcmd "max-allies"
+	local.axis = waitexec global/settings.scr::getcmd "max-axis"
+
+	level.planes_max["allies"] = int local.allies 
+	level.planes_max["axis"] = int local.axis
+
+	if(level.planes[local.team] == level.planes_max[local.team])
+	{
+		exec server_planes/trigger.scr::from_fly local.team
+	}
+	if(self.instructed!=1)
+	{
+		self waitexec server_planes/first_flight_instructions.scr local.plane_start
+	}
+
+	//spawn the plane
+	local.plane = spawn script_model "targetname" ("flyingplane")
+	if(self.dmteam == "axis")
+	{
+		local.plane model "vehicles/fockwulffly.tik"
+	}
+	else
+	{
+		local.plane model "vehicles/p47fly.tik"	
+	}
+
+	// Set the start direction of the plane
+	local.plane.angles = self.viewangles
+
+	local.solid = int ( waitexec global/settings.scr::getcmd "uncrashable" )
+
+	if(local.solid == 0)
+	{
+		local.plane solid
+	}
+	else
+	{
+		local.plane notsolid
+	}
+
+	// Set up the plane
+//	local.plane physics_on
+	local.plane.origin = local.plane_start
+	local.plane.scale = self.scale 
+	local.plane.pilot = self
+	
+	// Set up the set size for the planes
+	if(local.plane.scale == .75)
+	{
+		local.plane setsize ( -100 -100 -5 ) ( 100 100 30 )
+	}
+	else if(local.plane.scale == .2)
+	{
+		local.plane setsize ( -60 -60 -5 ) ( 60 60 10 )
+	}
+
+	// Set the seat
+	if(self.seat==NIL)
+	{
+		if(local.plane.scale == .75)
+		{
+			self.seat[0] = -335 //3
+			self.seat[1] = 10
+		}
+		else if(local.plane.scale == .2)
+		{
+			self.seat[0] = -215 //3
+			self.seat[1] = 45 //-65
+		}
+		else
+		{
+			self.seat[1] = -65
+		}
+	}
+		
+
+	// Set up the player
+
+	self notsolid
+	self forcetorsostate PLANE_TORSO
+	self forcelegsstate PLANE_LEGS
+	self hide
+	self.scale = 1
+	self.plane = local.plane
+
+	//allows use of putawaymain even without a weapon
+	self weapnext
+	self activatenewweapon lefthand
+
+	local.team = self.dmteam
+	//announce Player in plane
+	local.team  = waitexec global/strings.scr::to_upper local.team 0
+	iprintlnbold (local.team  + " Aircraft Spotted On Radar!!!")
+	local.team = self.dmteam
+
+	self glue local.plane
+
+	local.camera = waitthread getcam
+	local.camera.origin = local.plane.origin
+	
+	local.plane.cam = local.camera
+	
+	// Get speed to start with
+	local.plane.speed = int ( waitexec global/settings.scr::getcmd "startspeed" )
+
+	if(local.plane.speed == NIL)
+	{
+		println "Planes can not start because settings are missing"
+		end
+	}
+
+	// Get acceleration
+	local.plane.acceleration = int ( waitexec global/settings.scr::getcmd "acceleration" )
+	// Get deceleration
+	local.plane.deceleration = int ( waitexec global/settings.scr::getcmd "deceleration" )
+	// Get maxspeed
+	local.plane.maxspeed = int ( waitexec global/settings.scr::getcmd "maxspeed" )
+	// Get minspeed
+	local.plane.minspeed = int ( waitexec global/settings.scr::getcmd "minspeed" )
+
+	local.camera.angles = self.viewangles
+
+	//Set to start using camera view that follows the plane
+	local.plane.freelook = 1
+
+	while (self.dmteam == local.team && isalive self && local.plane && self.flying == 1)
+	{
+		local.origin = local.plane.origin
+
+		if(self == NIL || self == NULL)
+		{
+			local.plane exec server_planes/end_flight.scr::plane
+			end
+		}
+
+	//	local.plane.velocity = local.plane.forwardvector * local.plane.speed
+
+		local.plane waitthread move_forward
+		local.lean = (self getcontrollerangles 0)[2] //self.viewangles[2]
+
+		//local.lean_old
+		if(local.lean != 0 )
+		{
+			if( local.lean > 0 )
+			{
+			
+				if(local.lean >= local.lean_old)
+				{
+					local.change = (self.upvector * 0.08)// ~25 deg/
+					local.change += (self.forwardvector * -0.02)// ~25 deg/
+					local.plane exec server_planes/angles.scr::axisrotate local.change
+				}
+			}
+			else
+			{
+				if(local.lean <= local.lean_old)
+				{
+					local.change = (self.upvector * -0.08)// ~25 deg/
+					local.change += (self.forwardvector * 0.02)// ~25 deg/
+					local.plane exec server_planes/angles.scr::axisrotate local.change
+				}
+
+			}
+
+		}
+		local.lean_old = local.lean 
+
+		if(local.plane.freelook == 1)
+		{
+			local.camera.angles = local.plane.angles
+		}
+		else
+		{
+			local.camera.angles = self.viewangles
+		}
+
+		waitframe
+
+		waitthread camera local.camera local.plane
+		if(local.origin == local.plane.origin)
+		{
+	//		break
+		}
+	}
+	
+	
+	exec server_planes/end_flight.scr
+
+end
+
+camera local.camera local.plane:
+	
+	local.camera.origin = local.plane.origin + ( 0 0 self.seat[1] ) + local.plane.forwardvector  * self.seat[0] + 0.05 * local.plane.forwardvector * local.plane.speed
+
+end
+
+getcam:
+
+	local.cam = "cam" + self.entnum
+	local.camera = spawn Camera targetname local.cam
+	local.cam_trigger = spawn TriggerCameraUse target local.cam
+	local.cam_trigger doUse self
+	local.cam_trigger remove
+
+end local.camera
+
+// Sets new angles for the plane. 
+// threaded to like so local.plane thread change_angles ( 0 0 1 )
+// WIll add 1 to the z
+// used for roll
+change_angles local.angles:
+//
+	self.angles += local.angles
+	
+end
+
+
+move_forward:
+	
+	self.origin += self.forwardvector * self.speed //* -0.05
+
+end

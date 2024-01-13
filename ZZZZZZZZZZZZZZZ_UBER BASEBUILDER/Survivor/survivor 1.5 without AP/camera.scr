@@ -1,0 +1,134 @@
+main:
+
+	local.d = spawn script_object origin self.origin
+	
+
+	//woohooo jv found 1 player cam:D
+	while!(isalive self)
+	{
+		waitframe
+	}
+
+	local.cam = "cam" + randomint 1000 // make sure it's unique
+	local.camera = spawn Camera targetname local.cam
+	local.cam_trigger = spawn TriggerCameraUse target local.cam
+	local.cam_trigger doUse self
+	local.camera targetname ""
+
+	local.camera lookat self
+	local.camera orbit local.d //self
+	
+	self stufftext "playmp3 main/sound/music/mus_17c_failure.mp3"
+
+	local.h = 0
+	while(local.true != 1)
+	{
+		wait 1
+		if(level.roundend == 1 || local.h ==8)
+		{
+			break
+		}
+		local.h++
+	}
+	
+	local.d delete
+
+	local.cam_trigger = remove
+	local.camera remove
+
+	self stufftext "stopmp3"
+end
+
+
+winner local.dmteam:
+
+	local.cam = spawn Camera "targetname" "endcam"
+	local.cam.origin = self.origin 
+	local.cam follow_distance 190
+	local.cam orbit_height 80
+	local.cam speed 1.3
+
+	letterbox 1
+	self waitexec GLOBAL/get_weapon.scr
+	local.player = spawn animate
+	local.player.model = self.brushmodel
+	local.player hide
+	local.player notsolid
+	local.player.origin = self.origin
+	local.player.angles = self.angles
+	local.player show
+
+
+	//$player noclip	
+	self respawn
+	self hide
+	
+	freezeplayer $player
+
+
+	if(self.weapon != "models/weapons/unarmed.tik")
+	{
+		local.player anim unarmed_run_into_wall					
+	}
+	else
+	{
+		local.player anim unarmed_stand_idle	 							
+	}
+
+	local.gun = spawn animate
+	local.gun.model = self.weapon
+	local.gun.origin = local.player.origin
+
+	local.gun attach local.player  "tag_weapon_right"
+
+	local.cam orbit local.player 
+
+	fadein 5.0 0.0 0.0 0.0 1.0
+	
+
+	if(level.team == 1)
+	{
+		local.dmmanager = spawn DM_Manager
+
+		if(local.dmteam == "draw")
+		{
+			
+			local.dmmanager doroundtransition  
+
+		}
+		else
+		{
+			setcvar "g_gametype" "4"
+			teamwin local.dmteam
+			setcvar "g_gametype" level.gt
+		}
+	}
+
+	wait 2
+
+	cuecamera local.cam
+
+	wait 5
+
+
+	clearletterbox
+	cueplayer
+
+	local.player delete
+
+	releaseplayer  $player
+
+	self show
+
+
+	self stufftext "stopmp3"
+	
+	local.cam remove
+
+	local.dmmanager = spawn DM_Manager
+	local.dmmanager finishroundtransition   
+
+end
+	
+
+

@@ -1,0 +1,267 @@
+menu "camper_playerselect" 640 514 NONE 0
+align centerx centery
+fgcolor 1.00 1.00 1.00 1.00
+bgcolor 0.00 0.00 0.00 0.00
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+resource
+Label
+{
+name "Default"
+rect 360 30 270 460
+fgcolor 0.00 0.00 0.00 1.00
+bgcolor 0.50 0.50 0.50 1.00
+borderstyle "RAISED"
+}
+resource
+Label
+{
+title "ERROR "
+name "selecttitle"
+rect 10 10 620 20
+fgcolor 0.00 0.00 0.00 1.00
+bgcolor 0.50 0.50 0.50 1.00
+borderstyle "3D_BORDER"
+}
+resource
+Label
+{
+name "Default"
+rect 33 933 20 460
+fgcolor 0.00 0.00 0.00 1.00
+bgcolor 0.25 0.50 0.50 1.00
+borderstyle "3D_BORDER"
+}
+resource
+ListBox
+{
+name "default"
+rect 90 900 320 440
+fgcolor 0.00 0.00 0.00 1.00
+bgcolor 0.50 0.50 0.00 1.00
+borderstyle "INDENT_BORDER"
+font verdana-12
+addconfigstringitem "1684" "rcon clientkick 0"
+addconfigstringitem "1685" "rcon clientkick 1"
+addconfigstringitem "1686" "rcon clientkick 2"
+addconfigstringitem "1687" "rcon clientkick 3"
+addconfigstringitem "1688" "rcon clientkick 4"
+addconfigstringitem "1689" "rcon clientkick 5"
+addconfigstringitem "1690" "rcon clientkick 6"
+addconfigstringitem "1691" "rcon clientkick 7"
+addconfigstringitem "1692" "rcon clientkick 8"
+addconfigstringitem "1693" "rcon clientkick 9"
+addconfigstringitem "1694" "rcon clientkick 10"
+addconfigstringitem "1695" "rcon clientkick 11"
+addconfigstringitem "1696" "rcon clientkick 12"
+addconfigstringitem "1697" "rcon clientkick 13"
+addconfigstringitem "1698" "rcon clientkick 14"
+addconfigstringitem "1699" "rcon clientkick 15"
+addconfigstringitem "1700" "rcon clientkick 16"
+addconfigstringitem "1701" "rcon clientkick 17"
+addconfigstringitem "1702" "rcon clientkick 18"
+addconfigstringitem "1703" "rcon clientkick 19"
+addconfigstringitem "1704" "rcon clientkick 20"
+addconfigstringitem "1705" "rcon clientkick 21"
+addconfigstringitem "1706" "rcon clientkick 22"
+addconfigstringitem "1707" "rcon clientkick 23"
+addconfigstringitem "1708" "rcon clientkick 24"
+addconfigstringitem "1709" "rcon clientkick 25"
+addconfigstringitem "1710" "rcon clientkick 26"
+addconfigstringitem "1711" "rcon clientkick 27"
+addconfigstringitem "1712" "rcon clientkick 28"
+addconfigstringitem "1713" "rcon clientkick 29"
+addconfigstringitem "1714" "rcon clientkick 30"
+addconfigstringitem "1715" "rcon clientkick 31"
+addconfigstringitem "1716" "rcon clientkick 32"
+additem "All" "rcon admin_cmd `all_stufftext_disconnect"
+additem "All Axis" "rcon admin_cmd `axis_stufftext_disconnect"
+additem "All Allied" "rcon admin_cmd `allies_stufftext_disconnect"
+additem "All Spectators" "rcon admin_cmd `spectator_stufftext_disconnect"
+
+}
+resource
+Label
+{
+title "#0\n#1\n#2\n#3\n#4\n#5\n#6\n#7\n#8\n#9\n#10\n#11\n#12\n#13\n#14\n#15\n#16\n#17\n#18\n#19\n#20\n#21\n#22\n#23\n#24\n#25\n#26\n#27\n#28\n#29\n#30\n#31\n#32\nAll\nAxis\nAllied\nSpectators\n"
+name "Default"
+rect 10 30 70 460
+fgcolor 0.00 0.00 0.00 1.00
+bgcolor 0.50 0.50 0.00 1.00
+borderstyle "NONE"
+font verdana-12
+//
+
+}
+resource
+Label
+{
+name "Default"
+rect 10 0 620 10
+fgcolor 0.00 0.00 0.00 1.00
+bgcolor 0.50 0.50 0.50 1.00
+borderstyle "3D_BORDER"
+}
+resource
+Label
+{
+name "Default"
+rect 0 10 10 480
+fgcolor 0.00 0.00 0.00 1.00
+bgcolor 0.50 0.50 0.50 1.00
+borderstyle "3D_BORDER"
+}
+resource
+Label
+{
+name "Default"
+rect 10 490 620 10
+fgcolor 0.00 0.00 0.00 1.00
+bgcolor 0.50 0.50 0.50 1.00
+borderstyle "3D_BORDER"
+}
+resource
+Label
+{
+name "Default"
+rect 630 10 10 480
+fgcolor 0.00 0.00 0.00 1.00
+bgcolor 0.50 0.50 0.50 1.00
+borderstyle "3D_BORDER"
+}
+resource
+ListBox
+{
+name "playerlist"
+rect 80 30 280 460
+fgcolor 0.00 0.00 0.00 1.00
+bgcolor 0.50 0.50 0.00 1.00
+borderstyle "INDENT_BORDER"
+font verdana-12
+
+}
+resource
+Button
+{
+name "corner4"
+rect 620 480 20 20
+fgcolor 0.00 0.00 0.00 1.00
+bgcolor 0.50 0.50 0.50 1.00
+borderstyle "3D_BORDER"
+}
+resource
+Button
+{
+name "corner3"
+rect 0 480 20 20
+fgcolor 0.00 0.00 0.00 1.00
+bgcolor 0.50 0.50 0.50 1.00
+borderstyle "3D_BORDER"
+}
+resource
+Button
+{
+name "corner3"
+rect 0 0 20 20
+fgcolor 0.00 0.00 0.00 1.00
+bgcolor 0.50 0.50 0.50 1.00
+borderstyle "3D_BORDER"
+}
+resource
+Button
+{
+name "corner3"
+rect 620 0 20 20
+fgcolor 0.00 0.00 0.00 1.00
+bgcolor 0.50 0.50 0.50 1.00
+borderstyle "3D_BORDER"
+}
+resource
+Button
+{
+title "Status"
+name "Default"
+rect 402 119 100 20
+fgcolor 0.00 0.00 0.00 1.00
+bgcolor 0.50 0.50 0.25 1.00
+borderstyle "3D_BORDER"
+stuffcommand "rcon status; stuffcommand "globalwidgetcommand status title \"See Console `\"; rcon status; wait 3000; globalwidgetcommand status title Status"
+
+}
+resource
+Button
+{
+name "Default"
+rect 370 100 250 380
+fgcolor 0.50 0.50 0.00 1.00
+bgcolor 0.50 0.50 0.00 1.00
+borderstyle "RAISED"
+shader "menu/textures/playerselecthlp"
+
+}
+resource
+Button
+{
+title "Finish"
+name "Default"
+rect 500 70 100 20
+fgcolor 0.00 0.00 0.00 1.00
+bgcolor 0.50 0.50 0.25 1.00
+borderstyle "3D_BORDER"
+stuffcommand "popmenu 0"
+clicksound "sound/menu/back.wav"
+hoversound "menu/sound/scroll.wav"
+shader "menu_button_trans"
+hovershader "menu_button_glow"
+
+}
+resource
+Button
+{
+title "Reload Names"
+name "Default"
+rect 390 40 210 20
+fgcolor 0.00 0.00 0.00 1.00
+bgcolor 0.50 0.50 0.25 1.00
+borderstyle "3D_BORDER"
+stuffcommand "reloadnames "
+clicksound "sound/menu/back.wav"
+hoversound "menu/sound/scroll.wav"
+shader "menu_button_trans"
+hovershader "menu_button_glow"
+
+}
+resource
+Button
+{
+title "Status"
+name "status1"
+rect 390 70 100 20
+fgcolor 0.00 0.00 0.00 1.00
+bgcolor 0.50 0.50 0.25 1.00
+borderstyle "3D_BORDER"
+stuffcommand "rcon status; stuffcommand "globalwidgetcommand status1 title \"See Console `\"; rcon status; wait 3000; globalwidgetcommand status1 title Status"
+clicksound "sound/menu/back.wav"
+hoversound "menu/sound/scroll.wav"
+shader "menu_button_trans"
+hovershader "menu_button_glow"
+
+}
+end.

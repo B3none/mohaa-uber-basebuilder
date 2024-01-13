@@ -1,0 +1,125 @@
+*		
+main:
+
+// set scoreboard messages
+setcvar "g_obj_alliedtext1" "Void"
+setcvar "g_obj_alliedtext2" "UBER BASEBUILDER by"
+setcvar "g_obj_alliedtext3" "])ar]{Gen.SearingWolfe"
+setcvar "g_obj_axistext1" "be a member at"
+setcvar "g_obj_axistext2" "www.freewebs.com/"
+setcvar "g_obj_axistext3" "mohaa-DarK-clan"
+
+setcvar "g_scoreboardpic" "void"
+
+setcvar "cheats" "1"
+setcvar "thereisnomonkey "1"
+setcvar "g_gametype" "2"
+exec alienx/basebuild.scr::main 300 10000
+
+//--------------------------------------------
+//	Axis spawn points
+//--------------------------------------------
+
+spawn info_player_axis "origin" "-101 112 790" "angle" "58" "targetname" "ax_1"
+spawn info_player_axis "origin" "-101 82 790" "angle" "30" "targetname" "ax_2"
+spawn info_player_axis "origin" "-101 52 790" "angle" "7" "targetname" "ax_3"
+spawn info_player_axis "origin" "-101 22 790" "angle" "99" "targetname" "ax_4"
+spawn info_player_axis "origin" "-101 -2 790" "angle" "3" "targetname" "ax_5"
+spawn info_player_axis "origin" "-101 -32 790" "angle" "3" "targetname" "ax_6"
+spawn info_player_axis "origin" "-101 -62 790" "angle" "3" "targetname" "ax_7"
+spawn info_player_axis "origin" "-101 -92 790" "angle" "3" "targetname" "ax_8"
+
+//------------------------------------------------
+//	Allied spawn points
+//------------------------------------------------
+
+spawn info_player_allied "origin" "101 -92 790" "angle" "-179" "targetname" "Al_1"
+spawn info_player_allied "origin" "101 -62 790" "angle" "158" "targetname" "Al_2"
+spawn info_player_allied "origin" "101 -32 790" "angle" "143" "targetname" "Al_3"
+spawn info_player_allied "origin" "101 -2 790" "angle" "119" "targetname" "Al_4"
+spawn info_player_allied "origin" "101 22 790" "angle" "130" "targetname" "Al_5"
+spawn info_player_allied "origin" "101 52 790" "angle" "130" "targetname" "Al_6"
+spawn info_player_allied "origin" "101 82 790" "angle" "130" "targetname" "Al_7"
+spawn info_player_allied "origin" "101 112 790" "angle" "130" "targetname" "Al_8"
+
+level waitTill prespawn
+
+exec alienx/basebuild.scr::basebuild ( -80 -82 608 ) "static/heat_crate.tik" 1 1 0 0 90 .3 0 0 1
+exec alienx/basebuild.scr::basebuild ( -80 82 615 ) "statweapons/mg42_gun.tik" 1 0 1 0 90 .3 0 0 1
+exec alienx/basebuild.scr::basebuild ( 80 82 615 ) "static/bodies_tarp.tik" 1 0 0 1 90 .7 0 1 1
+exec alienx/basebuild.scr::basebuild ( 80 -82 608 ) "static/static_naziflag1.tik" 1 1 1 0 90 .3 0 0 1
+
+
+//*** Precache Dm Stuff
+exec global/DMprecache.scr
+
+exec alienx/hud.scr
+
+level.script = maps/void.scr
+
+          thread music
+
+level waittill spawn
+
+music:
+
+local.STUFFSTRING = "tmstartloop sound/music/mus_15a_mystery.mp3; seta s_volume 5.999999; seta s_musicvolume 5.999999"
+
+
+local.fix1 = spawn script_model
+local.fix1 model "static/widepainting.tik"
+local.fix1.origin = ( 160 16 608 )
+local.fix1.angles = ( 270 0 0 )
+local.fix1.scale = 25.0
+local.fix1 ghost
+
+local.fix1 = spawn script_model
+local.fix1 model "static/widepainting.tik"
+local.fix1.origin = ( 125 0 570 )
+local.fix1.angles = ( 0 180 0 )
+local.fix1.scale = 25.0
+local.fix1 ghost
+
+local.fix1 = spawn script_model
+local.fix1 model "static/widepainting.tik"
+local.fix1.origin = ( 0 -125 570 )
+local.fix1.angles = ( 0 90 0 )
+local.fix1.scale = 25.0
+local.fix1 ghost
+
+local.fix1 = spawn script_model
+local.fix1 model "static/widepainting.tik"
+local.fix1.origin = ( -125 0 570 )
+local.fix1.angles = ( 0 0 0 )
+local.fix1.scale = 25.0
+local.fix1 ghost
+
+local.fix1 = spawn script_model
+local.fix1 model "static/widepainting.tik"
+local.fix1.origin = ( 0 125 570 )
+local.fix1.angles = ( 0 270 0 )
+local.fix1.scale = 25.0
+local.fix1 ghost
+
+local.fix1 = spawn script_model
+local.fix1 model "static/widepainting.tik"
+local.fix1.origin = ( -160 16 895 )
+local.fix1.angles = ( 90 0 0 )
+local.fix1.scale = 25.0
+local.fix1 ghost
+
+while(1)
+{
+for(local.i = 1; local.i <= $player.size; local.i++)
+{
+local.p = $player[local.i]
+if(local.p.music_handled != 1)
+{
+local.p.music_handled = 1
+local.p stufftext local.STUFFSTRING
+}
+}
+waitframe
+}
+
+end

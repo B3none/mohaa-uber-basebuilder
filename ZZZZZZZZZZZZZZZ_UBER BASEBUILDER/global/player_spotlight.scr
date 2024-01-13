@@ -1,0 +1,212 @@
+// To use this script, make script_models with model miscobj/searchlightbase.tik and give them
+// all the same targetname .You can also give the spotlights health and color .Then execute the script like this .
+//
+// local.s1 = spawn script_model model miscobj/searchlightbase.tik origin ( 4056.53 -4411.25 216.13 )
+// local.s1 angles ( 0 205 0 )
+// local.s1 targetname myspot
+// local.s1.color = ( 1 1 0)
+// local.s1.health = 100
+
+// 
+//     exec global/player_spotlight.scr mytargetname
+// 
+// When a player press the use key down it lights up, and it goes off when use is pressed again . 
+// It will follow the players view while it is on.
+
+
+
+main local.name:
+
+local.master = spawn scriptmaster
+
+local.master aliascache exp_searchlight sound/weapons/explo/Explo_Searchlight1.wav soundparms 0.9 0.2 0.8 0.4 1000 8000 auto loaded maps "DM obj"
+
+for(local.num = 1;local.num <= $(local.name).size;local.num++)
+{
+thread makespot $(local.name)[local.num]
+}
+end
+
+makespot local.spotlight:
+
+	if(local.spotlight.color == NIL)
+		local.color = ( 1 1 1 )
+	else
+		local.color = local.spotlight.color
+
+	local.spot = spawn script_model model miscobj/searchlightoff.tik origin (local.spotlight.origin + ( 0 0 32 )) spawnflags 1
+	local.spot.destroyed = 0
+	local.angles = local.spotlight.angles
+	local.angles[1] = (local.angles[1] * -1)
+	local.spot.angles = local.angles
+
+	local.spotdamage = spawn trigger_multiple origin local.spot.origin spawnflags 144
+	local.spotdamage setsize ( -25 -25 -25 )( 25 25 25 )
+
+	if(local.spotlight.health == NIL || local.spotlight.health <= 0)
+		local.spotdamage.health = 300
+	else
+		local.spotdamage.health = local.spotlight.health
+
+	local.spottrigger = spawn trigger_multiple origin local.spotlight.origin
+	local.spottrigger setsize ( -50 -50 -100 )(50 50 50 )
+
+	if($(local.spotlight.target))
+
+	local.player = parm.other
+	
+	local.spottrigger origin $(local.spotlight.target).origin
+
+	local.groundtarget = spawn script_origin
+	local.groundspot_target = spawn script_origin
+
+	local.light = spawn script_model
+	local.light model "fx/searchlight.tik"
+	local.light notsolid
+	local.light.origin = local.spot.origin + local.spot.forwardvector * -16
+	local.light hide
+
+	local.flare = spawn script_model
+	local.flare model "fx/searchlight.tik"
+	local.flare notsolid
+	local.flare scale 5
+	local.flare.origin = local.groundtarget.origin
+	local.flare hide
+	local.flare light local.color
+	local.flare lightradius 250
+	local.flare.on = 0 //********** Added line
+
+	local.beam = spawn func_beam origin local.spot.origin
+	local.beam alpha .2
+	local.beam maxoffset 0
+	local.beam numsegments 20
+	local.beam scale 50
+	local.beam activate
+	local.beam life .1
+	local.beam color local.color
+	local.beam hide
+
+	thread aimspot local.groundspot_target local.beam local.spot local.light local.groundtarget local.flare local.spotdamage local.spottrigger
+
+
+
+while(1)
+{
+
+	local.spottrigger waittill trigger
+
+	local.spottrigger nottriggerable
+
+	local.player = parm.other
+
+	while(local.player istouching local.spottrigger )
+	{
+
+		local.fwd_vec = angles_toforward local.player.viewangles
+		local.start = local.player gettagposition "Bip01 Head"
+
+		local.range = 10240
+
+		local.groundtarget.origin = trace (local.start + local.fwd_vec * 64) (local.start + local.fwd_vec * local.range ) 0
+
+		local.s_vec = ( local.groundtarget.origin - local.spot.origin)
+		local.s_ang = vector_toangles(local.s_vec)
+
+		local.s_ang[1] = (local.s_ang[1] - 180)
+
+		local.s_ang[0] = (local.s_ang[0] * -1)
+
+
+		local.spot.angles = local.s_ang
+
+		local.spotlight.angles = ( 0 local.s_ang[1] 0 )
+
+		local.light.origin = local.spot.origin + local.spot.forwardvector * -8 
+
+		if(local.player.useheld == 1)
+		{
+
+			wait .2
+
+			if(local.showspot !=1)
+			{
+				local.showspot = 1
+				local.light show
+				local.flare show
+				local.flare.on = 1//********** Added line
+				local.beam show
+
+			}
+			else
+			{
+				local.beam hide
+				local.showspot = 0
+				local.light hide
+				local.flare hide
+				local.flare.on = 0 //********** Added line
+
+			}
+		}
+
+
+		waitframe
+
+	if(local.spot.destroyed == 1)
+		break
+
+	}
+
+	if(local.spot.destroyed == 1)
+		break
+
+	local.spottrigger triggerable
+}
+
+end
+
+aimspot local.groundspot_target local.beam local.spot local.light local.groundtarget local.flare local.spotdamage local.spottrigger:
+
+
+while(local.spot.destroyed != 1)
+{
+		local.groundspot_target.origin = local.spot.origin + local.spot.forwardvector * -10240
+
+		local.p = trace local.spot.origin local.groundspot_target.origin 0
+
+		local.beam endpoint local.p
+
+		local.flare.origin = local.p
+
+// ******** Added section **************************
+
+		if (local.flare.on == 1)
+		{
+			for(local.i=1;local.i<=$player.size;local.i++)
+			{
+				if (vector_length(local.p - $player[local.i].origin) < 50) 
+				{
+					$player[local.i] kill
+				}
+			}
+		}
+
+//****************************************************
+
+	if(local.spotdamage.health <= 0)
+	{
+		local.spot playsound exp_searchlight
+		exec global/model.scr local.spot.origin models/fx/fx_spotlighthit
+
+		local.light delete
+		local.flare delete
+		local.spottrigger delete
+		local.spotdamage delete
+		local.groundtarget delete
+		local.spot.destroyed = 1
+		local.beam deactivate
+		break
+	}
+
+waitframe
+}
+end

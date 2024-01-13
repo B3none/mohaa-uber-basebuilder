@@ -1,0 +1,20 @@
+main:
+	if(level.run["medics"] != "1")
+	{
+		end
+	}
+	
+	if (level.mef_gametype == "ft" || level.mef_gametype == "ftobj" || level.mef_gametype == "fttow" || level.mef_gametype == "ftctf" || level.mef_gametype == "ftdem")
+	{
+		end
+	}
+
+//	if(level.medics_setup != 1)
+//	{
+//		level.medics_setup = 1
+//
+//		exec global/ac/spawn_detect.scr global/ac/medics/hold_check.scr
+//
+//	}
+
+end

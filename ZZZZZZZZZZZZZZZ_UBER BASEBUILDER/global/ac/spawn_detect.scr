@@ -1,0 +1,132 @@
+// This is a global ac script for detecting spawning.
+// exec once! with the path for your script. eg
+//
+//	if(level.spawnpotect!=1)
+//	{
+//		level.spawnpotect=1
+//		exec global/ac/spawn_detect.scr global/ac/spawn_protection.scr // exec with this script path
+//	}	
+//
+// 24/08/2005
+
+main local.fr:
+
+	if(local.fr == "1")
+	{
+
+		if(self.spawned == NIL)
+		{
+
+		//	self.spawned=1
+		//	wait 1 // 0.15 to allow for all scripts to load, God slloow
+			//self.spawnedcheck=1
+			//self thread follow
+			thread spawned
+
+		}
+		else
+		{
+			self.spawned = 1
+		}
+
+		end
+	}
+	else if(local.fr != "")
+	{
+		if(level.spawn_scripts==NIL)
+		{
+			level.spawn_scripts[1] = local.fr
+		}
+		else
+		{
+		//	//some odd reason it wont let me get the size. so get it using a loop.
+		//	// errors when trying ?:S
+		//	for(local.i = 1; local.i <= ; local.i++)
+		//	{
+		//	}
+			local.i = level.spawn_scripts.size
+			local.i++
+			level.spawn_scripts[local.i] = local.fr
+		}
+	}
+end
+
+/*
+setup:
+
+iprintlnbold "work"
+	while(1)
+	{
+		println "J"
+		for(local.i = 1; local.i <= $player.size; local.i++)
+		{
+			if($player[local.i].spawnedcheck !=1 && $player[local.i] != NIL && $player[local.i] != NULL) //`````` && $player[local.i].dmteam !="spectator")
+			{	
+				$player[local.i].spawnedcheck=1
+				$player[local.i] thread follow
+			}
+		}
+
+		waitframe
+	}
+end
+*/
+
+follow:
+
+	if(self.spawned != NIL)
+	{
+		local.team = self.dmteam
+		self.forcespawn = 0
+		while(isalive self && self.dmteam == local.team && self.forcespawn == 0 ) 
+		{
+			waitframe
+			if(self == NIL || self == NULL)
+			{
+				end
+			}
+		}
+	}
+
+	self.spawned=0	
+
+	while(self.spawned==0)
+	{
+		waitframe
+		if(self == NIL || self == NULL)
+		{
+			end
+		}
+	}
+
+	spawned:
+
+	//iprintlnbold  "spawned"
+
+	self.spawned=1
+	//run the script that want spawn detection
+
+	for(local.i = 1; local.i <= level.spawn_scripts.size; local.i++)
+	{
+	//	iprintln  level.spawn_scripts[local.i][1]
+
+		if(self.forcespawn == 1)
+		{
+			//iprintln level.spawn_scripts[local.i][3]
+			if(level.spawn_scripts[local.i][3] == "1")
+			{
+				self exec level.spawn_scripts[local.i][1]
+			}
+		}
+		else
+		{
+			self exec level.spawn_scripts[local.i][1]
+		}
+	}
+			
+	self.forcespawn = 0
+	//end of run the script that want spawn detection
+
+	//self.spawnedcheck = 0
+	thread follow
+end

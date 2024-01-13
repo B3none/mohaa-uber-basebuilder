@@ -1,0 +1,190 @@
+
+main:
+
+// set scoreboard messages
+setcvar "g_obj_alliedtext1" "the bridge"
+setcvar "g_obj_alliedtext2" "UberBB & Planes by"
+setcvar "g_obj_alliedtext3" "])ar]{Gen.SearingWolfe"
+setcvar "g_obj_axistext1" "be a member at"
+setcvar "g_obj_axistext2" "www.freewebs.com/"
+setcvar "g_obj_axistext3" "mohaa-DarK-clan"
+
+setcvar "g_scoreboardpic" "mohdm4"
+setcvar "g_gametype" "2"
+setcvar "cheats" "1"
+setcvar "thereisnomonkey" "1"
+
+setcvar "fraglimit" "0"
+setcvar "timelimit" "50"
+
+exec alienx/basebuild.scr::main 1000 10000
+
+
+
+	// call additional stuff for playing this map round based is needed
+	if(level.roundbased)
+		thread roundbasedthread
+
+	level waittill prespawn
+
+//                                              note all these must have a value!
+//                                                                                      +----------------- light on or off ( 1 = on, 0 = off )
+//                                                                                      | +--------------- red (1 is the max, so for a little red, use 0.5)
+//                                                                                      | | +------------- green (same for red)
+//                                                                                      | | | +----------- blue (same for red)
+//                                                                                      | | | | ++-------- rotation speed (keep it sensiable lol)
+//                                                                                      | | | | || ++----- the scale of the pickup object, 1 is default
+//                                                                                      | | | | || || +--- lift creator ( 1 = on, 0 = off )
+//---| script                      |-| origin                |-|  model name            | | | | || || | +- Tele
+
+//pickup point - ALL
+exec alienx/basebuild.scr::basebuild ( -2331 -207 32 ) "emitters/fireandsmoke.tik" 1 1 0 0 90 .5 0 0 1
+exec alienx/basebuild.scr::basebuild ( -1971.13 283.80 49.10 ) "emitters/fireball_matrix.tik" 1 1 0 0 90 .5 0 0 1
+exec alienx/basebuild.scr::basebuild ( -2071.13 283.80 29.10 ) "miscobj/beef.tik" 1 1 0 0 90 .5 0 0 1
+exec alienx/basebuild.scr::basebuild ( -2171.13 283.80 29.10 ) "static/static_nazibanner2.tik" 1 1 0 0 90 .5 0 0 1end
+exec alienx/basebuild.scr::basebuild ( -2271.13 283.80 29.10 ) "static/bush_regularbush.tik" 1 1 0 0 90 .5 0 0 1end
+exec alienx/basebuild.scr::basebuild ( -2371.13 283.80 29.10 ) "static/single_bed.tik" 1 1 0 0 90 .5 0 0 1
+exec alienx/basebuild.scr::basebuild ( -2471.13 283.80 29.10 ) "static/toilet.tik" 1 1 0 0 90 .5 0 0 1
+exec alienx/basebuild.scr::basebuild ( -2571.13 283.80 29.10 ) "static/tablewithumbrella.tik" 1 1 0 0 90 .5 0 0 1
+exec alienx/basebuild.scr::basebuild ( -2671.13 283.80 29.10 ) "furniture/roundedchair.tik" 1 1 0 0 90 .5 0 0 1
+exec alienx/basebuild.scr::basebuild ( -2771.13 283.80 29.10 ) "static/lightpost_triple.tik" 1 1 0 0 90 .5 0 0 1
+exec alienx/basebuild.scr::basebuild ( -2871.13 283.80 29.10 ) "static/mg42ammoboxwbelt.tik" 1 1 0 0 90 .5 0 0 1
+exec alienx/basebuild.scr::basebuild ( -2971.13 283.80 29.10 ) "furniture/woodchair.tik" 1 1 0 0 90 .5 0 0 1
+exec alienx/basebuild.scr::basebuild ( -3071.13 283.80 29.10 ) "furniture/table.tik" 1 1 0 0 90 .5 0 0 1
+exec alienx/basebuild.scr::basebuild ( -3171.13 283.80 29.10 ) "items/bratwurst.tik" 1 1 0 0 90 .5 0 0 1
+exec alienx/basebuild.scr::basebuild ( -3271.13 283.80 29.10 ) "static/winecasks.tik" 1 1 0 0 90 .5 0 0 1
+exec alienx/basebuild.scr::basebuild ( -3371.13 283.80 29.10 ) "static/static_cablespool_full.tik" 1 1 0 0 90 .5 0 0 1
+exec alienx/basebuild.scr::basebuild ( -3471.13 283.80 29.10 ) "static/bathroomsink.tik" 1 1 0 0 90 .5 0 0 1
+exec alienx/basebuild.scr::basebuild ( -3571.13 283.80 29.10 ) "static/bathtubwithshowerhead.tik" 1 1 0 0 90 .5 0 0 1
+exec alienx/basebuild.scr::basebuild ( -3671.13 283.80 29.10 ) "static/lightpost_globe.tik" 1 1 0 0 90 .5 0 0 1
+exec alienx/basebuild.scr::basebuild ( -3771.13 283.80 29.10 ) "static/piano.tik" 1 1 0 0 90 .5 0 0 1
+exec alienx/basebuild.scr::basebuild ( -3871.13 283.80 29.10 ) "static/static_torpedo.tik" 1 1 0 0 90 .5 0 0 1
+exec alienx/basebuild.scr::basebuild ( -3971.13 283.80 29.10 ) "items/bangalore.tik" 1 1 0 0 90 .5 0 0 1
+exec alienx/basebuild.scr::basebuild ( -4071.13 283.80 29.10 ) "static/heat_crate.tik" 1 1 0 0 90 .5 0 0 1
+exec alienx/basebuild.scr::basebuild ( -4171.13 283.80 29.10 ) "static/bunkerbench.tik" 1 1 0 0 90 .5 0 0 1
+exec alienx/basebuild.scr::basebuild ( -4271.13 283.80 29.10 ) "items/item_100_healthbox.tik" 1 1 0 0 90 .5 0 0 1
+exec alienx/basebuild.scr::basebuild ( -4371.13 283.80 29.10 ) "static/bunkerstove_ns.tik" 1 1 0 0 90 .5 0 0 1
+exec alienx/basebuild.scr::basebuild ( -4471.13 283.80 109.10 ) "static/curtain.tik" 1 1 0 0 90 .5 0 0 1end
+exec alienx/basebuild.scr::basebuild ( -4571.13 283.80 29.10 ) "static/bush_full.tik" 1 1 0 0 90 .5 0 0 1end
+exec alienx/basebuild.scr::basebuild ( -4671.13 283.80 29.10 ) "miscobj/radio_military.tik" 1 1 0 0 90 .5 0 0 1
+exec alienx/basebuild.scr::basebuild ( -4771.13 283.80 29.10 ) "lights/hang5lamp.tik" 1 1 0 0 90 .5 0 0 1
+exec alienx/basebuild.scr::basebuild ( -4871.13 283.80 29.10 ) "lights/tiffany lamp.tik" 1 1 0 0 90 .5 0 0 1
+exec alienx/basebuild.scr::basebuild ( -4971.13 283.80 29.10 ) "static/loveseat.tik" 1 1 0 0 90 .5 0 0 1
+exec alienx/basebuild.scr::basebuild ( -5071.13 283.80 29.10 ) "static/armchairposh.tik" 1 1 0 0 90 .5 0 0 1end
+exec alienx/basebuild.scr::basebuild ( -2231 -207 32 ) "static/sandbag_longsegment.tik" 1 1 0 0 90 .5 0 0 1
+exec alienx/basebuild.scr::basebuild ( -1971.13 13.13 65.10 ) "static/bunkertable.tik" 1 1 0 0 90 .9 0 1 1
+exec alienx/basebuild.scr::basebuild ( -2071.13 13.13 65.10 ) "miscobj/searchlight.tik" 1 1 0 0 90 .5 0 0 1
+exec alienx/basebuild.scr::basebuild ( -2171.13 13.13 29.10 ) "miscobj/hidden_cabinet_a.tik" 1 1 0 0 90 .5 0 0 1
+exec alienx/basebuild.scr::basebuild ( -2271.13 13.13 29.10 ) "static/bookcase.tik" 1 1 0 0 90 .5 0 0 1end
+exec alienx/basebuild.scr::basebuild ( -2371.13 13.13 29.10 ) "static/bigbed.tik" 1 1 0 0 90 .5 0 0 1
+exec alienx/basebuild.scr::basebuild ( -2471.13 13.13 29.10 ) "static/barbwire.tik" 1 1 0 0 90 .5 0 0 1
+exec alienx/basebuild.scr::basebuild ( -2571.13 13.13 29.10 ) "static/static_nazibanner2.tik" 1 1 0 0 90 .5 0 0 1
+exec alienx/basebuild.scr::basebuild ( -2671.13 13.13 29.10 ) "static/static_naziflag2.tik" 1 1 0 0 90 .5 0 0 1
+exec alienx/basebuild.scr::basebuild ( -2771.13 13.13 29.10 ) "static/bathtub.tik" 1 1 0 0 90 .5 0 0 1
+exec alienx/basebuild.scr::basebuild ( -2871.13 13.13 29.10 ) "static/bush_regularbush.tik" 1 1 0 0 90 .5 0 0 1
+exec alienx/basebuild.scr::basebuild ( -2971.13 13.13 29.10 ) "animal/german_shepherd.tik" 1 1 0 0 90 .5 0 0 1
+exec alienx/basebuild.scr::basebuild ( -3071.13 13.13 29.10 ) "static/cabinet_large.tik" 1 1 0 0 90 .5 0 0 1
+exec alienx/basebuild.scr::basebuild ( -3171.13 13.13 29.10 ) "static/static_nazibanner.tik" 1 1 0 0 90 .5 0 0 1
+exec alienx/basebuild.scr::basebuild ( -3271.13 13.13 29.10 ) "static/static_naziflag1.tik" 1 1 0 0 90 .5 0 0 1
+exec alienx/basebuild.scr::basebuild ( -4586.13 65.13 35.10 ) "static/bucket.tik" 1 1 0 0 90 1 0 0 1				
+exec alienx/basebuild.scr::basebuild ( -3471.13 13.13 29.10 ) "static/banquet_table.tik" 1 1 0 0 90 .5 0 0 1
+exec alienx/basebuild.scr::basebuild ( -3371.13 13.13 35.10 ) "static/dish.tik" 1 1 0 0 90 2 0 0 1
+exec alienx/basebuild.scr::basebuild ( -3571.13 13.13 29.10 ) "static/flowerplate.tik" 1 1 0 0 90 2 0 0 1
+exec alienx/basebuild.scr::basebuild ( -3671.13 13.13 29.10 ) "static/servingplate.tik" 1 1 0 0 90 2 0 0 1
+exec alienx/basebuild.scr::basebuild ( -3771.13 13.13 29.10 ) "miscobj/bottle_condiment.tik" 1 1 0 0 90 2 0 0 1
+exec alienx/basebuild.scr::basebuild ( -3871.13 13.13 29.10 ) "miscobj/bottle_medicine.tik" 1 1 0 0 90 2 0 0 1
+exec alienx/basebuild.scr::basebuild ( -3971.13 13.13 29.10 ) "miscobj/bottle_rum.tik" 1 1 0 0 90 2 0 0 1
+exec alienx/basebuild.scr::basebuild ( -4071.13 13.13 29.10 ) "miscobj/bottle_wine.tik" 1 1 0 0 90 2 0 0 1
+exec alienx/basebuild.scr::basebuild ( -4171.13 13.13 29.10 ) "miscobj/coffee_kettle.tik" 1 1 0 0 90 2 0 0 1
+exec alienx/basebuild.scr::basebuild ( -4271.13 13.13 50.10 ) "miscobj/drinkglass.tik" 1 1 0 0 90 2 0 0 1
+exec alienx/basebuild.scr::basebuild ( -4371.13 13.13 50.10 ) "miscobj/shortglass.tik" 1 1 0 0 90 2 0 0 1
+exec alienx/basebuild.scr::basebuild ( -4453.13 37.13 50.10 ) "miscobj/tallglass.tik" 1 1 0 0 90 2 0 0 1
+exec alienx/basebuild.scr::basebuild ( -2431 -207 32 ) "static/indycrate.tik" 1 1 1 0 80 .5 0 0 1
+exec alienx/basebuild.scr::basebuild ( -2531 -207 32 ) "statweapons/mg42_gun.tik" 1 1 0 0 80 .5 0 0 1
+exec alienx/basebuild.scr::basebuild ( -2631 -207 32 ) "static/sandbag_link_main.tik" 1 0 0 1 80 .5 0 0 1
+exec alienx/basebuild.scr::basebuild ( -2731 -207 32 ) "static/bodies_tarp.tik" 1 1 0 1 80 .5 1 0 1
+
+
+exec global/dog.scr ( -1056.87 2384.87 472.13 )
+
+exec global/jetpack.scr ( -175 4540 248 ) //axis
+exec global/jetpack.scr ( -218.89 -2808.98 248.13 ) //allies
+
+exec guidedmissile/spawntrigger.scr ( -564 -2603 248 ) //allies
+exec guidedmissile/spawntrigger.scr ( 213 4625 248 ) //axis
+
+
+	//*** precache dm stuff
+	exec global/dmprecache.scr
+	exec alienx/hud.scr::main	
+	level.script = maps/dm/mohdm4.scr
+	exec global/ambient.scr mohdm4
+
+
+exec map_triggers/allweapons.scr ( 1255.13 784.87 32.13 )
+exec map_triggers/giant.scr ( -432.87 1535.13 240.13 )
+exec map_triggers/invisible.scr ( 560.87 911.13 240.13 )
+exec map_triggers/invulnerable.scr ( 1027.29 1431.65 360.13 )
+exec map_triggers/midget.scr ( -504.68 -1956.13 248.13 )
+exec map_triggers/normal.scr ( -346.52 1399.15 728.13 )
+exec map_triggers/camo.scr ( 393 1036 264 )
+exec map_triggers/health.scr ( 839 -1328 248 ) ( -1648 -1208 223 ) ( 1392 832 68 ) ( 98 3235 18 ) ( -1143 3791 240 ) ( -1728 2855 184 ) ( -516 4473.83 300 ) ( -500 3587 1261 ) ( 643 2613 672 ) ( 385 1199 264 )
+
+	thread global/door_locked.scr::lock
+
+	setcvar "r_fastsky" "1"
+	$world farplane 5000
+	$world farplane_color (0 0 0)
+
+exec server_planes/trigger.scr ( 32.43 4591.27 240.13 ) "axis" .2
+exec server_planes/trigger.scr ( -359.58 -2663.86 240.13 ) "allies" .2
+exec server_planes/trigger.scr ( -1935 -777 145 ) allies" .2
+exec server_planes/trigger.scr ( -2245 -749 170 ) "axis" .2
+
+thread port1
+thread port2
+
+	level waittill spawn
+
+//--Teles--
+
+port1:
+
+local.portlight = spawn script_model
+local.portlight model "fx/corona_red.tik" 
+local.portlight.origin = ( -1437 544 62 ) // starting point
+local.portlight.scale = 3
+
+local.trig = spawn trigger_use
+local.trig targetname port1 
+local.trig.origin = ( -1437 544 32 ) // starting point
+local.trig setsize ( -30 -30 0 ) ( 30 30 80 )
+$port1 waittill trigger
+local.player = parm.other
+local.player tele ( -2550 -496 32 ) // destination
+local.portlight remove
+$port1 remove
+wait 0.1
+thread port1
+end
+
+port2:
+
+local.portlight = spawn script_model
+local.portlight model "fx/corona_red.tik" 
+local.portlight.origin = ( -3115 -465 62 ) // starting point
+local.portlight.scale = 3
+
+local.trig = spawn trigger_use
+local.trig targetname port2
+local.trig.origin = ( -3115 -465 32 ) // starting point
+local.trig setsize ( -30 -30 0 ) ( 30 30 80 )
+$port2 waittill trigger
+local.player = parm.other
+local.player tele ( -872 652 32 ) // destination
+local.portlight remove
+$port2 remove
+wait 0.1
+thread port2
+
+end

@@ -1,0 +1,953 @@
+menu "camper_maps" 460 481 NONE 0
+align center center
+borderstyle 3D_BORDER
+
+showcommand "exec menu/mapsdm.cfg; set ui_mapset Select Map"
+
+bgcolor 0 0 0 0
+fgcolor 1 1 1 1
+
+
+
+//lib
+
+
+
+resource
+Label
+{
+name "Default"
+rect 0 20 460 440
+fgcolor 0.00 0.00 0.00 1.00
+bgcolor 0.00 0.00 1.00 0.70
+borderstyle "RAISED"
+}
+resource
+Button
+{
+name "lib1"
+rect 5 310 60 60
+fgcolor 1.00 1.00 1.00 1.00
+bgcolor 1.00 1.00 1.00 0.00
+borderstyle "NONE"
+stuffcommand "gt; wait 1000;   rcon LIB/mp_anzio_lib"
+shader  "mp_anzio_lib"
+hovercommand "set ui_mapset  LIB/mp_anzio_lib - Anzio"
+clicksound "menu/sound/apply.wav"
+hoversound "menu/sound/scroll.wav"
+hovershader "menu_button_glow"
+
+}
+resource
+Button
+{
+name "lib2"
+rect 70 310 60 60
+fgcolor 0.00 0.00 0.00 1.00
+bgcolor 1.00 1.00 1.00 0.00
+borderstyle "NONE"
+stuffcommand "gt; wait 1000;   rcon map LIB/mp_ship_lib"
+shader "mp_ship_lib"
+hovercommand  "set ui_mapset LIB/mp_ship_lib - Stuckguter"
+clicksound "menu/sound/apply.wav"
+hoversound "menu/sound/scroll.wav"
+hovershader "menu_button_glow"
+
+}
+resource
+Button
+{
+name "lib3"
+rect 135 310 60 60
+fgcolor 0.00 0.00 0.00 1.00
+bgcolor 1.00 1.00 1.00 0.00
+borderstyle "NONE"
+stuffcommand "gt; wait 1000;   rcon LIB/mp_bizerteharbor_lib"
+shader  "mp_bizerteharbor_lib"
+hovercommand  "set ui_mapset LIB/mp_bizerteharbor_lib - Bizerte"
+clicksound "menu/sound/apply.wav"
+hoversound "menu/sound/scroll.wav"
+hovershader "menu_button_glow"
+
+}
+resource
+Button
+{
+name "lib4"
+rect 200 310 60 60
+fgcolor 0.00 0.00 0.00 1.00
+bgcolor 1.00 1.00 1.00 0.00
+borderstyle "NONE"
+stuffcommand "gt; wait 1000;   rcon map LIB/mp_tunisia_lib"
+shader  "mp_tunisia_lib"
+hovercommand  "set ui_mapset LIB/mp_tunisia_lib - Tunisia"
+clicksound "menu/sound/apply.wav"
+hoversound "menu/sound/scroll.wav"
+hovershader "menu_button_glow"
+
+}
+resource
+Button
+{
+name "obj9"
+rect 265 310 60 60
+fgcolor 0.00 0.00 0.00 1.00
+bgcolor 1.00 1.00 1.00 0.00
+borderstyle "NONE"
+stuffcommand "gt; wait 1000;   rcon map LIB/mp_ship_lib"
+shader "mp_ship_lib"
+hovercommand  "set ui_mapset LIB/mp_ship_lib - Stuckguter"
+clicksound "menu/sound/apply.wav"
+hoversound "menu/sound/scroll.wav"
+hovershader "menu_button_glow"
+
+}
+resource
+Button
+{
+name "obj8"
+rect 200 310 60 60
+fgcolor 0.00 0.00 0.00 1.00
+bgcolor 1.00 1.00 1.00 0.00
+borderstyle "NONE"
+stuffcommand "gt; wait 1000;   rcon map OBJ/mp_bizertefort_obj"
+shader  "mp_bizerte_dm"
+hovercommand  "set ui_mapset OBJ/mp_bizertefort_obj - Bizerte Festung"
+clicksound "menu/sound/apply.wav"
+hoversound "menu/sound/scroll.wav"
+hovershader "menu_button_glow"
+
+}
+resource
+Button
+{
+name "tow7"
+rect 135 310 60 60
+fgcolor 0.00 0.00 0.00 1.00
+bgcolor 1.00 1.00 1.00 0.00
+borderstyle "NONE"
+stuffcommand "gt; wait 1000;   rcon map OBJ/MP_MonteCassino_TOW"
+shader  "MP_MonteCassino_TOW"
+hovercommand  "set ui_mapset OBJ/MP_MonteCassino_TOW - Monte Cassino"
+clicksound "menu/sound/apply.wav"
+hoversound "menu/sound/scroll.wav"
+hovershader "menu_button_glow"
+
+}
+resource
+Button
+{
+name "tow6"
+rect 70 310 60 60
+fgcolor 0.00 0.00 0.00 1.00
+bgcolor 1.00 1.00 1.00 0.00
+borderstyle "NONE"
+stuffcommand "gt; wait 1000;   rcon map OBJ/MP_MonteBattaglia_TOW"
+shader  "MP_MonteBattaglia_TOW"
+hovercommand "set ui_mapset  OBJ/MP_MonteBattaglia_TOW - Monte Battaglia"
+clicksound "menu/sound/apply.wav"
+hoversound "menu/sound/scroll.wav"
+hovershader "menu_button_glow"
+
+}
+resource
+Button
+{
+name "obj5"
+rect 5 310 60 60
+fgcolor 1.00 1.00 1.00 1.00
+bgcolor 1.00 1.00 1.00 0.00
+borderstyle "NONE"
+stuffcommand "gt; wait 1000;   rcon map DM/MP_Palermo_DM"
+shader  "mp_palermo_obj" //dm loading screen is missing?
+hovercommand "set ui_mapset  DM/MP_Palermo_DM - Palermo"
+clicksound "menu/sound/apply.wav"
+hoversound "menu/sound/scroll.wav"
+hovershader "menu_button_glow"
+
+}
+resource
+Button
+{
+name "obj6"
+rect 70 310 60 60
+fgcolor 0.00 0.00 0.00 1.00
+bgcolor 1.00 1.00 1.00 0.00
+borderstyle "NONE"
+stuffcommand "gt; wait 1000;   rcon OBJ/MP_Bologna_OBJ"
+shader  "MP_Bologna_OBJ"
+hovercommand "set ui_mapset  OBJ/MP_Bologna_OBJ -  Bologna"
+clicksound "menu/sound/apply.wav"
+hoversound "menu/sound/scroll.wav"
+hovershader "menu_button_glow"
+
+}
+resource
+Button
+{
+name "obj7"
+rect 135 310 60 60
+fgcolor 0.00 0.00 0.00 1.00
+bgcolor 1.00 1.00 1.00 0.00
+borderstyle "NONE"
+stuffcommand "gt; wait 1000;   rcon map OBJ/mp_castello_obj"
+shader  "mp_castello_obj"
+hovercommand  "set ui_mapset OBJ/mp_castello_obj - castello"
+clicksound "menu/sound/apply.wav"
+hoversound "menu/sound/scroll.wav"
+hovershader "menu_button_glow"
+
+}
+resource
+Button
+{
+name "tow1"
+rect 5 155 60 60
+fgcolor 1.00 1.00 1.00 1.00
+bgcolor 1.00 1.00 1.00 0.00
+borderstyle "NONE"
+stuffcommand "gt; wait 1000;   rcon map OBJ/MP_Ardennes_TOW"
+shader  "MP_Ardennes_TOW"
+hovercommand "set ui_mapset OBJ/MP_Ardennes_TOW - Ardennes"
+clicksound "menu/sound/apply.wav"
+hoversound "menu/sound/scroll.wav"
+hovershader "menu_button_glow"
+
+}
+resource
+Button
+{
+name "tow2"
+rect 70 155 60 60
+fgcolor 0.00 0.00 0.00 1.00
+bgcolor 1.00 1.00 1.00 0.00
+borderstyle "NONE"
+stuffcommand "gt; wait 1000;   rcon map OBJ/MP_Berlin_TOW"
+shader  "MP_Berlin_TOW"
+hovercommand "set ui_mapset OBJ/MP_Berlin_TOW - Berlin"
+clicksound "menu/sound/apply.wav"
+hoversound "menu/sound/scroll.wav"
+hovershader "menu_button_glow"
+
+}
+resource
+Button
+{
+name "tow4"
+rect 200 155 60 60
+fgcolor 0.00 0.00 0.00 1.00
+bgcolor 1.00 1.00 1.00 0.00
+borderstyle "NONE"
+stuffcommand "gt; wait 1000;   rcon map OBJ/MP_Flughafen_TOW"
+shader  "MP_Flughafen_TOW"
+hovercommand  "set ui_mapset OBJ/MP_Flughafen_TOW - Flughafen"
+clicksound "menu/sound/apply.wav"
+hoversound "menu/sound/scroll.wav"
+hovershader "menu_button_glow"
+
+}
+resource
+Button
+{
+name "tow3"
+rect 135 155 60 60
+fgcolor 0.00 0.00 0.00 1.00
+bgcolor 1.00 1.00 1.00 0.00
+borderstyle "NONE"
+stuffcommand "gt; wait 1000;   rcon map OBJ/MP_Druckkammern_TOW"
+shader  "MP_Druckkammern_TOW"
+hovercommand  "set ui_mapset OBJ/MP_Druckkammern_TOW - Druckkammern"
+clicksound "menu/sound/apply.wav"
+hoversound "menu/sound/scroll.wav"
+hovershader "menu_button_glow"
+
+}
+resource
+Button
+{
+name "obj4"
+rect 200 65 60 60
+fgcolor 1.00 1.00 1.00 1.00
+bgcolor 1.00 1.00 1.00 0.00
+borderstyle "NONE"
+stuffcommand "gt; wait 1000;   rcon map obj/obj_team4"
+shader "objdm4"
+hovercommand  "set ui_mapset obj/obj_team4 - The Bridge"
+clicksound "menu/sound/apply.wav"
+hoversound "menu/sound/scroll.wav"
+hovershader "menu_button_glow"
+
+}
+resource
+Button
+{
+name "obj3"
+rect 135 65 60 60
+fgcolor 1.00 1.00 1.00 1.00
+bgcolor 1.00 1.00 1.00 0.00
+borderstyle "NONE"
+stuffcommand "gt; wait 1000;   rcon map obj/obj_team3"
+shader  "objdm5"
+hovercommand  "set ui_mapset obj/obj_team1 - Omaha Beach"
+clicksound "menu/sound/apply.wav"
+hoversound "menu/sound/scroll.wav"
+hovershader "menu_button_glow"
+
+}
+resource
+Button
+{
+name "obj2"
+rect 70 65 60 60
+fgcolor 1.00 1.00 1.00 1.00
+bgcolor 1.00 1.00 1.00 0.00
+borderstyle "NONE"
+stuffcommand "gt; wait 1000;rcon map obj/obj_team2"
+shader  "objdm2"
+hovercommand "set ui_mapset obj/obj_team2 - V2 Rocket Facility"
+clicksound "menu/sound/apply.wav"
+hoversound "menu/sound/scroll.wav"
+hovershader "menu_button_glow"
+
+}
+resource
+Button
+{
+name "obj1"
+rect 5 65 60 60
+fgcolor 1.00 1.00 1.00 1.00
+bgcolor 1.00 1.00 1.00 0.00
+borderstyle "NONE"
+stuffcommand "gt; wait 1000;rcon map obj/obj_team1"
+shader "objdm1"
+hovercommand "set ui_mapset obj/obj_team1 - The Hunt"
+clicksound "menu/sound/apply.wav"
+hoversound "menu/sound/scroll.wav"
+hovershader "menu_button_glow"
+
+}
+resource
+Button
+{
+name "tow5"
+rect 5 310 60 60
+fgcolor 1.00 1.00 1.00 1.00
+bgcolor 1.00 1.00 1.00 0.00
+borderstyle "NONE"
+stuffcommand "gt; wait 1000;   rcon map OBJ/MP_Kasserine_TOW"
+shader  "MP_Kasserine_TOW"
+hovercommand "set ui_mapset  OBJ/MP_Kasserine_TOW - Kasserine"
+clicksound "menu/sound/apply.wav"
+hoversound "menu/sound/scroll.wav"
+hovershader "menu_button_glow"
+
+}
+resource
+Button
+{
+title "Close"
+name "Default"
+rect 0 460 460 20
+fgcolor 1.00 1.00 1.00 1.00
+bgcolor 1.00 0.00 0.00 1.00
+borderstyle "3D_BORDER"
+stuffcommand "popmenu 0"
+font facfont-20
+hovercommand "set ui_mapset  Close the maps selection menu"
+clicksound "sound/menu/back.wav"
+hoversound "menu/sound/scroll.wav"
+hovershader "menu_button_glow"
+
+}
+resource
+Button
+{
+name "dm2"
+rect 70 65 60 60
+fgcolor 1.00 1.00 1.00 1.00
+bgcolor 1.00 1.00 1.00 0.00
+borderstyle "NONE"
+stuffcommand "gt; wait 1000;rcon map dm/mohdm2"
+shader  "mohdm2"
+hovercommand "set ui_mapset dm/mohdm2 - Destroyed Village"
+clicksound "menu/sound/apply.wav"
+hoversound "menu/sound/scroll.wav"
+hovershader "menu_button_glow"
+
+}
+resource
+Button
+{
+name "dm4"
+rect 200 65 60 60
+fgcolor 1.00 1.00 1.00 1.00
+bgcolor 1.00 1.00 1.00 0.00
+borderstyle "NONE"
+stuffcommand "gt; wait 1000;   rcon map dm/mohdm4"
+shader  "mohdm4"
+hovercommand  "set ui_mapset dm/mohdm4 - The Crossroads"
+clicksound "menu/sound/apply.wav"
+hoversound "menu/sound/scroll.wav"
+hovershader "menu_button_glow"
+
+}
+resource
+Button
+{
+name "dm6"
+rect 330 65 60 60
+fgcolor 1.00 1.00 1.00 1.00
+bgcolor 1.00 1.00 1.00 0.00
+borderstyle "NONE"
+stuffcommand "gt; wait 1000;   rcon map dm/mohdm6"
+shader  "mohdm6"
+hovercommand  "set ui_mapset dm/mohdm6 - Stalingrad"
+clicksound "menu/sound/apply.wav"
+hoversound "menu/sound/scroll.wav"
+hovershader "menu_button_glow"
+
+}
+resource
+Button
+{
+name "dm7"
+rect 395 65 60 60
+fgcolor 1.00 1.00 1.00 1.00
+bgcolor 1.00 1.00 1.00 0.00
+borderstyle "NONE"
+stuffcommand "gt; wait 1000;   rcon map dm/mohdm7"
+shader  "mohdm7"
+hovercommand  "set ui_mapset dm/mohdm7 - Algiers"
+clicksound "menu/sound/apply.wav"
+hoversound "menu/sound/scroll.wav"
+hovershader "menu_button_glow"
+
+}
+resource
+Button
+{
+name "dm12"
+rect 265 155 60 60
+fgcolor 0.00 0.00 0.00 1.00
+bgcolor 1.00 1.00 1.00 0.00
+borderstyle "NONE"
+stuffcommand "gt; wait 1000;   rcon map DM/MP_Holland_DM"
+shader  "MP_Holland_DM"
+hovercommand  "set ui_mapset DM/MP_Holland_DM - Holland"
+clicksound "menu/sound/apply.wav"
+hoversound "menu/sound/scroll.wav"
+hovershader "menu_button_glow"
+
+}
+resource
+Button
+{
+name "dm11"
+rect 200 155 60 60
+fgcolor 0.00 0.00 0.00 1.00
+bgcolor 1.00 1.00 1.00 0.00
+borderstyle "NONE"
+stuffcommand "gt; wait 1000;   rcon map DM/MP_Gewitter_DM"
+shader  "MP_Gewitter_DM"
+hovercommand  "set ui_mapset DM/MP_Gewitter_DM - Gewitter"
+clicksound "menu/sound/apply.wav"
+hoversound "menu/sound/scroll.wav"
+hovershader "menu_button_glow"
+
+}
+resource
+Button
+{
+name "dm13"
+rect 330 155 60 60
+fgcolor 0.00 0.00 0.00 1.00
+bgcolor 1.00 1.00 1.00 0.00
+borderstyle "NONE"
+stuffcommand "gt; wait 1000;   rcon map DM/MP_Stadt_DM"
+shader  "MP_Stadt_DM"
+hovercommand  "set ui_mapset DM/MP_Stadt_DM - Stadt"
+clicksound "menu/sound/apply.wav"
+hoversound "menu/sound/scroll.wav"
+hovershader "menu_button_glow"
+
+}
+resource
+Button
+{
+name "dm14"
+rect 395 155 60 60
+fgcolor 0.00 0.00 0.00 1.00
+bgcolor 1.00 1.00 1.00 0.00
+borderstyle "NONE"
+stuffcommand "gt; wait 1000;   rcon map DM/MP_Unterseite_DM"
+shader  "MP_Unterseite_DM"
+hovercommand  "set ui_mapset DM/MP_Unterseite_DM - Unterseite"
+clicksound "menu/sound/apply.wav"
+hoversound "menu/sound/scroll.wav"
+hovershader "menu_button_glow"
+
+}
+resource
+Button
+{
+name "dm8"
+rect 5 155 60 60
+fgcolor 1.00 1.00 1.00 1.00
+bgcolor 1.00 1.00 1.00 0.00
+borderstyle "NONE"
+stuffcommand "gt; wait 1000;   rcon map dm/MP_Bahnhof_DM"
+shader  "MP_Bahnhof_DM"
+hovercommand "set ui_mapset  dm/MP_Bahnhof_DM - Bahnhof"
+clicksound "menu/sound/apply.wav"
+hoversound "menu/sound/scroll.wav"
+hovershader "menu_button_glow"
+
+}
+resource
+Button
+{
+title "DM"
+name "mapsbtndm"
+rect 0 20 76 20
+fgcolor 1.00 1.00 1.00 1.00
+bgcolor 0.50 0.50 0.00 1.00
+borderstyle "INDENT_BORDER"
+stuffcommand "exec menu/mapsdm.cfg"
+font facfont-20
+hovercommand "set ui_mapset  show dm maps"
+clicksound "menu/sound/apply.wav"
+hoversound "menu/sound/scroll.wav"
+hovershader "menu_button_glow"
+
+}
+resource
+Label
+{
+title "Select Map"
+name "Default"
+rect 0 40 460 20
+fgcolor 1.00 1.00 1.00 1.00
+bgcolor 0.50 0.50 0.00 1.00
+borderstyle "NONE"
+linkcvar "ui_mapset"
+font facfont-20
+//font courier16
+
+}
+resource
+Button
+{
+title "TDM"
+name "mapsbtntdm"
+rect 76 20 76 20
+fgcolor 1.00 1.00 1.00 1.00
+bgcolor 0.50 0.50 0.25 1.00
+borderstyle "3D_BORDER"
+stuffcommand "exec menu/mapstdm.cfg"
+font facfont-20
+hovercommand "set ui_mapset  show tdm maps"
+clicksound "menu/sound/apply.wav"
+hoversound "menu/sound/scroll.wav"
+hovershader "menu_button_glow"
+
+}
+resource
+Button
+{
+title "RBM"
+name "mapsbtnrbm"
+rect 152 20 76 20
+fgcolor 1.00 1.00 1.00 1.00
+bgcolor 0.50 0.50 0.00 1.00
+borderstyle "3D_BORDER"
+stuffcommand "exec menu/mapsrbm.cfg"
+font facfont-20
+hovercommand "set ui_mapset  show rbm maps"
+clicksound "menu/sound/apply.wav"
+hoversound "menu/sound/scroll.wav"
+hovershader "menu_button_glow"
+
+}
+resource
+Button
+{
+title "OBJ"
+name "mapsbtnobj"
+rect 228 20 76 20
+fgcolor 1.00 1.00 1.00 1.00
+bgcolor 0.50 0.50 0.25 1.00
+borderstyle "3D_BORDER"
+stuffcommand "exec menu/mapsobj.cfg"
+font facfont-20
+hovercommand "set ui_mapset  show obj maps"
+clicksound "menu/sound/apply.wav"
+hoversound "menu/sound/scroll.wav"
+hovershader "menu_button_glow"
+
+}
+resource
+Button
+{
+title "TOW"
+name "mapsbtntow"
+rect 304 20 76 20
+fgcolor 1.00 1.00 1.00 1.00
+bgcolor 0.50 0.50 0.00 1.00
+borderstyle "3D_BORDER"
+stuffcommand "exec menu/mapstow.cfg"
+font facfont-20
+hovercommand "set ui_mapset  show tow maps"
+clicksound "menu/sound/apply.wav"
+hoversound "menu/sound/scroll.wav"
+hovershader "menu_button_glow"
+
+}
+resource
+Button
+{
+title "LIB"
+name "mapsbtnlib"
+rect 380 20 80 20
+fgcolor 1.00 1.00 1.00 1.00
+bgcolor 0.50 0.50 0.25 1.00
+borderstyle "3D_BORDER"
+stuffcommand "exec menu/mapslib.cfg"
+font facfont-20
+hovercommand "set ui_mapset  show lib maps"
+clicksound "menu/sound/apply.wav"
+hoversound "menu/sound/scroll.wav"
+hovershader "menu_button_glow"
+
+}
+resource
+Button
+{
+title "map List"
+name "maplistbtn"
+rect 380 0 80 20
+fgcolor 1.00 1.00 1.00 1.00
+bgcolor 1.00 0.00 0.00 1.00
+borderstyle "3D_BORDER"
+stuffcommand "Maplist"
+font facfont-20
+hovercommand "set ui_mapset  Show Map list"
+clicksound "menu/sound/apply.wav"
+hoversound "menu/sound/scroll.wav"
+hovershader "menu_button_glow"
+
+}
+resource
+Button
+{
+name "dm1"
+rect 5 65 60 60
+fgcolor 1.00 1.00 1.00 1.00
+bgcolor 1.00 1.00 1.00 0.00
+borderstyle "NONE"
+stuffcommand "gt; wait 1000;rcon map dm/mohdm1"
+shader  "mohdm1"
+hovercommand "set ui_mapset dm/mohdm1 - Southern France"
+clicksound "menu/sound/apply.wav"
+hoversound "menu/sound/scroll.wav"
+hovershader "menu_button_glow"
+
+}
+resource
+Label
+{
+title "Spearhead"
+name "Default"
+rect 0 130 460 20
+fgcolor 1.00 1.00 1.00 1.00
+bgcolor 0.50 0.50 0.00 1.00
+borderstyle "NONE"
+font facfont-20
+//font courier16
+
+}
+resource
+Button
+{
+name "dm9"
+rect 70 155 60 60
+fgcolor 0.00 0.00 0.00 1.00
+bgcolor 1.00 1.00 1.00 0.00
+borderstyle "NONE"
+stuffcommand "gt; wait 1000;   rcon map DM/MP_Bazaar_DM"
+shader  "MP_Bazaar_DM"
+hovercommand "set ui_mapset DM/MP_Bazaar_DM - Bazaar"
+clicksound "menu/sound/apply.wav"
+hoversound "menu/sound/scroll.wav"
+hovershader "menu_button_glow"
+
+}
+resource
+Button
+{
+name "dm3"
+rect 135 65 60 60
+fgcolor 1.00 1.00 1.00 1.00
+bgcolor 1.00 1.00 1.00 0.00
+borderstyle "NONE"
+stuffcommand "gt; wait 1000;   rcon map dm/mohdm3"
+shader  "mohdm3"
+hovercommand  "set ui_mapset dm/mohdm3 - Remagen"
+clicksound "menu/sound/apply.wav"
+hoversound "menu/sound/scroll.wav"
+hovershader "menu_button_glow"
+
+}
+resource
+Label
+{
+title "Breakthrough"
+name "Default"
+rect 0 285 460 20
+fgcolor 1.00 1.00 1.00 1.00
+bgcolor 0.50 0.50 0.00 1.00
+borderstyle "NONE"
+font facfont-20
+//font courier16
+
+}
+resource
+Button
+{
+name "dm15"
+rect 5 220 60 60
+fgcolor 0.00 0.00 0.00 1.00
+bgcolor 1.00 1.00 1.00 0.00
+borderstyle "NONE"
+stuffcommand "gt; wait 1000;   rcon map DM/MP_Verschneit_DM"
+shader  "MP_Verschneit_DM"
+hovercommand "set ui_mapset  DM/MP_Verschneit_DM - Verschneit"
+clicksound "menu/sound/apply.wav"
+hoversound "menu/sound/scroll.wav"
+hovershader "menu_button_glow"
+
+}
+resource
+Button
+{
+name "dm16"
+rect 70 220 60 60
+fgcolor 0.00 0.00 0.00 1.00
+bgcolor 1.00 1.00 1.00 0.00
+borderstyle "NONE"
+stuffcommand "gt; wait 1000;   rcon map DM/mp_malta_dm"
+shader  "mp_malta_dm"
+hovercommand "set ui_mapset  DM/mp_malta_dm - malta"
+clicksound "menu/sound/apply.wav"
+hoversound "menu/sound/scroll.wav"
+hovershader "menu_button_glow"
+
+}
+resource
+Button
+{
+name "dm17"
+rect 135 220 60 60
+fgcolor 0.00 0.00 0.00 1.00
+bgcolor 1.00 1.00 1.00 0.00
+borderstyle "NONE"
+stuffcommand "gt; wait 1000;   rcon map OBJ/MP_Ardennes_TOW"
+shader  "mp_ardennes_tow"
+hovercommand  "set ui_mapset OBJ/MP_Ardennes_TOW - Ardennes"
+clicksound "menu/sound/apply.wav"
+hoversound "menu/sound/scroll.wav"
+hovershader "menu_button_glow"
+
+}
+resource
+Button
+{
+name "dm18"
+rect 200 220 60 60
+fgcolor 0.00 0.00 0.00 1.00
+bgcolor 1.00 1.00 1.00 0.00
+borderstyle "NONE"
+stuffcommand "gt; wait 1000;   rcon map OBJ/MP_Berlin_TOW"
+shader  "mp_berlin_tow"
+hovercommand  "set ui_mapset OBJ/MP_Berlin_TOW - Berlin"
+clicksound "menu/sound/apply.wav"
+hoversound "menu/sound/scroll.wav"
+hovershader "menu_button_glow"
+
+}
+resource
+Button
+{
+name "dm19"
+rect 265 220 60 60
+fgcolor 0.00 0.00 0.00 1.00
+bgcolor 1.00 1.00 1.00 0.00
+borderstyle "NONE"
+stuffcommand "gt; wait 1000;   rcon map OBJ/MP_Druckkammern_TOW"
+shader  "mp_druckkammern_tow"
+hovercommand  "set ui_mapset OBJ/MP_Druckkammern_TOW - Druckkammern"
+clicksound "menu/sound/apply.wav"
+hoversound "menu/sound/scroll.wav"
+hovershader "menu_button_glow"
+
+}
+resource
+Button
+{
+name "dm5"
+rect 265 65 60 60
+fgcolor 1.00 1.00 1.00 1.00
+bgcolor 1.00 1.00 1.00 0.00
+borderstyle "NONE"
+stuffcommand "gt; wait 1000;   rcon map dm/mohdm5"
+shader  "mohdm5"
+hovercommand  "set ui_mapset dm/mohdm5 - Snowy Park"
+clicksound "menu/sound/apply.wav"
+hoversound "menu/sound/scroll.wav"
+hovershader "menu_button_glow"
+
+}
+resource
+Button
+{
+name "dm10"
+rect 135 155 60 60
+fgcolor 0.00 0.00 0.00 1.00
+bgcolor 1.00 1.00 1.00 0.00
+borderstyle "NONE"
+stuffcommand "gt; wait 1000;   rcon map DM/MP_Brest_DM"
+shader  "MP_Brest_DM"
+hovercommand  "set ui_mapset DM/MP_Brest_DM - Brest"
+clicksound "menu/sound/apply.wav"
+hoversound "menu/sound/scroll.wav"
+hovershader "menu_button_glow"
+
+}
+resource
+Button
+{
+name "dm26"
+rect 395 310 60 60
+fgcolor 0.00 0.00 0.00 1.00
+bgcolor 1.00 1.00 1.00 0.00
+borderstyle "NONE"
+stuffcommand "gt; wait 1000;   rcon map obj/obj_team3"
+shader "objdm5"
+hovercommand  "set ui_mapset obj/obj_team3 - Omaha Beach "
+clicksound "menu/sound/apply.wav"
+hoversound "menu/sound/scroll.wav"
+hovershader "menu_button_glow"
+
+}
+resource
+Button
+{
+name "dm25"
+rect 330 310 60 60
+fgcolor 0.00 0.00 0.00 1.00
+bgcolor 1.00 1.00 1.00 0.00
+borderstyle "NONE"
+stuffcommand "gt; wait 1000;   rcon map LIB/mp_tunisia_lib"
+shader  "mp_tunisia_lib"
+hovercommand  "set ui_mapset LIB/mp_tunisia_lib - Tunisia"
+clicksound "menu/sound/apply.wav"
+hoversound "menu/sound/scroll.wav"
+hovershader "menu_button_glow"
+
+}
+resource
+Button
+{
+name "dm24"
+rect 265 310 60 60
+fgcolor 0.00 0.00 0.00 1.00
+bgcolor 1.00 1.00 1.00 0.00
+borderstyle "NONE"
+stuffcommand "gt; wait 1000;   rcon map LIB/mp_ship_lib"
+shader "mp_ship_lib"
+hovercommand  "set ui_mapset LIB/mp_ship_lib - Stuckguter"
+clicksound "menu/sound/apply.wav"
+hoversound "menu/sound/scroll.wav"
+hovershader "menu_button_glow"
+
+}
+resource
+Button
+{
+name "dm23"
+rect 200 310 60 60
+fgcolor 0.00 0.00 0.00 1.00
+bgcolor 1.00 1.00 1.00 0.00
+borderstyle "NONE"
+stuffcommand "gt; wait 1000;   rcon map OBJ/MP_MonteCassino_TOW"
+shader  "MP_MonteCassino_TOW"
+hovercommand  "set ui_mapset OBJ/MP_MonteCassino_TOW - Monte Cassino"
+clicksound "menu/sound/apply.wav"
+hoversound "menu/sound/scroll.wav"
+hovershader "menu_button_glow"
+
+}
+resource
+Button
+{
+name "dm22"
+rect 135 310 60 60
+fgcolor 0.00 0.00 0.00 1.00
+bgcolor 1.00 1.00 1.00 0.00
+borderstyle "NONE"
+stuffcommand "gt; wait 1000;   rcon map OBJ/MP_MonteBattaglia_TOW"
+shader  "MP_MonteBattaglia_TOW"
+hovercommand  "set ui_mapset OBJ/MP_MonteBattaglia_TOW - Monte Battaglia"
+clicksound "menu/sound/apply.wav"
+hoversound "menu/sound/scroll.wav"
+hovershader "menu_button_glow"
+
+}
+resource
+Button
+{
+name "dm21"
+rect 70 310 60 60
+fgcolor 0.00 0.00 0.00 1.00
+bgcolor 1.00 1.00 1.00 0.00
+borderstyle "NONE"
+stuffcommand "gt; wait 1000;   rcon OBJ/MP_Kasserine_TOW"
+shader  "MP_Kasserine_TOW"
+hovercommand "set ui_mapset  OBJ/MP_Kasserine_TOW - Kasserine"
+clicksound "menu/sound/apply.wav"
+hoversound "menu/sound/scroll.wav"
+hovershader "menu_button_glow"
+
+}
+resource
+Button
+{
+name "dm20"
+rect 5 310 60 60
+fgcolor 1.00 1.00 1.00 1.00
+bgcolor 1.00 1.00 1.00 0.00
+borderstyle "NONE"
+stuffcommand "gt; wait 1000;   rcon map DM/MP_Palermo_DM"
+shader  "mp_palermo_obj" //dm loading screen is missing?
+hovercommand "set ui_mapset  DM/MP_Palermo_DM - Palermo"
+clicksound "menu/sound/apply.wav"
+hoversound "menu/sound/scroll.wav"
+hovershader "menu_button_glow"
+
+}
+resource
+Button
+{
+name "dm27"
+rect 5 375 60 60
+fgcolor 1.00 1.00 1.00 1.00
+bgcolor 1.00 1.00 1.00 0.00
+borderstyle "NONE"
+stuffcommand "gt; wait 1000;   rcon map obj/obj_team1"
+shader  "objdm1"
+hovercommand "set ui_mapset  obj/obj_team1 - The Hunt"
+clicksound "menu/sound/apply.wav"
+hoversound "menu/sound/scroll.wav"
+hovershader "menu_button_glow"
+
+}
+end.

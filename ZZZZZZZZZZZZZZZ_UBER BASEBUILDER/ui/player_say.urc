@@ -1,0 +1,155 @@
+menu "camper_say" 640 511 NONE 0
+align centerx centery
+fgcolor 0.00 0.00 0.00 0.00
+bgcolor 0.00 0.00 0.00 0.00
+showcommand "set saycvar \"\""; globalwidgetcommand cmp_say enable"
+include "Admin_menu/phrases_tosay.inc"
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+resource
+ListBox
+{
+name "cmp_say"
+rect 70 0 570 460
+fgcolor 0.00 0.00 0.00 1.00
+bgcolor 0.50 0.50 0.00 1.00
+borderstyle "NONE"
+font verdana-12
+addconfigstringitem "1684" "append saycvar \"0 stufftext say\" ; globalwidgetcommand cmp_say hide; globalwidgetcommand lstphrases enable" 
+addconfigstringitem "1685" "append saycvar \"1 stufftext say; globalwidgetcommand cmp_say hide; globalwidgetcommand lstphrases enable" 
+addconfigstringitem "1686" "append saycvar \"2 stufftext say; globalwidgetcommand cmp_say hide; globalwidgetcommand lstphrases enable" 
+addconfigstringitem "1687" "append saycvar \"3 stufftext say ; globalwidgetcommand cmp_say hide; globalwidgetcommand lstphrases enable" 
+addconfigstringitem "1688" "append saycvar \"4 stufftext say ; globalwidgetcommand cmp_say hide; globalwidgetcommand lstphrases enable" 
+addconfigstringitem "1689" "append saycvar \"5 stufftext say ; globalwidgetcommand cmp_say hide; globalwidgetcommand lstphrases enable" 
+addconfigstringitem "1690" "append saycvar \"6 stufftext say ; globalwidgetcommand cmp_say hide; globalwidgetcommand lstphrases enable" 
+addconfigstringitem "1691" "append saycvar \"7 stufftext say ; globalwidgetcommand cmp_say hide; globalwidgetcommand lstphrases enable" 
+addconfigstringitem "1692" "append saycvar \"8 stufftext say ; globalwidgetcommand cmp_say hide; globalwidgetcommand lstphrases enable" 
+addconfigstringitem "1693" "append saycvar \"9 stufftext say ; globalwidgetcommand cmp_say hide; globalwidgetcommand lstphrases enable" 
+addconfigstringitem "1694" "append saycvar \"10 stufftext say ; globalwidgetcommand cmp_say hide; globalwidgetcommand lstphrases enable" 
+addconfigstringitem "1695" "append saycvar \"11 stufftext say ; globalwidgetcommand cmp_say hide; globalwidgetcommand lstphrases enable" 
+addconfigstringitem "1696" "append saycvar \"12 stufftext say ; globalwidgetcommand cmp_say hide; globalwidgetcommand lstphrases enable" 
+addconfigstringitem "1697" "append saycvar \"13 stufftext say ; globalwidgetcommand cmp_say hide; globalwidgetcommand lstphrases enable" 
+addconfigstringitem "1698" "append saycvar \"14 stufftext say ; globalwidgetcommand cmp_say hide; globalwidgetcommand lstphrases enable" 
+addconfigstringitem "1699" "append saycvar \"15 stufftext say ; globalwidgetcommand cmp_say hide; globalwidgetcommand lstphrases enable" 
+addconfigstringitem "1700" "append saycvar \"16 stufftext say ; globalwidgetcommand cmp_say hide; globalwidgetcommand lstphrases enable" 
+addconfigstringitem "1701" "append saycvar \"17 stufftext say ; globalwidgetcommand cmp_say hide; globalwidgetcommand lstphrases enable" 
+addconfigstringitem "1702" "append saycvar \"18 stufftext say ; globalwidgetcommand cmp_say hide; globalwidgetcommand lstphrases enable" 
+addconfigstringitem "1703" "append saycvar \"19 stufftext say ; globalwidgetcommand cmp_say hide; globalwidgetcommand lstphrases enable" 
+addconfigstringitem "1704" "append saycvar \"20 stufftext say ; globalwidgetcommand cmp_say hide; globalwidgetcommand lstphrases enable" 
+addconfigstringitem "1705" "append saycvar \"21 stufftext say ; globalwidgetcommand cmp_say hide; globalwidgetcommand lstphrases enable" 
+addconfigstringitem "1706" "append saycvar \"22 stufftext say ; globalwidgetcommand cmp_say hide; globalwidgetcommand lstphrases enable" 
+addconfigstringitem "1707" "append saycvar \"23 stufftext say ; globalwidgetcommand cmp_say hide; globalwidgetcommand lstphrases enable" 
+addconfigstringitem "1708" "append saycvar \"24 stufftext say ; globalwidgetcommand cmp_say hide; globalwidgetcommand lstphrases enable" 
+addconfigstringitem "1709" "append saycvar \"25 stufftext say ; globalwidgetcommand cmp_say hide; globalwidgetcommand lstphrases enable" 
+addconfigstringitem "1710" "append saycvar \"26 stufftext say ; globalwidgetcommand cmp_say hide; globalwidgetcommand lstphrases enable" 
+addconfigstringitem "1711" "append saycvar \"27 stufftext say ; globalwidgetcommand cmp_say hide; globalwidgetcommand lstphrases enable" 
+addconfigstringitem "1712" "append saycvar \"28 stufftext say ; globalwidgetcommand cmp_say hide; globalwidgetcommand lstphrases enable" 
+addconfigstringitem "1713" "append saycvar \"29 stufftext say ; globalwidgetcommand cmp_say hide; globalwidgetcommand lstphrases enable" 
+addconfigstringitem "1714" "append saycvar \"30 stufftext say ; globalwidgetcommand cmp_say hide; globalwidgetcommand lstphrases enable" 
+addconfigstringitem "1715" "append saycvar \"31 stufftext say ; globalwidgetcommand cmp_say hide; globalwidgetcommand lstphrases enable" 
+addconfigstringitem "1716" "append saycvar \"32 stufftext say ; globalwidgetcommand cmp_say hide; globalwidgetcommand lstphrases enable" 
+additem "All" "append saycvar all stufftext say ; globalwidgetcommand cmp_say hide; globalwidgetcommand lstphrases enable" 
+additem "All Axis" "append saycvar axis stufftext say ; globalwidgetcommand cmp_say hide; globalwidgetcommand lstphrases enable" 
+additem "All Allied" "append saycvar allies stufftext say ; globalwidgetcommand cmp_say hide; globalwidgetcommand lstphrases enable" 
+additem "All Spectators" "append saycvar spectator stufftext say ; globalwidgetcommand cmp_say hide; globalwidgetcommand lstphrases enable" 
+
+}
+resource
+Label
+{
+name "Default"
+rect 33 933 20 460
+fgcolor 0.00 0.00 0.00 1.00
+bgcolor 0.25 0.50 0.50 1.00
+borderstyle "3D_BORDER"
+}
+resource
+Label
+{
+title "#0\n#1\n#2\n#3\n#4\n#5\n#6\n#7\n#8\n#9\n#10\n#11\n#12\n#13\n#14\n#15\n#16\n#17\n#18\n#19\n#20\n#21\n#22\n#23\n#24\n#25\n#26\n#27\n#28\n#29\n#30\n#31\n#32\nAll\nAxis\nAllied\nSpectators\n"
+name "Default"
+rect 0 0 70 460
+fgcolor 0.00 0.00 0.00 1.00
+bgcolor 0.50 0.50 0.00 1.00
+borderstyle "NONE"
+font verdana-12
+//
+
+}
+resource
+Button
+{
+name "Default"
+rect 0 460 640 10
+fgcolor 0.00 0.00 0.00 1.00
+bgcolor 0.50 0.50 0.50 1.00
+borderstyle "3D_BORDER"
+}
+resource
+Button
+{
+name "Default"
+rect 500 469 10 40
+fgcolor 0.00 0.00 0.00 1.00
+bgcolor 0.50 0.50 0.50 1.00
+borderstyle "RAISED"
+}
+resource
+Button
+{
+title "Finish"
+name "Default"
+rect 510 470 65 40
+fgcolor 0.00 0.00 0.00 1.00
+bgcolor 0.50 0.50 0.25 1.00
+borderstyle "3D_BORDER"
+stuffcommand "popmenu 0"
+clicksound "sound/menu/back.wav"
+hoversound "menu/sound/scroll.wav"
+shader "menu_button_trans"
+hovershader "menu_button_glow"
+
+}
+resource
+Button
+{
+title "help"
+name "Default"
+rect 575 470 65 40
+fgcolor 0.00 0.00 0.00 1.00
+bgcolor 0.50 0.50 0.00 1.00
+borderstyle "3D_BORDER"
+stuffcommand "set saycvar select a player and then a phrase. Then press enter here to send"
+clicksound "sound/menu/back.wav"
+hoversound "menu/sound/scroll.wav"
+shader "menu_button_trans"
+hovershader "menu_button_glow"
+
+}
+resource
+Field
+{
+name "Default"
+rect 0 470 500 40
+fgcolor 0.00 0.00 0.00 1.00
+bgcolor 0.25 0.50 0.50 1.00
+borderstyle "RAISED"
+stuffcommand "rcon admin_cmd \""
+linkcvar "saycvar"
+
+}
+end.

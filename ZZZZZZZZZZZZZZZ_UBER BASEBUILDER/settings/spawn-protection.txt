@@ -1,0 +1,47 @@
+main:
+	local.settings = makearray
+		//command			//setting			//help	
+		"invulnerabletime"		"3"				" The time the player is immune for after spawning. In seconds"
+		"spawn-team"			"both"				" Set the team that is protected. both = both teams, allies = allies only, axis - axis only"
+		"spawn-light"			"0"				" When the player spawns they have a light on them during the time they are immune"
+		"spawn-lightcolour"		"0 1 0 100"			" The colour of the spawn light. In RGB"
+		"print-sp"			"1"				" Print to players spawn protection is on for them"	
+	endarray
+
+end local.settings
+		
+
+
+maps:
+	//MAPS
+	local.maplist = makeArray
+		//dm maps
+		"dm/mohdm1"
+		"dm/mohdm2"
+		"dm/mohdm3"
+		"dm/mohdm4"
+		"dm/mohdm5"
+		"dm/mohdm6"	
+		"dm/mohdm7"
+		//objective maps
+		"obj/obj_team1"
+		"obj/obj_team2"
+		"obj/obj_team3"
+		"obj/obj_team4"
+	endArray
+
+
+end local.maplist
+
+
+gametypes:
+	
+	local.gametypes = makeArray
+	//game type #	// String- just for refrence
+		"1"	//FFA	
+		"2"	//TDM
+		"3"	//RBM
+		"4"	//OBJ
+	endArray
+
+end local.gametypes

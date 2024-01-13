@@ -1,0 +1,109 @@
+//The mod will choose between a random number of starting positions. 
+//I only added one but you can add as many as you want.
+//By adding them into an array of local.origin and then ending with the local.origin variable.
+//Each tiemyou add a ogiin use the same format btu increase the number by one for the index, for example.
+//
+//main:
+//
+//	local.origin[0] = ( 504 -5128 -447 )
+//	local.origin[1] = ( -1414 162 -127 )
+//	local.origin[2] = ( 120 96 9 )
+//
+//end  local.origin
+
+main:
+	local.origin[0] = ( -2124.15 1511.28 16.12 )
+
+	local.origin[1] = ( -2125.45 1289.32 75.13 )
+
+	local.origin[2] = ( -2110.56 621.11 24.13 )
+
+	local.origin[3] = ( -1725.14 682.44 256.13 )
+
+	local.origin[4] = ( -2037.04 939.26 256.13 )
+
+	local.origin[5] = ( -1781.19 1105.91 256.13 )
+
+	local.origin[6] = ( -3532.95 1641.77 -7.87 )
+
+	local.origin[7] = ( -3842.91 1927.67 16.13 )
+
+	local.origin[8] = ( -5045.78 3132.44 16.13 )
+
+	local.origin[9] = ( -4527.05 4897.88 200.13 )
+
+	local.origin[10] = ( -4538.69 4421.68 168.13 )
+
+	local.origin[11] = ( -4648.41 4201.59 43.69 )
+
+	local.origin[12] = ( -5829.99 3858.77 16.13 )
+
+	local.origin[13] = ( -5900.77 4020.15 192.13 )
+
+	local.origin[14] = ( -5558.61 4587.79 59.13 )
+
+	local.origin[15] = ( -3533.33 3063.62 0.12 )
+
+	local.origin[16] = ( -3691.69 3539.50 0.12 )
+
+	local.origin[17] = ( -3244.69 3976.76 0.12 )
+
+	local.origin[18] = ( -2740.53 4260.88 0.12 )
+
+	local.origin[19] = ( -2176.22 4389.16 0.12 )
+
+	local.origin[20] = ( -1863.64 4721.43 0.12 )
+
+	local.origin[21] = ( -1053.01 4839.60 32.13 )
+
+	local.origin[22] = ( -590.35 5834.36 24.13 )
+
+	local.origin[23] = ( 511.41 5249.55 72.13 )
+
+	local.origin[24] = ( 150.43 5441.46 72.13 )
+
+	local.origin[25] = ( 533.11 5644.77 128.13 )
+
+	local.origin[26] = ( 949.95 5470.06 72.13 )
+
+	local.origin[27] = ( 2704.61 4938.86 24.13 )
+
+	local.origin[28] = ( 2859.77 3641.51 178.13 )
+
+	local.origin[29] = ( 2765.33 3191.60 124.13 )
+
+	local.origin[30] = ( 2438.62 2565.46 16.13 )
+
+	local.origin[31] = ( 1210.28 2440.38 16.13 )
+
+	local.origin[32] = ( 492.42 3702.80 16.13 )
+
+	local.origin[33] = ( 2512.52 1233.40 -167.88 )
+
+	local.origin[34] = ( 3830.75 2689.95 -167.88 )
+
+	local.origin[35] = ( 4817.64 1769.37 -231.88 )
+
+	local.origin[36] = ( 5720.36 1004.21 32.13 )
+
+	local.origin[37] = ( 5713.87 1986.05 272.13 )
+
+	local.origin[38] = ( 6125.44 2101.65 24.13 )
+
+	local.origin[39] = ( 5340.25 3762.02 24.13 )
+
+	local.origin[40] = ( 3734.03 2629.78 80.13 )
+
+	local.origin[41] = ( -246.83 3437.95 36.13 )
+
+	local.origin[42] = ( -823.10 2995.00 264.13 )
+
+	local.origin[43] = ( -996.13 3230.38 264.13 )
+
+	local.origin[44] = ( -953.44 2496.30 264.13 )
+
+	local.origin[45] = ( -1479.94 2195.47 264.13 )
+
+	local.origin[46] = ( -1892.18 2274.83 128.13 )
+
+end  local.origin

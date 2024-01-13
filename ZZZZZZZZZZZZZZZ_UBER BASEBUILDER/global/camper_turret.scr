@@ -1,0 +1,4 @@
+main local.using:
+
+	self.using_turret = local.using
+end

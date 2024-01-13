@@ -1,0 +1,447 @@
+// Anti camper script by Elgan Sayer
+// Anti camper SFX camper script
+// version 1.01
+//
+// Questions should go to www.mods-r-us.net forums or elgan.sayer@gmail.com
+//
+// feel free to pass or tamper with this mod as its for u!
+// 
+// www.mods-r-us.net
+//
+// I have decided not to comment the code because you do not need to play with it. only settings files need to be altered.
+//
+// **************************************************************************************************************************************
+
+
+main:
+	if(self ==  NULL || self == NIL)																// If the player has vanished
+	{
+		end																	// end the script
+	}
+
+	//check if camper mod is on
+	if(level.run["camper"]!="1")
+	{
+		//uh oh not laoded:(
+		if(level.loaded_settings !=1)
+		{
+			level.loaded_settings=1
+			// Something whent horribly wrong with loading ambient.scr, SO load the settings again
+			println "ERROR: Admin-Pro Is being loaded incorrectly"
+			exec global/ac/console_feedback.scr "Admin-Pro Is being loaded incorrectly - Please fix" 1
+
+			waitexec global/settings.scr
+			
+			// load the cvar handling stuff
+			exec global/ac/cvarscheck.scr
+			
+			//Check the mod is on 
+			if(level.run["camper"]=="1")
+			{
+				exec global/libmef/mapdesc.scr::setup_map level.map_shortname
+
+				level.camps[allies] = 0
+				level.camps[axis] = 0
+				
+//				if(local.counter == "1")
+//				{
+//					thread hud 1
+//				}
+
+			}
+
+			exec global/mod_inform.scr
+//			else
+//			{
+////				thread hud 0
+//			}
+
+			//everything is wrong, This means the spawn detection would be too slow. So activate the spawn detection for players
+			
+//			for(local.i= 1;local.i <= $player.size; local.i++)
+//			{
+//				for(local.o = 1; local.o <= level.spawn_scripts.size; local.o++)
+//				{
+//					if($player[local.i].dmteam != "spectator")
+//					{
+//					//iprintln  level.spawn_scripts[local.i][1]
+//						$player[local.i] exec level.spawn_scripts[local.o][1]
+//					}
+//				}
+//			}
+		}
+		end 
+	}
+//	else
+//	{
+////		if(game.informed==1)
+////		{
+////			game.informed=0 //sets so this so it will run if(game.informed!=1) and not this 	
+////			iprintln_noloc  "Camper Mod On"//the mod is on again
+////			
+////			local.counter = waitexec global/settings.scr::getcmd "counter"
+////
+////			if(local.counter == "1")
+////			{
+////				thread hud 1
+////			}
+////		}
+//	}
+
+
+	if(level.gametype == 0)
+	{
+		level.run["camper"] = 0
+		end
+	}
+
+	//if checking camping already or spec end
+
+	if(self.campinfcheck==1 || self.dmteam=="spectator" || self.mef_spectator == 1)
+	{
+		end
+	}
+
+	//check if the player is in a jail for lib mode
+	if(self.injail == 1 || self.locked == 1 )
+	{
+		self.campinfcheck=0
+		end
+	}	
+
+	//if player is dead end
+	if!(isalive self)
+	{
+		end
+	}	
+
+
+	local.camper_time = waitexec global/settings.scr::getcmd "time"
+
+	//reset if camper settings are Not there.
+	if(local.camper_time==NIL)
+	{
+		level.run["camper"] = 0
+		exec global/ac/console_feedback.scr ("Settings for anti camper are missing, mod being turned off") 1		
+		end
+	}
+
+	//end if they are using turret
+	local.turret_camp = waitexec global/settings.scr::getcmd "turret-camp"
+
+	if(local.turret_camp == "1")
+	{
+		if(self.using_turret == 1)
+		{
+			end
+		}
+	}
+
+	self.campinfcheck=1
+
+	local.camper_message = waitexec global/settings.scr::getcmd "message"
+	local.camper_radius = waitexec global/settings.scr::getcmd "radius"
+	local.camper_saysound = waitexec global/settings.scr::getcmd "saysound"
+
+	//get users weapons check settings
+	local.weapons_check =  waitexec global/settings.scr::getcmd "weaponscheck" 
+
+	//if user wants to check weapons then do so
+	if(local.weapons_check=="1")
+	{
+		local.camper_time =  waitthread check_weapon self
+	}
+
+	//if time is not there find it!
+	if(local.camper_time==NIL)
+	{
+		local.camper_time =  waitexec global/settings.scr::getcmd  "time"
+	}
+
+	//turn into #
+	local.camper_time = int local.camper_time
+
+	//if there is no time then end
+	if(local.camper_time==0)
+	{
+		self.campinfcheck=0
+		end
+	}
+
+	//the players origin
+	local.origin = self.origin
+	// work out the camping area
+	local.inradius =  vector_within local.origin self.origin local.camper_radius
+	
+  	local.camped_for=1
+
+	self.in_radius=1
+
+	local.camped=0
+
+	//turn camper raduis into a number
+	local.camper_radius = int local.camper_radius
+
+	while(local.inradius && isalive self)
+	{
+		wait 1
+
+		//if(level.run["camper"]!="1")
+		//{
+		//	end
+		//	self.campinfcheck=0
+		//}
+
+		if(self==NIL || self == NULL)
+		{
+			end
+		}
+
+		if(self.dmteam == "spectator")
+		{
+			self.in_radius=0
+			self.campinfcheck=0
+			end
+		}
+
+		local.inradius =  vector_within local.origin self.origin local.camper_radius   
+		if(local.camped==0)
+		{	
+			if(local.camped_for==local.camper_time)
+			{
+				if(local.counter == "1")
+				{
+					level.camps[self.dmteam] ++
+					thread hud 1
+				}
+
+				if(local.camper_message!="")
+				{
+					self iprint local.camper_message
+				}
+	
+				if(local.camper_saysound=="1")
+				{
+					self stoploopsound
+					self playsound streamed_dfr_scripted_M3L1_016a 
+				}
+
+				local.say_pos = waitexec global/settings.scr::getcmd   "say-pos"
+
+				if(level.map_enabled == 1)
+				{
+					if(local.say_pos == "1")
+					{
+						local.pos = waitexec global/libmef/mapdesc.scr::get_player_position self.origin
+	
+						if(local.pos != "" || local.pos != NULL || local.pos != NIL)
+						{
+							if(game.game == "BT")
+							{
+								local.pos = (self.netname + " " + "is camping: " + local.pos)
+							}
+							else
+							{
+								local.pos =  ("A Camper has been detected: " + local.pos)
+							}
+						
+							iprintlnbold_noloc local.pos
+						}
+					}
+				}
+
+				local.type = waitexec global/settings.scr::getcmd "type" 
+				local.duration = waitexec global/settings.scr::getcmd "duration"
+				local.camped=1
+
+				local.wordsarray = waitexec global/strings.scr::split_line local.type 1
+				
+				if(local.wordsarray[2] > 1)
+				{
+					local.words = local.wordsarray[1]
+
+					for(local.w = 0;local.w <= local.words.size; local.w++)
+					{
+						for(local.ts = 1; local.ts<=game.types.size;local.ts++)
+						{
+							if(local.words[local.w] == game.types[local.ts][1])
+							{
+								local.types[local.w] = local.words[local.w]
+							}
+						}
+					}
+
+					local.type = local.types	
+				}
+
+				self exec global/ac/types.scr local.duration local.type 1
+
+				local.counter = waitexec global/settings.scr::getcmd "counter"
+
+				if(local.counter == "1")
+				{
+					thread hud 1
+				}
+
+			}
+			local.camped_for++
+		}
+	}
+
+	self.in_radius=0
+	
+	self.campinfcheck=0
+
+end
+
+
+check_weapon local.player:
+
+	if(local.player.dmteam=="spectator" || local.player == NIL || local.player == NULL)
+	{
+		end
+	}
+
+	if(game.loaded_weapons==NIL)
+	{
+		waitthread load_weapons 
+	}
+
+	self.weapon = NIL	
+
+	//self forcetorsostate GET_WEAPON
+	
+	self waitexec global/get_weapon.scr
+
+	local.true = 1
+	for(local.true =0;local.true <= 1; local.true++)
+	{
+		wait 1
+		if(self.weapon==NIL)
+		{
+			while(self.weapon==NIL)
+			{
+				if(self == NULL || self == NIL)
+				{
+					end
+				}
+				waitframe
+			}
+		}
+
+		if(self.weapon != "models/weapons/unarmed.tik")
+		{
+			local.true = 2
+		}
+
+		waitexec global/get_weapon.scr
+
+	}
+	
+	for(local.load=game.weapons_start;local.load<=game.all_commands.size;local.load++)
+	{
+		if(self.weapon == ("models/weapons/" + game.all_commands[local.load][1] + ".tik"))
+		{
+			local.camper_time = game.all_commands[local.load] [2]
+			local.camper_time = int local.camper_time
+			end local.camper_time
+		}
+	}
+
+end local.camper_time
+
+load_weapons:
+
+	switch(game.game)
+	{
+	case "AA":
+		game.loaded_weapons =  waitexec game.file["camper"]::weaponsaa
+	break
+	case "SH":
+		game.loaded_weapons =  waitexec game.file["camper"]::weaponssh
+	break
+	case "BT":
+		game.loaded_weapons =  waitexec game.file["camper"]::weaponsbt
+	break
+	}
+
+	game.weapons_start= game.all_commands.size
+
+	exec global/settings.scr::add_cmds game.loaded_weapons
+end
+
+
+// There is no radius so make one for the player ( console commands )
+getradius:
+
+	local.origin = self.origin
+	local.camper_radius = waitexec global/settings.scr::getcmd  "radius"
+
+	local.camper_radius = int local.camper_radius
+
+	local.inradius =  vector_within local.origin self.origin local.camper_radius  
+
+	self.in_radius=1
+
+	while(local.inradius)
+	{
+		local.inradius =  vector_within local.origin self.origin local.camper_radius  
+		waitframe
+	}
+
+	self.in_radius=0
+end
+
+
+hud local.alpha:
+
+	
+	huddraw_alpha 5 1
+	huddraw_shader 5 "textures/mohmenu/black.tga"
+
+	if (local.alpha == 1)
+	{
+		huddraw_alpha 5 .45
+	}
+	else
+	{
+		huddraw_alpha 5 0
+	}
+
+	huddraw_rect 5 -105 53 100 73
+	huddraw_align 5 right top
+
+	huddraw_align 4 right top
+	huddraw_font 4 facfont-20
+	huddraw_rect 4 -100 55 100 100
+	huddraw_color 4 1 1 0
+	huddraw_alpha 4 local.alpha
+	huddraw_string 4 ("Camp Counter")
+
+	huddraw_align 6 right top
+	huddraw_font 6 facfont-20
+	huddraw_rect 6 -73 80 100 100
+	huddraw_color 6 1 1 1
+	huddraw_alpha 6 local.alpha
+	huddraw_string 6 ( level.camps[allies])
+
+	huddraw_align 30 right top
+	huddraw_font 30 facfont-20
+	huddraw_rect 30 -73 100 100 100
+	huddraw_color 30 1 1 1
+	huddraw_alpha 30 local.alpha
+	huddraw_string 30 ( level.camps[axis])
+
+	huddraw_shader 31 ("textures/hud/allies")
+	huddraw_align 31 right top
+	huddraw_rect 31 -100 73 25 25
+	huddraw_color 31 1 1 1
+	huddraw_alpha 31 local.alpha
+
+	huddraw_shader 33 ("textures/hud/axis")
+	huddraw_align 33 right top
+	huddraw_rect 33 -100 98 25 25
+	huddraw_color 33 1 1 1
+	huddraw_alpha 33 local.alpha
+
+end

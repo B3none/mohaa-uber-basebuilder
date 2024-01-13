@@ -1,0 +1,870 @@
+// Start of PreFab
+
+
+
+main:
+//KEEP THESE! DO NOT EDIT THIS BIT!
+setcvar "g_obj_alliedtext1" "m1l3b"
+setcvar "g_obj_alliedtext2" "Vehicle Wars by"
+setcvar "g_obj_alliedtext3" "])ar]{Gen.SearingWolfe"
+setcvar "g_obj_axistext1" "To Drive Vehicles, press"
+setcvar "g_obj_axistext2" "Use Key (E) or (F)"
+setcvar "g_obj_axistext3" "Have Fun!""
+
+setcvar "g_scoreboardpic" "m1l3b.tga" // A Scoreboard Pic
+setcvar "g_gametype" "2"
+setcvar "fraglimit" "0"
+setcvar "timelimit" "50" // timelimit for the match
+setcvar "level.clockside" "kills" // Highest Team With Kills Wins
+
+//setcvar "cheats" "1"
+//setcvar "thereisnomonkey" "1"
+
+
+	$panzer1 thread init_panzer
+	$panzer2 thread init_panzer
+
+	$opel1.nolights = 1
+	$opel1 thread global/vehicles_thinkers.scr::enemy_truck_think level.truck_health
+	
+	$stuka1 thread enemy_stuka_think
+	$stuka2 thread enemy_stuka_think
+	$stuka3 thread enemy_stuka_think
+	$stuka4 thread enemy_stuka_think
+	$stuka5 thread enemy_stuka_think
+	$stuka6 thread enemy_stuka_think
+	$stuka8 thread enemy_stuka_think
+	$stuka9 thread enemy_stuka_think
+	$stuka10 thread enemy_stuka_think
+	$stuka11 thread enemy_stuka_think
+	$stuka12 thread enemy_stuka_think
+	$stuka13 thread enemy_stuka_think
+	
+	$stuka7 thread monkey_stuka_setup
+
+	$bike1 thread global/vehicles_thinkers.scr::enemy_bike_think
+	$bike2 thread global/vehicles_thinkers.scr::enemy_bike_think
+
+level.script = maps/m1l3b.scr // your maps scripts name
+
+thread spawns // Gonna need this 
+	thread global/barrel.scr::explosive_barrel
+removeclass Actor // This Line Removes the AI Actors
+
+//exec alienx/basebuild.scr::main 1000 10000 //remove //s in front of exec on this line to activate basebuilder (not recommended)
+
+level waittill prespawn
+
+
+exec alienx/basebuild.scr::basebuild ( -7400 5200 -23 ) "static/indycrate.tik" 1 1 0 0 90 .9 0 0 1
+exec alienx/basebuild.scr::basebuild ( -7300 5200 -23 ) "statweapons/mg42_gun.tik" 1 0 1 0 90 .9 0 0 1
+exec alienx/basebuild.scr::basebuild ( -7200 5200 -23 ) "static/sandbag_longsegment.tik" 1 0 0 1 90 .9 0 0 1
+exec alienx/basebuild.scr::basebuild ( -7100 5200 -23 ) "static/bodies_tarp.tik" 1 .5 0 .5 90 .9 1 0 1
+exec alienx/basebuild.scr::basebuild ( -7000 5200 -23 ) "static/static_torpedo.tik" 1 1 1 0 90 .9 0 0 1
+exec alienx/basebuild.scr::basebuild ( -6900 5200 -23 ) "static/fireplaceset.tik" 1 0 1 1 90 .9 0 0 1
+exec alienx/basebuild.scr::basebuild ( -6800 5200 -23 ) "static/sandbag_link_main.tik" 1 1 0 0 90 .9 0 0 1
+exec alienx/basebuild.scr::basebuild ( -6700 5200 -23 ) "static/static_nazibanner.tik" 1 1 0 0 90 .9 0 0 3
+exec alienx/basebuild.scr::basebuild ( -6600 5200 -23 ) "static/static_naziflag2.tik" 1 1 0 0 90 .9 0 0 3
+exec alienx/basebuild.scr::basebuild ( -6500 5200 -23 ) "static/barbwire.tik" 1 0 1 1 90 .9 0 0 1
+exec alienx/basebuild.scr::basebuild ( -6400 5200 -23 ) "static/piano.tik" 1 1 0 0 90 .9 0 0 1
+exec alienx/basebuild.scr::basebuild ( -6300 5200 -23 ) "static/bunkertable.tik" 1 1 1 0 90 .9 0 1 1
+exec alienx/basebuild.scr::basebuild ( -6200 5200 -23 ) "static/banquet_table.tik" 1 1 0 0 90 .9 0 0 1
+exec alienx/basebuild.scr::basebuild ( -6100 5200 -23 ) "miscobj/beef.tik" 1 1 0 0 90 .9 0 0 1
+exec alienx/basebuild.scr::basebuild ( -6000 5200 -23 ) "static/toilet.tik" 1 1 1 0 90 .9 0 0 3
+exec alienx/basebuild.scr::basebuild ( -5900 5200 -23 ) "miscobj/bottle_condiment.tik" 1 0 0 1 90 .9 0 0 1
+exec alienx/basebuild.scr::basebuild ( -5800 5200 -23 ) "furniture/armchairposh.tik" 1 0 0 1 90 .9 0 0 1
+exec alienx/basebuild.scr::basebuild ( -5700 5200 -23 ) "static/static_naziflag1.tik" 1 0 1 0 90 .9 0 0 1
+exec alienx/basebuild.scr::basebuild ( -5600 5200 -23 ) "miscobj/coffee_kettle.tik" 1 1 0 0 90 .9 0 0 1
+exec alienx/basebuild.scr::basebuild ( -5500 5200 -23 ) "static/bucket.tik" 1 0 0 1 90 .9 0 0 1
+exec alienx/basebuild.scr::basebuild ( -5400 5200 -23 ) "static/heat_crate.tik" 1 0 1 0 90 .9 0 0 1
+exec alienx/basebuild.scr::basebuild ( -5300 5200 -23 ) "items/bangalore.tik" 1 0 1 1 90 .9 0 0 1
+exec alienx/basebuild.scr::basebuild ( -5200 5200 -23 ) "static/bush_regularbush.tik" 1 1 1 0 90 .9 0 0 1
+exec alienx/basebuild.scr::basebuild ( -5100 5200 -23 ) "static/bigbed.tik" 1 1 0 0 90 .9 0 0 1
+exec alienx/basebuild.scr::basebuild ( -5000 5200 -23 ) "static/single_bed.tik" 1 0 1 0 90 .9 0 0 1
+exec alienx/basebuild.scr::basebuild ( -4900 5200 -23 ) "static/bookcase.tik" 1 0 0 1 90 .9 0 0 1end
+exec alienx/basebuild.scr::basebuild ( -4800 5200 -23 ) "static/loveseat.tik" 1 0 1 1 90 .9 0 0 1
+exec alienx/basebuild.scr::basebuild ( -4700 5200 -23 ) "lights/tiffanylamp.tik" 1 1 1 0 90 .9 0 0 1
+exec alienx/basebuild.scr::basebuild ( -4600 5200 -23 ) "lights/hang5lamp.tik" 1 1 0 0 90 .9 0 0 1
+exec alienx/basebuild.scr::basebuild ( -4500 5200 -23 ) "miscobj/radio_military.tik" 1 0 1 0 90 .9 0 0 1
+exec alienx/basebuild.scr::basebuild ( -4400 5200 -23 ) "static/bush_full.tik" 1 0 0 1 90 .9 0 0 1
+exec alienx/basebuild.scr::basebuild ( -4300 5200 -23 ) "static/bunkerstove_ns.tik" 1 0 1 1 90 .9 0 0 1
+exec alienx/basebuild.scr::basebuild ( -4200 5200 -23 ) "items/item_100_healthbox.tik" 1 1 1 0 90 .9 0 0 1
+exec alienx/basebuild.scr::basebuild ( -4100 5200 -23 ) "static/bunkerbench.tik" 1 1 0 0 90 .9 0 0 1
+exec alienx/basebuild.scr::basebuild ( -4000 5200 -23 ) "static/winecasks.tik" 1 0 1 0 90 .9 0 0 1
+exec alienx/basebuild.scr::basebuild ( -3900 5200 -23 ) "items/bratwurst.tik" 1 0 0 1 90 .9 0 0 1
+exec alienx/basebuild.scr::basebuild ( -3800 5200 -23 ) "furniture/table.tik" 1 0 1 1 90 .9 0 0 1
+exec alienx/basebuild.scr::basebuild ( -3700 5200 -23 ) "furniture/woodchair.tik" 1 1 1 0 90 .9 0 0 1
+exec alienx/basebuild.scr::basebuild ( -3600 5200 -23 ) "static/mg42ammoboxwbelt.tik" 1 1 0 0 90 .9 0 0 1
+exec alienx/basebuild.scr::basebuild ( -3500 5200 -23 ) "static/tablewithumbrella.tik" 1 0 1 0 90 .9 0 0 1
+exec alienx/basebuild.scr::basebuild ( -3400 5200 -23 ) "furniture/roundedchair.tik" 1 0 0 1 90 .9 0 0 1
+exec alienx/basebuild.scr::basebuild ( -3300 5200 -23 ) "static/nazi_crate.tik" 1 0 1 1 90 .9 0 0 1
+exec alienx/basebuild.scr::basebuild ( -3200 5200 -23 ) "statweapons/mg42_gun.tik" 1 0 1 0 90 .9 0 0 1
+exec alienx/basebuild.scr::basebuild ( -3100 5200 -23 ) "static/sandbag_longsegment.tik" 1 0 0 1 90 .9 0 0 1
+exec alienx/basebuild.scr::basebuild ( -3000 5200 -23 ) "static/bodies_tarp.tik" 1 .5 0 .5 90 .9 0 0 1
+exec alienx/basebuild.scr::basebuild ( -2900 5200 -23 ) "static/bunkertable.tik" 1 1 0 0 90 .9 0 1 1
+exec alienx/basebuild.scr::basebuild ( -2800 5200 -23 ) "emitters/fire.tik" 1 1 0 0 90 .9 0 0 1end
+exec alienx/basebuild.scr::basebuild ( -2700 5200 -23 ) "miscobj/bottle_medicine.tik" 1 1 0 0 90 2 0 0 1
+exec alienx/basebuild.scr::basebuild ( -2600 5200 -23 ) "static/bathtubwithshowerhead.tik" 1 1 0 0 90 .9 0 0 1
+exec alienx/basebuild.scr::basebuild ( -2500 5200 -23 ) "miscobj/searchlight.tik" 1 1 0 0 90 .9 0 0 1
+exec alienx/basebuild.scr::basebuild ( -2400 5200 -23 ) "emitters/inferno.tik" 1 1 0 0 90 .9 0 0 1end
+exec alienx/basebuild.scr::basebuild ( -2300 5200 -23 ) "miscobj/bottle_wine.tik" 1 0 0 1 90 2 0 0 1
+exec alienx/basebuild.scr::basebuild ( -2200 5200 -23 ) "static/static_cablespool_full.tik" 1 1 0 0 90 .9 0 0 1	
+exec alienx/basebuild.scr::basebuild ( -2100 5200 -23 ) "static/lightpost_globe.tik" 1 0 1 1.5 90 .9 0 0 1
+exec alienx/basebuild.scr::basebuild ( -2000 5200 -23 ) "static/lightpost_triple.tik" 1 0 0 1 90 .9 0 0 1
+exec alienx/basebuild.scr::basebuild ( -1900 5200 -23 ) "miscobj/bottle_rum.tik" 1 1 0 0 90 2 0 0 1
+exec alienx/basebuild.scr::basebuild ( -1800 5200 -23 ) "miscobj/drinkglass.tik" 1 1 1 0 90 2 0 0 1	
+exec alienx/basebuild.scr::basebuild ( -1700 5200 -23 ) "static/bathroomsink.tik" 1 0 0 1 90 2 0 0 1
+exec alienx/basebuild.scr::basebuild ( -1600 5200 -23 ) "static/wardrobe.tik" 1 1 1 0 90 .9 0 0 1	
+exec alienx/basebuild.scr::basebuild ( -1500 5200 -23 ) "static/cabinet_large.tik" 1 1 0 0 90 .9 0 0 1
+exec alienx/basebuild.scr::basebuild ( -1400 5200 -23 ) "static/curtain.tik" 1 1 0 0 90 2 0 0 3end
+exec alienx/basebuild.scr::basebuild ( -1300 5200 -23 ) "miscobj/tallglass.tik" 1 0 0 1 90 2 0 0 1
+exec alienx/basebuild.scr::basebuild ( -1200 5200 -23 ) "static/dish.tik" 1 1 0 0 90 2 0 0 1
+exec alienx/basebuild.scr::basebuild ( -1100 5200 -23 ) "miscobj/shortglass.tik" 1 0 1 0 90 2 0 0 1
+exec alienx/basebuild.scr::basebuild ( -1000 5200 -23 ) "static/flowerplate.tik" 1 1 1 0 90 2 0 0 1
+exec alienx/basebuild.scr::basebuild ( -900 5200 -23 ) "static/servingplate.tik" 1 0 1 1 90 2 0 0 1
+
+
+exec global/jetpack.scr ( -1025 -927 25 ) //allies
+exec global/jetpack.scr ( -1869 5593 3 ) //axis
+
+exec global/dog.scr ( -1343 1871 -23 )
+
+exec guidedmissile/spawntrigger.scr ( -1531 -884 -5 ) //allies
+exec guidedmissile/spawntrigger.scr ( -2631 5705 -23 ) //allies
+
+
+	//*** precache dm stuff
+	exec global/dmprecache.scr
+
+	//*** Unique HUD for Vehicle Wars
+	exec alienx/hudvw.scr
+
+	level.script = maps/m1l3b.scr
+	exec global/ambient.scr m3l1b
+
+
+exec map_triggers/allweapons.scr ( -5120 -828 178 )
+exec map_triggers/giant.scr ( -1037 2160 8 )
+exec map_triggers/invisible.scr ( -1583 -934 368 )
+exec map_triggers/invulnerable.scr ( -5559 1223 296 )
+exec map_triggers/midget.scr ( 4840 6112 -19 )
+exec map_triggers/normal.scr ( 340 1136 -24 )
+exec map_triggers/bomb.scr ( -2307 5903 -23 )
+exec map_triggers/bomb.scr ( -1438 -1167 8 )
+exec map_triggers/health.scr ( -895 -903 -17 ) ( -1684 -897 -23 ) ( -5360 1276 -15 ) ( -3980 -944 82 ) ( -4544 6183 -19 ) ( -5493 1895 -23 ) ( 2135 5662 -23 ) ( 3805 5897 -19 ) ( 3794 2328 -23 ) ( -1114 6536 -23 )
+
+	setcvar "r_fastsky" "1"
+	$world farplane 5000
+	$world farplane_color (0 0 0)
+
+//##########################################################################################################################################################################
+//################################################################################***Vehicles***############################################################################
+//##########################################################################################################################################################################
+exec server_planes/trigger.scr ( -2191 5448 13 ) "axis" .2
+exec server_planes/trigger2.scr ( -2474 5393 33 ) "axis" .2
+exec server_planes/trigger3.scr ( -2700 5384 33 ) "axis" .2
+exec server_planes/trigger.scr ( -1275 -878 1 ) "allies" .2
+exec server_planes/trigger2.scr ( -1669 -673 44 ) "allies" .2
+exec server_planes/trigger3.scr ( -932 -634 43 ) "allies" .2
+
+exec global/playertank.scr vehicles/kingtank.tik vehicles/kingcannon.tik vehicles/kingtank_all_d.tik ( -6337 4931 -23 ) ( 0 0 0 ) 0 200
+exec global/playertank.scr vehicles/kingtank.tik vehicles/kingcannon.tik vehicles/kingtank_all_d.tik ( -6551 3895 -23 ) ( 0 0 0 ) 0 200
+exec global/playertank.scr vehicles/kingtank.tik vehicles/kingcannon.tik vehicles/kingtank_all_d.tik ( 5048 3894 -23 ) ( 0 180 0 ) 0 200
+exec global/playertank.scr vehicles/kingtank.tik vehicles/kingcannon.tik vehicles/kingtank_all_d.tik ( 5048 4923 -23 ) ( 0 180 0 ) 0 200
+exec global/playertank.scr vehicles/kingtank.tik vehicles/kingcannon.tik vehicles/kingtank_all_d.tik ( -3020 6272 -23 ) ( 0 -90 0 ) 0 200
+exec global/playertank.scr vehicles/kingtank.tik vehicles/kingcannon.tik vehicles/kingtank_all_d.tik ( -1960 6238 -23 ) ( 0 -90 0 ) 0 200
+exec global/playertank.scr vehicles/kingtank.tik vehicles/kingcannon.tik vehicles/kingtank_all_d.tik ( -4463 241 -23 ) ( 0 90 0 ) 0 200
+exec global/playertank.scr vehicles/kingtank.tik vehicles/kingcannon.tik vehicles/kingtank_all_d.tik ( -3274 241 -23 ) ( 0 90 0 ) 0 200
+exec global/playertank.scr vehicles/kingtank.tik vehicles/kingcannon.tik vehicles/kingtank_all_d.tik ( -863 -29 -13 ) ( 0 90 0 ) 0 200
+exec global/playertank.scr vehicles/kingtank.tik vehicles/kingcannon.tik vehicles/kingtank_all_d.tik ( -1593 -52 48 ) ( 0 90 0 ) 0 200
+
+exec global/playervehicle.scr vehicles/bmwbike.tik fx/dummy.tik ( -1029 673 -23 ) ( 0 90 0 ) 500
+exec global/playervehicle.scr vehicles/bmwbike.tik fx/dummy.tik ( -251 673 -23 ) ( 0 90 0 ) 500
+//##########################################################################################################################################################################
+//################################################################################***Vehicles***############################################################################
+//##########################################################################################################################################################################
+level waittill spawn
+
+local.flak88turret1 = spawn statweapons/flak88turret.tik
+local.flak88turret1.origin = ( -880 2128 80 )
+local.flak88turret1.angle = 42
+
+end
+
+spawns:
+
+//-----------------FLAK 88s-------------------
+
+local.flak88base1 = spawn script_model
+local.flak88base1 model statweapons/flak88base.tik
+local.flak88base1.origin = ( 1615 -370 592.13 )
+local.flak88base1.angle = -90
+
+local.flak88turret1 = spawn statweapons/flak88turret.tik
+local.flak88turret1.origin = local.flak88base1.origin + ( 0 0 54 )
+local.flak88turret1.angle = local.flak88base1.angle
+
+
+local.axis = spawn info_player_axis
+local.axis.angle = 71.86
+local.axis.origin = ( -4211.99 3880.40 -23.88 )
+
+local.axis = spawn info_player_axis
+local.axis.angle = -78.67 
+local.axis.origin = ( 3844.46 5984.33 -19.88)
+
+local.axis = spawn info_player_axis
+local.axis.angle = -137.58
+local.axis.origin = ( 4808.16 5691.19 -19.88)
+
+local.axis = spawn info_player_axis
+local.axis.angle = -97.93 
+local.axis.origin = ( 1517.25 6865.75 14.88)
+
+local.axis = spawn info_player_axis
+local.axis.angle = -89.63 
+local.axis.origin = ( -195.89 5897.37 -23.77)
+
+local.axis = spawn info_player_axis
+local.axis.angle = -76.41 
+local.axis.origin = ( -1075.42 5963.57 -23.88)
+
+local.axis = spawn info_player_axis
+local.axis.angle = -73.01 
+local.axis.origin = ( -2016.61 6037.60 -23.88)
+
+local.axis = spawn info_player_axis
+local.axis.angle = -60.93 
+local.axis.origin = ( -3718.97 6068.59 -19.88)
+
+local.axis = spawn info_player_axis
+local.axis.angle = -43.93 
+local.axis.origin = ( -4376.63 5938.05 -19.88)
+
+local.axis = spawn info_player_allied
+local.axis.angle = 0
+local.axis.origin = ( 416.45 -3083.67 109.17  )
+
+local.axis = spawn info_player_allied
+local.axis.angle = 55.51 
+local.axis.origin = ( -559.10 -3342.07 119.05)
+
+local.axis = spawn info_player_allied
+local.axis.angle = -144.00 
+local.axis.origin = ( 606.66 -1824.15 70.82)
+
+local.axis = spawn info_player_allied
+local.axis.angle = 117.06
+local.axis.origin = ( 121.16 -935.72 -22.33)
+
+local.axis = spawn info_player_allied
+local.axis.angle = 74.39 
+local.axis.origin = ( -2380.99 -982.36 -23.88)
+
+local.axis = spawn info_player_allied
+local.axis.angle = -1.64 
+local.axis.origin = ( -5311.96 1258.26 -15.88)
+
+local.axis = spawn info_player_allied
+local.axis.angle = 149.40
+local.axis.origin = ( -3230.56 -155.95 -23.88)
+
+local.axis = spawn info_player_allied
+local.axis.angle = 57.65 
+local.axis.origin = ( -4748.95 -431.68 -20.36)
+
+//-----------------------------HUD----------------------------
+
+huddraw_virtualsize 202 1
+huddraw_align 202 right top
+huddraw_font 202 "verdana-12"
+huddraw_rect 202 -150 80 200 14
+huddraw_color 202 1 1 1
+huddraw_alpha 202 1.0
+huddraw_string 202 ("Drivable Vehicles")
+
+huddraw_virtualsize 203 1
+huddraw_align 203 right top
+huddraw_font 203 "verdana-12"
+huddraw_rect 203 -150 90 200 14
+huddraw_color 203 1 1 1
+huddraw_alpha 203 1.0
+huddraw_string 203 ("By ])ar]{Gen.SearingWolfe")
+
+end
+
+barrel_opel:
+	$opel1 damage $world 15000 $world (0 0 0) (0 0 0) (0 0 0) 0 9 0 0
+	wait 3
+	thread start_s2
+	end
+
+barrel_panzer1:
+	$panzer1 thread kill_panzer
+	wait 3
+	thread start_s2
+	end
+
+barrel_panzer2:
+	$panzer2 thread kill_panzer
+	wait 3
+	thread start_s2
+	end
+	
+barrel_noise:
+	wait 3
+	thread start_s2
+	end
+
+
+init_panzer:
+	self rendereffects "-shadow"
+	if (self.target)
+		self.collisionent = self.target
+	self nodamage
+end
+
+kill_panzer:
+	self playsound explode_tank
+	local.gun = self QueryTurretSlotEntity 0
+	if (local.gun)
+	{
+		self DetachTurretSlot 0
+		local.gun remove
+	}
+	local.gun2 = self QueryTurretSlotEntity 1
+	if (local.gun2)
+	{
+		self DetachTurretSlot 1
+		local.gun2 remove
+	}
+	self thread spawn_fx models/fx/fx_tank_explosion.tik
+	exec global/earthquake.scr .2 4 0 0
+	local.model = models/vehicles/panzer_iv_d.tik
+	local.damaged = thread spawn_damaged local.model
+	self remove
+end
+
+start_s2:
+	if ( level.s2_started == 1) 
+		end
+	level.s2_started = 1
+	println "z:         scene2 started"
+
+	wait 2
+//	$alarm_sound exec global/loopsound.scr m1l3a_alarm
+
+	thread friendly_message2
+	
+
+
+		thread global/ai.scr::spawn 1
+		thread global/ai.scr::spawn 2
+		thread global/ai.scr::spawn 3
+		thread global/ai.scr::spawn 4
+	wait 6
+	if (level.totalbaddies <= 1)
+	{
+		thread global/ai.scr::spawn 1
+		thread global/ai.scr::spawn 2
+		thread global/ai.scr::spawn 3
+		thread global/ai.scr::spawn 4
+	}
+	wait 12
+	thread friendly_message3
+//	thread guys_from_airfield
+end
+
+guys_from_airfield:
+	println "z:        guys from airfield"
+
+	for (local.i = 1; local.i < 4; local.i++)
+	{
+		thread global/ai.scr::spawn 7
+		wait ( (randomint 4) + 1)
+	}
+end
+
+//////////////////////
+PLAYER_JEEP_Drive local.trigger:
+	//local.trigger waittill trigger
+	// drive Vector position, Float speed, Float acceleration, Float reach_distance, Float look_ahead, [ Vector alternate_position ] 
+	//println  "z:         before it starts driving"
+	thread opel2_thinker
+	
+	self drive $jeeppath1 level.slowspeed 80 200 level.lookahead
+	//println  "z:         after it starts driving"
+
+	waitthread friendly_message0
+	wait 4
+	thread friendly_message4
+
+	self waitTill drive
+	self stop
+
+	wait 4
+
+	println "z:        going in reverse"
+	self drive $jeeppath2 level.reversespeed 50 200 level.lookahead
+	wait 1
+	self waitTill drive
+	self stop
+
+	thread start_s2
+	thread guys_from_airfield
+
+	println "z:        switching to forward"
+
+	local.touch = $opel2 thread touch_check $opel2_detector
+
+
+	if (local.touch == 1)
+	{
+		self drive $jeeppath3alt level.fastspeed 80 200 level.lookahead
+	}
+	else
+	{
+		self drive $jeeppath3 level.fastspeed 80 200 level.lookahead
+	}
+
+stuka_loop:
+
+	println "z:      $next_path_check2 waittill trigger "  
+$next_path_check2 waittill trigger 
+	println "z:      $next_path_check2 triggered "  
+	
+	println "z:   stukas intact: " level.aircraft_intact
+	if (level.aircraft_intact == 0)
+	{
+		thread stuka_loop_exit2
+		println "z:          exit number 2"
+		end
+	}
+	local.touch = $opel3 thread touch_check $opel3_detector
+			
+	if (local.touch == 1)
+	{
+		self nextdrive $jeeppath4alt
+	}
+	else
+	{
+		self nextdrive $jeeppath4
+	}
+	// it is still currently driving path3 or path6
+
+	self waitTill drive
+	//now it is switching to path4 or path4alt
+
+	println "z:      $next_path_check1 waittill trigger "  
+$next_path_check1 waittill trigger 
+	println "z:      $next_path_check1 triggered "  
+
+	println "z:   stukas intact: " level.aircraft_intact
+	if (level.aircraft_intact == 0)
+	{
+		thread stuka_loop_exit1
+		println "z:          exit number 1"
+		end
+	}
+	self nextdrive $jeeppath6
+
+	self waitTill drive
+	//switches to path6
+goto stuka_loop
+end
+	
+stuka_loop_exit1:
+	self nextdrive $jeeppath7
+	self waitTill drive
+	//switches to path7
+
+	self waitTill drive
+	self stop
+	thread arrived
+end
+
+stuka_loop_exit2:
+	local.touch = $opel3 thread touch_check $opel3_detector2
+			
+	if (local.touch == 1)
+	{
+		self nextdrive $jeeppath5alt
+	}
+	else
+	{
+		self nextdrive $jeeppath5
+	}
+	
+	self waitTill drive
+	//switches to path5 or path5alt
+
+	self waitTill drive
+	self stop
+	thread arrived
+end
+
+arrived:
+	$oss_man eyeslookat $player
+	waitthread friendly_message_end
+	exec global/missioncomplete.scr m1l3c bsp2bsp
+end
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+//******************************************
+enemy_stuka_think:
+	self rendereffects "-shadow"
+	self solid
+	self.health = 1500
+	self takedamage
+	self removeondeath 0 
+	if (self.target)
+	{
+		self.collisionent = self.target
+		//self.collisionent hide
+	}
+
+self waittill death
+
+	thread plane_exploded
+end
+
+plane_exploded:
+	self show
+	self playsound explode_plane
+	exec global/earthquake.scr .2 4 0 0
+	
+	if $(self.right_mg)
+		self.right_mg thread plane_remove_mg
+	if $(self.left_mg)
+		self.left_mg thread plane_remove_mg
+	
+	println "Z:    stukas remaining " level.aircraft_intact
+	level.aircraft_intact--
+	
+	local.obj_text = ("Destroy the aircraft. [" + level.aircraft_intact + " remaining]")
+	if (level.aircraft_intact != 0)
+		waitthread global/objectives.scr::add_objectives 1 2 local.obj_text
+	else
+		waitthread global/objectives.scr::add_objectives 1 3 local.obj_text
+
+	local.offset = (0 0 72)
+
+	
+	if (self.target == "fock_mask")
+	{
+		if (self.dont_explode != 1)
+		{
+			self thread spawn_fx models/fx/fx_stuka_explosion.tik local.offset
+			wait .2
+		}
+		local.damaged = thread spawn_damaged models/vehicles/fockwulf_d.tik
+	}
+	else
+	{
+		if (self.dont_explode != 1)
+		{
+			self thread spawn_fx models/fx/fx_stuka_explosion.tik local.offset
+			wait .2
+		}
+		local.damaged = thread spawn_damaged models/vehicles/stukadesrt_d.tik
+		local.damaged anim idle
+	}
+	for (local.i = 1; local.i <= 9; local.i++)
+	{
+		if ( (randomint 5) == 1)
+			local.damaged thread stuka_fire local.i
+	}
+//	if (self.crashed == 1)
+//		local.damaged thread plane_straighten
+	local.damaged notsolid
+	self remove
+end
+
+stuka_fire local.i:	
+	wait 1
+	local.temp = spawn models/emitters/firegood
+	local.tag = ("fire" + local.i)
+	println "z:      local.tag " local.tag
+	local.temp.angles = (270 0 0)
+	local.temp.origin = self gettagposition local.tag
+	//local.temp.origin = (self.origin + (local.randomx local.randomy 32))
+	local.temp anim start
+	
+	
+	wait 20
+	local.temp delete
+end
+
+monkey_stuka_setup:
+	// plane_taxi
+	// plane_takeoff
+
+	// Setup Custom Plane Vars
+	self.IsInAir = 0
+	self.GoingDown = 0
+
+	// Setup Built-in Plane Vars
+	self setsize "-100 -100 -100" "100 100 100"
+	self.mins = ( -100 -100 -100 )
+	self.maxs = (100 100 100)
+	self solid
+	self takedamage
+	
+	self.right_so bind self
+	self.right_mg glue self.right_so
+	self.left_so bind self
+	self.left_mg glue self.left_so
+
+	//add hide the mgs
+
+	self.right_target bind self
+	self.left_target bind self
+	
+	self.origin = self.path.origin
+	self.angles = self.path.angles
+
+	self.right_mg hide
+	self.left_mg hide
+	
+	self.right_mg setAimTarget self.right_target
+	self.left_mg setAimTarget self.left_target
+	self.right_mg tracerFrequency 1
+	self.left_mg tracerFrequency 1
+
+level waittill spawn
+//println "z:     waitting for self.start_trigger"
+
+	self loopsound m1l3b_stuka_idle
+
+self.start_trigger waitTill trigger
+	
+	thread takeoff_dialog
+	
+	println "z:     stuka taking off"
+	self stoploopsound
+	self playsound m1l3b_first_stuka_takeoff
+	self followpath self.path
+	self waitmove
+	self hide
+	self nodamage
+//	self.went_east = 1
+	thread strafing_loop
+	self thread DamageManager
+end
+
+
+
+strafing_loop:
+while ( (self.GoingDown != 1) && (self != NULL) )
+{
+self.strafe_trigger waittill trigger
+	wait ( (randomint 5) + 1)
+	
+	if (self == NULL)
+		end
+	
+	self.right_mg startFiring
+	self.left_mg startFiring
+	thread strafing_dialog
+	self playsound m1l3b_stuka_strafing_run
+	self show
+	self takedamage
+	self followpath self.strafe_path
+	self waitmove
+	
+	if ( (self == NULL) || (self.GoingDown == 1) )
+		end
+	
+	self hide
+	self nodamage
+//	self.went_east = 1
+	self.right_mg stopFiring
+	self.left_mg stopFiring
+	
+	
+self.strafe_trigger2 waittill trigger
+	wait ( (randomint 5) + 1)
+	
+	if (self == NULL)
+		end
+		
+	self.right_mg startFiring
+	self.left_mg startFiring
+	thread strafing_dialog
+	self playsound m1l3b_stuka_strafing_run
+	self show
+	self takedamage
+	self followpath self.strafe_path2
+	self waitmove
+	
+	if ( (self == NULL) || (self.GoingDown == 1) )
+		end
+	
+	self hide
+	self nodamage
+	self.right_mg stopFiring
+	self.left_mg stopFiring
+}
+end
+
+
+DamageManager:
+	local.damage_events = 0
+	while (local.damage_events < 2)
+	{
+		self waitTill damage
+		local.damage_events ++
+		println "z:    local.damage_events " local.damage_events
+		wait .5
+	}
+	
+	self.right_mg thread plane_remove_mg
+	self.left_mg thread plane_remove_mg
+	
+	self.GoingDown = 1
+//	thread flying_plane_killed
+	self thread planeonfire
+end
+
+planeonfire:
+//	local.temp = spawn effectentity model models/emitters/planesmokefly.tik
+	local.temp = spawn effectentity model models/fx/fx_flying_stuka_explosion.tik
+	local.temp notsolid
+	local.temp anim start
+	local.offset = (0 0 92)
+
+	self playsound explode_plane_flying
+
+//	local.temp2 = spawn effectentity model models/fx/fx_stuka_explosion.tik
+//	local.temp2 notsolid
+//	local.temp2 anim start
+
+//	self.dont_explode = 1
+
+	local.temp.origin = (self.origin + local.offset)
+	local.start_time = level.time
+
+	while(level.time < local.start_time + 10)
+	{
+		local.temp.origin = (self.origin + local.offset)
+		waitframe
+	//	println "z:      creating plane on fire fx"
+	}
+
+	local.temp remove
+	self hide
+end
+
+
+plane_remove_mg:
+	self stopFiring
+	self remove
+end
+
+
+
+
+flying_plane_killed:
+
+		// Save Destroyed Values
+		local.velocity = self.velocity
+		local.avelocity = self.avelocity
+
+		self endpath // stop the follow path
+
+		self physics_on	
+		self gravity 0.25
+
+		// Restore Destroyed Values
+		self.velocity = local.velocity
+		self RotateX local.avelocity[0]
+		self RotateY local.avelocity[1]
+		self RotateZ local.avelocity[2]
+
+		self hide
+		self notsolid
+		
+		self thread planecrash	
+end
+
+planecrash:
+	while(1)
+	{
+		local.desiredpitch = -25
+	
+		local.pitch = self.angles[0]	
+		if(local.pitch > 180)
+		{
+			local.pitch -= 360
+		}
+		
+		local.delta = local.pitch - local.desiredpitch
+		local.delta = local.delta * 0.33 
+		
+		self RotateX local.delta
+
+		local.start = self.origin
+		local.end = local.start - (0 0 4096)
+	
+		local.groundpos = local.start
+		local.groundpos = trace local.start local.end 1 self.mins self.maxs
+		local.grounddist = vector_length(self.origin - local.groundpos)
+		if(local.grounddist < 25)
+		{
+			self.crashed = 1
+		//	self thread plane_exploded
+			end
+		}
+	
+		wait 0.05
+	}
+end
+
+
+
+
+plane_straighten:
+	println "z:     straightening crashed plane"
+	println "z:     plane angles: "	self.angles
+	wait 1
+	self time 1
+	self rotateYupto 0
+	self rotateZupto 0
+	self waitmove
+	println "z:     plane angles (after waitmove): "	self.angles
+	self notsolid
+end
+
+//----------------------------------
+spawn_damaged local.model:
+	local.damaged = spawn script_model model local.model
+	local.damaged.origin = self.origin
+	local.damaged.angles = self.angles
+end local.damaged
+
+spawn_fx local.fx local.offset:
+	local.temp = spawn script_model model local.fx
+	if (local.offset)
+		local.temp.origin = (self.origin + local.offset)
+	else
+		local.temp.origin = self.origin
+	local.temp anim start
+	wait 5
+	local.temp remove
+end

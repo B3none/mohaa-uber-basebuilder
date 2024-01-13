@@ -1,0 +1,77 @@
+TIKI
+setup
+{
+	scale 1.0
+	path models/fx/dummy
+	skelmodel dummy3.skd
+}
+
+init
+{
+			server
+	{
+
+			scale 0.22
+		classname Projectile
+		anim idle
+		setsize       "-2 -2 -2" "2 2 2"
+		speed         1300
+		minspeed      1200
+		life			15.0
+		dmlife			15.0
+		rendereffects +dontdraw
+		hitdamage     3
+		takedamage
+		meansofdeath		grenade
+		explosionmodel models/EMITTERS/snowdrift.tik
+		explodeontouch
+		smashthroughglass 64
+		gravity 0.4
+		// avelocity random 90 random 90 90
+		addvelocity		0 0 299
+
+
+		cache models/EMITTERS/snowdrift.tik
+	}
+	client
+	{
+		originemitter waterfall
+		(
+			spawnrate 60.00
+			model water_g.spr
+			spritegridlighting
+			alpha 0.50
+			color 2.00 1.00 3.00
+			scale 2.00
+			life 1.50
+			velocity 50.00
+			randvel crandom -7 crandom -8 crandom -6
+			accel 11.00 -10.00 -332.00
+			fade
+		)
+	}
+}
+
+animations
+{
+        idle dummy3.skc
+	start dummy3.skc
+	{
+		client
+	        {
+			enter emitteron waterfall
+	        }
+	}
+	stop dummy3.skc
+	{
+		client
+	        {
+	    		enter emitteroff waterfall
+		}
+	}
+}
+
+/*QUAKED fx_water_falls (0.0 0.5 0.5) (-8 -8 -8) (8 8 8)
+water fall...like duh...
+Doesn't collide.
+*/

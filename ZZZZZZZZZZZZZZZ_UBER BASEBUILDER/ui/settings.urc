@@ -1,0 +1,107 @@
+menu "camper_settings" 640 360 NONE 0
+
+showcommand "set rconfield \"\"; exec menu/rconmenu/showhome.cfg"
+
+
+
+
+
+
+
+
+
+
+
+
+
+			
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+resource
+Label
+{
+name "Default"
+rect 0 0 640 480
+fgcolor 1.00 1.00 1.00 1.00
+bgcolor 0.50 0.50 0.00 1.00
+borderstyle "RAISED"
+shader "menu/textures/lazy.tga"
+
+}
+resource
+Label
+{
+name "Default"
+rect 5 30 630 5
+fgcolor 0.00 0.00 0.00 1.00
+bgcolor 0.50 0.50 0.50 1.00
+borderstyle "RAISED"
+}
+resource
+Button
+{
+title "Close"
+name "Default"
+rect 5 335 630 20
+fgcolor 0.00 0.00 0.00 1.00
+bgcolor 0.50 0.50 0.50 1.00
+borderstyle "3D_BORDER"
+stuffcommand "popmenu 0"
+clicksound "sound/menu/back.wav"
+shader "menu_button_trans"
+hovershader "menu_button_glow"
+hoversound "menu/sound/scroll.wav"
+
+}
+resource
+Label
+{
+name "Default"
+rect 5 325 630 5
+fgcolor 0.00 0.00 0.00 1.00
+bgcolor 0.50 0.50 0.50 1.00
+borderstyle "3D_BORDER"
+}
+end.

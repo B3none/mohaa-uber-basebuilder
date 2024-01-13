@@ -1,0 +1,19 @@
+main:
+
+	if(game.game != "AA")
+	{
+		if(game.run_spawn_protect_on_sh_and_bt != 1)
+		{
+			level.run["spawn-protection"] = 0
+		}
+		
+	}
+
+//
+//	if(level.spawnpotect!=1)
+//	{
+//		level.spawnpotect=1
+//		exec global/ac/spawn_detect.scr global/ac/spawn_protection.scr // exec with this script path
+//	}	
+
+end

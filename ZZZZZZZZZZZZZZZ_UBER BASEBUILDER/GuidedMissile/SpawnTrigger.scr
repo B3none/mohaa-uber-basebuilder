@@ -1,0 +1,149 @@
+main local.origin:
+
+
+	while(level.time <= 0)
+		waitframe
+
+	if(level.RocketSound != 1)
+		{
+		local.cache = spawn scriptmaster
+		local.cache aliascache missile sound/mechanics/Mec_SteamLoop_01.wav soundparms 3.0 0.3 1.0 0.0 320 2200 item loaded maps "dm obj"
+		cache models/static/v2.tik
+		cache models/emitters/firefill.tik
+		cache models/emitters/fx_explosion_mine.tik	
+		cache models/missile/missile.tik		
+		level.RocketSound = 1
+		}
+
+	if(level.GMSettings == NIL)
+		{
+		level.GMSettings = waitexec settings/GuidedMissile.txt
+
+		if(level.GMSettings == NIL)
+			level.GMSettings = waitexec settings/backup/GuidedMissile.txt
+		local.game = getcvar "version"
+		local.i=15
+
+		if(local.game[local.i]==" ")
+			{
+			local.i= 16
+			}
+
+		switch(local.game[local.i])
+			{
+			case "S":
+				level.ShHud = 1
+			break
+			}
+		}
+
+
+
+	local.trig = spawn trigger_multiple origin (local.origin + ( 0 0 50))
+	local.trig model models/static/v2.tik
+	local.trig scale 0.1
+	local.trig setthread Go
+	local.trig thread Rotatex
+	local.trig show
+	local.trig setsize ( -16 -16 -0 ) ( 16 16 100 )
+
+end
+
+Go:
+
+	local.player = parm.other
+	self nottriggerable
+	if(local.player.missile != NIL)
+		{
+		self triggerable
+		end
+		}
+	switch(local.player.dmteam)
+		{
+		case "axis":
+			{
+			if(level.GMAxis != NIL)
+				{
+
+				if(level.GMAxis == "unlimited")
+					break
+
+				if(level.GMAxis <= 0)
+					{
+					self thread TooMany local.player
+					end
+					}
+				else
+					level.GMAxis--
+			
+				}
+			else
+				{
+				if(level.GMSettings[1] == 0)
+					level.GMAxis = "unlimited"
+				else
+					{
+					level.GMAxis = int level.GMSettings[1]
+					level.GMAxis--
+					}
+				}
+			}
+		break
+		case "allies":
+			{
+			if(level.GMAllies != NIL)
+				{
+				if(level.GMAllies == "unlimited")
+					break
+
+				if(level.GMAllies <= 0)
+					{
+					self thread TooMany local.player
+					end
+					}
+				else
+					level.GMAllies--
+			
+				}
+			else
+				{
+				if(level.GMSettings[1] == 0)
+					level.GMAllies = "unlimited"
+				else
+					{
+					level.GMAllies = int level.GMSettings[1]
+					level.GMAllies--
+					}
+				}
+			}
+		break
+		}
+	local.player safeholster 1
+	local.player.missile = self
+	local.player exec GuidedMissile/Missile.scr self
+	wait 5
+	self triggerable
+
+end
+
+
+TooMany local.player:
+	
+	local.player iprint "Out of Stock - Please try later"
+	self triggerable
+				
+end
+
+
+Rotatex:
+
+	while(self)
+		{
+		self.angles = (self.angles + ( 0 03 0 ))
+		waitframe
+		}
+
+
+end
+
+

@@ -1,0 +1,329 @@
+//11/08/2005
+// Removed weapon get class 
+// added strings
+
+main local.model:
+
+	if(local.model=="UNARMED")
+	{
+		local.model = "models/weapons/unarmed.tik"
+	}
+
+	self.weapon = local.model
+	self.DMweapon = local.model
+	
+	if(level.run["weapons-limiter"] != "1"){end}
+
+	local.drop = waitexec global/settings.scr::getcmd "dropweapons"
+	
+	if(local.drop != "1")
+	{
+		self weaponcommand duel notdroppable
+	}
+
+	self resetstate
+
+	if(local.model=="models/weapons/unarmed.tik")
+	{
+		end
+	}
+
+	for(local.i = 1 ; local.i <= game.limiter_weapons.size;local.i++)
+	{
+		local.weapon = waitthread get_weapontik game.limiter_weapons[local.i][1] game.limiter_weapons[local.i][2] 
+		local.weaponname = game.limiter_weapons[local.i][1]::game.limiter_weapons[local.i][2] 
+
+		if(local.model == local.weapon[1])
+		{
+			if(game.limiter_weapons[local.i][2] != "" )
+			{
+
+				if(game.game == "AA")
+				{
+					self take local.model
+				}
+				else
+				{
+					self takeall
+					self waitexec weapon_limit/secondry_weapons.scr
+				}
+
+				self item local.weapon[2] 
+
+				local.print = waitexec global/settings.scr::getcmd "swap-message"
+
+				if(local.print == "1")
+				{
+					self iprint (game.weapons_strings[1][1] + local.weaponname[1] + game.weapons_strings[2][1] + local.weaponname[2] + game.weapons_strings[3][1]) 1
+				}
+
+				//local.weapon_class = waitthread get_weaponclass game.limiter_weapons[local.i][2]
+				//self usestuff
+				//self useweaponclass local.weapon_class
+
+				self use local.weapon[2]
+				end
+			}
+			else
+			{
+				local.amount = game.limiter_weapons[local.i][3]
+
+				if(local.amount==""){end}
+
+				local.amount = int local.amount
+
+				if(local.amount==0)
+				{
+
+					local.print = waitexec global/settings.scr::getcmd "swap-message"
+
+					/*
+					// Dont think this will ever run
+					//local.weapon_class = waitthread get_weaponclass game.limiter_weapons[local.i][1]
+					if(local.weapon_class == "pistol" || local.weapon_class == "grenade")
+					{
+						self take local.model
+
+						if(local.print == "1")
+						{
+							self iprint ("The admin has set that you are not allowed to use the " + local.weaponname[1]) 1
+						}
+					}
+					else
+					{
+					*/
+
+					if(local.print == "1")
+					{
+						self iprint (game.weapons_strings[4][1] + local.weaponname[1] + game.weapons_strings[5][1] ) 1
+					}
+
+					self thread newgun
+					
+					//}
+
+					end
+				}
+
+				if(level.weapons_inuse[local.model]==NIL)
+				{
+					level.weapons_inuse[local.model]=0
+				}
+
+				level.weapons_inuse[local.model]++
+	
+				if(level.weapons_inuse[local.model] > local.amount)
+				{
+					self thread newgun
+					self iprint (local.weaponname[1] + game.weapons_strings[6][1] + local.amount + game.weapons_strings[7][1]) 1
+					
+					self iprint game.weapons_strings[8][1]  1
+					
+					wait 1
+
+					for(local.w=1;local.w <= game.limiter_weapons.size;local.w++)
+					{
+						local.weaponname = game.limiter_weapons[local.w][1] 
+
+						if(game.limiter_weapons[local.w][3] != "")
+						{
+							local.num = int game.limiter_weapons[local.w][3]
+			
+							if(local.num != 0 )	
+							{
+								local.name = waitthread get_weapontik game.limiter_weapons[local.w][1] 
+
+								local.say = 1
+
+								if(level.weapons_inuse[local.name[1]] == NIL)
+								{
+									local.left = local.num 
+								}
+								else if(level.weapons_inuse[local.name[1]] < local.num)
+								{
+									local.left = local.num - level.weapons_inuse[local.name[1]]
+								}
+								else
+								{
+									local.say = 0
+								}
+								
+								if(local.say == 1)
+								{
+									self iprint ( "* " + local.weaponname + " " + local.left + game.weapons_strings[9][1] ) 
+									wait 1.5
+								}
+							}
+						}
+						else
+						{
+							self iprint ( "* " + local.weaponname ) 
+							wait 1.5
+						}
+			
+					}
+
+					end
+				}
+			}					
+		}	
+	}
+end
+
+get_weapontik local.weapon_one local.weapon_two:
+	
+	if(level.weaponsinfo == NIL)
+	{
+		waitthread ( weaponsinfo + game.game )
+	}
+
+	for(local.i=1;local.i <= level.weaponsinfo.size;local.i++)
+	{
+		if(local.weapon_one == level.weaponsinfo[local.i] [2])
+		{
+			local.weapon_one  = level.weaponsinfo[local.i][1]
+		}
+		else if(local.weapon_two == level.weaponsinfo[local.i] [2])
+		{
+			local.weapon_two  = level.weaponsinfo[local.i][1]
+		}
+	}
+
+end ( local.weapon_one::local.weapon_two )
+/*
+get_weaponcl/ss local.weapon:
+	
+	if(level.weaponsinfo == NIL)
+	{
+		waitthread ( weaponsinfo + game.game )
+	}
+
+	for(local.i=1;local.i <= level.weaponsinfo.size;local.i++)
+	{
+		if(local.weapon == level.weaponsinfo[local.i][2])
+		{
+			end level.weaponsinfo[local.i] [3]
+		}
+	}
+end
+*/
+
+weaponsinfoAA:
+
+	level.weaponsinfo = makearray			
+		//Ally weapons									//name						//class								
+		"models/weapons/springfield.tik"						"springfield '03 sniper"			"rifle"										
+		"models/weapons/bar.tik"							"bar"						"mg"
+		"models/weapons/thompsonsmg.tik"						"thompson"					"smg"
+		"models/weapons/bazooka.tik"							"bazooka"					"heavy"	
+		"models/weapons/m1_garand.tik"							"m1 garand"					"rifle"
+		//Axis												
+		"models/weapons/kar98.tik"							"kar98"						"rifle"	
+		"models/weapons/KAR98sniper.tik"						"kar98 - sniper"				"rifle"	
+		"models/weapons/mp40.tik"							"mp40"						"smg"
+		"models/weapons/mp44.tik"							"mp44"						"mg"
+		"models/weapons/panzerschreck.tik"						"panzerschreck"					"heavy"	
+		//both						
+		"models/weapons/shotgun.tik"							"shotgun"					"heavy"
+	endarray
+
+end
+
+weaponsinfoBT:
+
+	level.weaponsinfo = makearray	
+		"models/weapons/bazooka.tik"							"bazooka"					"heavy"	
+		"models/weapons/bar.tik"							"bar"						"mg"
+		"models/weapons/DeLisle.tik"							"delisle"					"rifle"
+		"models/weapons/enfield.tik"							"lee-enfield"					"rifle"
+		"models/weapons/enfield_lite.tik"						"lee-enfield"					"rifle"
+		"models/weapons/G43.tik"							"g 43"						"rifle"
+		"models/weapons/Gr_W_MineDetector.tik"						"minensuchgerat"				"grenade"
+		"models/weapons/It_W_Breda.tik"							"breda"						"mg"
+		"models/weapons/It_W_Carcano.tik"						"carcano"					"rifle"	
+		"models/weapons/It_W_Carcano_lite.tik"						"carcano"					"rifle"	
+		"models/weapons/It_W_Moschetto.tik"						"moschetto"					"smg"
+		"models/weapons/kar98.tik"							"mauser kar 98k"				"rifle"
+		"models/weapons/KAR98sniper.tik"						"kar98 - sniper"				"rifle"
+		"models/weapons/kar98_lite.tik"							"mauser kar 98k"				"rifle"
+		"models/weapons/kar98_mortar.tik"						"gewehrgranate"					"rifle"
+		"models/weapons/Mosin_Nagant_Rifle.tik"						"mosin nagant rifle"				"rifle"	
+		"models/weapons/Mosin_Nagant_Rifle_lite.tik"					"mosin nagant rifle"				"rifle"	
+		"models/weapons/mp40.tik"							"mp40"						"smg"
+		"models/weapons/m1_garand.tik"							"m1 garand"					"rifle"
+		"models/weapons/mp44.tik"							"mp44"						"mg"
+		"models/weapons/m1_garand_lite.tik"						"m1 garand"					"rifle"
+		"models/weapons/panzerschreck.tik"						"panzerschreck"					"heavy"
+		"models/weapons/ppsh_smg.tik"							"ppsh smg"					"smg"
+		"models/weapons/shotgun.tik"							"shotgun"					"heavy"
+		"models/weapons/springfield.tik"						"springfield '03 sniper"			"rifle"	
+		"models/weapons/sten.tik"							"sten mark ii"					"smg"
+		"models/weapons/svt_rifle.tik"							"svt 40"					"rifle"
+		"models/weapons/thompsonsmg.tik"						"thompson"					"smg"
+		"models/weapons/Uk_W_L42A1.tik"							"enfield l42a1"					rifle
+		"models/weapons/Uk_W_Piat.tik"							"piat"						"heavy"
+		"models/weapons/Uk_W_Vickers.tik"						"vickers-berthier"				"mg"
+		"models/weapons/US_W_MineDetector.tik"						"minedetector"					"grenade"	
+	endarray
+end
+
+weaponsinfoSH:
+
+	level.weaponsinfo = makearray			
+		"models/weapons/bar.tik"							"bar"						"mg"
+		"models/weapons/bazooka.tik"							"bazooka"					"heavy"
+		"models/weapons/kar98.tik"							"kar98"						"rifle"
+		"models/weapons/KAR98sniper.tik"						"kar98 - sniper"				"rifle"
+		"models/weapons/m1_garand.tik"							"m1 garand"					"rifle"
+		"models/weapons/mp40.tik"							"mp40"						"smg"
+		"models/weapons/mp44.tik"							"mp44"						"mg"
+		"models/weapons/panzerschreck.tik"						"panzerschreck"					"heavy"
+		"models/weapons/shotgun.tik"							"shotgun"					"heavy"
+		"models/weapons/springfield.tik"						"springfield '03 sniper"			"rifle"	
+		"models/weapons/thompsonsmg.tik"						"thompson"					"smg"
+		"models/weapons/enfield.tik"							"lee-enfield"					"rifle"		
+		"models/weapons/G43.tik"							"g 43"						"rifle"	
+		"models/weapons/Mosin_Nagant_Rifle.tik"						"mosin nagant rifle"				"rifle"	
+		"models/weapons/ppsh_smg.tik"							"ppsh smg"					"smg"
+		"models/weapons/sten.tik"							"sten mark ii"					"smg"
+		"models/weapons/svt_rifle.tik"							"svt 40"					"rifle"	
+		"models/weapons/kar98_mortar.tik"						"gewehrgranate"					"rifle"	
+	endarray
+end 
+
+newgun:
+	//local.dmteam= self.dmteam
+	self primarydmweapon ""
+	self spectator
+	self stufftext "pushmenu SelectPrimaryWeapon"
+	//self join_team local.dmteam
+end
+
+
+
+setup_stuff:
+
+	local.weapons = makearray			
+		//Ally weapons				
+		"Springfield '03 Sniper"												
+		"bar"						
+		"Thompson"					
+		"bazooka"					
+		"m1_garand					
+		//Axis														
+		"kar98"						
+		"KAR98 - Sniper"					
+		"mp40"						
+		"mp44"						
+		"Panzerschreck"					
+		//both						
+		"shotgun"					
+	endarray
+
+	for(local.i=1;local.i <= local.weapons.size;local.i++)
+	{
+		local.name = local.weapons[local.i][1]
+		level.weapons_inuse[local.name] = 0
+	}
+
+end

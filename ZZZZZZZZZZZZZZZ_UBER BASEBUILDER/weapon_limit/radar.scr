@@ -1,0 +1,34 @@
+main:
+
+	if(level.run["weapons-limiter"] != "1"){end}
+
+	local.player = self
+
+	local.player forcetorsostate GET_WEAPON
+
+	local.team = local.player.dmteam
+
+	while(local.player.DMweapon == NIL || local.player.DMweapon == "none")
+	{
+		waitframe
+	}
+
+	local.weapon = local.player.DMweapon
+
+	while(isalive local.player && local.team == local.player.dmteam && local.player != NULL && local.player != NIL )
+	{
+		waitframe
+	}
+
+	if(level.weapons_inuse[local.weapon] != NIL)
+	{
+		level.weapons_inuse[local.weapon]--	
+	}	
+
+
+	if ( local.player != NULL && local.player != NIL )
+	{
+		local.player.DMweapon = "none"
+	}
+
+end

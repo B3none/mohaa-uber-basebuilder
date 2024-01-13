@@ -1,0 +1,47 @@
+main:
+
+self.parachute = spawn script_model
+self.parachute model equipment/parachute.tik
+self.parachute.origin = self.origin
+self.parachute.angle = self.angle
+self.parachute notsolid
+self.parachute attach self "bip01 spine2" 0 ( 0 0 0 )
+
+self.falling = 1
+
+thread playercancutparachute
+
+while(self.falling)
+{
+	self.velocity = (self.velocity[0] self.velocity[1] -200)
+
+	if!(isalive self)
+	{
+		self.falling = 0
+		self.parachute anim collapse
+		wait 5
+		self.parachute remove
+	}
+
+	waitframe
+}
+
+end
+
+playercancutparachute:
+
+while(self.useheld)
+	waitframe
+
+while(self.falling)
+{
+	if(self.useheld)
+	{
+		self.falling = 0
+		self.parachute detach
+		self.parachute remove
+	}
+	waitframe
+}
+
+end

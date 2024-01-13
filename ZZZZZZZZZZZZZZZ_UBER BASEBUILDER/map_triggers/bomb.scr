@@ -1,0 +1,192 @@
+main local.origin:
+
+local.trig = spawn trigger_multiple
+local.trig.origin = ( local.origin )
+local.trig setsize ( -70 -70 -50 ) ( 70 70 50 )
+local.trig setthread boomerweenie
+local.trig message "****You Got A Bomb!****"
+local.trig wait 0
+local.trig delay 0
+
+local.rocket1 = spawn script_model 
+local.rocket1 model "AMMO/us_bomb.tik"
+local.rocket1.origin =  ( local.origin )
+local.rocket1.scale = .5
+local.rocket1 light 0 0 1 65
+local.rocket1 rotatey 360
+local.rocket1 rotatez -360
+local.rocket1 time 10
+local.rocket1 notsolid
+
+end
+
+
+cheat:
+local.player=parm.other
+if(local.player.ischeats==1)
+end
+
+local.player.ischeats=1
+wait .5
+if(local.player.isfiredboomerweenie == 1)
+{
+local.laser21 remove
+local.laser22 remove
+local.thing remove
+local.player.isfiredboomerweenie=0
+local.player.istake=0
+
+}
+
+
+wait .5
+local.player.ischeats=0
+local.player respawn
+end
+
+boomerweenie:
+local.player=parm.other
+if(local.player.isfiredboomerweenie==1)
+end
+
+local.player.isfiredboomerweenie=1
+local.player iprint "**Press E **USE** To Throw A Bomb!!**"
+local.player playsound plantbomb1
+
+
+	local.thing = spawn script_object
+	local.thing model AMMO/us_bomb.tik
+	local.thing.scale = .2
+	local.thing attach local.player "tag_weapon_left"
+
+
+if ((isalive local.player) && (local.player.useheld==1))
+local.player.counter = 0
+while ((isalive local.player) && (local.player.useheld==0))
+wait .1
+
+
+if(local.player.dmteam == "spectator")
+{
+local.laser21 remove
+local.laser22 remove
+local.thing remove
+local.player.isfiredboomerweenie=0
+local.player.istake=0
+}
+
+if(local.player.health <= 0)
+{
+local.laser21 remove
+local.laser22 remove
+local.thing remove
+local.player.isfiredboomerweenie=0
+local.player.istake=0
+}
+
+if(local.player.isfiredboomerweenie==0)
+end
+
+
+local.groundtarget = spawn script_origin
+local.groundspot_target = spawn script_origin
+
+local.fwd_vec = angles_toforward local.player.viewangles
+local.start = local.player gettagposition "Bip01 Head"
+
+local.range = 10240
+
+local.groundtarget.origin = trace (local.start + local.fwd_vec * 64) (local.start + local.fwd_vec * local.range ) 0
+
+			local.laser21 = spawn script_model 
+			local.laser21 model "AMMO/us_bomb.tik" targetname "boomerweenie"
+			local.laser21.origin = local.start
+			local.laser21.angles = self.angles
+			local.laser21.scale = .2
+			local.laser21 notsolid
+			local.laser21 light 1 0 0 60
+			local.laser22 = spawn script_model 
+			local.laser22.origin = local.laser21.origin
+			local.laser22 notsolid
+			local.laser22 light 1 1 0 60
+			local.laser22 glue local.laser21
+
+
+if (local.player.dmteam == "allies")
+{
+local.laser21 light 0 0 1 150
+}
+else
+{
+local.laser21 light 1 0 0 150
+}
+
+
+local.thing remove
+
+	$boomerweenie physics_off
+
+local.showspot = 1
+
+local.laser21 playsound snd_b_zing8
+local.laser22 playsound snd_b_zing8
+local.laser21 playsound snd_b_zing8
+local.laser22 playsound snd_b_zing8
+local.laser21 playsound snd_b_zing8
+local.laser22 playsound snd_b_zing8
+local.laser21 playsound snd_b_zing8
+local.laser22 playsound snd_b_zing9
+local.laser21 playsound snd_b_zing9
+local.laser22 playsound snd_b_zing9
+local.laser21 playsound snd_b_zing9
+local.laser22 playsound snd_b_zing9
+local.laser21 loopsound snd_b_zing9
+local.laser22 loopsound snd_b_zing9
+
+
+local.laser21 time 1
+local.laser21 moveto local.groundtarget.origin
+local.laser21 waitmove
+
+local.Exp21 = spawn "fx/scriptbazookaexplosion.tik"
+local.Exp22 = spawn "animate/fx_mortar_dirt.tik"
+local.Exp21.origin = local.groundtarget.origin
+local.Exp21.scale = .6
+local.Exp21 light 1 0 0 250
+local.Exp21 anim start
+local.Exp22.origin = local.groundtarget.origin
+local.Exp22.scale = .2
+local.Exp22 light 1 0 0 150
+local.Exp22 anim start
+wait .7
+local.Exp21 anim stop
+local.Exp22 anim stop
+local.Exp21 remove
+local.Exp22 remove
+
+
+
+
+local.laser21 stoploopsound
+local.laser22 stoploopsound
+local.laser21 remove
+local.laser22 remove
+
+
+
+if((local.player isTouching local.Exp31) && (local.player.health <= 0))
+{
+
+}
+local.Exp31 anim stop
+local.Exp31 remove
+local.Exp32 anim stop
+local.Exp32 remove
+
+
+local.groundtarget remove
+local.groundspot_target remove
+wait .1
+
+local.player.isfiredboomerweenie=0
+end

@@ -1,0 +1,736 @@
+menu "camper_stats" 640 480 NONE 0
+bgcolor 1 1 1 0
+borderstyle NONE
+bgfill 1 1 1 0
+//fullscreen 1
+//fadein 1.5
+virtualres 1
+//include "ui/statsback.inc"
+showcommand "exec stats/stats.txt"
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+resource
+Label
+{
+name "Default"
+rect 0 0 512 512
+fgcolor 1.00 1.00 1.00 1.00
+bgcolor 0.50 0.50 0.50 0.00
+borderstyle "NONE"
+shader "statscreen_a"
+
+}
+resource
+Label
+{
+name "Default"
+rect 384 0 256 512
+fgcolor 1.00 1.00 1.00 1.00
+bgcolor 0.50 0.50 0.50 0.00
+borderstyle "NONE"
+shader "statscreen_b"
+
+}
+resource
+Label
+{
+title "Upper torso"
+name "default"
+rect 250 80 128 24
+fgcolor 1.00 1.00 1.00 1.00
+bgcolor 0.00 0.00 0.00 0.00
+borderstyle "INDENT_BORDER"
+font "facfont-20"
+textalign center
+
+}
+resource
+Label
+{
+title "Lower torso"
+name "default"
+rect 250 128 128 24
+fgcolor 1.00 1.00 1.00 1.00
+bgcolor 0.00 0.00 0.00 0.00
+borderstyle "INDENT_BORDER"
+font "facfont-20"
+textalign center
+
+}
+resource
+Label
+{
+title "Pelvis"
+name "default"
+rect 250 152 128 24
+fgcolor 1.00 1.00 1.00 1.00
+bgcolor 0.00 0.00 0.00 0.00
+borderstyle "INDENT_BORDER"
+font "facfont-20"
+textalign center
+
+}
+resource
+Label
+{
+title "Upper right arm"
+name "default"
+rect 250 176 128 24
+fgcolor 1.00 1.00 1.00 1.00
+bgcolor 0.00 0.00 0.00 0.00
+borderstyle "INDENT_BORDER"
+font "facfont-20"
+textalign center
+
+}
+resource
+Label
+{
+title "Upper left arm"
+name "default"
+rect 250 200 128 24
+fgcolor 1.00 1.00 1.00 1.00
+bgcolor 0.00 0.00 0.00 0.00
+borderstyle "INDENT_BORDER"
+font "facfont-20"
+textalign center
+
+}
+resource
+Label
+{
+title "Upper right leg"
+name "default"
+rect 250 224 128 24
+fgcolor 1.00 1.00 1.00 1.00
+bgcolor 0.00 0.00 0.00 0.00
+borderstyle "INDENT_BORDER"
+font "facfont-20"
+textalign center
+
+}
+resource
+Label
+{
+title "Upper left leg"
+name "default"
+rect 250 248 128 24
+fgcolor 1.00 1.00 1.00 1.00
+bgcolor 0.00 0.00 0.00 0.00
+borderstyle "INDENT_BORDER"
+font "facfont-20"
+textalign center
+
+}
+resource
+Label
+{
+title "Lower right arm"
+name "default"
+rect 250 272 128 24
+fgcolor 1.00 1.00 1.00 1.00
+bgcolor 0.00 0.00 0.00 0.00
+borderstyle "INDENT_BORDER"
+font "facfont-20"
+textalign center
+
+}
+resource
+Label
+{
+title "Lower left arm"
+name "default"
+rect 250 296 128 24
+fgcolor 1.00 1.00 1.00 1.00
+bgcolor 0.00 0.00 0.00 0.00
+borderstyle "INDENT_BORDER"
+font "facfont-20"
+textalign center
+
+}
+resource
+Label
+{
+title "Lower right leg"
+name "default"
+rect 250 320 128 24
+fgcolor 1.00 1.00 1.00 1.00
+bgcolor 0.00 0.00 0.00 0.00
+borderstyle "INDENT_BORDER"
+font "facfont-20"
+textalign center
+
+}
+resource
+Label
+{
+title "Lower left leg"
+name "default"
+rect 250 344 128 24
+fgcolor 1.00 1.00 1.00 1.00
+bgcolor 0.00 0.00 0.00 0.00
+borderstyle "INDENT_BORDER"
+font "facfont-20"
+textalign center
+
+}
+resource
+Label
+{
+title "Right hand"
+name "default"
+rect 250 368 128 24
+fgcolor 1.00 1.00 1.00 1.00
+bgcolor 0.00 0.00 0.00 0.00
+borderstyle "INDENT_BORDER"
+font "facfont-20"
+textalign center
+
+}
+resource
+Label
+{
+title "Left hand"
+name "default"
+rect 250 392 128 24
+fgcolor 1.00 1.00 1.00 1.00
+bgcolor 0.00 0.00 0.00 0.00
+borderstyle "INDENT_BORDER"
+font "facfont-20"
+textalign center
+
+}
+resource
+Label
+{
+title "Right foot"
+name "default"
+rect 250 416 128 24
+fgcolor 1.00 1.00 1.00 1.00
+bgcolor 0.00 0.00 0.00 0.00
+borderstyle "INDENT_BORDER"
+font "facfont-20"
+textalign center
+
+}
+resource
+Label
+{
+title "Left foot"
+name "default"
+rect 250 440 128 24
+fgcolor 1.00 1.00 1.00 1.00
+bgcolor 0.00 0.00 0.00 0.00
+borderstyle "INDENT_BORDER"
+font "facfont-20"
+textalign center
+
+}
+resource
+Label
+{
+title "Middle torso"
+name "default"
+rect 250 104 128 24
+fgcolor 1.00 1.00 1.00 1.00
+bgcolor 0.00 0.00 0.00 0.00
+borderstyle "INDENT_BORDER"
+font "facfont-20"
+textalign center
+
+}
+resource
+Label
+{
+title "Killed"
+name "default"
+rect 32 32 128 24
+fgcolor 1.00 1.00 1.00 1.00
+bgcolor 0.00 0.00 0.00 0.00
+borderstyle "INDENT_BORDER"
+font "facfont-20"
+textalign center
+
+}
+resource
+Label
+{
+title "times_headshots"
+name "default"
+rect 160 32 64 24
+fgcolor 1.00 1.00 1.00 1.00
+bgcolor 0.00 0.00 0.00 0.00
+borderstyle "INDENT_BORDER"
+linkcvar "times_killed"
+font "facfont-20"
+textalign center
+
+}
+resource
+Label
+{
+title "Blown up!"
+name "default"
+rect 32 128 128 24
+fgcolor 1.00 1.00 1.00 1.00
+bgcolor 0.00 0.00 0.00 0.00
+borderstyle "INDENT_BORDER"
+font "facfont-20"
+textalign center
+
+}
+resource
+Label
+{
+title "times_blownup"
+name "default"
+rect 160 128 64 24
+fgcolor 1.00 1.00 1.00 1.00
+bgcolor 0.00 0.00 0.00 0.00
+borderstyle "INDENT_BORDER"
+linkcvar "times_blownup"
+font "facfont-20"
+textalign center
+
+}
+resource
+Label
+{
+title "times_crouching"
+name "default"
+rect 160 104 64 24
+fgcolor 1.00 1.00 1.00 1.00
+bgcolor 0.00 0.00 0.00 0.00
+borderstyle "INDENT_BORDER"
+linkcvar "times_crouching"
+font "facfont-20"
+textalign center
+
+}
+resource
+Label
+{
+title "Location"
+name "default"
+rect 250 8 128 24
+fgcolor 1.00 1.00 1.00 1.00
+bgcolor 0.00 0.00 0.00 0.00
+borderstyle "INDENT_BORDER"
+font "facfont-20"
+textalign center
+
+}
+resource
+Label
+{
+title "Been Shot"
+name "default"
+rect 390 8 80 24
+fgcolor 1.00 1.00 1.00 1.00
+bgcolor 0.00 0.00 0.00 0.00
+borderstyle "INDENT_BORDER"
+font "facfont-20"
+textalign center
+
+}
+resource
+Label
+{
+title "Head"
+name "default"
+rect 250 56 128 24
+fgcolor 1.00 1.00 1.00 1.00
+bgcolor 0.00 0.00 0.00 0.00
+borderstyle "INDENT_BORDER"
+font "facfont-20"
+textalign center
+
+}
+resource
+Label
+{
+title "times_head"
+name "default"
+rect 390 56 80 24
+fgcolor 1.00 1.00 1.00 1.00
+bgcolor 0.00 0.00 0.00 0.00
+borderstyle "INDENT_BORDER"
+linkcvar "times_head"
+font "facfont-20"
+textalign center
+
+}
+resource
+Label
+{
+title "times_torso_mid"
+name "default"
+rect 390 104 80 24
+fgcolor 1.00 1.00 1.00 1.00
+bgcolor 0.00 0.00 0.00 0.00
+borderstyle "INDENT_BORDER"
+linkcvar "times_torso_mid"
+font "facfont-20"
+textalign center
+
+}
+resource
+Label
+{
+title "times_torso_lower"
+name "default"
+rect 390 128 80 24
+fgcolor 1.00 1.00 1.00 1.00
+bgcolor 0.00 0.00 0.00 0.00
+borderstyle "INDENT_BORDER"
+linkcvar "times_torso_lower"
+font "facfont-20"
+textalign center
+
+}
+resource
+Label
+{
+title "times_pelvis"
+name "default"
+rect 390 152 80 24
+fgcolor 1.00 1.00 1.00 1.00
+bgcolor 0.00 0.00 0.00 0.00
+borderstyle "INDENT_BORDER"
+linkcvar "times_pelvis"
+font "facfont-20"
+textalign center
+
+}
+resource
+Label
+{
+title "times_r_arm_upper"
+name "default"
+rect 390 176 80 24
+fgcolor 1.00 1.00 1.00 1.00
+bgcolor 0.00 0.00 0.00 0.00
+borderstyle "INDENT_BORDER"
+linkcvar "times_r_arm_upper"
+font "facfont-20"
+textalign center
+
+}
+resource
+Label
+{
+title "times_l_arm_upper"
+name "default"
+rect 390 200 80 24
+fgcolor 1.00 1.00 1.00 1.00
+bgcolor 0.00 0.00 0.00 0.00
+borderstyle "INDENT_BORDER"
+linkcvar "times_l_arm_upper"
+font "facfont-20"
+textalign center
+
+}
+resource
+Label
+{
+title "times_r_leg_upper"
+name "default"
+rect 390 224 80 24
+fgcolor 1.00 1.00 1.00 1.00
+bgcolor 0.00 0.00 0.00 0.00
+borderstyle "INDENT_BORDER"
+linkcvar "times_r_leg_upper"
+font "facfont-20"
+textalign center
+
+}
+resource
+Label
+{
+title "times_l_leg_upper"
+name "default"
+rect 390 248 80 24
+fgcolor 1.00 1.00 1.00 1.00
+bgcolor 0.00 0.00 0.00 0.00
+borderstyle "INDENT_BORDER"
+linkcvar "times_l_leg_upper"
+font "facfont-20"
+textalign center
+
+}
+resource
+Label
+{
+title "times_r_arm_lower"
+name "default"
+rect 390 272 80 24
+fgcolor 1.00 1.00 1.00 1.00
+bgcolor 0.00 0.00 0.00 0.00
+borderstyle "INDENT_BORDER"
+linkcvar "times_r_arm_lower"
+font "facfont-20"
+textalign center
+
+}
+resource
+Label
+{
+title "times_l_arm_lower"
+name "default"
+rect 390 296 80 24
+fgcolor 1.00 1.00 1.00 1.00
+bgcolor 0.00 0.00 0.00 0.00
+borderstyle "INDENT_BORDER"
+linkcvar "times_l_arm_lower"
+font "facfont-20"
+textalign center
+
+}
+resource
+Label
+{
+title "times_r_leg_lower"
+name "default"
+rect 390 320 80 24
+fgcolor 1.00 1.00 1.00 1.00
+bgcolor 0.00 0.00 0.00 0.00
+borderstyle "INDENT_BORDER"
+linkcvar "times_r_leg_lower"
+font "facfont-20"
+textalign center
+
+}
+resource
+Label
+{
+title "times_l_leg_lower"
+name "default"
+rect 390 344 80 24
+fgcolor 1.00 1.00 1.00 1.00
+bgcolor 0.00 0.00 0.00 0.00
+borderstyle "INDENT_BORDER"
+linkcvar "times_l_leg_lower"
+font "facfont-20"
+textalign center
+
+}
+resource
+Label
+{
+title "times_r_hand"
+name "default"
+rect 390 368 80 24
+fgcolor 1.00 1.00 1.00 1.00
+bgcolor 0.00 0.00 0.00 0.00
+borderstyle "INDENT_BORDER"
+linkcvar "times_r_hand"
+font "facfont-20"
+textalign center
+
+}
+resource
+Label
+{
+title "times_l_hand"
+name "default"
+rect 390 392 80 24
+fgcolor 1.00 1.00 1.00 1.00
+bgcolor 0.00 0.00 0.00 0.00
+borderstyle "INDENT_BORDER"
+linkcvar "times_l_hand"
+font "facfont-20"
+textalign center
+
+}
+resource
+Label
+{
+title "times_l_foot"
+name "default"
+rect 390 440 80 24
+fgcolor 1.00 1.00 1.00 1.00
+bgcolor 0.00 0.00 0.00 0.00
+borderstyle "INDENT_BORDER"
+linkcvar "times_l_foot"
+font "facfont-20"
+textalign center
+
+}
+resource
+Label
+{
+title "times_r_foot"
+name "default"
+rect 390 416 80 24
+fgcolor 1.00 1.00 1.00 1.00
+bgcolor 0.00 0.00 0.00 0.00
+borderstyle "INDENT_BORDER"
+linkcvar "times_r_foot"
+font "facfont-20"
+textalign center
+
+}
+resource
+Label
+{
+title "times_torso_upper"
+name "default"
+rect 390 80 80 24
+fgcolor 1.00 1.00 1.00 1.00
+bgcolor 0.00 0.00 0.00 0.00
+borderstyle "INDENT_BORDER"
+linkcvar "times_torso_upper"
+font "facfont-20"
+textalign center
+
+}
+resource
+Label
+{
+title "times_stood"
+name "default"
+rect 160 80 64 24
+fgcolor 1.00 1.00 1.00 1.00
+bgcolor 0.00 0.00 0.00 0.00
+borderstyle "INDENT_BORDER"
+linkcvar "times_stood"
+font "facfont-20"
+textalign center
+
+}
+resource
+Label
+{
+title "times_running"
+name "default"
+rect 160 56 64 24
+fgcolor 1.00 1.00 1.00 1.00
+bgcolor 0.00 0.00 0.00 0.00
+borderstyle "INDENT_BORDER"
+linkcvar "times_running"
+font "facfont-20"
+textalign center
+
+}
+resource
+Button
+{
+title "Close"
+name "default"
+rect 32 440 64 24
+fgcolor 1.00 1.00 1.00 1.00
+bgcolor 0.00 0.00 0.00 0.70
+borderstyle "3D_BORDER"
+stuffcommand "popmenu 0"
+textalign center
+clicksound "menu/sound/apply.wav"
+hoversound "menu/sound/scroll.wav"
+font facfont-20
+shader "menu_button_trans"
+hovershader "menu_button_glow"
+
+}
+resource
+Label
+{
+title "Killed Running"
+name "default"
+rect 32 56 128 24
+fgcolor 1.00 1.00 1.00 1.00
+bgcolor 0.00 0.00 0.00 0.00
+borderstyle "INDENT_BORDER"
+font "facfont-20"
+textalign center
+
+}
+resource
+Label
+{
+title "Killed Stood"
+name "default"
+rect 31 80 128 24
+fgcolor 1.00 1.00 1.00 1.00
+bgcolor 0.00 0.00 0.00 0.00
+borderstyle "INDENT_BORDER"
+font "facfont-20"
+textalign center
+
+}
+resource
+Label
+{
+title "Killed Crouching"
+name "default"
+rect 32 104 128 24
+fgcolor 1.00 1.00 1.00 1.00
+bgcolor 0.00 0.00 0.00 0.00
+borderstyle "INDENT_BORDER"
+font "facfont-20"
+textalign center
+
+}
+resource
+Button
+{
+title "Reset"
+name "default"
+rect 97 440 64 24
+fgcolor 1.00 1.00 1.00 1.00
+bgcolor 0.00 0.00 0.00 0.70
+borderstyle "3D_BORDER"
+stuffcommand "exec menu/stats.cfg"
+textalign center
+clicksound "menu/sound/apply.wav"
+hoversound "menu/sound/scroll.wav"
+font facfont-20
+shader "menu_button_trans"
+hovershader "menu_button_glow"
+
+}
+end.

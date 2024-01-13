@@ -1,0 +1,25 @@
+local.hello = makearray
+	"hello world"
+	Norwegian_Nynorsk_Norway_________________Goddag
+	Norwegian_Bokmaal_Norway_________________Hei
+	Norwegian_Bokmaal_Norway_________________Heisann
+	Norwegian_Bokmaal_Norway_________________God_dag
+	Norwegian_Bokmaal_Norway_________________Morn
+	Norwegian_Bokmaal_Norway_________________Hallo
+	Norwegian_Nordmørsk_Norway_______________Goddág
+	Norwegian_Nordmørsk_Norway_______________Goddàjen
+	Norwegian_Nordmørsk_Norway_reply_old__Sing_Gú_______________
+	Norwegian_Nordmørsk_Norway_old_________Godt_mót
+	Norwegian_Nordmørsk_Norway_reply_______Godt_mót_att
+	Norwegian_Nordmørsk_Norway_informal____Hêia
+	Norwegian_Nordmørsk_Norway_informal____Hæia
+	Norwegian_Nordmørsk_Norwayto_p.working_Síng_ârbeia
+	Norwegian_Bergensk_Bergen_Norway_________Halloen
+	Norwegian_Sortlandsk_Sortland_Norway_____Goda
+	Norwegian_Sortlandsk_Sortland_Norway_____Ka_farsken,_e_det_du?
+
+endarray
+
+end local.hello
+
+// did have 800 languages but mohaa wouldnt let me have any fun:(

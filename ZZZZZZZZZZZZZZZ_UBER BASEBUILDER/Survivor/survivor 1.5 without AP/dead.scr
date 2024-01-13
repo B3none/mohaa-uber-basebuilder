@@ -1,0 +1,29 @@
+main:
+	self.lives--
+
+	if( self.lives == 1 && level.lives > 1)
+	{
+		self iprint ("1 life left, Your last live") 1
+	}
+	else
+	{
+		if(self.lives > 1 || self.lives == 0)
+		{
+			 local.s = " lives"
+		}
+		else if(self.lives == 1)
+		{
+			 local.s = "life"
+		}
+
+		self iprint ("You now have " + self.lives + local.s + " left") 1
+
+
+	}
+
+	if(self.lives <=0)
+	{
+		self waitexec survivor/camera.scr
+		self exec survivor/spectator.scr
+	}
+end

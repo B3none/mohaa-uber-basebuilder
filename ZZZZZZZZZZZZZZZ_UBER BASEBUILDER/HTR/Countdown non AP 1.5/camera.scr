@@ -1,0 +1,80 @@
+main local.dmteam:
+
+	level.round_times = getcvar "countdown_times"
+	level.round_times = int level .round_times
+	level.round_times++
+	setcvar "countdown_times" level.round_times
+
+	spawn Camera targetname "camera" origin self.origin 
+	$camera follow_distance 190
+	$camera orbit_height 70
+	$camera speed 1.4
+
+	drawhud 0
+
+	letterbox 1
+	self waitexec global/get_weapon.scr
+	local.player = spawn animate
+	local.player.model = self.brushmodel
+	local.player hide
+	local.player notsolid
+	local.player.origin = self.origin
+	local.player.angles = self.angles
+	local.player show
+
+
+	//$player noclip	
+	self respawn
+	$player hide
+	
+	freezeplayer $player
+
+
+	if(self.weapon != "models/weapons/unarmed.tik")
+	{
+		local.player anim unarmed_run_into_wall					
+	}
+	else
+	{
+		local.player anim unarmed_stand_idle	 							
+	}
+
+	local.gun = spawn animate
+	local.gun.model = self.weapon
+	local.gun.origin = local.player.origin
+
+	local.gun attach local.player  "tag_weapon_right"
+	local.player attachmodel "items/walkietalkie.tik" "Bip01 Pelvis" 0.8 "fake_pelvis_radio" 1 -1 -1 -1 -1 ( 1.5 -4 -10.0 )
+	$fake_pelvis_radio.angles = ( 0 90 90 )
+
+
+	$camera orbit local.player 
+
+	fadein 5.0 0.0 0.0 0.0 1.0
+
+	wait 1
+	
+	local.gt = getcvar "g_gametype"
+
+	setcvar "g_gametype" "4"
+
+	teamwin local.dmteam
+
+	setcvar "g_gametype" local.gt
+	
+	wait 2
+
+	cuecamera $camera
+
+	wait 4
+
+	clearletterbox
+	cueplayer
+
+	$fake_pelvis_radio delete
+	local.player delete
+
+	releaseplayer  $player
+	
+
+end

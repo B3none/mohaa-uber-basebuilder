@@ -1,0 +1,193 @@
+
+main:
+
+	local.player = self
+
+	level.limit = waitexec global/settings.scr::getcmd "mines-ammo"
+	level.limit = int  level.limit
+
+	if(local.player.mines >  level.limit )
+	{
+		self iprint "Out of mines" 1
+		end
+	}
+
+	local.player iprint ( "Sticky bomb: " + local.player.mines + "/" + level.limit)
+	local.player.mines++
+
+	local.wait = 3
+	local.mine = waitexec global/ac/mines/sticky_chuck.scr local.player "items/explosive2.tik" 2.5
+
+	local.mine_trig = spawn trigger_multiple "spawnflags" "128"  "targetname" ("minetrig_shot")
+	local.mine_trig.origin = local.mine.origin
+	local.mine_trig setsize ( -15 -15 -15 ) ( 15 15 15 )
+	local.mine_trig setthread shot
+	local.mine_trig glue local.mine
+	local.mine_trig.mine = local.mine
+
+	local.mine_trig_walk = spawn trigger_multiple  "targetname" ("minetrig_walk")
+	local.mine_trig_walk.origin = local.mine.origin
+	local.mine_trig_walk setsize ( -15 -15 -15 ) ( 15 15 15 )
+	local.mine_trig_walk setthread stepped_on
+	local.mine_trig_walk glue local.mine
+	local.mine_trig_walk.team = local.player.dmteam
+	local.mine_trig_walk.mine = local.mine
+
+	local.mine_trig_walk nottriggerable
+	local.mine.shot = local.mine_trig
+	local.mine.walk = local.mine_trig_walk
+	local.mine.player = local.player
+
+
+	if(level.mine_script != "proximity-chuck")
+	{
+		local.watch = waitexec global/settings.scr::getcmd "stopwatch" 
+		if(local.watch=="1")
+		{
+			local.player stopwatch local.wait
+		}
+	}
+
+	local.player playsound plantbomb1
+
+	for(local.i = 0; local.i <=  local.wait; local.i++)
+	{
+		wait 1
+		if(local.mine == NULL)
+		{
+			local.player stopwatch 0
+			end
+		}
+	}
+
+	if(local.mine != NULL)
+	{
+		local.mine_trig_walk triggerable
+
+		local.player thread explode local.mine.origin
+
+		local.mine.shot delete
+		local.mine.walk delete
+		local.mine delete
+	}
+end
+
+stepped_on:
+
+	local.player = parm.other
+	
+	local.mine = self.mine			
+	local.end_or_not = waitthread team_check local.player local.mine.player
+	
+	if(local.end_or_not==1)
+	{
+		if(self.team=="axis")
+		{
+			self.mine light 1 0 0 50
+		}
+		else
+		{
+			self.mine light 0 0 1 50
+		}
+
+		wait 3
+		if(self.mine )
+		{
+			local.mine light 0 0 0 0
+		}
+
+		end //end if same team and team team killing is not on
+	}
+
+	local.mine.player thread explode local.mine.origin
+
+	local.mine.shot delete
+	local.mine.walk delete
+	local.mine delete
+		
+end
+	
+shot:
+	local.player = parm.other
+				
+	local.mine = self.mine
+
+	local.player thread explode local.mine.origin
+
+	local.mine.shot delete
+	local.mine.walk delete
+	local.mine delete
+		
+
+end
+
+
+explode local.explosionplace local.shot:
+
+	thread bang local.explosionplace
+	local.radius = 300.00 * 300.00
+
+	for(local.i = 1; local.i <= $player.size; local.i++)
+	{
+		local.player= $player[local.i]
+		local.distance = local.player.origin - local.explosionplace
+
+		local.distance = local.distance * local.distance
+
+		if(local.distance <= local.radius)
+		{
+			local.end_or_not = waitthread team_check local.player self
+	
+			if(local.end_or_not==1)
+			{
+				end //end if same team and team team killing is not on
+			}
+
+			local.dmg_fact = 1 - local.distance / local.radius
+			local.dmg = 150 * local.dmg_fact + 30
+
+			local.player damage self local.dmg self (0 0 0) (0 0 0) (0 0 0) 1 1 9 -1
+		}
+
+	}
+
+
+end
+
+team_check local.player local.shooter:
+	
+	local.gametype = getcvar "g_gametype"
+	
+	if(local.gametype=="1")
+	{
+		end 0
+	}
+	
+	local.ff =  getcvar "g_teamdamage"
+
+	if(local.ff!="0")
+	{
+		if(local.player.dmteam == local.shooter.dmteam)
+		{
+			end 1
+		}
+	}
+
+end 0
+
+bang local.origin:
+
+	local.exp1 = spawn "models/emitters/explosion_mine.tik" 
+	local.exp1.origin = local.origin 
+	local.exp1 scale 2
+
+	local.exp = spawn "models/emitters/explosion_mine_shockwave.tik" 
+	local.exp.origin = local.origin 
+	local.exp scale 2
+	local.exp1 anim start
+	local.exp anim start
+	wait 1
+	local.exp delete
+	local.exp1 delete
+ 
+end

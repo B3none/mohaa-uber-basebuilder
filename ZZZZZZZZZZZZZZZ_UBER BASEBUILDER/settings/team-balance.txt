@@ -1,0 +1,30 @@
+// This is the settings file for a  modified version of Jim's Skill Balancer.
+
+
+
+
+main:
+	local.settings = makearray
+		//command			//setting			//help	
+		"scan-wait"			"3"				"Time between each team scan"
+	endarray
+
+end local.settings
+
+
+
+
+// DOnt run in FFA
+gametypes:
+	
+	local.gametypes = makeArray
+	//game type #	// String- just for refrence
+		//"1"	//FFA	
+		"2"	//TDM
+		"3"	//RBM
+		"4"	//OBJ
+		"5"	//TOW
+		"6"	//LIB
+	endArray
+
+end local.gametypes

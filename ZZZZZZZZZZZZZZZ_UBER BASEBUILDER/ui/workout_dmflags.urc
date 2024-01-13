@@ -1,0 +1,306 @@
+menu "workout_dmflags" 560 320 NONE 0
+
+
+
+
+
+resource
+Label
+{
+name "Default"
+rect 0 0 560 320
+fgcolor 0.00 0.00 0.00 1.00
+bgcolor 0.50 0.50 0.50 1.00
+borderstyle "RAISED"
+}
+resource
+CheckBox
+{
+title "No MG"
+name "Default"
+rect 10 90 100 20
+fgcolor 0.00 0.00 0.00 1.00
+bgcolor 0.00 0.50 1.00 1.00
+borderstyle "RAISED"
+linkcvar "flagsmg"
+checked_command "add flags 33554432"
+unchecked_command "subtract flags 33554432"
+
+}
+resource
+CheckBox
+{
+title "No Rockets"
+name "Default"
+rect 120 90 100 20
+fgcolor 0.00 0.00 0.00 1.00
+bgcolor 0.00 0.50 1.00 1.00
+borderstyle "RAISED"
+linkcvar "flagssmg"
+checked_command "add flags 67108864"
+unchecked_command "subtract flags 67108864"
+
+}
+resource
+CheckBox
+{
+title "No Health"
+name "Default"
+rect 10 155 173 20
+fgcolor 0.00 0.00 0.00 1.00
+bgcolor 0.00 0.50 1.00 1.00
+borderstyle "RAISED"
+linkcvar "flagshealth"
+checked_command "add flags 1"
+unchecked_command "subtract flags 1"
+
+}
+resource
+CheckBox
+{
+title "No Power ups"
+name "Default"
+rect 193 155 173 20
+fgcolor 0.00 0.00 0.00 1.00
+bgcolor 0.00 0.50 1.00 1.00
+borderstyle "RAISED"
+linkcvar "flagspwrupd"
+checked_command "add flags 2"
+unchecked_command "subtract flags 2"
+
+}
+resource
+CheckBox
+{
+title "Weapons stay"
+name "Default"
+rect 376 155 173 20
+fgcolor 0.00 0.00 0.00 1.00
+bgcolor 0.00 0.50 1.00 1.00
+borderstyle "RAISED"
+linkcvar "flagswpsstay"
+checked_command "add flags 4"
+unchecked_command "subtract flags 4"
+
+}
+resource
+CheckBox
+{
+title "Instant items"
+name "Default"
+rect 10 185 173 20
+fgcolor 0.00 0.00 0.00 1.00
+bgcolor 0.00 0.50 1.00 1.00
+borderstyle "RAISED"
+linkcvar "flaginstitems"
+checked_command "add flags 16"
+unchecked_command "subtract flags 16"
+
+}
+resource
+Label
+{
+title "Flags"
+name "Default"
+rect 193 255 60 20
+fgcolor 1.00 1.00 1.00 1.00
+bgcolor 0.00 0.00 0.00 1.00
+borderstyle "INDENT_BORDER"
+}
+resource
+CheckBox
+{
+title "No armor"
+name "Default"
+rect 376 185 173 20
+fgcolor 0.00 0.00 0.00 1.00
+bgcolor 0.00 0.50 1.00 1.00
+borderstyle "RAISED"
+linkcvar "flagsnoarmor"
+checked_command "add flags 2048"
+unchecked_command "subtract flags 2048"
+
+}
+resource
+CheckBox
+{
+title "Same level"
+name "Default"
+rect 193 185 173 20
+fgcolor 0.00 0.00 0.00 1.00
+bgcolor 0.00 0.50 1.00 1.00
+borderstyle "RAISED"
+linkcvar "flagsamelvl"
+checked_command "add flags 32"
+unchecked_command "subtract flags 32"
+
+}
+resource
+Field
+{
+name "Default"
+rect 253 255 112 20
+fgcolor 0.00 0.00 0.00 1.00
+bgcolor 1.00 1.00 1.00 1.00
+borderstyle "INDENT_BORDER"
+stuffcommand "rcon dmflags"
+linkcvar "flags"
+}
+resource
+CheckBox
+{
+title "Allow lean"
+name "Default"
+rect 376 215 173 20
+fgcolor 0.00 0.00 0.00 1.00
+bgcolor 0.00 0.50 1.00 1.00
+borderstyle "RAISED"
+linkcvar "flagsallowln"
+checked_command "add flags 262144"
+unchecked_command "subtract flags 262144"
+
+}
+resource
+CheckBox
+{
+title "No footsteps"
+name "Default"
+rect 193 215 173 20
+fgcolor 0.00 0.00 0.00 1.00
+bgcolor 0.00 0.50 1.00 1.00
+borderstyle "RAISED"
+linkcvar "flagsnofoot"
+checked_command "add flags 131072"
+unchecked_command "subtract flags 131072"
+
+}
+resource
+CheckBox
+{
+title "Infinite ammo"
+name "Default"
+rect 10 215 173 20
+fgcolor 0.00 0.00 0.00 1.00
+bgcolor 0.00 0.50 1.00 1.00
+borderstyle "RAISED"
+linkcvar "flagammo"
+checked_command "add flags 16384"
+unchecked_command "subtract flags 16384"
+
+}
+resource
+CheckBox
+{
+title "No Sniper "
+name "Default"
+rect 450 60 100 20
+fgcolor 0.00 0.00 0.00 1.00
+bgcolor 0.00 0.50 1.00 1.00
+borderstyle "RAISED"
+linkcvar "flagsniper"
+checked_command "add flags 8388608"
+unchecked_command "subtract flags 8388608"
+
+}
+resource
+CheckBox
+{
+title "No Shotgun"
+name "Default"
+rect 340 60 100 20
+fgcolor 0.00 0.00 0.00 1.00
+bgcolor 0.00 0.50 1.00 1.00
+borderstyle "RAISED"
+linkcvar "flagshotgun"
+checked_command "add flags 134217728"
+unchecked_command "subtract flags 134217728"
+
+}
+resource
+CheckBox
+{
+title "No Mines"
+name "Default"
+rect 230 60 100 20
+fgcolor 0.00 0.00 0.00 1.00
+bgcolor 0.00 0.50 1.00 1.00
+borderstyle "RAISED"
+linkcvar "flagsmines"
+checked_command "add flags 268435456"
+unchecked_command "subtract flags 268435456"
+
+}
+resource
+CheckBox
+{
+title "No SMG"
+name "Default"
+rect 120 60 100 20
+fgcolor 0.00 0.00 0.00 1.00
+bgcolor 0.00 0.50 1.00 1.00
+borderstyle "RAISED"
+linkcvar "flagssmg"
+checked_command "add flags 16777216"
+unchecked_command "subtract flags 16777216"
+
+}
+resource
+CheckBox
+{
+title "No Rifle"
+name "Default"
+rect 10 60 100 20
+fgcolor 0.00 0.00 0.00 1.00
+bgcolor 0.00 0.50 1.00 1.00
+borderstyle "RAISED"
+linkcvar "flagsrifle"
+checked_command "add flags 4194304"
+unchecked_command "subtract flags 4194304"
+
+}
+resource
+Label
+{
+title "Hit enter in the text field above to set Dm flags"
+name "Default"
+rect 123 277 310 20
+fgcolor 1.00 1.00 1.00 1.00
+bgcolor 0.00 0.00 0.00 1.00
+borderstyle "INDENT_BORDER"
+}
+resource
+Label
+{
+title "DM Flags Calculator"
+name "Default"
+rect 10 20 540 20
+fgcolor 1.00 1.00 1.00 1.00
+bgcolor 0.00 0.00 0.00 1.00
+borderstyle "RAISED"
+}
+resource
+Label
+{
+name "Default"
+rect 10 120 540 5
+fgcolor 1.00 1.00 1.00 1.00
+bgcolor 0.00 0.00 0.00 1.00
+borderstyle "RAISED"
+}
+resource
+Button
+{
+title "Close"
+name "Default"
+rect 251 298 60 19
+fgcolor 0.00 0.00 0.00 1.00
+bgcolor 0.50 0.50 0.00 1.00
+borderstyle "3D_BORDER"
+stuffcommand "popmenu 0; set flags 0"
+clicksound "sound/menu/back.wav"
+hoversound "menu/sound/scroll.wav"
+shader "menu_button_trans"
+hovershader "menu_button_glow"
+
+}
+end.

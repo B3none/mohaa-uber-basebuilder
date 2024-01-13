@@ -1,0 +1,61 @@
+
+if(self.sharkcheck==1)
+{
+	end
+}
+else
+{
+	self.sharkcheck=1
+}
+
+local.ladder = self.origin
+
+local.within = 1
+
+while(isalive self && local.within == 1)
+{
+waitframe
+		
+	local.radius = 10 // 200.0 * 200.0
+	local.isin = vector_within self.origin local.ladder local.radius
+	
+	if(local.isin!=1)
+	{
+		local.within = 0
+	}
+
+
+}
+	local.movement = ( self getmovement )
+	local.position = ( self getposition )
+		 
+	if(local.movement == "standing" && local.position == "standing")
+	{
+		local.flags=0
+		if(self.velocity[0] > 0 ||  self.velocity[0] < 0)
+		{
+			local.flags++
+		}
+
+		if(self.velocity[1] > 0 ||  self.velocity[1] < 0)
+		{
+			local.flags++
+		}
+
+		if(self.velocity[2] > 0 ||  self.velocity[2] < 0)
+		{
+			local.flags++
+		}
+
+		if(local.flags > 1)
+		{
+			self iprint "You were killed for attempting sharking" 1
+			self stufftext "say I TRIED TO SHARK"
+			self kill
+		}			
+	}
+
+	self.sharkcheck=0
+end
+			
+		

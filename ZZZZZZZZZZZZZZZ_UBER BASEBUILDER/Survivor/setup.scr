@@ -1,0 +1,163 @@
+main:
+	
+	if(level.run["survivor"] != "1")
+	{
+		huddraw_string 72 "Survivor is Being Shut Down"
+		wait 2
+		huddraw_alpha 72 0
+		end
+	}
+
+	if(level.Survivor_setup == 1)
+	{
+		end
+	}
+
+	level.Survivor_setup = 1
+
+	level.gt = getcvar "g_gametype"
+
+	
+	if(level.gt == "1")
+	{
+		group.wording = "Survivor DM" 
+	}
+	else
+	{
+		group.wording = "Survivor"
+	}
+
+	setcvar "g_gametypestring" group.wording
+
+	local.times = getcvar "survivor_times"
+
+	if(local.times == "")
+	{
+		setcvar "survivor_times" "0"
+	}
+
+	local.rounds = waitexec global/settings.scr::getcmd "survivor-rounds"
+
+	if(local.rounds == "")
+	{
+		local.rounds = 1
+	}
+
+//	level waittill prespawn 
+	//exec global/ac/spawn_detect.scr survivor/spawned.scr 1
+	exec global/killed.scr Survivor/dead.scr 1
+
+	level waittill spawn
+		
+	thread startround
+end
+
+startround:
+
+	thread changemap
+
+	level.roundend = 0
+
+	exec survivor/roundend.scr::stopmusic
+
+	if($endcam)
+	{
+		$endcam delete
+	}
+
+	local.lives = waitexec global/settings.scr::getcmd "survivor-lives"
+	local.warmup_time = waitexec global/settings.scr::getcmd "survivor-warmup"
+
+	if(local.lives == "")
+	{
+		local.lives = 5
+	}
+
+	if(local.warmup_time == "")
+	{
+		local.warmup_time = 5
+	}
+	
+	local.lives = int local.lives
+	local.warmup_time = int local.warmup_time
+
+	//local.lives = 1
+	//local.warmup_time = 2
+
+	level.lives = local.lives
+	level.warmup_time = local.warmup_time //how long the wait is for warmup
+	level.roundstarted = 0
+
+	level.min_players = 2
+
+
+	if(level.lives == 1)
+	{
+		level.word = " life"
+	}
+	else
+	{
+		level.word = " lives"
+	}
+
+	level.gt = getcvar "g_gametype"
+
+	if(level.gt != "1")
+	{
+		level.team = 1
+		level.dmrespawning = 1
+		level.clockside = "kills"
+		level.players["axis"] = 0
+		level.players["allies"] = 0
+	}
+	else
+	{
+		level.players = 0
+	}
+
+	exec survivor/warm_up.scr
+	
+	setcvar "g_obj_alliedtext1" group.wording
+	setcvar "g_obj_alliedtext2"  ( level.lives + level.word )
+	setcvar "g_obj_alliedtext3" "Become "
+	setcvar "g_obj_axistext1" "The last man standing"
+	setcvar "g_obj_axistext2" "The Survivor"
+	setcvar "g_obj_axistext3" "Survivor 1.5"
+
+end
+
+
+
+changemap:
+	
+	//level waittill spawn
+
+	local.rounds = waitexec global/settings.scr::getcmd "survivor-rounds"
+	local.rounds = int local.rounds
+
+	if(local.rounds != 0)
+	{
+
+		level.round_times = getcvar "survivor_times"
+		level.round_times = int level.round_times
+
+		if(level.round_times >= local.rounds)
+		{
+			setcvar "survivor_times" "0"
+
+			while(1)
+			{
+				local.gametype = getcvar "g_gametype"
+				setcvar "g_gametype" "0"
+				bsptransition nextmap
+				setcvar "g_gametype" local.gametype
+				// wait one frame and set all game types again so map changes and doesnt save game
+				waitframe
+				setcvar "g_gametype" "0"
+				bsptransition nextmap
+				setcvar "g_gametype" local.gametype
+				wait 15
+			}
+		}
+	}
+end

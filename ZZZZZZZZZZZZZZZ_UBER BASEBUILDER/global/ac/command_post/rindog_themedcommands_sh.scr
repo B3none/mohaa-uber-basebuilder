@@ -1,0 +1,451 @@
+/*
+================================================================================
+Rindogs_ThemedCommands_MAM_Addon for Medal Of Honor: 
+Version 1.0 (10/10/04)
+
+Copyright (c) 2003-2004 Ron Schacht
+email: mods@rindog.com
+
+Permission is hereby granted, free of charge, to any person obtaining a copy
+of this software and associated documentation files (the "Software"), to deal
+in the Software without restriction, including without limitation the rights
+to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+copies of the Software, and to permit persons to whom the Software is furnished
+to do so, subject to the following conditions:
+
+The above copyright notice and this permission notice shall be included in all
+copies or substantial portions of the Software.
+
+THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
+SOFTWARE.
+================================================================================
+*/
+///////////////////////////////////////////////////////////////////////////////
+
+main local.words local.actual local.player:
+
+	switch(local.words[2])
+	{
+	case "killtrace":
+		local.player thread killtrace
+	break
+	case "rocketsmoke":
+		local.player thread rocket_smoke
+	break
+	case "rocketammo":
+		local.player thread rocket_ammo
+	break
+	case "rocketmod":
+		local.player thread rocket_mod local.actual
+	break
+	case "thrasher":
+		local.player thread Thrasher
+	case "rindog":
+		local.player thread Rindog
+	break
+	default:
+		end
+	}
+end 1
+
+
+killtrace:
+      local.player = self
+  
+      if ((level.killtraceing[local.player.entnum] == 0) || (level.killtraceing[local.player.entnum] == NIL))
+        {
+          local.trig = spawn trigger_multiple
+          local.trig.origin = local.player.origin
+          local.trig wait .2
+          local.trig.targetname = ("killtrace_trig_" + local.player.entnum)
+          local.trig setthread killtrace_setthread
+
+          local.effect1 = spawn DamageModel
+          local.effect1 model "fx/dummy.tik"
+          local.effect1.origin = local.player.origin + local.player.forwardvector * 64 + ( 0 0 50)
+          local.effect1.targetname = ("killtrace_effect1_" + local.player.entnum)
+          local.effect1 notsolid
+
+          local.obj = spawn script_origin
+          local.obj.origin = local.player.origin
+          local.obj.targetname = ("killtrace_scr_org_" + local.player.entnum)
+
+          local.trig bind local.obj
+          local.obj glue local.player 
+          level.killtraceing[local.player.entnum] = 1
+          local.player dmmessage 0 "I'M HELPLESS"
+          end 
+        }
+
+      if (level.killtraceing[local.player.entnum] == 1)  
+        {	 
+          $("killtrace_trig_" + local.player.entnum) delete
+          $("killtrace_effect1_" + local.player.entnum) delete
+          $("killtrace_scr_org_" + local.player.entnum) delete
+          level.killtraceing[local.player.entnum] = 0
+          end 
+        } 	
+    
+end 
+
+killtrace_setthread:
+  local.player = parm.other
+  $("killtrace_effect1_" + local.player.entnum).origin = local.player.origin + local.player.forwardvector * 64 + ( 0 0 50)
+  $("killtrace_effect1_" + local.player.entnum) killtrace ( 0 0 0) local.player.viewangles 10 10000
+end 
+
+
+rocket_smoke:
+      local.player = self
+  
+      if ((level.rocket_smokeing[local.player.entnum] == 0) || (level.rocket_smokeing[local.player.entnum] == NIL))
+        {
+          local.trig = spawn trigger_multiple
+          local.trig.origin = local.player.origin
+          local.trig wait 3
+          local.trig.targetname = ("rocket_smoke_trig_" + local.player.entnum)
+          local.trig setthread rocket_smoke_setthread
+
+          local.obj = spawn script_origin
+          local.obj.origin = local.player.origin
+          local.obj.targetname = ("rocket_smoke_scr_org_" + local.player.entnum)
+
+          local.trig bind local.obj
+          local.obj glue local.player 
+          level.rocket_smokeing[local.player.entnum] = 1
+          local.player dmmessage 0 "MY ROCKET IS SMOKING"
+          end 
+        }
+
+      if (level.rocket_smokeing[local.player.entnum] == 1)  
+        {	 
+          $("rocket_smoke_trig_" + local.player.entnum) delete
+          $("rocket_smoke_scr_org_" + local.player.entnum) delete
+          level.rocket_smokeing[local.player.entnum] = 0
+          local.player dmmessage 0 "MY ROCKET WILL RETURN TO NORMAL WHEN I RESPAWN"
+          end 
+        } 	
+    
+end 
+
+rocket_smoke_setthread:
+  local.player = parm.other
+  if (local.player.dmteam == "axis")
+    {
+      local.player weaponcommand dual projectile "models/projectiles/nebelhandgranate_primary.tik"
+    }
+    else
+    {
+      local.player weaponcommand dual projectile "models/projectiles/M18_Smoke_grenade_primary.tik"
+    }
+end 
+
+rocket_ammo:
+      local.player = self
+  
+      if ((level.rocket_ammoing[local.player.entnum] == 0) || (level.rocket_ammoing[local.player.entnum] == NIL))
+        {
+          local.trig = spawn trigger_multiple
+          local.trig.origin = local.player.origin
+          local.trig wait 3
+          local.trig.targetname = ("rocket_ammo_trig_" + local.player.entnum)
+          local.trig setthread rocket_ammo_setthread
+
+          local.obj = spawn script_origin
+          local.obj.origin = local.player.origin
+          local.obj.targetname = ("rocket_ammo_scr_org_" + local.player.entnum)
+
+          local.trig bind local.obj
+          local.obj glue local.player 
+          level.rocket_ammoing[local.player.entnum] = 1
+           end 
+        }
+
+      if (level.rocket_ammoing[local.player.entnum] == 1)  
+        {	 
+          $("rocket_ammo_trig_" + local.player.entnum) delete
+          $("rocket_ammo_scr_org_" + local.player.entnum) delete
+          level.rocket_ammoing[local.player.entnum] = 0
+          end 
+        } 	
+    
+end 
+
+rocket_ammo_setthread:
+  local.player = parm.other
+  local.player ammo heavy 6
+  local.player weaponcommand dual movementspeed .8
+  local.player weaponcommand dual maxfiremovement 1
+end 
+
+
+rocket_mod local.actual:
+
+      // whats the client number
+      if (local.args == "all")
+        {
+          if ((level.rocket_mod_all == 0) || (level.rocket_mod_all == NIL))
+            {
+              level.rocket_mod_all = 1
+              thread rocket_mod_all
+              end 
+            }
+          if (level.rocket_mod_all == 1) 
+            {
+              level.rocket_mod_all = 0
+              thread rocket_mod_all
+              end 
+            }
+        } 
+      local.clientnumber = int (local.args)
+
+		for(local.i = 1; local.i <= $player.size; local.i++)
+		{
+			if( local.clientnumber == $player[local.i].entnum)
+			{
+				local.player =  $player[local.i]
+			}
+		}
+    
+  
+      if ((level.rocket_moding[local.player.entnum] == 0) || (level.rocket_moding[local.player.entnum] == NIL))
+        {
+          local.trig = spawn trigger_multiple
+          local.trig.origin = local.player.origin
+          local.trig wait 5
+          local.trig.targetname = ("rocket_mod_trig_" + local.player.entnum)
+          local.trig setthread rocket_mod_setthread
+
+          local.obj = spawn script_origin
+          local.obj.origin = local.player.origin
+          local.obj.targetname = ("rocket_mod_scr_org_" + local.player.entnum)
+
+          local.trig bind local.obj
+          local.obj glue local.player 
+          level.rocket_moding[local.player.entnum] = 1
+         end 
+        }
+
+      if (level.rocket_moding[local.player.entnum] == 1)  
+        {	 
+          $("rocket_mod_trig_" + local.player.entnum) delete
+          $("rocket_mod_scr_org_" + local.player.entnum) delete
+          level.rocket_moding[local.player.entnum] = 0
+          end 
+        } 	
+ 
+end 
+
+rocket_mod_all:
+  while (level.rocket_mod_all == 1)
+    {
+      for (local.i = 1 ; local.i <= $player.size ; local.i ++)
+      thread rocket_mod_check_weapon $player[local.i]
+      wait 3
+    }
+
+end 
+
+rocket_mod_setthread:
+  local.player = parm.other
+  thread rocket_mod_check_weapon local.player
+end 
+
+rocket_mod_check_weapon local.player:
+  local.player weaponcommand dual targetname ("weapon_" + local.player.entnum)
+  if ($("weapon_" + local.player.entnum) == NULL) end 
+  if ($("weapon_" + local.player.entnum).model == "models/weapons/bazooka.tik")
+    {
+      local.player weaponcommand dual ammo_in_clip 99
+      local.player weaponcommand dual firedelay 0.0
+      local.player weaponcommand dual zoom 20
+      local.player weaponcommand dual movementspeed 1
+      local.player weaponcommand dual maxfiremovement 1
+      $("weapon_" + local.player.entnum).targetname = ""
+    }
+    else
+    {
+      // local.player iprint $("weapon_" + local.player.entnum).model 
+      if ($("weapon_" + local.player.entnum).model == "models/weapons/m2frag_grenade.tik" ||
+          $("weapon_" + local.player.entnum).model == "models/weapons/m18_smoke_grenade.tik" ||
+          $("weapon_" + local.player.entnum).model == "models/weapons/mills_grenade.tik" ||
+          $("weapon_" + local.player.entnum).model == "models/weapons/nebelhandgranate.tik" ||
+          $("weapon_" + local.player.entnum).model == "models/weapons/rdg-1_smoke_grenade.tik" ||
+          $("weapon_" + local.player.entnum).model == "models/weapons/russian_f1_grenade.tik" ||
+          $("weapon_" + local.player.entnum).model == "models/weapons/steilhandgranate.tik" || 
+          $("weapon_" + local.player.entnum).model == "models/weapons/p38.tik" || 
+          $("weapon_" + local.player.entnum).model == "models/weapons/nagant_revolver.tik" || 
+          $("weapon_" + local.player.entnum).model == "models/weapons/silencedpistol.tik" || 
+          $("weapon_" + local.player.entnum).model == "models/weapons/webley_revolver.tik" || 
+          $("weapon_" + local.player.entnum).model == "models/weapons/colt45.tik") 
+           {
+             $("weapon_" + local.player.entnum).targetname = ""
+             end 
+           }
+      local.player take $("weapon_" + local.player.entnum).model
+      waitframe
+      local.player weapon "models/weapons/bazooka.tik"
+      local.player primarydmweapon heavy
+      //local.player useweaponclass heavy
+    }
+end 
+
+
+Thrasher:
+      local.player = self
+  
+      if ((level.thrashering[local.player.entnum] == 0) || (level.thrashering[local.player.entnum] == NIL))
+        {
+          local.trig = spawn trigger_multiple
+          local.trig.origin = local.player.origin
+          local.trig wait .2
+          local.trig.targetname = ("thrasher_trig_" + local.player.entnum)
+          local.trig setthread thrasher_setthread
+
+          local.obj = spawn script_origin
+          local.obj.origin = local.player.origin
+          local.obj.targetname = ("thrasher_scr_org_" + local.player.entnum)
+
+          local.effect1 = spawn sentient "model" "models/player/allied_russian_Recon_Scout.tik"
+          local.effect1.origin = local.obj.origin + local.player.forwardvector * 160
+          local.effect1.angle = local.player.viewangles[1] + 180
+          local.effect1.targetname = ("thrasher_effect1_" + local.player.entnum)
+
+
+          local.effect1 item "weapons/Mosin_Nagant_Rifle.tik" 1
+          local.effect1 useweaponclass "rifle" right
+          local.effect1 activatenewweapon right
+          local.effect1 solid
+          local.effect1 takedamage
+          local.effect1 anim rifle_stand_idle
+          local.effect1 weaponcommand dual bulletdamage 10
+
+          local.trig bind local.obj
+          local.obj glue local.player 
+          level.thrashering[local.player.entnum] = 1
+          local.player dmmessage 0 "I'M BEING THRASHED BECAUSE MY BEHAVIOR STINKS"
+          end 
+        }
+
+      if (level.thrashering[local.player.entnum] == 1)  
+	{	 
+	  $("thrasher_trig_" + local.player.entnum) delete
+	  $("thrasher_scr_org_" + local.player.entnum) delete
+	  $("thrasher_effect1_" + local.player.entnum) delete
+	 // $("thrasher_effect2_" + local.player.entnum) delete
+          level.thrashering[local.player.entnum] = 0
+          end 
+	} 	
+    
+end 
+
+thrasher_setthread:
+  local.player = parm.other
+  $("thrasher_effect1_" + local.player.entnum) anim rifle_stand_fire
+  $("thrasher_effect1_" + local.player.entnum) fire
+  $("thrasher_effect1_" + local.player.entnum).origin = local.player.origin + local.player.forwardvector * 160
+  $("thrasher_effect1_" + local.player.entnum).angle = local.player.viewangles[1] + 180
+  if (level.thrashdir[local.player.entnum] == 1)
+    {
+      $("thrasher_effect1_" + local.player.entnum) anim rifle_stand_run_left
+      level.thrashdir[local.player.entnum] = 0
+    }
+    else
+    {
+      $("thrasher_effect1_" + local.player.entnum) anim rifle_crouch_run_right
+      level.thrashdir[local.player.entnum] = 1
+    }
+
+  if ( local.player.normal_health <= 0 ) //health is at 0 
+    { 
+      $("thrasher_trig_" + local.player.entnum) delete
+      $("thrasher_scr_org_" + local.player.entnum) delete
+      $("thrasher_effect1_" + local.player.entnum) delete
+     // $("thrasher_effect2_" + local.player.entnum) delete
+      level.thrashering[local.player.entnum] = 0
+    } 	
+end 
+////////////////////////////****thrasher****/////////////////////////////////
+//////////////////////////// ****disarm**** ////////////////////////
+////////////////////////////RINDOG/OTD///////////////////////////
+Rindog:
+      
+
+  	if(level.Rindoging[self.entnum] != 1) 
+	{
+		local.obj = spawn script_origin
+		local.obj.origin = self.origin
+
+		local.obj glue self 
+
+		cache models/animal/german_shepherd.tik
+		local.effect1 = spawn "models/animal/german_shepherd.tik"
+		local.effect1.origin = self.origin + self.forwardvector * 96  + ( 0 0 32 )
+		local.effect1.angle = (self.angle + 180)
+		local.effect1.health = 10000
+		local.effect1.noticescale = 5
+		local.effect1.fov = 359
+		local.effect1 ai_on
+		local.effect1.hearing = 10000
+		local.effect1.accuracy = 10000
+		local.effect1.sight = 10000
+		local.effect1.enableEnemy = 1
+		local.effect1.painhandler = anim/dog_pain.scr
+		local.effect1.deathhandler = anim/dog_killed.scr
+		//  local.effect1 safesolid
+
+		self iprint "********* Here comes the Rindog *********"
+		level.Rindoging[self.entnum] = 1
+		self dmmessage 0 "WHO LET OUT THE DOG?  I'M BEING ATTACKED BY A DOG FOR BREAKING THE RULES!"
+
+		thread with_dog local.effect1
+		while(level.Rindoging[self.entnum] == 1 && self.health > 0 && self.dmteam != "spectator") 
+		{
+			wait 1
+		//	local.effect1.origin = self.origin + self.forwardvector * 96  + ( 0 0 32 )
+			local.effect1.angle = ( self.angle + 180)
+			self iprint "********* You know he ain't gonna die *********"
+			self iprint "********* Yeaaaaaaa........the Rindog *********"
+
+		}
+
+		local.obj delete
+		local.effect1 delete
+		self dmmessage 0 "The dog is gone!"
+          }	
+	
+	level.Rindoging[self.entnum] = 0
+
+
+
+end 
+
+with_dog local.effect1:
+
+while(1)
+{	
+	wait 1 //waitframe
+			if (local.effect1 istouching self)
+			{
+				local.effect1 setmotionanim dog_bite_leg
+				self hurt 5 
+				local.effect1 heal 1
+				local.effect1 waittill flaggedanimdone
+			}
+			else
+			{
+				//chase enemy
+				local.effect1 setmotionanim dog_run
+				local.effect1.position = self.origin
+			///	local.effect1 heal 1
+				local.effect1 waittill flaggedanimdone
+			}
+}
+end
+
+

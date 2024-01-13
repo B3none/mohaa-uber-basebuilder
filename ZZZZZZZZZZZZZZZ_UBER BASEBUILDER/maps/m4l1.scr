@@ -1,0 +1,174 @@
+
+
+main:
+
+setcvar "g_obj_alliedtext1" "m4l1"
+setcvar "g_obj_alliedtext2" "UBER BASEBUILDER by"
+setcvar "g_obj_alliedtext3" "])ar]{Gen.SearingWolfe"
+setcvar "g_obj_axistext1" "be a member at"
+setcvar "g_obj_axistext2" "www.freewebs.com/"
+setcvar "g_obj_axistext3" "mohaa-DarK-clan"
+
+setcvar "g_scoreboardpic" "m4l1"
+
+setcvar "fraglimit" "0"
+setcvar "timelimit" "50"
+
+setcvar "cheats" "1"
+setcvar "thereisnomonkey" "1"
+setcvar "g_gametype" "2"
+removeclass actor
+level.script = maps/m4l1.scr
+thread spawns 
+
+exec alienx/basebuild.scr::main 1000 10000
+
+//--------------------------------------------
+//	Axis spawn points
+//--------------------------------------------
+
+spawn info_player_axis "origin" "4193.80 5485.97 590.13" "angle" "58" "targetname" "ax_1"
+spawn info_player_axis "origin" "4193.80 5385.97 590.13" "angle" "30" "targetname" "ax_2"
+spawn info_player_axis "origin" "4193.80 5285.97 590.13" "angle" "7" "targetname" "ax_3"
+spawn info_player_axis "origin" "4193.80 5185.97 590.13" "angle" "99" "targetname" "ax_4"
+spawn info_player_axis "origin" "4193.80 5085.97 590.13" "angle" "3" "targetname" "ax_5"
+spawn info_player_axis "origin" "4193.80 4985.97 590.13" "angle" "162" "targetname" "ax_6"
+spawn info_player_axis "origin" "4193.80 4885.97 590.13" "angle" "-32" "targetname" "ax_7"
+spawn info_player_axis "origin" "4193.80 4785.97 590.13" "angle" "-10" "targetname" "ax_8"
+spawn info_player_axis "origin" "4193.80 4685.97 590.13" "angle" "-7" "targetname" "ax_9"
+spawn info_player_axis "origin" "4193.80 4585.97 590.13" "angle" "-81" "targetname" "ax_10"
+//------------------------------------------------
+//	Allied spawn points
+//------------------------------------------------
+
+spawn info_player_allied "origin" "-1732.93 -2619.36 -165.22" "angle" "-179" "targetname" "Al_1"
+spawn info_player_allied "origin" "-1557.29 -2772.57 -165.46" "angle" "158" "targetname" "Al_2"
+spawn info_player_allied "origin" "-1400.70 -2908.77 -165.46" "angle" "143" "targetname" "Al_3"
+spawn info_player_allied "origin" "-1205.55 -3063.63 -165.21" "angle" "119" "targetname" "Al_4"
+spawn info_player_allied "origin" "-991.80 -3224.14 -165.34" "angle" "130" "targetname" "Al_5"
+spawn info_player_allied "origin" "-788.76 -3338.68 -167.69" "angle" "101" "targetname" "Al_6"
+spawn info_player_allied "origin" "-582.24 -3447.96 -167.37" "angle" "82" "targetname" "Al_7"
+spawn info_player_allied "origin" "-360.06 -3554.87 -163.74" "angle" "58" "targetname" "Al_8"
+spawn info_player_allied "origin" "-237.35 -3651.79 -132.32" "angle" "86" "targetname" "Al_9"
+spawn info_player_allied "origin" "-103.40 -3751.13 -121.44" "angle" "103" "targetname" "Al_10"
+
+
+level waitTill prespawn
+
+//allies
+exec alienx/basebuild.scr::basebuild ( -611.14 -4200.42 -165.67 ) "static/indycrate.tik" 1 0 1 0 90 .5 0 0 1
+exec alienx/basebuild.scr::basebuild ( -711.14 -4100.42 -165.67 ) "static/indycrate.tik" 1 1 0 1 90 .5 1 0 1
+exec alienx/basebuild.scr::basebuild ( -811.14 -4000.42 -165.67 ) "statweapons/mg42_gun.tik" 1 1 0 0 90 .5 0 0 1
+exec alienx/basebuild.scr::basebuild ( -911.14 -3900.42 -165.67 ) "static/sandbag_link_main.tik" 1 0 0 1 90 .5 0 0 1
+exec alienx/basebuild.scr::basebuild ( -1111.14 -3800.42 -165.67 ) "static/bodies_tarp.tik" 1 1 0 1 90 .5 1 0 1
+exec alienx/basebuild.scr::basebuild ( -1311.14 -3750.42 -165.67 ) "static/bunkertable.tik" 1 1 1 0 90 .5 0 1 1
+exec alienx/basebuild.scr::basebuild ( -1411.14 -3600.42 -165.67 ) "static/barbwire.tik" 1 0 1 1 90 .5 0 0 1
+exec alienx/basebuild.scr::basebuild ( -1511.14 -3550.42 -165.67 ) "static/cabinet_large.tik" 1 1 1 1 90 .5 0 0 1
+exec alienx/basebuild.scr::basebuild ( -1611.14 -3400.42 -165.67 ) "static/sandbag_longsegment.tik" 1 1 1 1 90 .2 0 0 1
+exec alienx/basebuild.scr::basebuild ( -1811.14 -3350.42 -165.67 ) "static/bodies_tarp.tik" 1 1 1 1 90 .5 0 0 1
+exec alienx/basebuild.scr::basebuild ( -2011.14 -3300.42 -165.67 ) "static/static_naziflag1.tik" 1 1 1 1 90 .2 0 0 1
+exec alienx/basebuild.scr::basebuild ( -2190.66 -3014.76 -165.67 ) "static/bookcase.tik" 1 1 0 1 90 .2 0 0 1
+exec alienx/basebuild.scr::basebuild ( -2073.79 -2908.31 -165.67 ) "static/bush_full.tik" 1 0 1 1 90 .5 0 0 1end
+exec alienx/basebuild.scr::basebuild ( -1878.48 -2740.94 -165.67 ) "static/banquet_table.tik" 1 1 0 0 90 .5 0 0 1
+
+
+//axis
+exec alienx/basebuild.scr::basebuild ( 1039.13 2218.31 65.80 ) "static/indycrate.tik" 1 0 1 0 90 .5 0 0 1
+exec alienx/basebuild.scr::basebuild ( 1139.13 2218.31 65.80 ) "static/indycrate.tik" 1 1 0 1 90 .5 1 0 1
+exec alienx/basebuild.scr::basebuild ( 1239.13 2218.31 69 ) "statweapons/mg42_gun.tik" 1 1 0 0 90 .5 0 0 1
+exec alienx/basebuild.scr::basebuild ( 1339.13 2218.31 65.80 ) "static/sandbag_link_main.tik" 1 0 0 1 90 .5 0 0 1
+exec alienx/basebuild.scr::basebuild ( 1439.13 2218.31 65.80 ) "static/bodies_tarp.tik" 1 1 0 1 90 .5 1 0 1
+exec alienx/basebuild.scr::basebuild ( 1039.13 2218.31 65.80 ) "static/bunkertable.tik" 1 1 1 0 90 .5 0 1 1
+exec alienx/basebuild.scr::basebuild ( 1039.13 2318.31 65.80 ) "static/barbwire.tik" 1 0 1 1 90 .5 0 0 1
+exec alienx/basebuild.scr::basebuild ( 1039.13 2418.31 65.80 ) "static/cabinet_large.tik" 1 1 1 1 90 .5 0 0 1
+exec alienx/basebuild.scr::basebuild ( 1039.13 2518.31 65.80 ) "static/sandbag_longsegment.tik" 1 1 1 1 90 .2 0 0 1
+exec alienx/basebuild.scr::basebuild ( 1039.13 2618.31 65.80 ) "static/bodies_tarp.tik" 1 1 1 1 90 .5 0 0 1
+exec alienx/basebuild.scr::basebuild ( 1039.13 2718.31 65.80 ) "static/static_naziflag1.tik" 1 1 1 1 90 .2 0 0 1
+exec alienx/basebuild.scr::basebuild ( 1039.13 2818.31 65.80 ) "static/bookcase.tik" 1 1 0 1 90 .2 0 0 1
+exec alienx/basebuild.scr::basebuild ( 1439.13 2418.31 65.80 ) "static/bush_full.tik" 1 0 1 1 90 .5 0 0 1end
+exec alienx/basebuild.scr::basebuild ( 1439.13 2518.31 65.80 ) "static/banquet_table.tik" 1 1 0 0 90 .5 0 0 1
+
+exec global/jetpack.scr ( -816 3807 -169 ) //allies
+exec global/jetpack.scr ( 3598 4267 571 ) //axis
+
+exec global/dog.scr ( 4316 -3231 41 )
+
+exec guidedmissile/spawntrigger.scr ( -606 -3546 -165 ) //allies
+exec guidedmissile/spawntrigger.scr ( 3677 3887 547 ) //axis
+
+exec server_planes/trigger.scr ( 3613.78 4050.87 560.04 ) "axis" .2
+exec server_planes/trigger.scr ( -717.13 -3690.44 -167.43 ) "allies" .2
+
+//*** Precache Dm Stuff
+exec global/DMprecache.scr
+
+//hud
+exec alienx/hud.scr::main
+
+level.script = maps/m4l1.scr
+exec global/ambient.scr obj_team1
+
+   	setcvar "r_fastsky" "1"
+	$world farplane 5000
+	$world farplane_color (0 0 0)
+
+exec map_triggers/allweapons.scr ( 5803 4562 408 )
+exec map_triggers/giant.scr ( 2135 -3952 192 )
+exec map_triggers/invisible.scr ( 338 -3065 552 )
+exec map_triggers/invulnerable.scr ( 4193 4088 1398 )
+exec map_triggers/midget.scr ( 2527 -3775 192 )
+exec map_triggers/normal.scr ( 2832 -3391 -15 )
+exec map_triggers/health.scr ( 5690 4399 368 ) ( 5968 4399 368 ) ( 5968 4678 355 ) ( 5886 4838 368 ) ( 5840 5008 368 ) ( 5639 4976 378 ) ( 5640 4824 378 ) ( 5642 4610 378 ) ( 5786 4602 365 ) ( 5798 4492 356 )
+
+thread port1
+thread port2
+
+level waittill spawn
+
+port1:
+
+local.portlight = spawn script_model
+local.portlight model "fx/corona_red.tik" 
+local.portlight.origin = ( 4191 5585 590 ) // starting point
+local.portlight.scale = 3
+
+local.trig = spawn trigger_use
+local.trig targetname port1 
+local.trig.origin = ( 4191 5585 590 ) // starting point
+local.trig setsize ( -30 -30 0 ) ( 30 30 80 )
+$port1 waittill trigger
+local.player = parm.other
+local.player tele ( 4280 5638 434 ) // destination
+local.portlight remove
+$port1 remove
+wait 0
+thread port1
+end
+
+port2:
+
+local.portlight = spawn script_model
+local.portlight model "fx/corona_red.tik" 
+local.portlight.origin = ( 4226 5536 480 ) // starting point
+local.portlight.scale = 3
+local.portlight ghost
+
+local.trig = spawn trigger_use
+local.trig targetname port2 
+local.trig.origin = ( 4226 5536 480 ) // starting point
+local.trig setsize ( -20 -20 0 ) ( 20 20 80 )
+$port2 waittill trigger
+local.player = parm.other
+local.player tele ( 4193 5508 648 ) // destination
+local.portlight remove
+$port2 remove
+wait 0
+thread port2
+end
+
+end
+
+
+
+
+

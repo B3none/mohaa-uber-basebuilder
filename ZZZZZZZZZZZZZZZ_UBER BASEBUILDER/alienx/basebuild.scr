@@ -1,0 +1,1643 @@
+
+//
+//Notes: The base build script will work on any map, and will need player input...
+//More: script will bind the players K button to kill them...
+//More More: This is how they plant the objects where they want them...
+//More more more: Also falling damage will be turned off for the time that the players are placing their objects...
+//
+//--How does this work?---
+//Players goto the spinning spawned object of choice
+//Player turnes into object
+//player kills self (Presses K)
+//Object is placed at players location, and created solid...
+//
+//---Help---
+//
+//How 2 use:
+//First you need to exec AlienX/basebuild.scr WAITTIME
+//Where WAITTIME is the time in SECONDS before the level will really start...
+//Your level time is increased on how long you have set here...
+//so if you set 120 seconds 
+//This will only work if you have put your level time OVER or the same as 60 seconds...
+//Boxes are spawned around the level via your choice AFTER Level waittill prespawn, but before spawn
+//
+//How to spawn the objects:
+//You must do this AFTER Prespawn, and BEFORE spawn...
+//
+//To spawn an object simpally use:
+//exec AlienX/basebuild.scr::basebuild ORIGIN MODEL LIGHTONOFF RED GREEN BLUE ROTATIONANGLE SCALE
+//
+//Definitions:
+//ORIGIN	- The origin of the model, You must put this in brackets, like so: ( -500 12 331 )
+//Model		- The model path for the model to use for the base build object...
+//LIGHTONOFF	- Set to 0 to have the light off, or anything > 0 for on...
+//RED		- how much red light is in, Highest value is 1, No red light is 0, for medium red light use 0.50
+//GREEN		- same as abouve but green values
+//BLUE		- same as red, just for blue values
+//ROTATIONANGLE	- sets the rotation angle (Lower the angle, lower the speed)
+//SCALE		- Object scale (The collection point)
+//NEW
+//Solid or non solid after placement! - In other words, if u wanted a bush to be placeable, then u will set it to 0 for not solid
+//Anything above 0 is on
+
+//###########################################################################################################
+
+main local.levelwaitstarttime local.objectlimitx:
+
+exec alienx/alienxcvars.scr::main
+
+local.basebuilderonoff = getcvar(basebuilder)
+
+
+if (local.basebuilderonoff == "0")
+{
+	setcvar "g_kblock" "0"
+	$spotA1 remove
+	$spotB1 remove
+	goto BasebuilderIsOff
+}
+
+
+//Just a fix for the blocked area error
+local.object = spawn script_object
+local.object model "static/indycrate.tik"
+local.object.origin = ( 1 1 -9999 )
+local.object hide
+local.object notsolid
+local.object targetname "blockedarea"
+
+exec alienx/textscroll.scr::start
+
+level.objectlimit = local.objectlimitx
+level.objectlimitcount = 0
+
+println "I:	BaseBuilder Script Started..."
+
+local.i = 0
+level.build_number = 0
+
+if !(int(local.levelwaitstarttime / 60) < 60) {
+	local.leveltime = getcvar "timelimit"
+	local.leveltime = (local.leveltime + int(local.levelwaitstarttime / 60))
+	setcvar "timelimit" (local.leveltime)
+}
+
+thread changestring
+
+level waittill spawn
+
+thread set_shark
+thread lod_spawn_fix
+
+println "I:	Level has spawned..."
+
+level.messagesactive = 1
+thread message_them
+
+//speed
+setcvar "sv_runspeed" "500"
+	setcvar "dmflags" "8"
+		setcvar "g_kblock" "1"
+
+//This makes the game wait for how ever long 
+while (local.i < local.levelwaitstarttime)
+{
+
+local.timeleft = local.levelwaitstarttime - local.i
+
+//Take weapons
+if ($player.size > 0)
+{
+	$player takeall
+	$player take all
+}
+
+//huddraw_virtualsize 1 1
+//huddraw_alpha 1 1
+//huddraw_rect 1 0 200 2000 20
+
+huddraw_virtualsize 2 1
+huddraw_alpha 2 1
+huddraw_font 2 "facfont-10"
+huddraw_color 2 0 1 0
+
+huddraw_rect 2 100 200 600 20
+
+huddraw_string 2 ("You Have " + local.timeleft + " Seconds Left To Build - Objects Used: " + level.objectlimitcount + "/" + local.objectlimitx)
+
+//huddraw_virtualsize 1 1
+//huddraw_alpha 1 1
+//huddraw_rect 1 0 200 2000 20
+
+huddraw_virtualsize 4 1
+huddraw_alpha 4 1
+huddraw_font 4 "facfont-10"
+huddraw_color 4 1 0 0
+
+huddraw_rect 4 100 190 600 20
+
+huddraw_string 4 ("Type Cmd Noclip In Console To Help Build...Cheats Are Deactivated After Building")
+
+	level.bbactive = 1
+
+
+if (getcvar(alx_basebuild) == "0")
+{
+	iprintlnbold "ADMIN CANCLED THE BASEBUILD..."
+	level.bbactive = 0
+	setcvar "alx_basebuild" "on"
+	setcvar "g_kblock" "0"
+	$spotA1 remove
+	$spotB1 remove
+	wait 1
+	goto End_Loop
+	setcvar "cheats" "0"
+	setcvar "dmflags" "8"
+	setcvar "thereisnomonkey" "0"
+	huddraw_string 62 ""
+	$player stoploopsound
+}
+
+if (int(getcvar(alx_timeboost)) > 0)
+{
+	local.levelwaitstarttime = (local.levelwaitstarttime + int(getcvar(alx_timeboost)))
+	setcvar "alx_timeboost" "0"
+}
+
+if (int(getcvar(alx_timedown)) > 0)
+{
+	local.levelwaitstarttime = (local.levelwaitstarttime - int(getcvar(alx_timedown)))
+	setcvar "alx_timedown" "0"
+}
+
+if (int(getcvar(alx_objectlimitboost)) > 0)
+{
+	local.objectlimitx = (local.objectlimitx + int(getcvar(alx_objectlimitboost)))
+
+	//Fix for the object limit before the boost
+	level.objectlimit = level.objectlimitx
+
+	setcvar "alx_objectlimitboost" "0"
+}
+
+if (int(getcvar(alx_objectlimitdown)) > 0)
+{
+	local.objectlimitx = (local.objectlimitx - int(getcvar(alx_objectlimitdown)))
+
+	//Fix for the object limit before the boost
+	level.objectlimit = level.objectlimitx
+
+	setcvar "alx_objectlimitboost" "0"
+}
+
+
+if (local.timeleft <= 70)
+{
+
+
+$player stufftext "tmstart sound/music/mus_Schmerzen_01f.mp3"
+
+	huddraw_virtualsize 62 1
+	huddraw_align 62 center
+	huddraw_alpha 62 1
+	huddraw_font 62 handle-23
+	huddraw_color 62 1 1 1
+	huddraw_rect 62 0 0 0 0 
+	huddraw_string 62 (local.timeleft)
+
+}
+
+if (local.timeleft <= 60)
+{
+	huddraw_virtualsize 62 1
+	huddraw_align 62 center
+	huddraw_alpha 62 1
+	huddraw_font 62 handle-23
+	huddraw_color 62 1 0 0
+	huddraw_rect 62 0 0 0 0 
+	huddraw_string 62 (local.timeleft)
+}
+
+if (local.timeleft <= 50)
+{
+	huddraw_virtualsize 62 1
+	huddraw_align 62 center
+	huddraw_alpha 62 1
+	huddraw_font 62 handle-23
+	huddraw_color 62 1 1 0
+	huddraw_rect 62 0 0 0 0 
+	huddraw_string 62 (local.timeleft)
+}
+
+if (local.timeleft <= 40)
+{
+	huddraw_virtualsize 62 1
+	huddraw_align 62 center
+	huddraw_alpha 62 1
+	huddraw_font 62 handle-23
+	huddraw_color 62 0 1 0
+	huddraw_rect 62 0 0 0 0 
+	huddraw_string 62 (local.timeleft)
+}
+
+if (local.timeleft <= 30)
+{
+	huddraw_virtualsize 62 1
+	huddraw_align 62 center
+	huddraw_alpha 62 1
+	huddraw_font 62 handle-23
+	huddraw_color 62 0 0 1
+	huddraw_rect 62 0 0 0 0 
+	huddraw_string 62 (local.timeleft)
+}
+
+if (local.timeleft <= 20)
+{
+	huddraw_virtualsize 62 1
+	huddraw_align 62 center
+	huddraw_alpha 62 1
+	huddraw_font 62 handle-23
+	huddraw_color 62 1 0 1
+	huddraw_rect 62 0 0 0 0 
+	huddraw_string 62 (local.timeleft)
+}
+
+if (local.timeleft <= 10)
+{
+	huddraw_virtualsize 62 1
+	huddraw_align 62 center
+	huddraw_alpha 62 1
+	huddraw_font 62 handle-23
+	huddraw_color 62 0 1 1
+	huddraw_rect 62 0 0 0 0 
+	huddraw_string 62 (local.timeleft)
+}
+
+if (local.timeleft <= 9)
+{
+	huddraw_virtualsize 62 1
+	huddraw_align 62 center
+	huddraw_alpha 62 1
+	huddraw_font 62 handle-23
+	huddraw_color 62 0 1 1
+	huddraw_rect 62 0 0 0 0 
+	huddraw_string 62 (local.timeleft)
+}
+
+if (local.timeleft <= 8)
+{
+	huddraw_virtualsize 62 1
+	huddraw_align 62 center
+	huddraw_alpha 62 1
+	huddraw_font 62 handle-23
+	huddraw_color 62 1 1 1
+	huddraw_rect 62 0 0 0 0 
+	huddraw_string 62 (local.timeleft)
+}
+
+if (local.timeleft <= 7)
+{
+	huddraw_virtualsize 62 1
+	huddraw_align 62 center
+	huddraw_alpha 62 1
+	huddraw_font 62 handle-23
+	huddraw_color 62 1 0 0
+	huddraw_rect 62 0 0 0 0 
+	huddraw_string 62 (local.timeleft)
+}
+
+if (local.timeleft <= 6)
+{
+	huddraw_virtualsize 62 1
+	huddraw_align 62 center
+	huddraw_alpha 62 1
+	huddraw_font 62 handle-23
+	huddraw_color 62 1 1 0
+	huddraw_rect 62 0 0 0 0 
+	huddraw_string 62 (local.timeleft)
+}
+
+if (local.timeleft <= 5)
+{
+	huddraw_virtualsize 62 1
+	huddraw_align 62 center
+	huddraw_alpha 62 1
+	huddraw_font 62 handle-23
+	huddraw_color 62 0 1 0
+	huddraw_rect 62 0 0 0 0 
+	huddraw_string 62 (local.timeleft)
+}
+
+if (local.timeleft <= 4)
+{
+	huddraw_virtualsize 62 1
+	huddraw_align 62 center
+	huddraw_alpha 62 1
+	huddraw_font 62 handle-23
+	huddraw_color 62 0 1 1
+	huddraw_rect 62 0 0 0 0 
+	huddraw_string 62 (local.timeleft)
+}
+
+if (local.timeleft <= 3)
+{
+	huddraw_virtualsize 62 1
+	huddraw_align 62 center
+	huddraw_alpha 62 1
+	huddraw_font 62 handle-23
+	huddraw_color 62 0 0 1
+	huddraw_rect 62 0 0 0 0 
+	huddraw_string 62 (local.timeleft)
+}
+
+if (local.timeleft <= 2)
+{
+	huddraw_virtualsize 62 1
+	huddraw_align 62 center
+	huddraw_alpha 62 1
+	huddraw_font 62 handle-23
+	huddraw_color 62 1 0 1
+	huddraw_rect 62 0 0 0 0 
+	huddraw_string 62 (local.timeleft)
+}
+
+if (local.timeleft <= 1)
+{
+	huddraw_virtualsize 62 1
+	huddraw_align 62 center
+	huddraw_alpha 62 1
+	huddraw_font 62 handle-23
+	huddraw_color 62 0 0 0
+	huddraw_rect 62 0 0 0 0 
+	huddraw_string 62 (local.timeleft)
+
+$player stoploopsound
+
+
+}
+
+
+if (level.objectlimitcount == local.objectlimitx) {
+	goto End_Loop
+	setcvar "cheats" "0"
+	setcvar "thereisnomonkey" "0"
+	huddraw_string 62 ""
+	setcvar "dmflags" "8"
+	$player stoploopsound
+}
+
+//local.player physics_on
+
+
+	local.i++
+	wait 1
+}
+
+End_Loop:
+
+$player physics_off
+
+level.bbactive = 0
+
+local.i = 0
+
+while (local.i <= level.build_number)
+{
+	level.base_build_object[local.i] remove
+	level.base_build_trigger[local.i] remove
+local.i++
+waitframe
+}
+
+if ($builder_object_used.size > 0)
+{
+	$builder_object_used remove
+}
+
+if ($thelaser.size > 0)
+{
+	$thelaser deactivate
+	$thelaser remove
+}
+
+setcvar "g_kblock" "0"
+
+
+	setcvar "dmflags" "8"
+	setcvar "cheats" "0"
+	setcvar "thereisnomonkey" "0"
+
+level.messagesactive = 0
+
+if ($builder_object.size > 0)
+{
+	$builder_object nodamage
+}
+
+	setcvar "dmflags" "8"
+setcvar "sv_runspeed" "280"
+	$spotA1 remove
+	$spotB1 remove
+
+if ($player.size > 0)
+{
+	$player respawn
+	setcvar "cheats" "0"
+	setcvar "thereisnomonkey" "0"
+	setcvar "dmflags" "8"
+}
+
+//May Fix The MG42 Bug!
+if ($builder_mg42.size > 0)
+{
+	$builder_mg42 setplayerusable 1
+}
+
+if ($player.size > 0)
+{
+	$player physics_on
+}
+
+
+
+//Clear the hud
+huddraw_shader 1 ""
+huddraw_string 2 ""
+huddraw_string 62 ""
+huddraw_string 4 ""
+
+thread Messages
+
+BasebuilderIsOff:
+
+	setcvar "dmflags" "8"
+	setcvar "cheats" "0"
+	setcvar "thereisnomonkey" "0"
+
+end
+
+//##########################################################################################################
+
+basebuild local.origin local.model local.lightonoff local.red local.green local.blue local.spinspeed local.scale local.lift local.teleporter local.solidstate:
+
+println "I:	Basebuilder script: Base builder is asked to make a new builder object..."
+
+level.base_build_object[level.build_number] = spawn script_model
+level.base_build_object[level.build_number].origin = local.origin
+if (local.teleporter == 1)
+{
+	level.base_build_object[level.build_number] model "fx/corona_red.tik"
+}else{
+	level.base_build_object[level.build_number] model local.model
+}
+
+//Set the model name
+level.base_build_object[level.build_number].modelname = local.model
+
+//Non solid
+level.base_build_object[level.build_number] notsolid
+
+//Set the scale
+level.base_build_object[level.build_number].scale = local.scale
+
+//Set the lift crap
+level.base_build_object[level.build_number].islift = local.lift
+
+level.base_build_object[level.build_number].solidstate = local.solidstate
+
+level.base_build_object[level.build_number] rotatey local.spinspeed
+
+if (local.lightonoff > 0) {
+	level.base_build_object[level.build_number] light local.red local.green local.blue 100
+}
+
+level.base_build_trigger[level.build_number] = spawn trigger_multiple
+level.base_build_trigger[level.build_number].origin = local.origin
+level.base_build_trigger[level.build_number].modelnumber = level.build_number
+level.base_build_trigger[level.build_number] setthread base_build_model_touched
+level.base_build_trigger[level.build_number] setsize ( -20 -20 0 ) ( 20 20 50 )
+level.base_build_trigger[level.build_number].solidstate = local.solidstate
+level.base_build_trigger[level.build_number].teleporter = local.teleporter
+
+level.base_build_trigger[level.build_number].islift = local.lift
+
+println ("I:	Base Builder Build number is: " + level.build_number)
+
+level.build_number++
+
+end
+
+//###########################################################################################################
+
+base_build_model_touched local.player:
+
+local.player = parm.other
+
+//iprintlnbold local.player.buildingmapnow
+
+if (local.player.buildingmapnow == 0 || local.player.buildingmapnow == NIL) 
+{
+	if (self.islift == 1) 
+	{
+		//iprintlnbold "LIFT!!!"
+		thread Init_Lift_Builder local.player self.modelnumber
+	} else {
+		if (self.teleporter > 0)
+		{
+			//iprintlnbold "TELEPORTER!!!"
+			thread Init_Builder_Teleporter local.player self.modelnumber
+		}else{
+			//iprintlnbold "JUST A FREEKIN OBJECT!!!"
+			local.player.objectcarried = level.base_build_object[self.modelnumber].modelname
+			thread Init_builder local.player self.modelnumber
+		}
+	}
+}else{
+//Change their object
+	local.player.objectcarried = level.base_build_object[self.modelnumber].modelname
+}
+
+end
+
+//###########################################################################################################
+
+
+Init_Lift_Builder local.player local.modelnumber:
+
+local.player.buildingmapnow = 1
+
+local.player iprint "You have selected a Lift-Creator, please follow the instructions:"
+
+
+if (level.base_build_object[local.modelnumber].modelname == "statweapons/mg42_gun.tik") {
+	local.builder = spawn (level.base_build_object[local.modelnumber].modelname) "origin" "1 1 1" "targetname" "builder_object_used"
+	local.builder setplayerusable 0
+} else {
+	local.builder = spawn script_model
+	local.builder model level.base_build_object[local.modelnumber].modelname
+	local.builder notsolid
+	local.builder targetname "builder_object_used"
+}
+
+local.builder notsolid
+
+local.playerteam = local.player.dmteam
+
+while (1) {
+
+if (local.player != NULL)
+{
+local.player physics_on
+}
+
+if (level.messagesactive == 0)
+{
+	goto Dont_Place_Object_Lift
+}
+
+//*********************************************************************
+
+if !(local.player.useheld)
+{
+
+		if (local.player.origin != NIL)
+		{
+			local.builder.origin = local.player.origin
+		}
+		if (local.player.angles[1] != NIL)
+		{
+			local.builder.angle = local.player.angles[1]
+		}
+}
+
+//*********************************************************************
+
+if !(local.player.dmteam == local.playerteam)
+{
+	local.builder remove
+		local.player.buildingmapnow = 0	
+	goto Dont_Place_Object_Lift
+}
+
+//*********************************************************************
+
+if !(isalive local.player)
+{
+	local.builder remove
+		local.player.buildingmapnow = 0	
+	goto Dont_Place_Object_Lift
+}
+
+
+//*********************************************************************
+
+if(local.player.fireheld == 1)
+{
+	if (local.player istouching self) 
+	{
+		local.player iprint "You cannot place an object here"
+	wait 1
+	} else {
+		local.player iprint "In-order to place the lift, you must use the USE key"
+		wait 1.5
+	}
+}
+
+//*********************************************************************
+
+
+if (local.player.useheld == 1)
+{
+	local.player.usinglaser = 1
+
+	local.ent = spawn func_beam
+	local.ent minoffset 0.0
+	local.ent maxoffset 0.0
+	local.ent numsegments 1
+	local.ent life 0
+	local.ent color ( 0 1 0 )
+	local.ent alpha 0.4
+	local.ent targetname "thelaser"
+
+	local.ent alwaysdraw
+
+	local.ent activate
+			
+	local.ent scale .5
+
+	while (local.player.useheld)
+	{
+		local.player physics_on
+
+		if(local.player.fireheld)
+		{
+
+			local.ent color ( 1 0 0 )
+			if (local.player istouching self) 
+			{
+				local.player iprint "You cannot place an object here"
+				wait 1.5
+			} else {
+
+				local.x = spawn script_origin
+				local.x.origin = local.objectplacementorigin
+					
+				local.startpoint = local.x.origin[2]
+
+				local.x remove
+
+				local.player iprint "Lift Start-Position was set, please set the destination"
+				local.player physics_off
+				wait 0.5
+				local.player physics_on
+			
+				while (1)
+				{
+
+					if !(level.bbactive)
+					{
+						goto Dont_Place_Object_Lift
+					}
+
+					local.laserorigin = (local.player gettagposition "eyes bone")
+					local.laservec = (angles_toforward local.player.viewangles)
+				
+					local.objectplacementorigin = (trace local.laserorigin (local.laserorigin + ( local.laservec * 35000 )))
+
+					local.ent.origin = local.objectplacementorigin
+					local.ent endpoint local.laserorigin
+
+					local.builder.origin = local.objectplacementorigin
+					local.ent color ( 0 1 0 )
+
+					if(local.player.fireheld == 1)
+					{
+						local.player iprint "Lift Destination-Position set, creating Lift"
+
+						local.x = spawn script_origin
+						local.x.origin = local.objectplacementorigin
+					
+						local.endpoint = local.x.origin[2]
+
+						local.x remove
+
+						if (local.endpoint <= local.startpoint)
+						{
+						
+							local.player iprint "You are attempting to place the lift below it's Start-Position"
+					
+						} else {
+
+						//CREATE THE BOX LIFT
+						local.builder solid
+						//local.builder.origin = local.endpoint
+
+						//Work out the distance of where the lift has to travel
+						local.distance = (local.endpoint - local.startpoint)
+
+						goto Place_Object_Lift
+					
+						}
+					
+
+					}
+
+					if !(local.player.dmteam == local.playerteam)
+					{
+						local.builder remove
+						local.player.buildingmapnow = 0	
+						goto Dont_Place_Object_Lift	
+					}
+
+					//*********************************************************************
+
+					if !(isalive local.player)
+					{
+						local.builder remove
+						local.player.buildingmapnow = 0	
+						goto Dont_Place_Object_Lift
+					}
+
+
+				waitframe
+				}
+			}
+	
+		}
+
+					if !(level.bbactive)
+					{
+						goto Dont_Place_Object_Lift
+					}
+
+					local.laserorigin = (local.player gettagposition "eyes bone")
+					local.laservec = (angles_toforward local.player.viewangles)
+				
+					local.objectplacementorigin = (trace local.laserorigin (local.laserorigin + ( local.laservec * 35000 )))
+
+					local.ent.origin = local.objectplacementorigin
+					local.ent endpoint local.laserorigin
+
+					local.builder.origin = local.objectplacementorigin
+
+					if !(local.player.dmteam == local.playerteam)
+					{
+						local.builder remove
+						local.player.buildingmapnow = 0	
+						goto Dont_Place_Object_Lift	
+					}
+
+					//*********************************************************************
+
+					if !(isalive local.player)
+					{
+						local.builder remove
+						local.player.buildingmapnow = 0	
+						goto Dont_Place_Object_Lift
+					}
+
+
+	waitframe
+	}
+
+		local.laserorigin = (local.player gettagposition "eyes bone")
+		local.laservec = (angles_toforward local.player.viewangles)
+
+		local.objectplacementorigin = (trace local.laserorigin (local.laserorigin + ( local.laservec * 350 )))
+
+			local.ent.origin = local.objectplacementorigin
+			local.ent endpoint local.laserorigin
+
+		local.builder.origin = local.objectplacementorigin
+
+	local.ent color ( 0 1 0 )
+
+		if (local.ent != NIL || local.ent != NULL)
+		{
+			local.ent deactivate
+			if (local.ent != NIL || local.ent != NULL)
+			{
+				local.ent remove
+			}
+		}
+
+	waitframe
+	} //While loop	
+
+
+					if !(level.bbactive)
+					{
+						goto Dont_Place_Object_Lift
+					}
+
+		if (local.player != NIL || local.player != NULL)
+		{
+			local.player.usinglaser = 0
+		}
+	
+
+//*********************************************************************
+
+waitframe
+}
+
+Place_Object_Lift:
+
+
+if (local.player.usinglaser == 1)
+{
+		local.ent deactivate
+		local.ent remove
+}
+	
+		if (local.player != NIL || local.player != NULL)
+		{
+			local.player.usinglaser = 0
+			local.player physics_on
+		}
+
+local.builder targetname "builder_object"
+
+local.builder thread move_lift local.distance
+
+		if (local.player != NIL || local.player != NULL)
+		{
+			local.player iprint "Lift placed"
+		}
+
+level.objectlimitcount++
+
+if (level.objectlimitcount == level.objectlimit) {
+	iprintlnbold "Object limit reached"
+}
+
+wait .5
+
+//Work out the distance for the thread
+local.distance = local.endpoint - local.startpoint
+
+//Place the object down
+local.builder thread move_lift local.distance
+
+if (local.player != NIL || local.player != NULL)
+{
+	
+	local.player.buildingmapnow = 0
+}
+
+Dont_Place_Object_Lift:
+end
+
+end
+
+//###########################################################################################################
+
+Init_builder local.player local.modelnumber:
+
+local.player.buildingmapnow = 1
+
+
+local.player iprint "You have selected an Object, press the USE button (followed by FIRE) to place it"
+
+
+if (level.base_build_object[local.modelnumber].modelname == "statweapons/mg42_gun.tik") {
+	local.builder = spawn (level.base_build_object[local.modelnumber].modelname) "origin" "1 1 1" "targetname" "builder_object_used"
+	local.builder setplayerusable 0
+} else {
+	local.builder = spawn script_model
+	local.builder model level.base_build_object[local.modelnumber].modelname
+	local.builder notsolid
+	local.builder targetname "builder_object_used"
+}
+
+local.builder notsolid
+
+local.playerteam = local.player.dmteam
+
+local.objectcarried = local.player.objectcarried
+
+while (1) {
+
+if (local.player != NULL)
+{
+	local.player physics_on
+} else {
+	goto Dont_Place_Object
+}
+
+if (level.messagesactive == 0)
+{
+	goto Dont_Place_Object_Lift
+}
+
+
+if !(local.player.objectcarried == local.objectcarried)
+{
+	local.builder remove
+
+	//Change players object for the one they just picked up!
+	if (level.base_build_object[local.modelnumber].modelname == "statweapons/mg42_gun.tik") {
+		local.builder = spawn local.player.objectcarried "origin" "1 1 1" "targetname" "builder_object_used"
+		local.builder setplayerusable 0
+	} else {
+		local.builder = spawn script_model
+		local.builder model local.player.objectcarried
+		local.builder notsolid
+		local.builder targetname "builder_object_used"
+	}
+
+	local.objectcarried = local.player.objectcarried
+	
+
+}
+
+
+//*********************************************************************
+
+if !(local.player.useheld)
+{
+		if (local.player.origin != NIL)
+		{
+			local.builder.origin = local.player.origin
+		}
+		if (local.player.angles[1] != NIL)
+		{
+			local.builder.angle = local.player.angles[1]
+		}
+
+}
+
+//*********************************************************************
+
+if !(local.player.dmteam == local.playerteam)
+{
+	local.builder remove
+		local.player.buildingmapnow = 0	
+	goto Dont_Place_Object	
+}
+
+//*********************************************************************
+
+if !(isalive local.player)
+{
+	local.builder remove
+		local.player.buildingmapnow = 0	
+	goto Dont_Place_Object
+}
+
+
+//*********************************************************************
+
+if(local.player.fire == 1)
+{
+local.player iprint "Placing Object (Let go of FIRE to place the Object)"
+local.player physics_off
+
+	if (local.player istouching self) 
+	{
+		local.player iprint "You cannot place an object here"
+	wait 1
+	} else {
+
+		
+			if(local.player.fire == 1)
+			{
+				goto Place_Object
+			}
+	}
+}
+
+//*********************************************************************
+
+
+	if (local.player.useheld == 1)
+	{
+	local.player.usinglaser = 1
+
+			local.ent = spawn func_beam
+			local.ent minoffset 0.0
+			local.ent maxoffset 0.0
+			local.ent numsegments 1
+			local.ent life 0
+			local.ent color ( 0 1 0 )
+			local.ent alpha 0.4
+			local.ent targetname "thelaser"
+
+			local.ent alwaysdraw
+
+			local.ent activate
+			
+			local.ent scale .5
+
+	while (local.player.useheld)
+	{
+
+		if (local.player != NULL)
+		{
+			local.player physics_on
+		} else {
+			goto Dont_Place_Object
+		}
+
+		if (level.messagesactive == 0)
+		{
+			goto Dont_Place_Object_Lift
+		}
+
+					if !(level.bbactive)
+					{
+						goto Dont_Place_Object
+					}
+
+		if !(local.player.objectcarried == local.objectcarried)
+		{
+			local.builder remove
+
+			//Change players object for the one they just picked up!
+			if (level.base_build_object[local.modelnumber].modelname == "statweapons/mg42_gun.tik") {
+			local.builder = spawn local.player.objectcarried "origin" "1 1 1" "targetname" "builder_object_used"
+			local.builder setplayerusable 0
+		} else {
+			local.builder = spawn script_model
+			local.builder model local.player.objectcarried
+			local.builder notsolid
+			local.builder targetname "builder_object_used"
+		}
+
+		local.objectcarried = local.player.objectcarried
+
+		}
+
+		if(local.player.fireheld)
+		{
+			local.ent color ( 1 0 0 )
+			if (local.player istouching self) 
+			{
+				
+				local.player iprint "You cannot place an object here"
+				
+			} else {
+				
+
+				if (local.player.fireheld)
+				{
+
+				local.player iprint "Placing Object (Let go of FIRE to place the Object)"
+				local.player physics_off
+				
+
+				local.badplacement = 0
+
+				//Check all players before placing
+				for (local.i = 1; local.i <= $player.size; local.i++)
+				{
+					if ($player[local.i] istouching local.builder)
+					{
+						if ($player[local.i].entnum != local.player.entnum)
+						{
+							local.badplacement = 1
+						}
+					}
+				}
+				
+				if (local.builder istouching $blockedarea)
+				{
+					local.player iprint "You are not allowed to access this area (Blocker)"
+
+				}else{
+
+					if(local.badplacement == 1)
+					{
+						local.player iprint "You cannot place Objects on-top of players"
+					}else{
+						goto Place_Object
+					}
+				}
+			}
+			}	
+		}
+
+		local.laserorigin = (local.player gettagposition "eyes bone")
+		local.laservec = (angles_toforward local.player.viewangles)
+
+		local.objectplacementorigin = (trace local.laserorigin (local.laserorigin + ( local.laservec * 350 )))
+
+			local.ent.origin = local.objectplacementorigin
+			local.ent endpoint local.laserorigin
+
+		if (local.builder != NIL || local.builder != NULL)
+		{
+			local.builder.origin = local.objectplacementorigin
+			//local.builder.angle = local.player.angles[1]
+		}
+
+	local.ent color ( 0 1 0 )
+
+					if !(level.bbactive)
+					{
+						goto Dont_Place_Object
+					}
+
+	waitframe
+	} //While loop	
+		if (local.ent != NIL || local.ent != NULL)
+		{
+			local.ent deactivate
+			local.ent remove
+		}
+	
+		if (local.player != NIL || local.player != NULL)
+		{
+			local.player.usinglaser = 0
+		}
+	}
+	
+
+					if !(level.bbactive)
+					{
+						goto Dont_Place_Object
+					}
+
+//*********************************************************************
+
+waitframe
+}
+
+Place_Object:
+
+if (local.player.usinglaser == 1)
+{
+		local.ent deactivate
+		local.ent remove
+}
+
+local.player physics_on
+
+local.player.usinglaser = 0
+
+local.builder targetname "builder_object"
+
+local.player iprint "Object placed"
+
+level.objectlimitcount++
+
+if (level.objectlimitcount == level.objectlimit) {
+	iprintlnbold "Object limit reached"
+}
+
+wait .5
+
+//Place the object down
+if !(local.player.objectcarried == "statweapons/mg42_gun.tik") 
+{
+//iprintln level.base_build_object[local.modelnumber].solidstate
+	if (level.base_build_object[local.modelnumber].solidstate == 1)
+	{
+		local.builder solid
+
+		if (local.builder istouching local.player)
+		{
+			local.player respawn
+		}
+	}
+	
+} else {
+	waitthread setup_mg42s local.builder.origin local.builder.angle
+	local.builder remove
+}
+
+local.player.buildingmapnow = 0
+Dont_Place_Object:
+end
+
+//###########################################################################################################
+
+/*message_them:
+	while (level.messagesactive == 1) 
+	{
+		wait 20
+		if (level.messagesactive == 1) {
+
+				iprintlnbold "BaseBuilder: Created by AlienX Software"
+			wait 2
+				iprintlnbold "BaseBuilder version 6.0.3.5, by DMZ"
+			wait 2	
+				iprintlnbold "Using ])ar]{ Clan's modified maps"
+			wait 2
+				iprintlnbold "To place an object: USE key"
+			wait 2
+				iprintlnbold "Save an object: FIRE key"
+			wait 2
+				iprintlnbold "Please visit: http://www.freewebs.com/mohaa-DarK-clan"
+
+		}
+	}
+end*/
+
+//###########################################################################################################
+
+setup_mg42s local.builder_origin local.builder_angle:
+local.mg = spawn statweapons/mg42_gun.tik "origin" (( local.builder_origin ) + ( 0 0 15 )) "angle" ( local.builder_angle ) "targetname" "builder_mg42" "setplayerusable" "0"
+	local.mg yawcenter local.builder_angle
+	local.mg setplayerusable 0
+	local.mg maxyawoffset 360
+end
+
+//###########################################################################################################
+
+/*Messages:
+
+while (1)
+{
+	iprintln "BaseBuilder: Created by AlienX Software"
+	wait 1.5
+	iprintln "BaseBuilder version 6.0.3.5, by DMZ"
+	wait 1.5
+	iprintln "Using ])ar]{ Clan's modified maps"
+	wait 1.5
+	iprintln "Please visit: http://www.freewebs.com/mohaa-DarK-clan"
+	wait 1.5
+	wait 120
+}
+
+end*/
+
+changestring:
+
+while (1)
+{
+	setcvar "g_gametypestring" "***UBER BASEBUILDER***"
+wait 10
+}
+
+end
+
+//###########################################################################################################
+
+move_lift local.distance local.start local.end:
+
+while (1)
+{
+	
+	self movedown local.distance
+	self waitmove
+
+	wait 3
+
+	self moveup local.distance
+	self waitmove
+
+	wait 3
+
+}
+
+end
+
+//###########################################################################################################
+
+make_teleporter local.origin local.desti:
+
+//iprintln "Inside the make teleporter thread"
+//iprintln local.origin
+//iprintln local.desti
+
+	local.object = spawn script_object
+	local.object model "miscobj/searchlight.tik"
+	local.object.origin = (local.origin - ( 0 0 80 ))
+	local.object.angles = ( 90 0 0 )
+	local.object notsolid
+
+	local.tele = spawn trigger_multiple
+	local.tele.origin = local.origin
+	local.tele setsize ( -20 -20 0 ) ( 20 20 30 )
+	local.tele setthread teleporter_action
+	local.tele.desti = local.desti
+
+end
+
+teleporter_action:
+
+//iprintln "Teleporter Triggerd!"
+
+	local.player = parm.other
+
+	local.player tele ( self.desti )
+
+end
+
+//###########################################################################################################
+
+Init_Builder_Teleporter local.player local.modelnumber:
+
+local.player.buildingmapnow = 1
+
+local.player iprint "You have selected a Teleporter, please follow the instructions:"
+
+	local.builder = spawn script_model
+	local.builder model "fx/corona_red.tik"
+	local.builder notsolid
+
+local.builder notsolid
+
+local.playerteam = local.player.dmteam
+
+while (1) {
+
+if (local.player != NULL)
+{
+	local.player physics_on
+}else{
+	goto Dont_Place_Object_Teleporter
+}
+
+if (level.messagesactive == 0)
+{
+	goto Dont_Place_Object_Teleporter
+}
+
+//*********************************************************************
+
+	local.builder.origin = local.player.origin
+	local.builder.angle = local.player.angles[1]
+
+//*********************************************************************
+
+if !(local.player.dmteam == local.playerteam)
+{
+	local.builder remove
+		local.player.buildingmapnow = 0	
+	goto Dont_Place_Object_Teleporter
+}
+
+//*********************************************************************
+
+if !(isalive local.player)
+{
+	local.builder remove
+		local.player.buildingmapnow = 0	
+	goto Dont_Place_Object_Teleporter
+}
+
+if (local.player.useheld)
+{
+
+	local.player iprint "There is no laser in the teleporter creator"
+	wait 1.5
+
+}
+
+//*********************************************************************
+
+if(local.player.fireheld == 1)
+{
+	if (local.player istouching self) 
+	{
+		local.player iprint "You cannot place an object here"
+	wait 1
+	} else {
+		
+		local.x = spawn script_origin
+		local.x.origin = local.player.origin
+					
+		local.startpoint = local.x.origin
+
+		local.x remove
+
+		local.player iprint "Teleporter Start-Position was set, please set the destination"
+
+		while (local.player.fireheld)
+		{
+			wait 1
+		}
+			
+		while (1)
+		{
+
+			if (level.messagesactive == 0)
+			{
+				goto Dont_Place_Object_Teleporter
+			}
+
+					if !(level.bbactive)
+					{
+						goto Dont_Place_Object_Teleporter
+					}
+
+
+			local.builder.origin = local.player.origin
+			local.builder.angle = local.player.angles[1]
+		
+			if(local.player.fireheld == 1)
+			{
+				local.player iprint "Teleporter Destination-Position set, creating Teleporter"
+
+				local.x = spawn script_origin
+				local.x.origin = local.player.origin
+					
+				local.endpoint = local.x.origin
+
+				local.x remove
+					
+				goto Place_Object_Teleporter
+					
+			}
+
+			if !(local.player.dmteam == local.playerteam)
+			{
+				local.builder remove
+					local.player.buildingmapnow = 0	
+				goto Dont_Place_Object_Teleporter	
+			}
+
+			//*********************************************************************
+
+			if !(isalive local.player)
+			{
+				local.builder remove
+					local.player.buildingmapnow = 0	
+				goto Dont_Place_Object_Teleporter
+			}
+
+		waitframe
+		}
+	}
+
+	if !(level.bbactive)
+	{
+		goto Dont_Place_Object_Teleporter
+	}
+
+	waitframe
+	} //While loop		
+
+//*********************************************************************
+
+waitframe
+}
+
+wait .5
+
+Place_Object_Teleporter:
+
+//CREATE THE TELEPORTER
+thread make_teleporter local.startpoint local.endpoint
+
+local.builder remove
+
+
+local.player.buildingmapnow = 0
+
+Dont_Place_Object_Teleporter:
+end
+
+end
+
+/*set_shark:
+
+wait 10
+
+local.mapname = getcvar(mapname)
+
+switch local.mapname
+{
+
+case "dm/mohdm1":
+	iprintln ("ANTI SHARK: Map: " + local.mapname + " detected...")
+	local.trig = spawn trigger_multiple
+	local.trig.origin = ( 1 1 -1700 )
+	local.trig setsize ( -9999 -9999 0 ) ( 9999 9999 10 )
+	local.trig setthread shark_action
+break
+
+case "dm/mohdm2":
+	iprintln ("ANTI SHARK: Map: " + local.mapname + " detected...")
+	local.trig = spawn trigger_multiple
+	local.trig.origin = ( 1 1 -95 )
+	local.trig setsize ( -9999 -9999 0 ) ( 9999 9999 10 )
+	local.trig setthread shark_action
+break
+
+case "dm/mohdm3":
+	iprintln ("ANTI SHARK: Map: " + local.mapname + " detected...")
+	local.trig = spawn trigger_multiple
+	local.trig.origin = ( 1 1 -215 )
+	local.trig setsize ( -9999 -9999 0 ) ( 9999 9999 10 )
+	local.trig setthread shark_action
+break
+
+case "dm/mohdm4":
+	iprintln ("ANTI SHARK: Map: " + local.mapname + " detected...")
+	local.trig = spawn trigger_multiple
+	local.trig.origin = ( 1 1 -1700 )
+	local.trig setsize ( -9999 -9999 0 ) ( 9999 9999 10 )
+	local.trig setthread shark_action
+break
+
+case "dm/mohdm5":
+	iprintln ("ANTI SHARK: Map: " + local.mapname + " detected...")
+	local.trig = spawn trigger_multiple
+	local.trig.origin = ( 1 1 -1700 )
+	local.trig setsize ( -9999 -9999 0 ) ( 9999 9999 10 )
+	local.trig setthread shark_action
+break
+
+case "dm/mohdm6":
+	iprintln ("ANTI SHARK: Map: " + local.mapname + " detected...")
+	local.trig = spawn trigger_multiple
+	local.trig.origin = ( 1 1 -1700 )
+	local.trig setsize ( -9999 -9999 0 ) ( 9999 9999 10 )
+	local.trig setthread shark_action
+break
+
+case "dm/mohdm7":
+	iprintln ("ANTI SHARK: Map: " + local.mapname + " detected...")
+	local.trig = spawn trigger_multiple
+	local.trig.origin = ( 1 1 -300 )
+	local.trig setsize ( -9999 -9999 0 ) ( 9999 9999 10 )
+	local.trig setthread shark_action
+break
+
+//obj
+
+case "obj/obj_team1":
+	iprintln ("ANTI SHARK: Map: " + local.mapname + " detected...")
+	local.trig = spawn trigger_multiple
+	local.trig.origin = ( 1 1 -511 )
+	local.trig setsize ( -9999 -9999 0 ) ( 9999 9999 10 )
+	local.trig setthread shark_action
+break
+
+case "obj/obj_team2":
+	iprintln ("ANTI SHARK: Map: " + local.mapname + " detected...")
+	local.trig = spawn trigger_multiple
+	local.trig.origin = ( 1 1 -1700 )
+	local.trig setsize ( -9999 -9999 0 ) ( 9999 9999 10 )
+	local.trig setthread shark_action
+break
+
+case "obj/obj_team3":
+	iprintln ("ANTI SHARK: Map: " + local.mapname + " detected...")
+	local.trig = spawn trigger_multiple
+	local.trig.origin = ( 1 1 -700 )
+	local.trig setsize ( -9999 -9999 0 ) ( 9999 9999 10 )
+	local.trig setthread shark_action
+break
+
+case "obj/obj_team4":
+	iprintln ("ANTI SHARK: Map: " + local.mapname + " detected...")
+	local.trig = spawn trigger_multiple
+	local.trig.origin = ( 1 1 -1700 )
+	local.trig setsize ( -9999 -9999 0 ) ( 9999 9999 10 )
+	local.trig setthread shark_action
+break
+
+//Sp-MP Maps
+
+case "m5l1b":
+	iprintln ("ANTI SHARK: Map: " + local.mapname + " detected...")
+	local.trig = spawn trigger_multiple
+	local.trig.origin = ( 1 1 -127 )
+	local.trig setsize ( -9999 -9999 0 ) ( 9999 9999 10 )
+	local.trig setthread shark_action
+break
+
+case "m1l3b":
+	iprintln ("ANTI SHARK: Map: " + local.mapname + " detected...")
+	local.trig = spawn trigger_multiple
+	local.trig.origin = ( 1 1 -109 )
+	local.trig setsize ( -9999 -9999 0 ) ( 9999 9999 10 )
+	local.trig setthread shark_action
+break
+
+case "m1l3a":
+	iprintln ("ANTI SHARK: Map: " + local.mapname + " detected...")
+	local.trig = spawn trigger_multiple
+	local.trig.origin = ( 1 1 -191 )
+	local.trig setsize ( -9999 -9999 0 ) ( 9999 9999 10 )
+	local.trig setthread shark_action
+break
+
+}
+end
+
+shark_action:
+
+	local.player = parm.other
+	
+	local.player stufftext "say Accessing forbidden area (Under-Map), Actions will be taken."
+
+	local.player respawn
+
+end*/
+
+lod_spawn_fix:
+wait 3
+for(local.i = 1; local.i <= $player.size; local.i++)
+{
+local.player = $player[local.i]
+local.player stufftext ("alias lod_spawn say Caught Cheating, Actions will be taken.")
+}
+ 
+goto lod_spawn_fix
+end
+

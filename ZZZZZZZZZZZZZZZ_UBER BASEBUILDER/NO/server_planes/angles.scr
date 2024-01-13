@@ -1,0 +1,198 @@
+
+// a convenient way to invoke object rotation
+// by jv_map
+
+// rotates self around axis defined by vector local.axis in world space
+// the angle of rotation is determined by the length of this vector (in radians, pi rad = 180 deg)
+// rotation is right-handed (generally regarded as counter-clockwise,
+// but it is clockwise when looking in the direction of the vector)
+axisrotate local.axis:
+
+   // define this somewhere, nah:P
+   level.PI = 3.1415926
+   
+   // the angle of rotation
+   local.theta = vector_length local.axis
+   
+   if(local.theta > 0.0)
+   {      
+      // similar to vector_normalize but as the length is already known
+      // this saves a costly calculation
+      local.normal_axis = local.axis * (1.0 / local.theta)
+      
+      local.cos_2 = waitthread cos (0.5 * local.theta)
+      local.sin_2 = waitthread sin (0.5 * local.theta)
+      
+      // this is known as a quaternion representation
+      local.a = local.cos_2
+      local.b = local.sin_2 * local.normal_axis[0]
+      local.c = local.sin_2 * local.normal_axis[1]
+      local.d = local.sin_2 * local.normal_axis[2]
+      
+      local.a2 = local.a * local.a
+      local.b2 = local.b * local.b
+      local.c2 = local.c * local.c
+      local.d2 = local.d * local.d
+      
+      // make sure we're working with a unit quaternion
+      // (this should be the case automatically but in case there's a
+      // slight error in the sin or cos function this fixes it)
+      local.quat_length_squared = local.a2 + local.b2 + local.c2 + local.d2
+      local.quat_length = waitthread sqrt1 local.quat_length_squared
+      
+      local.a = local.a / local.quat_length
+      local.b = local.b / local.quat_length
+      local.c = local.c / local.quat_length
+      local.d = local.d / local.quat_length
+      
+      local.a2 = local.a2 / local.quat_length_squared
+      local.b2 = local.b2 / local.quat_length_squared
+      local.c2 = local.c2 / local.quat_length_squared
+      local.d2 = local.d2 / local.quat_length_squared
+      
+      // these would be the fwd/lf/up vectors of the rotated system, if the initial rotation was zero (angles = (0 0 0))
+      // can't really explain this without major effort so best just believe it or look it up in a maths book (or wikipedia) ;)
+      local.rot[0] = ( (local.a2 + local.b2 - local.c2 - local.d2) (2 * local.a * local.d + 2 * local.b * local.c) (2 * local.b * local.d - 2 * local.a * local.c) )
+      local.rot[1] = ( (2 * local.b * local.c - 2 * local.a * local.d) (local.a2 - local.b2 + local.c2 - local.d2) (2 * local.a * local.b + 2 * local.c * local.d) )
+      local.rot[2] = ( (2 * local.a * local.c + 2 * local.b * local.d) (2 * local.c * local.d - 2 * local.a * local.b) (local.a2 - local.b2 - local.c2 + local.d2) )
+      
+      // these are the vectors of the current coordinate system
+      local.fw = self.forwardvector
+      local.lf = self.leftvector
+      
+      // (don't even need up as it is fully defined by fw and lf, but it can be included if you wish)
+      //local.up = self.upvector
+      
+      // transform the current system to the rotated system by premultiplying
+      // with the above rotation matrix (fwd lf up)
+      local.new_fw = ( (local.rot[0][0] * local.fw[0] + local.rot[1][0] * local.fw[1] + local.rot[2][0] * local.fw[2]) (local.rot[0][1] * local.fw[0] + local.rot[1][1] * local.fw[1] + local.rot[2][1] * local.fw[2]) (local.rot[0][2] * local.fw[0] + local.rot[1][2] * local.fw[1] + local.rot[2][2] * local.fw[2]) )
+      local.new_lf = ( (local.rot[0][0] * local.lf[0] + local.rot[1][0] * local.lf[1] + local.rot[2][0] * local.lf[2]) (local.rot[0][1] * local.lf[0] + local.rot[1][1] * local.lf[1] + local.rot[2][1] * local.lf[2]) (local.rot[0][2] * local.lf[0] + local.rot[1][2] * local.lf[1] + local.rot[2][2] * local.lf[2]) )
+      
+      // (don't even need up as it is fully defined by fw and lf, but it can be included if you wish)
+      //local.new_up = ( (local.rot[0][0] * local.up[0] + local.rot[1][0] * local.up[1] + local.rot[2][0] * local.up[2]) (local.rot[0][1] * local.up[0] + local.rot[1][1] * local.up[1] + local.rot[2][1] * local.up[2]) (local.rot[0][2] * local.up[0] + local.rot[1][2] * local.up[1] + local.rot[2][2] * local.up[2]) )
+      
+      // yikes have to convert new coord system to silly angles
+      // this is somewhat sad as first thing mohaa does is
+      // probably convert the angles back to a coord system again
+      self.angles = waitthread vectors_toangles local.new_fw local.new_lf
+   }
+end
+
+// transforms vectors to angles (pitch,yaw,roll)
+// unlike the script command vector_toangles this also accounts for roll properly
+// returns angles in degrees
+vectors_toangles local.vec_fwd local.vec_lf:
+   local.base_angles = vector_toangles local.vec_fwd
+   
+   local.base_fwd = local.vec_fwd
+   local.base_lf = -1.0 * (angles_toleft local.base_angles)
+   local.base_up = vector_cross local.base_fwd local.base_lf
+   
+   local.cos = local.vec_lf * local.base_lf
+   
+   if(abs local.cos < 0.8)
+   {
+      local.roll_angle = waitthread arccos local.cos
+      
+      if(local.vec_lf * local.base_up < 0.0)
+      {
+         local.roll_angle = -local.roll_angle
+      }
+   }
+   else
+   {
+      // arccos getting inaccurate here
+      // so just use arcsin instead
+      // (far more sensitive in this region)
+      local.sin = local.vec_lf * local.base_up
+      
+      local.roll_angle = waitthread arcsin local.sin
+      
+      if(local.cos < 0.0)
+      {
+         local.roll_angle = level.PI - local.roll_angle
+      }
+   }
+   
+   // convert to degrees
+   local.roll_angle = local.roll_angle / level.PI * 180.0
+   
+   local.angles = local.base_angles
+   local.angles[2] = local.roll_angle
+end local.angles
+
+// cheapest square-root approximation ever, but it almost overtakes light :)
+// only usuable near x=1
+sqrt1 local.x:
+   // McLaurin expansion
+   local.result = 0.5 + 0.5 * local.x - 0.125 * (local.x - 1.0) * (local.x - 1.0)
+end local.result
+
+// sin(x), x in rad
+sin local.x:
+end (waitthread cos(local.x - 0.5 * level.PI))
+
+// cos(x), x in rad
+cos local.x:
+   // reduce to [0,2pi]
+   if(local.x > 2.0 * level.PI)
+   {
+      local.x -= (int (local.x / (2.0 * level.PI))) * 2.0 * level.PI
+   }
+   else if(local.x < 0.0)
+   {
+      local.x += ((int ( -local.x / (2.0 * level.PI))) + 1) * 2.0 * level.PI
+   }   
+   
+   // reduce to [-pi,pi]
+   if(local.x > level.PI)
+   {
+      local.x -= 2.0 * level.PI
+   }
+   
+   // 10th order Taylor series expansion
+   // should be sufficiently accurate
+   local.x2 = local.x * local.x
+   local.x4 = local.x2 * local.x2
+   local.x6 = local.x4 * local.x2
+   local.x8 = local.x6 * local.x2
+   local.x10 = local.x8 * local.x2
+   local.cosx = 1.0 - local.x2 / 2.0 + local.x4 / 24.0 - local.x6 / 720.0 + local.x8 / 40320.0 - local.x10 / 3628800.0
+   
+   if(local.cosx > 1.0)
+   {
+      local.cosx = 1.0
+   }
+   else if(local.cosx < -1.0)
+   {
+      local.cosx = -1.0
+   }
+end local.cosx
+
+// inverse sin
+// somewhat inaccurate near +-0.5PI
+arcsin local.x:
+   if(local.x < -0.857 || local.x > 0.857)
+   {
+      // some empirical 9th order approximation
+      // I magically extracted this from the blue blue sky :)
+      local.x3 = local.x * local.x * local.x
+      local.x9 = local.x3 * local.x3 * local.x3
+      
+      local.out = local.x + (0.5 * level.PI - 1.0) * local.x9
+   }
+   else
+   {
+      local.x2 = local.x * local.x
+      local.x3 = local.x2 * local.x
+      local.x5 = local.x3 * local.x2
+   
+      // 5th order Taylor series expansion
+      local.out = local.x + 0.1667 * local.x3 + 0.075 * local.x5
+   }
+end local.out
+
+// inverse cos
+arccos local.rad:
+   local.result = 0.5 * level.PI - (waitthread arcsin local.rad)
+end local.result 

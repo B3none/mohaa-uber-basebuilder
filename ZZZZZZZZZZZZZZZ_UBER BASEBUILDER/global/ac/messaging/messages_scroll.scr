@@ -1,0 +1,124 @@
+
+// print the adverts
+main local.msg local.delay local.colour:
+
+	if(level.msginginuse==1)
+	{
+		while(level.msginginuse==1)
+		{
+			wait 1
+		}
+	}
+
+	local.delay = int local.delay
+
+	level.msginginuse=1
+
+	local.font = waitexec global/settings.scr::getcmd  "advert-font" 
+	local.scroll_speed = waitexec global/settings.scr::getcmd  "scroll-speed" 
+	local.scroll_dir = waitexec global/settings.scr::getcmd "scroll-dir"
+	local.virt = waitexec global/settings.scr::getcmd  "virtualsize" 
+	local.virt = int local.virt
+
+	local.wordcount = 0
+
+	if(local.font == NIL)
+	{
+		local.font = "facfont-20"
+	}
+
+	if(local.colour == "none" )
+	{
+		local.lightcolour = waitexec global/settings.scr::getcmd  "advert-colour" 
+		if(local.lightcolour == NIL)
+		{
+			local.light[1] = 1
+			local.light[2] = 0
+			local.light[3] = 1
+		}
+		else
+		{
+			if(local.lightcolour == "random")
+			{
+				local.light = waitexec global/nagle.scr::random_light
+			}
+			else
+			{
+				local.light = waitexec global/nagle.scr::light_from_string local.lightcolour
+			}
+		}
+	}
+	else
+	{
+		if(local.colour == "random")
+		{
+			local.light = waitexec global/nagle.scr::random_light
+		}
+		else
+		{
+			local.light = waitexec global/nagle.scr::light_from_string local.colour
+		}
+	}
+
+
+
+	if(local.delay == NIL)
+	{
+		local.delay = 2
+	}
+
+	if(local.scroll_speed == NIL)
+	{
+		local.scroll_speed = 2
+	}
+	else
+	{
+		local.scroll_speed = int local.scroll_speed
+	}
+
+	if(local.scroll_dir == NIL)
+	{
+		local.scroll_dir = "left"
+	}
+
+	if(local.scroll_dir == "left")
+	{
+		local.lengh = 300
+		local.to = ( -300 -  ( local.msg.size * 10 ) )
+	}
+	else
+	{
+		local.lengh = ( -300 -  ( local.msg.size * 10 ) )
+		local.to = ( 300 +  ( local.msg.size * 10 ) )
+	}
+
+	local.ended  = 1
+	while(local.ended == 1)
+	{
+		// draw the overlay coloured string
+		huddraw_virtualsize 51 local.virt
+		huddraw_rect 51 local.lengh 200 0 0
+		huddraw_color 51 local.light[1] local.light[2] local.light[3]
+		huddraw_font 51 local.font
+		huddraw_string 51 local.msg 
+		huddraw_align 51 "center" "center"
+		huddraw_alpha 51 1.0
+
+
+		if(local.scroll_dir == "left")
+		{
+			local.lengh -= local.scroll_speed
+			local.ended = (local.to < local.lengh)
+		}
+		else
+		{
+			local.lengh += local.scroll_speed
+			local.ended = (local.to > local.lengh)
+		}
+
+	
+		waitframe
+	}
+   
+	level.msginginuse=0
+end 

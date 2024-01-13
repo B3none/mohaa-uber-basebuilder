@@ -1,0 +1,101 @@
+main:
+	self thread plane_explode
+end
+
+plane_crashing:
+
+	if(self.plane==NULL || self.plane==NIL)
+	{
+		end
+	}
+
+	self thread plane_crash
+
+	local.flyingexplosion = spawn "models/emitters/fireandsmoke.tik"			
+	local.flyingexplosion glue self.plane
+	local.flyingexplosion.origin = self.plane.origin
+	local.flyingexplosion.scale = self.plane.scale
+	local.flyingexplosion anim start
+	local.flyingexplosion notsolid
+
+	local.flyingsmoke = spawn "models/emitters/plane_smoke.tik"			
+	local.flyingsmoke glue self.plane
+	local.flyingsmoke.origin = self.plane.origin
+	local.flyingsmoke.scale = self.plane.scale
+	local.flyingsmoke anim start
+	local.flyingsmoke notsolid
+
+	local.now = self.plane.angles[0]
+	local.end = local.now + 40
+
+	for(local.i=0;local.i<=45 ;local.i+=2)
+	{
+		waitframe
+		if(self.plane==NULL || self.plane==NIL)
+		{
+			break
+		}
+		else
+		{
+			self.plane.angles = ( local.i self.plane.angles[1] self.plane.angles[2] )
+		}
+	}
+
+	while(self.plane)
+	{
+		waitframe
+	}
+
+	local.flyingsmoke remove
+	local.flyingexplosion remove
+end	
+
+plane_crash:
+
+	if(self.plane!=NULL)
+	{
+		local.hitthing=self
+
+		while(local.hitthing==self || local.hitthing.targetname == "planebomb")
+		{
+			self.plane waittill touch
+			local.hitthing = parm.other
+		}
+		
+		self thread plane_explode
+	}
+
+end	
+
+
+plane_explode:
+
+	self solid
+	local.plane = self.plane
+	local.origin = local.plane.origin 
+	self.plane explode
+	self.plane  remove
+
+	local.Exp = spawn "emitters/aircraft_explosion.tik" //"fx/scriptbazookaexplosion.tik"
+	local.Exp2 = spawn "animate/fx_mortar_dirt.tik"
+	local.Exp.origin = local.origin
+	local.Exp2.origin = local.origin
+	
+	if(self.in_para_drop!=1)
+	{
+		self damage local.Exp2 100 local.Exp2 (0 0 0) (0 0 0) (0 0 0) 0 1 rocket -1
+	}
+
+	radiusdamage local.origin 100 300 0
+
+	local.Exp anim start
+	local.Exp2 anim start
+	wait 1
+	local.Exp remove	
+	local.Exp2 remove
+	
+	self.flying = 0
+
+	$("planehit" + self.entnum) remove
+
+end	

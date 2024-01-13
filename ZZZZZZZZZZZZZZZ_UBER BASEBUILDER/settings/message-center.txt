@@ -1,0 +1,74 @@
+main:
+	local.settings = makearray
+		// advert, message center
+		"virtualsize"			"1"				" Sets if the huddraw element should use virutal screen resolution for positioning and size"
+		"advert-time"			"500"				" Time between advert messages (hud print) in seconds. 5 * 60 = 500 = 5 minutes"	
+		"advert-delay"			"5"				" Time between each message in seconds"
+		"advert-colour"			"random" 			" The colour of the advert text RBG"	
+		"advert-font"			"verdana-12" 			" Set the font for the advert text"																																	
+		"typewriter-click"		"0" 				" make a clicking noise when typing"																																	
+		"scroll-speed"			"2" 				" Speed the text scrolls at"																																	
+		"scroll-dir"			"left"	 			" Scroll direction, left or right"																																	
+	endarray
+
+end local.settings
+
+
+// advert time and advert-delay
+//
+// advert-time is the time it waits before showing all the messages again. 
+// for example. IT would wait 5 minutes then show all the messages. Then it goes
+// back to waiting 5 minutes.
+//
+
+// advert-delay is the time between each message shown. So after the advert-time it 
+// starts showing the messages. After the message is shown it waits this time before showing the next message
+// 
+
+
+// Advert-colour
+// You can set the colour for each message to display in the 4th section of the message. You can either
+// set a RBG value or you can set "random". If this 4th section is left blank then the "advert-colour"
+// will be used.
+//
+// Advert-colour is the same as the colour section of the message. It can either be "random" or a RGB colour
+// value like "1.0 0 1".
+//
+// RBG means RED, GREEN, BLUE
+// So to make a colour simply use your knowlegde from primary school on mixing the primary colours red, green and blue.
+//
+// "1 0 0" = red, because it is 1 red, 0 green and 0 blue.
+// "0 1 0" = green, because it is 0 red, 1 green and 0 blue.
+//
+// Because "R G B" stands for red green blue. where a number is set gives the amount of colour. 0 gives no colour.
+// so to get purple, that is red and blue we would do "1 0 1".
+
+
+messages:
+	local.messages = makearray
+		
+		// message					// time to display for		// display style (scroll, fade or typewriter		//Colour
+
+		"Running  {sfx} Admin-Pro 1.12 Beta"		"3"					"typewriter"		
+		"Download From www.mods-r-us.net"		"3"					"fade"						"1.0 1.0 1.0"
+	
+
+endarray
+end local.messages
+
+
+
+// Server messaging , Uses hud print to print your messages. 
+// i included some suggestions
+
+//-----------------
+// example
+//
+//	local.messages = makearray
+//		// message		// time to display for		// Style. So u can display a message different each time.
+//		 eg
+//		"Elgan Sayer"		"3"				"fade"			"1 0 0"
+//		"is"			"3"				"typewriter"		"1 0 1"
+//		"{sfx}"			"3"				"scroll""		"random"
+//	endarray
+//-----------------

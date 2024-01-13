@@ -1,0 +1,524 @@
+main local.trig:
+
+	while(local.trig.Respawn != NIL)
+		waitframe
+
+	self hide
+	self notsolid
+	local.missile = spawn script_object origin (local.trig.origin + ( 0 0 500 )) model models/static/v2.tik 
+	local.missile notsolid
+	local.missile.team = self.dmteam
+	local.missile scale .08
+	local.missile setsize ( -10 -10 -10 ) ( 10 10 10 )
+	if(level.GMSettings[3] != 0)
+		{
+		local.health = int level.GMSettings[3]
+		local.missile.trig = spawn trigger_multiple spawnflags 128 origin (local.trig.origin + ( 0 0 500 )) health local.health
+		local.missile.trig setsize ( -10 -10 -10 ) ( 10 10 10 )
+		local.missile.trig setthread TakeDamage
+		local.missile.trig bind local.missile
+		self stufftext ("set ui_GuidedMissileHealth " + local.health)
+		self thread Hud local.health
+		local.missile.trig thread HealthDisplay self
+		}
+	else
+		{
+		local.missile.trig = spawn script_object origin (local.trig.origin + ( 0 0 500 ))
+		local.missile.trig notsolid
+		local.missile.trig bind local.missile
+		}
+	local.angles = (angles_toforward local.missile.angles)
+	local.missile.angles = ( 90 0 0 )
+	local.origin = (((local.trig.origin + ( 0 0 500 )) + ((local.angles[0]) (local.angles[1]) (0)) * -124 ) + ( 0 0 60 ))
+	local.ran = randomint 9999
+	local.missile.cam = spawn camera origin local.origin targetname local.ran
+	local.missile.cam bind local.missile
+	local.missile.cam notsolid
+	local.missile.angles = ( 90 self.viewangles[1] 0 )
+	local.missile.jet = spawn animate origin local.missile.origin
+	local.missile.jet model models/emitters/firefill.tik
+	local.missile.jet bind local.missile
+	local.missile.jet scale .1
+	local.missile.jet anim start
+	local.missile show
+	local.missile.jet notsolid
+	self glue local.missile.cam
+	self resetstate
+	self commanddelay 1 physics_off
+	local.missile playsound bazooka_snd_fire 
+	wait .2
+	local.camtrig = spawn trigger_camerause target (local.ran)
+	local.camtrig douse self
+	local.camtrig remove
+	self thread SetOrigin local.missile
+        wait .8
+	if(local.missile != NIL && local.missile != NULL)
+		local.missile.jet loopsound  missile
+
+
+	
+
+
+end
+
+
+SetOrigin local.missile:
+
+	local.team = self.dmteam
+	local.missile physics_on
+	local.missile.gravity = 0
+	self.speed = 400
+	local.count = (getcvar sv_fps)
+	local.count = int local.count
+	local.count = 1.000000000 / local.count
+	if(level.GMSettings[2] == 0)
+		local.time = "unlimited"
+	else
+		{
+		local.time = int level.GMSettings[2]
+		local.oldtime = local.time
+		}
+	while(1)
+		{
+		waitframe
+		if(self == NULL)
+			{
+			waitthread RemoveNull local.missile
+			end
+			}
+		else
+			{
+			if(self.dmteam != local.team || !isalive self)
+				{
+				self waitthread RemoveTeamSwap local.missile
+				end
+				}
+			else
+				{
+				if(local.missile.trig.shooter != NIL)
+					{
+					self waitthread ShotDown local.missile.trig local.missile
+					end
+					}
+				else
+					{
+					if(local.time != "unlimited")
+						{
+						if(local.time <= 0)
+							{
+							self waitthread DestroyMissile local.missile
+							end
+							}
+						}
+
+					local.missile.velocity = ((angles_toforward self.viewangles) * self.speed)
+					local.missile.angles = ( ( 90 + self.viewangles[0]) self.viewangles[1] self.viewangles[2])
+
+					if(self.fireheld)
+						{
+						self waitthread FireMissile local.missile
+						end
+						}
+
+					if(local.origin == self.origin)
+						{
+						self waitthread DestroyMissile local.missile
+						end
+						}
+
+					local.origin = self.origin
+
+					}
+				}
+			}
+		if(local.time != "unlimited")
+			{
+			local.time -= local.count
+			if(local.time <= (local.oldtime - 1))
+				{
+				local.oldtime = (local.oldtime - 1)
+				self stufftext ("subtitle3 Flight-Time-" + local.oldtime)
+				}
+			}
+		}
+
+end
+
+HealthDisplay local.player:
+
+	local.health = self.health
+
+	while(self)
+		{
+		if(self.health != local.health)
+			{
+			local.health = self.health
+			if(local.player != NULL)
+				local.player stufftext ("set ui_GuidedMissileHealth " + self.health)
+			}
+		waitframe
+		}
+
+end
+
+TakeDamage:
+
+	local.player = parm.other
+	self.shooter = local.player
+
+end
+
+ShotDown local.trig local.missile:
+
+	if(level.ShHud == NIL)
+		{
+		self stufftext "hidemenu dday2"
+		self stufftext "hidemenu dday1"
+		}
+	else
+		{
+		self stufftext "hidemenu bastogne1"
+		self stufftext "hidemenu bastogne2"
+		}
+
+
+	self iprint "Missile Shot Down!"
+	if(local.trig.shooter != NULL)
+		local.trig.shooter iprint "Good Shot!"
+	local.Exp = spawn models/emitters/fx_explosion_mine.tik origin local.missile.origin
+	local.Exp anim start
+	local.missile.jet remove
+	self unglue local.missile.cam
+	local.missile.cam remove
+	if(local.missile.trig != NIL && local.missile.trig != NULL)
+		local.missile.trig remove
+	switch(local.missile.team)
+		{
+		case allies:
+			if(level.GMAllies != "unlimited")
+				level.GMAllies++
+		break
+		case axis:
+			if(level.GMAxis != "unlimited")
+				level.GMAxis++
+		break
+		}	
+	local.missile remove
+	self physics_on
+	wait 1
+	self waitthread Respawn
+	local.Exp remove
+	self.missile = NIL
+
+end
+
+FireMissile local.missile:
+
+	self iprint Fire!
+	local.trace = (trace (self gettagposition "eyes bone") (self gettagposition "eyes bone" + ( angles_toforward self * 10000 )))
+	local.missile.cam unbind local.missile
+	local.missile.velocity = ((angles_toforward self.viewangles) * 1000)
+	local.team = self.dmteam
+	while(1)
+		{
+		if(self == NULL)
+			{
+			waitthread RemoveNull local.missile
+			end
+			}
+		else
+			{
+			if(self.dmteam != local.team || !isalive self)
+				{
+				self waitthread RemoveTeamSwap local.missile
+				end
+				}
+			else
+				{
+				if(local.missile.trig.shooter != NIL)
+					{
+					self waitthread ShotDown local.missile.trig local.missile
+					end
+					}
+				else
+					{
+					local.origin = local.missile.origin
+					waitframe
+					local.missile.velocity = ((angles_toforward self.viewangles) * 1000)
+					if(local.missile.origin == local.origin)
+							break
+					}
+				}
+			}
+		}
+ 
+	self waitthread DestroyMissile local.missile
+
+
+end
+
+DestroyMissile local.missile:
+
+	self stufftext "set ui_GuidedMissileHealth 0"
+	self iprint Boom!
+	local.missile.cam unbind local.missile
+	local.Exp = spawn models/emitters/fx_explosion_mine.tik origin local.missile.origin
+	local.Exp anim start
+	local.missile.jet remove
+	local.missile hide
+	for(local.i=1;local.i<=$player.size;local.i++)
+		{
+		if($player[local.i] != self)
+			{
+			local.dist = ( $player[local.i].origin - local.missile.origin )	
+			local.sqr = local.dist * local.dist	
+			local.radius = 300.0 * 300.0
+			if(local.sqr <= local.radius)	
+					{
+					if(getcvar g_teamdamage == 1)
+						{
+						$player[local.i] damage self 100 self $player[local.i].origin $player[local.i].forwardvector ( 0 0 0 ) 0 0 9 0
+						}
+					else
+						{
+						if($player[local.i].dmteam != self.dmteam)
+							$player[local.i] damage self 100 self $player[local.i].origin $player[local.i].forwardvector ( 0 0 0 ) 0 0 9 0
+						}
+					}
+			}
+						}	
+	wait 1
+	self physics_on
+	self unglue local.missile.cam 
+	local.missile.cam remove
+	if(local.missile.trig != NIL && local.missile.trig != NULL)
+		local.missile.trig remove
+	switch(local.missile.team)
+		{
+		case allies:
+			if(level.GMAllies != "unlimited")
+				level.GMAllies++
+		break
+		case axis:
+			if(level.GMAxis != "unlimited")
+				level.GMAxis++
+		break
+		}
+	local.missile remove
+	local.Exp remove	
+	self waitthread Respawn
+	self.missile = NIL
+
+end
+
+RemoveTeamSwap local.missile:
+
+
+	self stufftext "set ui_GuidedMissileHealth 0" 
+	if(level.ShHud == NIL)
+		{
+		self stufftext "hidemenu dday2"
+		self stufftext "hidemenu dday1"
+		}
+	else
+		{
+		self stufftext "hidemenu bastogne1"
+		self stufftext "hidemenu bastogne2"
+		}
+
+	local.Exp = spawn models/emitters/fx_explosion_mine.tik origin local.missile.origin
+	local.Exp anim start
+	local.missile.jet remove
+	self unglue local.missile.cam
+	local.missile.cam remove
+	if(local.missile.trig != NIL && local.missile.trig != NULL)
+		local.missile.trig remove
+	switch(local.missile.team)
+		{
+		case allies:
+			if(level.GMAllies != "unlimited")
+				level.GMAllies++
+		break
+		case axis:
+			if(level.GMAxis != "unlimited")
+				level.GMAxis++
+		break
+		}
+	local.missile remove
+	self physics_on
+	wait 1
+	local.Exp remove
+	self.missile = NIL
+	self iprint "Your missile Self Destructed"
+
+end
+
+RemoveNull local.missile:
+
+	local.Exp = spawn models/emitters/fx_explosion_mine.tik origin local.missile.origin
+	local.Exp anim start
+	local.missile.jet remove
+	local.missile.cam remove
+	if(local.missile.trig != NIL && local.missile.trig != NULL)
+		local.missile.trig remove
+	switch(local.missile.team)
+		{
+		case allies:
+			if(level.GMAllies != "unlimited")
+				level.GMAllies++
+		break
+		case axis:
+			if(level.GMAxis != "unlimited")
+				level.GMAxis++
+		break
+		}
+	local.missile remove
+	wait 1
+	local.Exp remove
+
+end
+
+Respawn:
+
+	if(level.ShHud == NIL)
+		{
+		self stufftext "hidemenu dday2"
+		self stufftext "hidemenu dday1"
+		}
+	else
+		{
+		self stufftext "hidemenu bastogne1"
+		self stufftext "hidemenu bastogne2"
+		}
+
+
+	if!(level.dmrespawning)
+		{
+		self.missile.Respawn = 1
+		self immune falling
+		self.origin = (self.missile.origin + ( 0 0 500 )) 
+		self show
+		self solid
+		local.trace = (trace self.origin (self.origin + ((angles_toup self.angles))))
+		while(1)
+			{
+			waitframe
+			if(local.trace[2] == self.origin[2])
+				{
+				//println Onground
+				break
+				}
+			local.trace = (trace self.origin (self.origin + ((angles_toup self.angles))))
+			}
+		self removeimmune falling
+		while(1)
+			{
+			if!(self istouching self.missile)
+				{
+				//println NotTouching
+				break
+				}
+			waitframe
+			}
+		self safeholster 0
+		self.missile.Respawn = NIL
+		}
+	else
+		self respawn
+
+end
+
+Hud local.health:
+
+	if(level.ShHud != NIL)
+		{
+		self thread HudSH local.health
+		end
+		}
+
+	self stufftext "globalwidgetcommand dday1 shader townhallwindow"
+	self stufftext "globalwidgetcommand dday1 fgcolor 1.00 1.00 1.00 1.00"
+	self stufftext "globalwidgetcommand dday1 bgcolor 0.50 0.50 0.50 0.00"
+	self stufftext "globalwidgetcommand dday1 fadein 0"
+	self stufftext "globalwidgetcommand dday1 menu dday1 640 480 NONE 0"
+	self stufftext "globalwidgetcommand dday1 virtualres 1" 
+	self stufftext "globalwidgetcommand dday1 fullscreen 1" 
+
+	self stufftext "globalwidgetcommand june6 borderstyle NONE"
+	self stufftext "globalwidgetcommand june6 shader textures/hud/healthback"
+	self stufftext "globalwidgetcommand june6 rect 16 420 16 64"
+	self stufftext "globalwidgetcommand june6 fgcolor 1.00 1.00 1.00 1.00"
+	self stufftext "globalwidgetcommand june6 bgcolor 0.00 0.00 0.00 0.00"
+	self stufftext "globalwidgetcommand june6 linkcvar ui_GuidedMissileHealth"
+	self stufftext ("globalwidgetcommand june6 statbar vertical 0 " + local.health)
+	self stufftext "globalwidgetcommand june6 statbar_shader textures/hud/healthmeter"
+	self stufftext "globalwidgetcommand june6 statbar_shader_flash textures/hud/healthmeterflash"
+
+
+	self stufftext "globalwidgetcommand dday2 fgcolor 1.00 1.00 1.00 1.00"
+	self stufftext "globalwidgetcommand dday2 bgcolor 0.50 0.50 0.50 0.00"
+	self stufftext "globalwidgetcommand dday2 fadein 0"
+	self stufftext "globalwidgetcommand dday2 menu dday2 640 480 NONE 0"
+	self stufftext "globalwidgetcommand dday2 virtualres 1" 
+	self stufftext "globalwidgetcommand dday2 fullscreen 1" 
+
+	self stufftext "globalwidgetcommand charliesector borderstyle NONE"
+	self stufftext "globalwidgetcommand charliesector textalign left " 
+	self stufftext "globalwidgetcommand charliesector rect 40 470 150 20"
+	self stufftext "globalwidgetcommand charliesector fgcolor 0.70 0.60 0.05 1.00"
+	self stufftext "globalwidgetcommand charliesector bgcolor 0.00 0.00 0.00 0.00"
+	self stufftext "globalwidgetcommand charliesector title Missile-Health"
+	self stufftext "globalwidgetcommand charliesector font facfont-20"
+	self stufftext "globalwidgetcommand charliesector shader townhallwindow"
+
+	self stufftext "showmenu dday2"
+	self stufftext "showmenu dday1"
+
+
+end
+
+HudSH local.health:
+
+	self stufftext "globalwidgetcommand bastogne1 shader townhallwindow"
+	self stufftext "globalwidgetcommand bastogne1 fgcolor 1.00 1.00 1.00 1.00"
+	self stufftext "globalwidgetcommand bastogne1 bgcolor 0.50 0.50 0.50 0.00"
+	self stufftext "globalwidgetcommand bastogne1 fadein 0"
+	self stufftext "globalwidgetcommand bastogne1 menu dday1 640 480 NONE 0"
+	self stufftext "globalwidgetcommand bastogne1 virtualres 1" 
+	self stufftext "globalwidgetcommand bastogne1 fullscreen 1" 
+
+	self stufftext "globalwidgetcommand june6 borderstyle NONE"
+	self stufftext "globalwidgetcommand june6 shader textures/hud/healthback"
+	self stufftext "globalwidgetcommand june6 rect 16 420 16 64"
+	self stufftext "globalwidgetcommand june6 fgcolor 1.00 1.00 1.00 1.00"
+	self stufftext "globalwidgetcommand june6 bgcolor 0.00 0.00 0.00 0.00"
+	self stufftext "globalwidgetcommand june6 linkcvar ui_GuidedMissileHealth"
+	self stufftext ("globalwidgetcommand june6 statbar vertical 0 " + local.health)
+	self stufftext "globalwidgetcommand june6 statbar_shader textures/hud/healthmeter"
+	self stufftext "globalwidgetcommand june6 statbar_shader_flash textures/hud/healthmeterflash"
+
+
+	self stufftext "globalwidgetcommand bastogne2 fgcolor 1.00 1.00 1.00 1.00"
+	self stufftext "globalwidgetcommand bastogne2 bgcolor 0.50 0.50 0.50 0.00"
+	self stufftext "globalwidgetcommand bastogne2 fadein 0"
+	self stufftext "globalwidgetcommand bastogne2 menu dday2 640 480 NONE 0"
+	self stufftext "globalwidgetcommand bastogne2 virtualres 1" 
+	self stufftext "globalwidgetcommand bastogne2 fullscreen 1" 
+
+	self stufftext "globalwidgetcommand charliesector borderstyle NONE"
+	self stufftext "globalwidgetcommand charliesector textalign left " 
+	self stufftext "globalwidgetcommand charliesector rect 40 470 150 20"
+	self stufftext "globalwidgetcommand charliesector fgcolor 0.70 0.60 0.05 1.00"
+	self stufftext "globalwidgetcommand charliesector bgcolor 0.00 0.00 0.00 0.00"
+	self stufftext "globalwidgetcommand charliesector title Missile-Health"
+	self stufftext "globalwidgetcommand charliesector font facfont-20"
+	self stufftext "globalwidgetcommand charliesector shader townhallwindow"
+
+	self stufftext "showmenu bastogne2"
+	self stufftext "showmenu bastogne1"
+
+
+end
+
+
+

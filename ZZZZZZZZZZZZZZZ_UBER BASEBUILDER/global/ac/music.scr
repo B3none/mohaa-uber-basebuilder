@@ -1,0 +1,262 @@
+// modified phil{sfx} spec music.scr into a scr for playing music to spec or all . 
+
+main local.cmd local.tracknum:
+
+	if(level.run["music"] != "1"){end}
+
+	switch(local.cmd)
+	{
+	case "next":
+		level.music_run = 0
+		waitthread turn_music_off
+		level.track++
+	break
+	case "prev":
+		waitthread turn_music_off
+		level.music_run = 0
+		level.track--
+	break
+	case "random":
+		waitthread turn_music_off
+		level.music_run = 0
+		level.track = randomint( 44+1)
+	break
+	case "track":
+		waitthread turn_music_off
+		level.music_run = 0
+		level.track = int local.tracknum
+	break
+	default:
+		level.track = randomint( 44+1)
+	}
+
+
+	if(level.music_run !=1)
+	{
+		level.music_run = 1
+	}
+	else
+	{
+		end
+	}
+
+	if(level.track < 0)
+	{
+		level.track =  44
+	}
+	else if(level.track > 44 )
+	{
+		level.track =  0
+	}
+
+	switch (level.track)
+	{
+	case "0":
+		local.SMUSIC = ("main/sound/music/mus_14a_action.mp3")
+	break
+	case "1":
+		local.SMUSIC = ("main/sound/music/mus_03c_suspense.mp3")
+	break
+	case "2":
+		local.SMUSIC = ("main/sound/music/mus_NorthAfrica_01a.mp3") 
+	break
+	case "3":
+		local.SMUSIC = ("main/sound/music/mus_14a_action.mp3") 
+	break
+	case "4":
+		local.SMUSIC = ("main/sound/music/mus_01a_suspense.mp3") 
+	break
+	case "5":
+		local.SMUSIC = ("main/sound/music/mus_04f_suspense.mp3")
+	break
+	case "6":
+		local.SMUSIC = ("main/sound/music/mus_17b_mystery.mp3")
+	break
+	case "7":
+		local.SMUSIC = ("main/sound/music/mus_17a_mystery.mp3")
+	break
+	case "8":
+		local.SMUSIC = ("main/sound/music/mus_11a_surprise.mp3")
+	break
+	case "9":
+		local.SMUSIC = ("main/sound/music/mus_10a_action.mp3")
+	break
+	case "10":
+		local.SMUSIC = ("main/sound/music/mus_06a_mystery.mp3")
+	break
+	case "11":
+		local.SMUSIC = ("main/sound/music/mus_03c_suspense.mp3")
+	break
+	case "12":
+		local.SMUSIC = ("main/sound/music/mus_NorthAfrica_01a.mp3") 
+	break
+	case "13":
+		local.SMUSIC = ("main/sound/music/mus_NorthAfrica_01a.mp3") 
+	break
+	case "14":
+		local.SMUSIC = ("main/sound/music/mus_14a_action.mp3") 
+	break
+	case "15":
+		local.SMUSIC = ("main/sound/music/mus_14a_action.mp3") 
+	break
+	case "16":
+		local.SMUSIC = ("main/sound/music/mus_01a_suspense.mp3") 
+	break
+	case "17":
+		local.SMUSIC = ("main/sound/music/mus_04f_suspense.mp3")
+	break
+	case "18":
+		local.SMUSIC = ("main/sound/music/mus_17b_mystery.mp3")
+	break
+	case "19":
+		local.SMUSIC = ("main/sound/music/mus_17a_mystery.mp3")
+	break
+	case "210:
+		local.SMUSIC = ("main/sound/music/mus_11a_surprise.mp3")
+	break
+	case "21":
+		local.SMUSIC = ("main/sound/music/mus_10a_action.mp3")
+	break
+	case "22":
+		local.SMUSIC = ("main/sound/music/mus_14a_action.mp3")
+	break
+	case "23":
+		local.SMUSIC = ("main/sound/music/mus_14a_action.mp3")
+	break
+	case "24":
+		local.SMUSIC = ("main/sound/music/mus_17a_mystery.mp3")
+	break
+	case "25":
+		local.SMUSIC = ("main/sound/music/mus_06a_mystery.mp3")
+	break
+	case "26":
+		local.SMUSIC = ("main/sound/music/mus_14a_action.mp3")
+	break
+	case "27":
+		local.SMUSIC = ("main/sound/music/mus_03c_suspense.mp3")
+	break
+	case "28":
+		local.SMUSIC = ("main/sound/music/mus_04a_suspense.mp3")
+	break
+	case "29":
+		local.SMUSIC = ("main/sound/music/mus_15a_mystery.mp3")
+	break
+	case "30":
+		local.SMUSIC = ("main/sound/music/mus_SniperTown_01a.mp3")
+	break
+	case "31":
+		local.SMUSIC = ("main/sound/music/mus_SniperTown_01b.mp3")
+	break
+	case "32":
+		local.SMUSIC = ("main/sound/music/mus_TigerTank_01a.mp3")
+	break
+	case "33":
+		local.SMUSIC = ("main/sound/music/mus_TigerTank_01a.mp3")
+	break
+	case "34":
+		local.SMUSIC = ("main/sound/music/mus_11b_action.mp3")
+	break
+	case "35":
+		local.SMUSIC = ("main/sound/music/mus_02b_suspense.mp3")
+	break
+	case "36":
+		local.SMUSIC = ("main/sound/music/mus_02b_suspense.mp3")
+	break
+	case "37":
+		local.SMUSIC = ("main/sound/music/mus_Schmerzen_01a.mp3")
+	break
+	case "38":
+		local.SMUSIC = ("main/sound/music/mus_01a_suspense.mp3") 
+	break
+	case "39":
+		local.SMUSIC = ("main/sound/music/mus_14a_action.mp3") 
+	break
+	case "40":
+		local.SMUSIC = ("main/sound/music/mus_14a_action.mp3")
+	break
+	case "41":
+		local.SMUSIC = ("main/sound/music/mus_Schmerzen_01a.mp3")
+	break
+	case "42":
+		local.SMUSIC = ("main/sound/music/mus_Schmerzen_01a.mp3")
+	break
+	case "43":
+		local.SMUSIC = ("main/sound/music/mus_Schmerzen_01f.mp3")
+	break
+	case "44":
+		local.SMUSIC = ("main/sound/music/mus_Schmerzen_01a.mp3")
+	break
+	default:
+		local.SMUSIC = ("main/sound/music/mus_Schmerzen_01a.mp3")
+	}
+
+	thread music local.SMUSIC
+end
+
+music local.track:
+
+	local.players = waitexec global/settings.scr::getcmd "play-for"
+
+	local.track = ("playmp3 " + local.track )
+	while(level.run["music"] == "1")
+	{
+		if(local.players== "spectator")
+		{	
+			for(local.p=1;local.p <= $player.size; local.p++)
+			{
+				if(level.run["music"] != "1"){end}
+				if($player[local.p].dmteam == "spectator" && $player[local.p].playingmusic != 1)
+				{
+					$player[local.p].playingmusic = 1
+					$player[local.p] stufftext (local.track)
+					$player[local.p] thread while_spec
+					$player[local.p] iprint ("Type stopmp3 into console to stop music ,It will auto stop when u join a team") 1
+				}
+			}
+		}
+		else
+		{
+	
+			for(local.p=1;local.p <= $player.size; local.p++)
+			{
+				if(level.run["music"] != "1"){end}
+				if($player[local.p].dmteam == "spectator" && $player[local.p].playingmusic != 1)
+				{
+					$player[local.p].playingmusic = 1
+					$player[local.p] stufftext ("" + local.track)
+				}
+			}
+		}
+		
+		wait 1
+	}
+
+end
+
+while_spec:
+
+	while(self.dmteam == "spectator")
+	{		
+		wait 1
+	}
+
+	self stufftext ("stopmp3")	
+	self.playingmusic = 0
+end
+	
+turn_music_off:
+
+	level.run["music"] = "0" //temp turn it all off.
+
+	for(local.p=1;local.p <= $player.size; local.p++)
+	{
+		if($player[local.p].playingmusic == 1)
+		{
+			$player[local.p].playingmusic = 0
+			$player[local.p] stufftext ("stopmp3")
+		}
+	}
+
+	level.run["music"] = "1" //turn it back on this instant!
+
+end

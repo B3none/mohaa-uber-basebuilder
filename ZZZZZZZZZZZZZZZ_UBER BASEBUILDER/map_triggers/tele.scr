@@ -1,0 +1,18 @@
+main local.origin local.destination:
+
+local.portlight = spawn script_model
+local.portlight model "emitters/welding_spark.tik" 
+local.portlight.origin = ( local.origin )
+local.portlight.scale = 2
+local.trig = spawn trigger_multiple
+local.trig.targetname = "port1"
+local.trig.origin = ( local.origin )
+local.trig setsize ( -30 -30 0 ) ( 30 30 80 )
+while(1)
+{
+$port1 waittill trigger
+local.player = parm.other
+local.player tele ( local.destination)
+wait 0.1
+}
+end

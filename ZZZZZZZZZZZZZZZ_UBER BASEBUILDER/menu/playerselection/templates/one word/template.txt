@@ -1,0 +1,43 @@
+//set the reloadnames alias
+alias reloadnames "exec menu/playerselection/TEMPLATE.cfg"
+globalwidgetcommand selecttitle title"Select a player to TEMPLATE"
+
+//delete all items
+globalwidgetcommand playerlist deleteallitems
+
+//delete all items
+globalwidgetcommand playerlist deleteallitems
+
+globalwidgetcommand playerlist addconfigstringitem "1684" "rcon admin_cmd TEMPLATE"            
+globalwidgetcommand playerlist addconfigstringitem "1685" "rcon admin_cmd TEMPLATE"            
+globalwidgetcommand playerlist addconfigstringitem "1686" "rcon admin_cmd TEMPLATE"            
+globalwidgetcommand playerlist addconfigstringitem "1687" "rcon admin_cmd TEMPLATE"            
+globalwidgetcommand playerlist addconfigstringitem "1688" "rcon admin_cmd TEMPLATE"            
+globalwidgetcommand playerlist addconfigstringitem "1689" "rcon admin_cmd TEMPLATE"            
+globalwidgetcommand playerlist addconfigstringitem "1690" "rcon admin_cmd TEMPLATE"            
+globalwidgetcommand playerlist addconfigstringitem "1691" "rcon admin_cmd TEMPLATE"            
+globalwidgetcommand playerlist addconfigstringitem "1692" "rcon admin_cmd TEMPLATE"            
+globalwidgetcommand playerlist addconfigstringitem "1693" "rcon admin_cmd TEMPLATE"            
+globalwidgetcommand playerlist addconfigstringitem "1694" "rcon admin_cmd TEMPLATE"            
+globalwidgetcommand playerlist addconfigstringitem "1695" "rcon admin_cmd TEMPLATE"            
+globalwidgetcommand playerlist addconfigstringitem "1696" "rcon admin_cmd TEMPLATE"            
+globalwidgetcommand playerlist addconfigstringitem "1697" "rcon admin_cmd TEMPLATE"            
+globalwidgetcommand playerlist addconfigstringitem "1698" "rcon admin_cmd TEMPLATE"            
+globalwidgetcommand playerlist addconfigstringitem "1699" "rcon admin_cmd TEMPLATE"            
+globalwidgetcommand playerlist addconfigstringitem"1700" "rcon admin_cmd TEMPLATE"             
+globalwidgetcommand playerlist addconfigstringitem"1701" "rcon admin_cmd TEMPLATE"             
+globalwidgetcommand playerlist addconfigstringitem"1702" "rcon admin_cmd TEMPLATE"             
+globalwidgetcommand playerlist addconfigstringitem"1703" "rcon admin_cmd TEMPLATE"             
+globalwidgetcommand playerlist addconfigstringitem"1704" "rcon admin_cmd TEMPLATE"             
+globalwidgetcommand playerlist addconfigstringitem"1705" "rcon admin_cmd TEMPLATE"             
+globalwidgetcommand playerlist addconfigstringitem"1706" "rcon admin_cmd TEMPLATE"             
+globalwidgetcommand playerlist addconfigstringitem"1707" "rcon admin_cmd TEMPLATE"             
+globalwidgetcommand playerlist addconfigstringitem"1708" "rcon admin_cmd TEMPLATE"             
+globalwidgetcommand playerlist addconfigstringitem"1709" "rcon admin_cmd TEMPLATE"             
+globalwidgetcommand playerlist addconfigstringitem"1710" "rcon admin_cmd TEMPLATE"             
+globalwidgetcommand playerlist addconfigstringitem"1711" "rcon admin_cmd TEMPLATE"             
+globalwidgetcommand playerlist addconfigstringitem"1712" "rcon admin_cmd TEMPLATE"             
+globalwidgetcommand playerlist addconfigstringitem"1713" "rcon admin_cmd TEMPLATE"             
+globalwidgetcommand playerlist addconfigstringitem"1714" "rcon admin_cmd TEMPLATE"             
+globalwidgetcommand playerlist addconfigstringitem"1715" "rcon admin_cmd TEMPLATE"             
+globalwidgetcommand playerlist addconfigstringitem"1716" "rcon admin_cmd TEMPLATE"             

@@ -1,0 +1,110 @@
+//All credit goes to mefy. So ty mefy (Mark Follett). This is his script for detecting players under the map.
+// I just fiddled with it some what to make it run.
+
+main:
+
+	if(game.undermap != 1)
+	{
+		end
+	}
+
+	local.numbers = waitthread check_under_map
+
+	if(local.numbers == NIL)
+	{
+		end
+	}
+
+	while(1)
+	{
+		wait 3
+		for(local.i = 1; local.i <= $player.size; local.i++)
+		{
+			wait 1
+			if($player[local.i].dmteam != "spectator" && isalive $player[local.i] && $player[local.i].flying != 1 )
+			{
+				if($player[local.i] waitthread check_player local.numbers[1] local.numbers[2])
+				{
+					//self stufftext "say I was detected out of bounds!"
+					self respawn
+					self.forcespawn = 1
+					self iprint "You are not allowed under the map"
+				}
+
+			}
+		}
+	}
+	
+end
+
+
+check_under_map:
+	// sets the z values of the invisible floor that the player can stand on
+	// while under the map
+
+	switch (level.mapname)
+	{
+		case "dm/mohdm2":
+			local.botz = -128.125
+			local.topz = -95.875
+			break
+				
+		case "obj/obj_team1":
+			local.botz = -520.125
+			local.topz = -511.875
+			break
+				
+		case "obj/obj_team3":
+			local.botz = -728.125
+			local.topz = -719.875
+			break
+		
+		case "dm/mohdm3":
+			local.botz = -224.125
+			local.topz = -215.875
+			break
+
+		case "dm/mohdm4":
+		case "obj/obj_team4":
+			local.botz = -16.125
+			local.topz = 0.125
+			break
+			
+		default:
+			end
+			break
+	}
+
+end (local.botz::local.topz)
+
+check_player local.botz local.topz:
+
+	local.zlow = -8000
+	local.zhigh = 8000
+
+	local.orglow = self.origin
+	local.orglow[2] = local.zlow
+	
+	local.orghigh = self.origin
+	local.orghigh[2] = local.zhigh
+	
+	// do a couple traces
+	// first one goes down from the players feet to determine the
+	// z value of the ground they're standing on
+	// second one comes up from the very bottom of the map to
+	// determine the lowest z value
+	local.down = trace (self.origin + ( 0 0 10 )) local.orglow 1 ( -5 -5 0 ) ( 5 5 0 )
+	local.up = trace local.orglow local.orghigh
+
+	// this prints out the two z values
+//	println ("BOTZ: " + local.up[2] + " TOPZ: " + local.down[2])
+
+	// check to see if they match the ones for this map, if so, the
+	// player is under the map
+	if (((abs (local.down[2] - local.topz)) < 0.001) && ((abs (local.up[2] - local.botz)) < 0.001))
+	{
+		end 1
+	}
+
+end
+

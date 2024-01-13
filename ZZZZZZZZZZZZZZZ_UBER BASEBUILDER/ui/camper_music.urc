@@ -1,0 +1,81 @@
+menu "camper_music" 230 130 NONE 1
+
+
+resource
+Label
+{
+name "Default"
+rect 0 0 230 130
+fgcolor 0.50 0.50 0.00 1.00
+bgcolor 0.50 0.50 0.00 1.00
+borderstyle "RAISED"
+}
+resource
+Label
+{
+title "Track (type # and press enter)"
+name "Default"
+rect 15 40 200 30
+fgcolor 0.00 0.00 0.00 1.00
+bgcolor 0.50 0.50 0.00 1.00
+borderstyle "3D_BORDER"
+}
+resource
+Button
+{
+title "Close"
+name "Default"
+rect 85 103 60 20
+fgcolor 0.00 0.00 0.00 1.00
+bgcolor 0.50 0.50 0.50 1.00
+borderstyle "RAISED"
+stuffcommand "popmenu 0"
+clicksound "menu/sound/apply.wav"
+hoversound "menu/sound/scroll.wav"
+shader "menu_button_trans"
+hovershader "menu_button_glow"
+
+}
+resource
+Button
+{
+title "next"
+name "Default"
+rect 155 20 60 20
+fgcolor 0.00 0.00 0.00 1.00
+bgcolor 0.50 0.50 0.50 1.00
+borderstyle "RAISED"
+stuffcommand "rcon admin_cmd \"music next\""
+clicksound "menu/sound/apply.wav"
+hoversound "menu/sound/scroll.wav"
+shader "menu_button_trans"
+hovershader "menu_button_glow"
+
+}
+resource
+Button
+{
+title "prev"
+name "Default"
+rect 15 20 60 20
+fgcolor 0.00 0.00 0.00 1.00
+bgcolor 0.50 0.50 0.50 1.00
+borderstyle "RAISED"
+stuffcommand "rcon admin_cmd \"music prev\""
+clicksound "menu/sound/apply.wav"
+hoversound "menu/sound/scroll.wav"
+shader "menu_button_trans"
+hovershader "menu_button_glow"
+
+}
+resource
+Field
+{
+name "Default"
+rect 90 70 50 30
+fgcolor 0.00 0.00 0.00 1.00
+bgcolor 1.00 1.00 1.00 1.00
+borderstyle "RAISED"
+stuffcommand "rcon admin_cmd \"music track\""
+}
+end.

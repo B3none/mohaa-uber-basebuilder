@@ -1,0 +1,311 @@
+
+main:
+//
+//	local.corona = spawn script_model "targetname" "HIEEEEEEEELLO"
+//	local.corona model "models/fx/corona_red.tik"
+//	local.corona.origin = self.origin 
+//	local.corona notsolid
+//	local.corona scale 3.5
+
+
+	if(level.run["medics"] != "1")
+	{
+		end
+	}
+
+	local.replenish = waitexec global/settings.scr::getcmd "medic-replenish"
+
+	if(self.medic_health == NIL || local.replenish != "0")
+	{
+		local.replenish = waitexec global/settings.scr::getcmd "health"
+		local.replenish = int local.replenish
+		self.medic_health = local.replenish
+	}
+
+	if(self.medic_health <= 0)
+	{
+		end
+	}
+
+	local.weaponscheck = waitexec global/settings.scr::getcmd "medic-weapons"
+
+	if(local.weaponscheck == "1")
+	{
+		local.end =  waitthread check_weapon self
+
+		if(local.end == "0")
+		{
+			end
+		}
+
+	}
+
+	local.team = self.dmteam
+
+
+	while(level.run["medics"] == "1" && self != NULL && self != NIL && isalive self  && self.dmteam == local.team)
+	{
+		wait .5 //wait 1 second
+
+		if(self == NULL || self == NIL)
+		{
+			end
+		}
+
+		local.skip = (self.no_usemedic == 1 || self.ARMED || self.WALKIETALKIED || self.DETONATORED || self.flying || self.dmteam == "spectator")
+
+
+		if(self.medic_health <= 0)
+		{
+			self iprint "Out of medic health" 1
+			end
+		}
+	
+		if(local.skip != 1)
+		{	
+			if(self.useheld == 1)
+			{
+				local.player = waitthread check_players 
+
+				if(local.player != NIL)
+				{
+					self.no_usemine = 1
+
+					local.health = local.player.health 
+					local.health = int local.health 
+
+					if(local.player.health < 100)
+					{
+						thread fakehealth
+						self stufftext ("subtitle3 Healing-Player")
+						
+						local.player stufftext ("locationprint 32 43 Being-Healed 1.0")
+						
+						local.is_near = 1
+
+						while(self.useheld == 1 && local.health <= 100 && self.medic_health > 0 && local.is_near == 1)
+						{
+							waitframe
+							local.health = local.player.health 
+							local.health = int local.health 
+					
+							self stufftext ("set dmplayerhealth " + local.health)
+							
+							self.medic_health--
+							local.health++
+
+							local.player.healthonly  = local.health
+
+							self stufftext ("globalwidgetcommand healthnumber fgcolor 1.0 1.0 1.0 1.0")
+							self stufftext ("globalwidgetcommand healthnumber title Medic-" + self.medic_health)
+							local.is_near = waitthread is_near self local.player
+						}
+					}
+					else
+					{
+						self stufftext ("subtitle3 Player-Has-Full-health")
+					}
+
+					self stufftext "hidemenu dday1"
+					self stufftext "hidemenu dday2"
+
+					wait 1
+					self.no_usemine = 0
+
+					self stufftext ("globalwidgetcommand healthnumber fgcolor 0.70 0.60 0.05 1.00")
+					self stufftext ("globalwidgetcommand healthnumber title Health")
+							
+					//self stufftext ("subtitle3 " + self.medic_health + "-medic-health")
+					//self stufftext ("locationprint 32 43 Players-Health=" + local.health + "1.0")
+				}
+			
+			}
+		}
+	}	
+
+end
+
+
+fakehealth:
+
+	if(game.game != "AA")
+	{
+		end
+	}
+
+	self stufftext "globalwidgetcommand dday1 shader townhallwindow"
+	self stufftext "globalwidgetcommand dday1 fgcolor 1.00 1.00 1.00 1.00"
+	self stufftext "globalwidgetcommand dday1 bgcolor 0.50 0.50 0.50 0.00"
+	self stufftext "globalwidgetcommand dday1 fadein 0"
+	self stufftext "globalwidgetcommand dday1 menu dday1 640 480 NONE 0"
+	self stufftext "globalwidgetcommand dday1 virtualres 1" 
+	self stufftext "globalwidgetcommand dday1 fullscreen 1" 
+
+	self stufftext "globalwidgetcommand june6 borderstyle NONE"
+	self stufftext "globalwidgetcommand june6 shader textures/hud/healthback"
+	self stufftext "globalwidgetcommand june6 rect 16 420 16 64"
+	self stufftext "globalwidgetcommand june6 fgcolor 1.00 1.00 1.00 1.00"
+	self stufftext "globalwidgetcommand june6 bgcolor 0.00 0.00 0.00 0.00"
+	self stufftext "globalwidgetcommand june6 linkcvar dmplayerhealth"
+	self stufftext "globalwidgetcommand june6 statbar vertical 0 100"
+	self stufftext "globalwidgetcommand june6 statbar_shader textures/hud/healthmeter"
+	self stufftext "globalwidgetcommand june6 statbar_shader_flash textures/hud/healthmeterflash"
+
+
+	self stufftext "globalwidgetcommand dday2 fgcolor 1.00 1.00 1.00 1.00"
+	self stufftext "globalwidgetcommand dday2 bgcolor 0.50 0.50 0.50 0.00"
+	self stufftext "globalwidgetcommand dday2 fadein 0"
+	self stufftext "globalwidgetcommand dday2 menu dday2 640 480 NONE 0"
+	self stufftext "globalwidgetcommand dday2 virtualres 1" 
+	self stufftext "globalwidgetcommand dday2 fullscreen 1" 
+
+	self stufftext "globalwidgetcommand charliesector borderstyle NONE"
+	self stufftext "globalwidgetcommand charliesector textalign left " 
+	self stufftext "globalwidgetcommand charliesector rect 40 470 150 20"
+	self stufftext "globalwidgetcommand charliesector fgcolor 0.70 0.60 0.05 1.00"
+	self stufftext "globalwidgetcommand charliesector bgcolor 0.00 0.00 0.00 0.00"
+	self stufftext "globalwidgetcommand charliesector linkcvar dmplayerhealth"
+	self stufftext "globalwidgetcommand charliesector font facfont-20"
+	self stufftext "globalwidgetcommand charliesector shader townhallwindow"
+
+	self stufftext "showmenu dday2"
+	self stufftext "showmenu dday1"
+end
+
+is_near local.player local.medic:
+
+	local.vector_dist = ( local.player.origin - local.medic.origin )	// get vector between distance?
+	local.dist_sqr = local.vector_dist * local.vector_dist			// get square distance
+
+	local.radius = 50.0 * 50.0						// 50.0 close
+	if(local.dist_sqr <= local.radius)					// is they within 50 things
+	{
+		local.is_fwd = local.vector_dist * local.medic.forwardvector		
+		local.is_fwd =  local.is_fwd >= 20.0 && local.is_fwd <= 50.0	// is the number thing between 20 and 50. thats like 30 in which the person is in view.
+
+		if(local.is_fwd)						
+		{
+			end 1
+		}
+	}
+
+end 0
+
+check_players:
+
+	local.radius = 30.0 * 30.0
+
+	for(local.i = 1;local.i <= $player.size;local.i++)
+	{
+		local.player = $player[local.i]
+
+		if(local.player.dmteam == self.dmteam && isalive local.player)
+		{
+			if(local.player != self)
+			{
+				local.vector_dist = ( local.player.origin - self.origin )	// get vector between distance?
+				local.dist_sqr = local.vector_dist * local.vector_dist		// get square distance
+		
+				local.radius = 50.0 * 50.0					// 50.0 close
+				if(local.dist_sqr <= local.radius)				// is they within 50 things
+				{
+					local.is_fwd = local.vector_dist * self.forwardvector		
+					local.is_fwd =  local.is_fwd >= 20.0 && local.is_fwd <= 50.0	// is the number thing between 20 and 50. thats like 30 in which the person is in view.
+				
+					if(local.is_fwd)
+					{
+						end local.player
+					}
+				}
+			}
+		}
+	}
+end
+
+check_weapon local.player:
+
+	if(local.player.dmteam=="spectator" || local.player == NIL || local.player == NULL)
+	{
+		end
+	}
+
+	if(game.medic_weapons==NIL)
+	{
+		waitthread load_weapons 
+	}
+
+	self.weapon = NIL	
+
+	self waitexec global/get_weapon.scr
+
+	local.true = 1
+	for(local.true =0;local.true <= 1; local.true++)
+	{
+		wait 1
+		if(self.weapon==NIL)
+		{
+			while(self.weapon==NIL)
+			{
+				if(self == NULL || self == NIL)
+				{
+					end
+				}
+				waitframe
+			}
+		}
+
+		if(self.weapon != "models/weapons/unarmed.tik")
+		{
+			local.true = 2
+		}
+
+		waitexec global/get_weapon.scr
+
+	}
+
+	for(local.load=game.medic_weap_start;local.load<=game.all_commands.size;local.load++)
+	{
+		if((self.weapon + "-medic") == ("models/weapons/" + game.all_commands[local.load][1]))
+		{
+			local.medics = game.all_commands[local.load] [2]
+			end local.medics
+		}
+	}
+
+end local.medics
+
+load_weapons:
+
+	switch(game.game)
+	{
+	case "AA":
+		game.medic_weapons =  waitexec game.file["medics"]::weaponsaa
+	break
+	case "SH":
+		game.medic_weapons =  waitexec game.file["medics"]::weaponssh
+	break
+	case "BT":
+		game.medic_weapons =  waitexec game.file["medics"]::weaponsbt
+	break
+	}
+
+	local.i = game.all_commands.size
+	game.medic_weap_start = local.i
+
+	for(local.n=1;local.n<=game.medic_weapons.size;local.n++)
+	{
+		local.i++
+		for(local.s=1;local.s <= game.medic_weapons[local.n].size; local.s++ )
+		{
+			if(local.s == 1)
+			{
+				game.all_commands[local.i][local.s] = (game.medic_weapons[local.n][local.s] + ".tik-medic")
+			}
+			else
+			{
+				game.all_commands[local.i][local.s] = (game.medic_weapons[local.n][local.s])
+			}
+		}
+	}
+end
+

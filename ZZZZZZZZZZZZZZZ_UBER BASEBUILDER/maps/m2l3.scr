@@ -1,0 +1,129 @@
+ymain:
+
+// set scoreboard messages
+//KEEP THESE! DO NOT EDIT THIS BIT!
+setcvar "g_obj_alliedtext1" "m2l3"
+setcvar "g_obj_alliedtext2" "UBER BASEBUILDER by"
+setcvar "g_obj_alliedtext3" "])ar]{Gen.SearingWolfe"
+setcvar "g_obj_axistext1" "be a member at"
+setcvar "g_obj_axistext2" "www.freewebs.com/"
+setcvar "g_obj_axistext3" "mohaa-DarK-clan"
+
+
+setcvar "g_scoreboardpic" "m2l3"
+
+
+setcvar "g_gametype" "2"
+setcvar "fraglimit" "0"
+setcvar "timelimit" "50"
+setcvar "level.clockside" "kills" 
+
+setcvar "cheats" "1"
+setcvar "thereisnomonkey" "1"
+
+//------------------------------|time to build
+//----------------------------------|object limit
+exec alienx/basebuild.scr::main 2500 10000
+
+//	Axis spawn points
+//--------------------------------------------
+
+spawn info_player_axis "origin" "-1926 -2245 -433" "angle" "58" "targetname" "ax_1"
+spawn info_player_axis "origin" "-2492 -703 -447" "angle" "30" "targetname" "ax_2"
+spawn info_player_axis "origin" "-337 -145 -409" "angle" "7" "targetname" "ax_3"
+spawn info_player_axis "origin" "257 -1947 -511" "angle" "99" "targetname" "ax_4"
+spawn info_player_axis "origin" "-1202 474 -511" "angle" "3" "targetname" "ax_5"
+
+//------------------------------------------------
+//	Allied spawn points
+//------------------------------------------------
+
+spawn info_player_allied "origin" "-308 5201 -511" "angle" "-179" "targetname" "Al_1"
+spawn info_player_allied "origin" "-362 4317 -527" "angle" "158" "targetname" "Al_2"
+spawn info_player_allied "origin" "-675 5386 -255" "angle" "143" "targetname" "Al_3"
+spawn info_player_allied "origin" "-1707 6702 -255" "angle" "119" "targetname" "Al_4"
+spawn info_player_allied "origin" "363 6170 -255" "angle" "130" "targetname" "Al_5"
+
+
+	//removed stuff from sp
+	removeclass actor
+	 
+level waittill prespawn 
+
+//axis
+exec alienx/basebuild.scr::basebuild ( 20 -23 -511 ) "static/indycrate.tik" 1 0 1 0 90 .2 0 0 1
+exec alienx/basebuild.scr::basebuild ( -80 -23 -511 ) "static/indycrate.tik" 1 1 0 1 90 .2 1 0 1
+exec alienx/basebuild.scr::basebuild ( -180 -23 -511 ) "statweapons/mg42_gun.tik" 1 1 0 0 90 .2 0 0 1
+exec alienx/basebuild.scr::basebuild ( -280 -23 -511 ) "static/sandbag_link_main.tik" 1 0 0 1 90 .2 0 0 1
+exec alienx/basebuild.scr::basebuild ( -380 -23 -511 ) "static/bodies_tarp.tik" 1 1 0 1 90 .2 1 0 1
+exec alienx/basebuild.scr::basebuild ( -480 -23 -511 ) "static/bunkertable.tik" 1 1 1 0 90 .2 0 1 1
+exec alienx/basebuild.scr::basebuild ( -580 -23 -511 ) "static/barbwire.tik" 1 0 1 1 90 .2 0 0 1
+exec alienx/basebuild.scr::basebuild ( -680 -23 -511 ) "static/cabinet_large.tik" 1 1 1 1 90 .2 0 0 1
+exec alienx/basebuild.scr::basebuild ( -780 -23 -511 ) "static/sandbag_longsegment.tik" 1 1 1 1 90 .1 0 0 1
+exec alienx/basebuild.scr::basebuild ( -880 -23 -511 ) "static/bodies_tarp.tik" 1 1 1 1 90 .2 0 0 1
+exec alienx/basebuild.scr::basebuild ( -980 -23 -511 ) "static/static_naziflag1.tik" 1 1 1 1 90 .2 0 0 1
+exec alienx/basebuild.scr::basebuild ( -1080 -23 -511 ) "static/bookcase.tik" 1 1 0 1 90 .2 0 0 1
+exec alienx/basebuild.scr::basebuild ( -1180 -23 -511 ) "static/bush_full.tik" 1 0 1 1 90 .2 0 0 1end
+exec alienx/basebuild.scr::basebuild ( -1280 -23 -511 ) "static/banquet_table.tik" 1 1 0 0 90 .2 0 0 1
+
+//allies
+exec alienx/basebuild.scr::basebuild ( 1301 4648 -527 ) "static/indycrate.tik" 1 0 1 0 90 .2 0 0 1
+exec alienx/basebuild.scr::basebuild ( 1301 4548 -527 ) "static/indycrate.tik" 1 1 0 1 90 .2 1 0 1
+exec alienx/basebuild.scr::basebuild ( 1301 4448 -527 ) "statweapons/mg42_gun.tik" 1 1 0 0 90 .2 0 0 1
+exec alienx/basebuild.scr::basebuild ( 1301 4348 -527 ) "static/sandbag_link_main.tik" 1 0 0 1 90 .2 0 0 1
+exec alienx/basebuild.scr::basebuild ( 1301 4248 -527 ) "static/bodies_tarp.tik" 1 1 0 1 90 .2 1 0 1
+exec alienx/basebuild.scr::basebuild ( 1301 4148 -527 ) "static/bunkertable.tik" 1 1 1 0 90 .2 0 1 1
+exec alienx/basebuild.scr::basebuild ( 1301 4048 -527 ) "static/barbwire.tik" 1 0 1 1 90 .2 0 0 1
+exec alienx/basebuild.scr::basebuild ( 1301 3948 -527 ) "static/cabinet_large.tik" 1 1 1 1 90 .2 0 0 1
+exec alienx/basebuild.scr::basebuild ( 1301 3848 -527 ) "static/sandbag_longsegment.tik" 1 1 1 1 90 .1 0 0 1
+exec alienx/basebuild.scr::basebuild ( 1301 3748 -527 ) "static/bodies_tarp.tik" 1 1 1 1 90 .2 0 0 1
+exec alienx/basebuild.scr::basebuild ( 1301 3648 -527 ) "static/static_naziflag1.tik" 1 1 1 1 90 .2 0 0 1
+exec alienx/basebuild.scr::basebuild ( 1301 3548 -527 ) "static/bookcase.tik" 1 1 0 1 90 .2 0 0 1
+exec alienx/basebuild.scr::basebuild ( 1301 3448 -527 ) "static/bush_full.tik" 1 0 1 1 90 .2 0 0 1end
+exec alienx/basebuild.scr::basebuild ( 1301 3348 -527 ) "static/banquet_table.tik" 1 1 0 0 90 .2 0 0 1
+
+exec global/jetpack.scr ( -619 2992 -510 ) //allies
+exec global/jetpack.scr ( -1703 -1130 -511 ) //axis
+
+exec global/dog.scr ( -773 964 -507 )
+
+exec guidedmissile/spawntrigger.scr ( -114 2990 -510 ) //allies
+exec guidedmissile/spawntrigger.scr ( -1367 -1128 -511 ) //axis
+
+//*** precache dm stuff
+	exec global/dmprecache.scr
+
+	//hud
+	exec alienx/hud.scr::main
+
+	level.script = maps/m2l3.scr
+
+	exec global/ambient.scr obj_team5
+
+   	setcvar "r_fastsky" "1"
+	$world farplane 5000
+	$world farplane_color (0 0 0)
+
+exec server_planes/trigger.scr ( -1529.48 -1108.48 -511.88 ) "axis" .2
+exec server_planes/trigger.scr ( -328.87 2992.88 -510.77 ) "allies" .2
+
+exec map_triggers/allweapons.scr ( -1072 2992 -510 )
+exec map_triggers/giant.scr ( -128 2155 -411 )
+exec map_triggers/invisible.scr ( -576 3087 -339 )
+exec map_triggers/invulnerable.scr ( -231 3917 -137 )
+exec map_triggers/midget.scr ( -1097 967 -71 )
+exec map_triggers/normal.scr ( -560 4496 -527 )
+exec map_triggers/health.scr ( -608 4719 -511 ) ( -127 5263 -255 ) ( -1840 6515 -211 ) ( 32 7020 -253 ) ( 912 6256 -223 ) ( 1120 6607 -167 ) ( 175 5199 -159 ) ( 1168 5583 -255 ) ( -879 5135 -255 ) ( -840 6088 -399 )
+
+
+lockeddoor:
+	self playsound door_metal_locked
+//	iprintln "This door is locked."
+end
+
+lockedgarage:
+	self playsound garagedoor_locked
+//	iprintln "This door is locked."
+end
+
+level waittill spawn

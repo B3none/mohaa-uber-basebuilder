@@ -1,0 +1,192 @@
+main local.jetpack:
+
+ 	local.master = spawn scriptMaster 
+   	local.master aliascache jetpack sound/mechanics/Mec_SteamLoop_01.wav soundparms 2.0 0.3 1.0 0.0 320 2200 item loaded maps "m dm obj "
+
+local.airtank = spawn script_model
+local.airtank model "models/static/static_airtank.tik"
+local.airtank.origin = ( local.jetpack ) 
+local.airtank.scale = 1
+local.airtank light 0 1 0 50
+local.airtank notsolid
+local.airtank rotatey 100
+local.airtank rotatez 100
+local.airtank rotatex 100
+
+local.trig = spawn trigger_multiple
+local.trig.origin = ( local.jetpack )
+local.trig setsize ( -50 -50 -50 ) ( 50 50 50 )
+local.trig setthread jetpack
+local.trig wait .5
+local.trig delay 0
+end
+
+jetpack:
+local.player = parm.other
+
+if(local.player.pack == 1)
+end
+
+local.player.pack = 1
+
+local.team = local.player.dmteam
+
+local.fuel = 250   //change fuel amount here  (.5 increments)  Fuelbar will only show amounts 100 and lower
+
+local.trig message "you now have a jetpack"
+local.player iprint "Press jump key to thrust up from ground." 1
+local.player iprint "Press USE key (E) to thrust forward and up." 1
+local.player stufftext "say i now  have a jetpack!!!"
+
+
+
+	local.model = "models/static/static_airtank.tik"
+
+	local.player attachmodel local.model "Bip01 Spine" 0.5 ("Pairtank" + local.player.entnum ) 1 -1 -1 -1 -1 ( 25 -5 3 )
+	$("Pairtank" + local.player.entnum ).angles = ( 270 0 4 )
+      	
+	local.player attachmodel local.model "Bip01 Spine" 0.5 ("Pairtank2" + local.player.entnum ) 1 -1 -1 -1 -1 ( 25 -5 -4 )
+	$("Pairtank2" + local.player.entnum ).angles = ( 270 0 3 )
+
+	local.model = "emitters/pipe_steam.tik"
+ 	local.player attachmodel local.model "Bip01 Spine" 0.1 ("tankemitter" + local.player.entnum ) 1 -1 -1 -1 -1 ( 0 -10 3 )
+	$("tankemitter" + local.player.entnum ).angles = ( -15 -180 0 )
+										    
+	local.model = "emitters/pipe_steam.tik"
+ 	local.player attachmodel local.model "Bip01 Spine" 0.1 ("tankemitter2" + local.player.entnum ) 1 -1 -1 -1 -1 ( 0 -10 -4 )
+	$("tankemitter2" + local.player.entnum ).angles = ( 15 -180 0 )
+				 
+	local.smoke  = $("tankemitter" + local.player.entnum )
+	local.smoke2 = $("tankemitter2" + local.player.entnum )
+	$("Pairtank" + local.player.entnum ).smoke = ( local.smoke::local.smoke2 )
+	
+	$("Pairtank" + local.player.entnum ).twin = $("Pairtank2" + local.player.entnum )
+
+	local.player.jetpack = $("Pairtank" + local.player.entnum )
+
+
+
+	local.player gravity .07
+
+	local.player stufftext ("centerprint You-Have-A-Jetpack")
+
+	local.player stufftext ("set fuel " + local.fuel)
+	local.player stufftext ("globalwidgetcommand charliesector title Fuel:" + local.fuel)
+
+	local.player stufftext "globalwidgetcommand dday1 shader townhallwindow"
+	local.player stufftext "globalwidgetcommand dday1 fgcolor 1.00 1.00 1.00 1.00"
+	local.player stufftext "globalwidgetcommand dday1 bgcolor 0.50 0.50 0.50 0.00"
+	local.player stufftext "globalwidgetcommand dday1 fadein 0"
+	local.player stufftext "globalwidgetcommand dday1 menu dday1 640 480 NONE 0"
+	local.player stufftext "globalwidgetcommand dday1 virtualres 1" 
+	local.player stufftext "globalwidgetcommand dday1 fullscreen 1" 
+
+	local.player stufftext "globalwidgetcommand june6 borderstyle NONE"
+	local.player stufftext "globalwidgetcommand june6 shader textures/hud/healthback"
+	local.player stufftext "globalwidgetcommand june6 rect 16 420 16 64"
+	local.player stufftext "globalwidgetcommand june6 fgcolor 1.00 1.00 1.00 1.00"
+	local.player stufftext "globalwidgetcommand june6 bgcolor 0.00 0.00 0.00 0.00"
+	local.player stufftext "globalwidgetcommand june6 linkcvar fuel"
+	local.player stufftext "globalwidgetcommand june6 statbar vertical 0 100"
+	local.player stufftext "globalwidgetcommand june6 statbar_shader textures/hud/healthmeter"
+	local.player stufftext "globalwidgetcommand june6 statbar_shader_flash textures/hud/healthmeterflash"
+
+
+	local.player stufftext "globalwidgetcommand dday2 fgcolor 1.00 1.00 1.00 1.00"
+	local.player stufftext "globalwidgetcommand dday2 bgcolor 0.50 0.50 0.50 0.00"
+	local.player stufftext "globalwidgetcommand dday2 fadein 0"
+	local.player stufftext "globalwidgetcommand dday2 menu dday2 640 480 NONE 0"
+	local.player stufftext "globalwidgetcommand dday2 virtualres 1" 
+	local.player stufftext "globalwidgetcommand dday2 fullscreen 1" 
+
+	local.player stufftext "globalwidgetcommand charliesector borderstyle NONE"
+	local.player stufftext "globalwidgetcommand charliesector textalign left " 
+	local.player stufftext "globalwidgetcommand charliesector rect 40 470 150 20"
+	local.player stufftext "globalwidgetcommand charliesector fgcolor 0.70 0.60 0.05 1.00"
+	local.player stufftext "globalwidgetcommand charliesector bgcolor 0.00 0.00 0.00 0.00"
+	local.player stufftext "globalwidgetcommand charliesector font facfont-20"
+	local.player stufftext ("globalwidgetcommand charliesector title Fuel:" + local.fuel)
+	local.player stufftext "globalwidgetcommand charliesector shader townhallwindow"
+
+	local.player stufftext "showmenu dday2"
+	local.player stufftext "showmenu dday1"
+
+while (1)
+
+{
+
+local.fuel--
+
+local.player stufftext ("set fuel " + local.fuel)
+local.player stufftext ("globalwidgetcommand charliesector title Fuel:" + local.fuel)
+
+if(local.player.dmteam == "spectator" && local.player.pack == 1 || local.player.dmteam != local.team)
+{
+local.player stoploopsound
+local.player.jetpack.smoke[1] delete
+local.player.jetpack.smoke[2] delete
+local.player.jetpack.twin delete
+local.player.jetpack delete
+local.player gravity 1
+local.player.pack = 0
+local.player stufftext "hidemenu dday2"
+local.player stufftext "hidemenu dday1"
+local.player iprint "you don't have a jetpack anymore since you changed teams" 1
+end
+}
+
+
+if(local.fuel == 0  && local.player.pack == 1)
+{
+local.player stoploopsound
+local.player.jetpack.smoke[1] delete
+local.player.jetpack.smoke[2] delete
+local.player.jetpack.twin delete
+local.player.jetpack delete
+local.player gravity 1
+local.player.pack = 0
+local.player stufftext "hidemenu dday2"
+local.player stufftext "hidemenu dday1"
+local.player iprint "you just ran out of jetpack fuel...go refuel your jetpack" 1
+end
+}
+
+if(local.player.health <= 0)
+{
+local.player stoploopsound
+local.player.jetpack.smoke[1] delete
+local.player.jetpack.smoke[2] delete
+local.player.jetpack.twin delete
+local.player.jetpack delete
+local.player gravity 1
+local.player.pack = 0
+local.player stufftext "hidemenu dday2"
+local.player stufftext "hidemenu dday1"
+local.player iprint "you don't have a jetpack anymore since you died" 1
+end
+}
+
+
+if (local.player.useheld == 1)
+{
+local.player.jetpack.smoke[1].scale = 1.0
+local.player.jetpack.smoke[2].scale = 1.0
+local.player.velocity += local.player.forwardvector * 70
+local.player.velocity += self.upvector * 50
+local.player loopsound jetpack
+
+}
+
+
+else
+{
+local.player.jetpack.smoke[1].scale = 0.2
+local.player.jetpack.smoke[2].scale = 0.2
+local.player stoploopsound jetpack
+}
+
+wait .5
+
+}
+
+end

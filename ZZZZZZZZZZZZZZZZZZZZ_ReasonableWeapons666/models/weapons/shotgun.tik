@@ -1,0 +1,192 @@
+//S7ATiC
+TIKI
+setup
+{
+scale 0.52
+path models/weapons/shotgun
+skelmodel shotgun.skd
+surface shotgun shader shotgun
+}
+init
+{
+server
+{
+classname Weapon
+weapontype heavy
+name "Shotgun"
+rank 620 620
+pickupsound shotgun_snd_pickup
+ammopickupsound shotgun_snd_pickup_ammo
+noammosound shotgun_snd_noammo
+firetype bullet
+ammotype "pistol"
+meansofdeath shotgun
+semiauto
+clipsize 1337
+startammo 1337
+ammorequired 2
+firedelay 0.5
+zoom 15
+bulletrange 99999
+bulletspread 5 5 5 5
+movementspeed 1.20
+bulletcount 1
+bulletdamage 999
+tracerfrequency 0
+crosshair 1
+weapongroup rifle
+dmstartammo 1337
+dmammorequired 0
+dmbulletcount 1
+dmbulletdamage 9999
+dmfiredelay 0.5
+dmbulletrange 99999
+dmbulletspread 5 5 5 5
+dmcrosshair 1
+dmmovementspeed 1.20
+}
+client
+{
+cache tracer.spr
+cache muzsprite.spr
+cache models/ammo/shotgunshell.tik
+cache model models/fx/bh_metal_fastpiece.tik
+}
+}
+animations
+{
+idle shotgun.skc
+reload shotgun.skc
+{
+client
+{
+entry sound shotgun_snd_reload_start
+}
+}
+reload_single shotgun.skc
+{
+client
+{
+entry stopaliaschannel shotgun_snd_reload_single
+entry sound shotgun_snd_reload_single
+}
+}
+reload_end shotgun_fire.skc
+{
+server
+{
+last idle
+}
+client
+{
+entry sound shotgun_snd_reload_end
+}
+}
+fire shotgun_fire.skc
+{
+server
+{
+entry shoot
+}
+client
+{
+entry stopaliaschannel shotgun_snd_fire
+entry sound shotgun_snd_fire
+entry stopaliaschannel shotgun_snd_rechamber
+entry sound shotgun_snd_rechamber
+entry viewkick 0 0 0 0 100 "V" 0 0 100
+entry tagdlight tag_barrel 0.25 0.2 0.15 140 0.11
+entry tagspawnlinked tag_barrel
+(
+scale 0.4
+offsetalongaxis 1.5 0 0
+count 1
+model muzsprite.spr
+angles 0 0 crandom 25
+life 0.06
+)
+entry tagspawn tag_barrel
+(
+spawnrate 1.00
+model models/fx/bh_metal_fastpiece.tik
+count 2
+color 1.00 1.00 1.00
+scale 0.20
+life 0.30
+radius 3.00
+velocity 100.00
+randvel 100 0 0
+accel 0.00 0.00 -120.00
+offsetalongaxis 4 0 0
+fade
+align
+)
+entry tagspawnlinked tag_barrel
+(
+spawnrate 1.00
+model muzsprite.spr
+color 1.00 1.00 1.00
+scale 0.60
+life 0.09
+scalerate 12.00
+velocity 33.00
+offsetalongaxis 4 0 0
+fade
+randomroll
+)
+entry tagspawnlinked tag_barrel
+(
+spawnrate 1.00
+model muzsprite.spr
+color 1.00 1.00 1.00
+scale 0.60
+life 0.10
+scalerate 3.00
+velocity 40.00
+offsetalongaxis 5 0 0
+randomroll
+)
+entry commanddelay 0.010 originspawn
+(
+model vsssource.spr
+count 5
+alpha 0.30
+color 1.00 1.00 1.00
+spritegridlighting
+scale 0.70
+life 0.50
+scalerate 6.00
+cone 6.00 2.00
+velocity 320.00
+radialvelocity 11.00 60.00 120.00
+accel 0.00 0.00 -30.00
+friction 5.00
+offset crandom -5 crandom -5 crandom -5
+offsetalongaxis 30 0 0
+fade
+randomroll
+)
+entry commanddelay 0.2 tagspawn tag_eject
+(
+count 1
+model models/ammo/shotgunshell.tik
+spawnrange 1024
+scale 1.0
+velocity 70
+randvel crandom 10 crandom 10 random 20
+emitterangles 0 0 0
+avelocity crandom 90 crandom 90 0
+accel 0 0 -800
+physicsrate 20
+life 2.0
+fadedelay 1.7
+collision
+bouncefactor 0.2
+bouncesoundonce snd_shotgun_shell
+)
+}
+}
+}
+/*QUAKED playerweapon_allied_shotgun (0.0 0.0 1.0) (-8 -8 -8) (8 8 8)
+Weapon - Winchester Model 12 Shotgun
+*/

@@ -1,0 +1,88 @@
+main:
+
+	if(level.survivor_roundstarted ==0)
+	{
+		self.playing = 1
+		self thread nodamage
+
+		if(level.team == 1)
+		{
+			level.players[self.dmteam]++
+		}
+		else
+		{
+			level.players++
+		}
+
+//		level.players[self.dmteam]++
+//		level.players[axis]++
+//		iprintlnbold level.players
+//		wait 3
+//		level.survivor_roundstarted = 1
+//		self spectator
+//		exec survivor/roundend.scr
+
+	}
+	else
+	{
+		if (self.playing != 1)
+		{
+			if(self.survivor_specmode != 1)
+			{
+				if(level.team == 1)
+				{
+					exec Survivor/hud.scr (  level.players["axis"] + " Axis and " + level.players["allies"] + " Allied " + " left")
+				}
+				else
+				{
+					exec Survivor/hud.scr (level.players + " Players left")
+				}
+
+				self.survivor_specmode = 1
+				self spectator
+				self iprint "You must wait for the next round" 1
+				exec survivor/spectator.scr
+			}
+		}
+	}
+
+end
+
+nodamage:
+	
+	local.team = self.dmteam
+
+	self takeall
+	self give "models/weapons/silencedpistol.tik"
+	self use "models/weapons/silencedpistol.tik"
+
+	local.team = self.dmteam
+
+	while(level.survivor_roundstarted ==0)
+	{
+	//	iprintln "no damamge"
+		self nodamage
+
+		waitframe
+	
+		if(self == NULL || self == NIL)
+		{
+			end
+		}
+
+		if(self.dmteam != local.team )
+		{
+			self.playing = 0
+
+			if(level.team == 1)
+			{
+				level.players[local.team]--
+			}
+			else
+			{
+				level.players--
+			}
+			end
+		}
+	}
+end

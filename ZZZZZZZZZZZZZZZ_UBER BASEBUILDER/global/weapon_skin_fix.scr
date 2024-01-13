@@ -1,0 +1,30 @@
+main:
+	switch(self.dmteam)
+	{
+	case "axis":
+		switch(self.nationalityprefix)
+		{
+		case "dfr":
+		case "dfrru":
+		case "dfruk":
+			self stufftext "dm_playergermanmodel german_wehrmacht_soldier"
+			self spectator
+			self iprint "Please select German or Italian skin."
+		break
+		}
+	break
+	case "allies":
+
+		switch(self.nationalityprefix)
+		{
+		case "den":
+		case "denit":
+			self stufftext "dm_playermodel american_army"
+			self stufftext " cmd spectator"
+			self iprint "Please select an American,British or Russian skin."
+		break
+		
+		}
+	break
+	}
+end

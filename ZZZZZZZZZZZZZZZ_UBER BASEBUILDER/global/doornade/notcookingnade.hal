@@ -1,0 +1,10 @@
+//global/doornade/NotCookingNade.hal
+//Scripting: @(...:.:...)@ / Hal
+//
+//sets the player as not cooking a grenade so that the main doornade script can tell if a player is still holding a grenade
+main:
+//	iprintlnbold "stopped cooking nade"
+	self.iscookingnade = "0"
+end
+
+//that was easy =)

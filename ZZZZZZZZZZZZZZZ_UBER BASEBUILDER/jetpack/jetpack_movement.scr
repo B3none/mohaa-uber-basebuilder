@@ -1,0 +1,97 @@
+// 23/11/2005 12:02 deals with input for jetpack
+main local.what:
+
+	if(self == NIL && self == NULL )
+	{
+		end
+	}
+	
+	//if we are on the floor
+	if(self.onground == 1)
+	{
+		self forcelegsstate STAND
+		end
+	}
+
+	//if left
+	if(self == NIL || self == NULL)
+	{
+		end
+	}
+
+	//if dont have a jetpack on
+	if(self.using_pack != 1)
+	{
+		end
+	}
+		    	
+	//remove some fuel
+	self.jetpack.fuel--
+
+	//if we have no fuel
+	if(self.jetpack.fuel <= 0 )
+	{
+		self stufftext ("set fuel Empty")
+		end
+	}		   	
+
+	//send new fuel
+  	self stufftext ("set fuel " + self.jetpack.fuel)
+
+	 // play some booster sound if not hit floor
+	if(local.what ==  "LAND")
+	{
+
+		self gravity 1
+		self.onground = 1
+		self stopsound jetpack
+
+		end
+	}
+	//play the sound
+	self playsound jetpack
+
+	//what did we press?
+	switch(local.what)
+	{
+	case "MOVEMENT_FORWARD":
+	
+		self.velocity += self.forwardvector * 15
+	break
+	case "MOVEMENT_BACKWARD":
+
+
+		self.velocity -= self.forwardvector * 15
+
+	break
+	case "MOVEMENT_LEFT":
+
+		self.velocity += self.leftvector * 15
+	break
+	case "MOVEMENT_RIGHT":
+
+		self.velocity += self.rightvector * 15
+
+	break
+	case "THRUST":
+
+		self.velocity += self.upvector * 15
+	break
+	default:
+	break
+	}
+
+	//some effect on smoke, make it big and puffy
+	self.jetpack.smoke[1].scale = 1.0
+	self.jetpack.smoke[2].scale = 1.0
+ 
+	wait 1
+
+	self.jetpack.smoke[1].scale = 0.2
+	self.jetpack.smoke[2].scale = 0.2
+
+	self.jetpack.fuel_time = 1
+
+	//self stoploopsound jetpack_boost
+	//self loopsound jetpack
+end

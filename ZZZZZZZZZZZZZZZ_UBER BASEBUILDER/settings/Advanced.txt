@@ -1,0 +1,128 @@
+
+
+//--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+//
+// register cvars
+//
+// Console variable/Commands. You can enter these straight into the console.
+// if you want cvars for your mod you can add them here and they will be created.
+//--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+	
+
+cvars:
+	//creates these cvars
+	local.settings = makearray
+		//cvars				//setting 			//help
+		"admin_cmd"			""  				" This is the main cvar for everything. Entering cmd's into this will allow you to control players, settings and search for help."
+	endarray
+
+end local.settings 
+
+
+//--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+//
+// Extra settings 
+//
+// These are just quick settings for speed 
+// level.jump_height sets how high the players jump. settings reset and map specific settigns file up can set diff jump heights for each map.// admin_cmd "jump_height 99" would a new value of 99
+//--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+
+extra_settings:
+	
+	game.show_on_mods = 1			 // At start of round's show what mods are on and off under the amom 		
+	game.run_bugnadefix =1			 // SH and BT bug nade fix. 1 = ON , 0 = Off
+	game.scan_at_start = 1 			 // Scan for admins at level start
+	game.input_type = "windows"     	 // windows or linux . set how to split the input "_" linux or " " for windows.
+	game.jump_height = 56			 // jump height
+	game.run_spawn_protect_on_sh_and_bt = 0	 // run spawn protect on Sh and bt. 1 = yes, 0 or anything else = no
+	game.time_alive_type = 1 		 // Either 1 or 0, 1 is in the format of hh/nmm/ss. 0 tells you like "time alive: 19 seconds"
+	game.undermap = 1			 // if this is 1 then under map detection will run otherwise it will not.
+end
+
+
+
+//--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+//
+// State files
+//
+// For more advanced people who need to change the state files.
+// The camper mod checks for it depending on the name string
+//
+// key
+// ---
+// aa = allias assault
+// ss = spearhead
+// bt = breakthrough
+//
+//--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+
+statefiles:
+
+	local.statepath = makearray
+		// Game			// file
+		"A" 			global/nagle_aa
+		"S" 			global/nagle_sh
+		"B" 			global/nagle_bt
+	endarray
+
+end local.statepath 
+
+//--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+//
+// Console commands
+//
+// This is in advanced because it is more advanced. the only person who is going to use this is probably me (Elgan).
+//
+// The following is a list of scripts to search through for commands put intp the console.
+// 
+// game.player_scripts holds a array of scripts with a switch or list of words and things to do to players. 
+// game.one_word_scripts holds an array of scripts that get executed when one word is enterd into console. like campercmd  "help"
+// game.commands_with_extra_scripts holds an array of scripts that get executed when more then one word is enterd. it searches for the first word, 
+//
+// All scripts created should be places ina folder named command_post
+//
+//--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+
+console_scripts:
+
+	game.player_scripts = makearray
+		// script name				// game to load in. AA, SH, BT or "all". You can enclose 2 like so "SH BT".
+		"player_cmds.scr"			"all"
+		"rindog_themedcommands.scr"		"all"
+		"rindog_themedcommands_sh.scr"		"SH BT"
+		"player_cmds_sh.scr"			"SH BT"
+	//	"punishments.scr"			"all"
+	endarray
+
+
+	game.one_word_scripts = makearray
+		// script name				// game to load in. AA, SH, BT or "all"
+		"one_word.scr"				"all"
+	endarray
+
+
+	game.commands_with_extra_scripts = makearray
+		// script name				// game to load in. AA, SH, BT or "all"
+		"commands_with_extra.scr"		"all"
+	endarray
+
+end 
+
+//--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+//
+// Extra Scripts that seem mis fit. Scripts that need executing to set things up i place here. 
+// As they are not a mod and dont belong in mods.txt placing them here will get executed each 
+// level.
+//
+//--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+extra_scripts:
+
+	exec global/under_map.scr //check for players under the map
+	exec global/sounds.scr	  // file with all the possible sounds
+	
+end
+

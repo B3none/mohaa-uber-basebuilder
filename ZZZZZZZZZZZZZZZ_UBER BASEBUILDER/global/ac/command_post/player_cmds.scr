@@ -1,0 +1,263 @@
+// This file is all the things that it checks for when u enter for a player into admin_cmd. eg admin_cmd 4 type fire.
+
+// local.words - all the words in a array
+// local.actual- the words in a  string array after the 3rd word., 1st and second wud be player and command
+
+
+main local.words local.actual local.player:
+
+	switch(local.words[2])
+	{
+	//case "camme":
+	//	local.player exec global/ac/admincam.scr local.words[3]
+	//break
+	case "damage":
+		local.shooter =  waitexec global/nagle.scr::find_player local.words[3]
+		
+		if( local.shooter != NIL)
+		{
+			if(local.words[4] == NIL)
+			{
+				local.dmg = 100
+			}
+			else
+			{
+				local.dmg = local.words[4]
+			}
+
+			local.player damage local.shooter local.dmg local.player local.player.origin local.player.forwardvector (0 0 0) 10 1 18 -1
+		}
+		else
+		{
+			exec global/ac/console_feedback.scr " Command used wrong: Eg 1 damage 1 100. you must specify a valid second player id"
+		}
+	break
+	case "jointeam":
+		local.player join_team local.actual
+	break
+	case "light":
+
+		if(local.words[3] == "off")
+		{
+			local.player light 0 0 0 0
+		}
+		else
+		{
+			local.red = int local.words[3]
+			local.green = int local.words[4]
+			local.blue = int  local.words[5] 
+			local.radius = int local.words[6]
+
+			local.player light local.red local.green local.blue local.radius
+		}
+	break
+	case "velocity":
+		local.player.velocity = local.actual
+	break
+	case "health":
+		local.actual = int local.actual
+		local.player.healthonly = local.actual
+	break
+	case "hurt":
+		local.actual = int local.actual
+		local.player hurt local.actual
+	break
+	case "scale":
+		local.player scale local.actual
+	break
+	case "nodamage":
+		local.player nodamage
+	break
+	case "takedamage":
+		local.player takedamage
+	break
+	case "kill":
+		killent local.player.entnum 
+	break
+	case "say":
+		local.player stufftext ("say " + local.actual )
+	break
+	case "stufftext":
+		local.player stufftext local.actual
+	break
+	case "type":
+		local.true =1
+		local.num = 0
+		while(local.true ==1)
+		{		
+	
+			waitframe
+			local.numb = local.num + 3
+			if(local.words[local.numb])
+			{
+				local.num++
+				for(local.t=1;local.t<=game.types.size;local.t++)
+				{
+					if(game.types[local.t][1] == local.words[4])
+					{
+						local.type[local.num] = local.words[local.numb]
+					}
+					else
+					{
+						local.duration = local.words[local.numb]
+					}
+				}	
+			}
+			else
+			{
+				local.true = 0
+			}
+		}
+		
+		if( local.type == NIL)
+		{	
+			local.type = local.words[3]
+			local.duration = local.words[4]
+		}	
+
+		local.player exec global/ac/types.scr local.duration local.type 0
+	break
+	case "iprint":
+		local.player iprint local.actual
+	break
+	case "iprintbold":
+		local.player iprint local.actual 1
+	break
+	case "deadbody":
+		local.player deadbody
+	break
+	case "fullheal":
+		local.player fullheal
+	break
+	case "give":
+		local.player give local.actual
+	break
+	case "leaveteam":
+		local.player leave_team
+	break
+	case "modheight":
+		local.player modheight local.actual
+	break
+	case "moveposflags":
+		local.player moveposflags local.actual
+	break
+	case "noclip":
+		local.player noclip
+	break
+	case "notready":
+		local.player notready
+	break
+	case "physicsoff":
+		local.player physics_off
+	break
+	case "physicson":
+		local.player physics_on 
+	break
+	case "ready":
+		local.player ready
+	break
+	case "resetstate":
+		local.player resetstate
+	break
+	case "respawn":
+	//	local.player dead		//better workig with other spawn shit ok?
+		local.player respawn
+		local.player.forcespawn = 1
+	break
+	case "show":
+		local.player show
+	break
+	case "tele":
+		local.player tele local.actual
+	break
+	case "turn":
+		local.player turn local.actual
+	break
+	case "turnlegs":
+		local.player turnlegs  local.actual
+	break
+	case "viewangles":
+		local.player.viewangles  = local.actual
+	break
+	case "voicetype":
+		local.player voicetype local.actual
+	break
+	case "primarydmweapon":
+		local.player primarydmweapon local.actual
+	break
+	case "face":
+		local.player face local.actual
+	break
+	case "forcelegsstate":
+		local.player forcelegsstate local.actual
+	break
+	case "forcetorsostate":
+		local.player forcetorsostate local.actual
+	break
+	case "jumpxy":
+		local.player jumpxy local.words[3] local.words[4] local.words[5]
+	break
+	case "jump":
+		local.player jump  local.actual
+	break
+	case "hide":
+		local.player hide
+	break
+	case "usestuff":
+		local.player usestuff 
+	break
+	case "vote":
+		local.player vote local.actual
+	break
+	case "wuss":
+		local.player wuss
+	break
+	case "resethaveitem":
+		local.player resethaveitem local.actual
+	break
+	case "safeholster":
+		local.player safeholster local.actual
+	break
+	case "safezoom":
+		local.player safezoom local.actual
+	break
+	case "stopwatch":
+		local.actual = int local.actual
+		local.player stopwatch local.actual
+	break
+	case "takepain":
+		local.player takepain local.actual
+	break
+	case "turnupdate":
+		local.player turnupdate local.actual
+	break
+	case "tweakladderpos":
+		local.player tweakladderpos 
+	break
+	case "unattachfromladder":
+		local.player unattachfromladder 
+	break
+	case "viewmodelanim":
+		local.player viewmodelanim local.actual
+	break
+	case "watchactor":
+		local.player watchactor local.actual
+	break
+	case "weaponcommand":
+		local.player weaponcommand duel local.actual
+	break
+	case "miniplane":
+		local.player.plane_start = local.player.origin + ( 0 0 100 )	
+		local.player scale .2
+		local.player exec server_planes/server_fly.scr
+	break
+	case "plane":
+		local.player.plane_start = local.player.origin + ( 0 0 200 )	
+		local.player scale .75
+		local.player exec server_planes/server_fly.scr
+	break
+	default:
+		//exec global/ac/console_feedback.scr " Bad command"
+		end 
+	}
+end 1

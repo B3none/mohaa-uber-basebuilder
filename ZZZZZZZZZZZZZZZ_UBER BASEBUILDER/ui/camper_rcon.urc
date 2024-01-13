@@ -1,0 +1,433 @@
+menu "camperrcon" 640 480 NONE 0
+showcommand ";exec menu/hidetypes.cfg;"
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+resource
+Label
+{
+name "Default"
+rect 10 10 620 460
+fgcolor 0.00 0.00 0.00 1.00
+bgcolor 0.50 0.50 0.00 1.00
+borderstyle "NONE"
+}
+resource
+Button
+{
+name "Default"
+rect 0 0 10 480
+fgcolor 0.00 0.00 0.00 1.00
+bgcolor 0.50 0.50 0.50 1.00
+borderstyle "3D_BORDER"
+}
+resource
+Button
+{
+name "Default"
+rect 250 10 10 380
+fgcolor 0.00 0.00 0.00 1.00
+bgcolor 0.50 0.50 0.50 1.00
+borderstyle "INDENT_BORDER"
+}
+resource
+Button
+{
+name "Default"
+rect 10 0 620 10
+fgcolor 0.00 0.00 0.00 1.00
+bgcolor 0.50 0.50 0.50 1.00
+borderstyle "3D_BORDER"
+}
+resource
+Button
+{
+name "Default"
+rect 260 80 370 10
+fgcolor 0.00 0.00 0.00 1.00
+bgcolor 0.50 0.50 0.50 1.00
+borderstyle "INDENT_BORDER"
+}
+resource
+Button
+{
+name "Default"
+rect 630 0 10 480
+fgcolor 0.00 0.00 0.00 1.00
+bgcolor 0.50 0.50 0.50 1.00
+borderstyle "3D_BORDER"
+}
+resource
+Button
+{
+name "Default"
+rect 10 470 620 10
+fgcolor 0.00 0.00 0.00 1.00
+bgcolor 0.50 0.50 0.50 1.00
+borderstyle "3D_BORDER"
+}
+resource
+Button
+{
+name "Default"
+rect 10 390 620 10
+fgcolor 0.00 0.00 0.00 1.00
+bgcolor 0.50 0.50 0.50 1.00
+borderstyle "INDENT_BORDER"
+}
+resource
+Button
+{
+title "Full Commands"
+name "fullcmds"
+rect 390 50 110 20
+fgcolor 0.00 0.00 0.00 1.00
+bgcolor 0.50 0.50 0.25 1.00
+borderstyle "3D_BORDER"
+stuffcommand "notepad Admin_menu/Camper_commands.txt"
+clicksound "sound/menu/back.wav"
+hoversound "menu/sound/scroll.wav"
+shader "menu_button_trans"
+hovershader "menu_button_glow"
+
+}
+resource
+Button
+{
+title "Rcon menu"
+name "cmdcamper"
+rect 390 20 110 20
+fgcolor 0.00 0.00 0.00 1.00
+bgcolor 0.50 0.50 0.25 1.00
+borderstyle "3D_BORDER"
+stuffcommand "exec menu/admin_cmds.cfg; wait 3000; globalwidgetcommand cmdcamper title \"Camper Commands\""
+//stuffcommand "exec menu/admin_cmds.cfg; wait 3000; globalwidgetcommand cmdcamper title \"Camper Commands\""
+clicksound "sound/menu/back.wav"
+hoversound "menu/sound/scroll.wav"
+shader "menu_button_trans"
+hovershader "menu_button_glow"
+
+}
+resource
+Label
+{
+title "Select a player from the list first, \n Then a command if needed"
+name "lblinform"
+rect 270 100 350 40
+fgcolor 0.00 0.00 0.00 1.00
+bgcolor 0.50 0.50 0.50 1.00
+borderstyle "RAISED"
+linkcvar "lblhlp"
+}
+resource
+Button
+{
+title "Close"
+name "Default"
+rect 570 20 50 50
+fgcolor 0.00 0.00 0.00 1.00
+bgcolor 0.50 0.50 0.25 1.00
+borderstyle "3D_BORDER"
+stuffcommand "popmenu 0"
+clicksound "sound/menu/back.wav"
+hoversound "menu/sound/scroll.wav"
+shader "menu_button_trans"
+hovershader "menu_button_glow"
+
+}
+resource
+Button
+{
+title "Clear"
+name "Default"
+rect 570 410 50 20
+fgcolor 0.00 0.00 0.00 1.00
+bgcolor 0.50 0.50 0.25 1.00
+borderstyle "3D_BORDER"
+stuffcommand "reset rconfield"
+hovercommand "set lblhlp Clear the rcon field"
+clicksound "sound/menu/back.wav"
+hoversound "menu/sound/scroll.wav"
+shader "menu_button_trans"
+hovershader "menu_button_glow"
+
+}
+resource
+Button
+{
+title "Cmd \n list"
+name "Default"
+rect 270 20 50 50
+fgcolor 0.00 0.00 0.00 1.00
+bgcolor 0.50 0.50 0.25 1.00
+borderstyle "3D_BORDER"
+stuffcommand "notepad Admin_menu/game_cmdlist.txt"
+clicksound "sound/menu/back.wav"
+hoversound "menu/sound/scroll.wav"
+shader "menu_button_trans"
+hovershader "menu_button_glow"
+
+}
+resource
+Button
+{
+title "Cvar \n list"
+name "Default"
+rect 330 20 50 50
+fgcolor 0.00 0.00 0.00 1.00
+bgcolor 0.50 0.50 0.25 1.00
+borderstyle "3D_BORDER"
+stuffcommand "notepad Admin_menu/game_cvarlist.txt"
+clicksound "sound/menu/back.wav"
+hoversound "menu/sound/scroll.wav"
+shader "menu_button_trans"
+hovershader "menu_button_glow"
+
+}
+resource
+Button
+{
+title "Help"
+name "Default"
+rect 570 440 50 20
+fgcolor 0.00 0.00 0.00 1.00
+bgcolor 0.50 0.50 0.25 1.00
+borderstyle "3D_BORDER"
+stuffcommand "notepad menu/help/camper_rcon_input.cfg"
+hovercommand "set lblhlp Show help on using rcon field"
+clicksound "sound/menu/back.wav"
+hoversound "menu/sound/scroll.wav"
+shader "menu_button_trans"
+hovershader "menu_button_glow"
+
+}
+resource
+Button
+{
+title "Help"
+name "Default"
+rect 510 20 50 50
+fgcolor 0.00 0.00 0.00 1.00
+bgcolor 0.50 0.50 0.25 1.00
+borderstyle "3D_BORDER"
+stuffcommand "pushmenu camper_help"
+clicksound "sound/menu/back.wav"
+hoversound "menu/sound/scroll.wav"
+shader "menu_button_trans"
+hovershader "menu_button_glow"
+
+}
+resource
+Field
+{
+name "fieldcamperrcon"
+rect 20 410 540 50
+fgcolor 0.00 0.00 0.00 1.00
+bgcolor 1.00 1.00 1.00 1.00
+borderstyle "INDENT_BORDER"
+linkcvar "rconfield"
+stuffcommand "rcon admin_cmd \""
+//stuffcommand "rcon admin_cmd \""
+
+}
+resource
+ListBox
+{
+name "admincmdslist"
+rect 20 50 220 330
+fgcolor 1.00 1.00 1.00 1.00
+bgcolor 0.50 0.50 0.25 0.70
+borderstyle "INDENT_BORDER"
+font facfont-20
+
+}
+resource
+PulldownMenuContainer
+{
+name "stufflist"
+rect 20 20 220 20
+fgcolor 1.00 1.00 1.00 1.00
+bgcolor 0.50 0.50 0.25 0.70
+borderstyle "INDENT_BORDER"
+font facfont-20
+addpopup "Select list option" "Punishment Stuff" command "exec menu/cmdlists/punishment.cfg"
+addpopup "Select list option" "Player Cmds" command "exec menu/cmdlists/player.cfg"
+//addpopup "Select list option" "General Commands" command "exec menu/cmdlists/general.cfg"
+addpopup "Select list option" "Player_extra" command "exec menu/cmdlists/player_extra.cfg"
+addpopup "Select list option" "..Other" command "exec menu/cmdlists/other.cfg"
+addpopup "Select list option" "SH & BT" command "exec menu/cmdlists/sh.cfg"
+
+}
+resource
+ListBox
+{
+name "players1"
+rect 270 145 175 240
+fgcolor 0.00 0.00 0.00 1.00
+bgcolor 0.50 0.50 0.50 1.00
+borderstyle "RAISED"
+font verdana-12
+addconfigstringitem "1684" "clrcvar; set rconfield 0" 
+addconfigstringitem "1685" "clrcvar ; set rconfield 1"
+addconfigstringitem "1686" "clrcvar ; set rconfield 2"
+addconfigstringitem "1687" "clrcvar ; set rconfield 3"
+addconfigstringitem "1688" "clrcvar ; set rconfield 4"
+addconfigstringitem "1689" "clrcvar ; set rconfield 5"
+addconfigstringitem "1690" "clrcvar ; set rconfield 6"
+addconfigstringitem "1691" "clrcvar ; set rconfield 7"
+addconfigstringitem "1692" "clrcvar ; set rconfield 8"
+addconfigstringitem "1693" "clrcvar ; set rconfield 9"
+addconfigstringitem "1694" "clrcvar ; set rconfield 10"
+addconfigstringitem "1695" "clrcvar ; set rconfield 11"
+addconfigstringitem "1696" "clrcvar ; set rconfield 12"
+addconfigstringitem "1697" "clrcvar ; set rconfield 13"
+addconfigstringitem "1698" "clrcvar ; set rconfield 14"
+addconfigstringitem "1699" "clrcvar ; set rconfield 15"
+addconfigstringitem "1700" "clrcvar ; set rconfield 16"
+addconfigstringitem "1701" "clrcvar ; set rconfield 17"
+addconfigstringitem "1702" "clrcvar ; set rconfield 18"
+
+}
+resource
+Label
+{
+title "Pick a type to force or use the field"
+name "types1"
+rect 270 100 349 20
+fgcolor 0.00 0.00 0.00 1.00
+bgcolor 0.50 0.50 0.25 1.00
+borderstyle "3D_BORDER"
+}
+resource
+Label
+{
+title "Use the text field to enter cmd' \n Then press enter to send it."
+name "types2"
+rect 270 300 350 40
+fgcolor 1.00 1.00 1.00 1.00
+bgcolor 0.50 0.50 0.25 0.60
+borderstyle "3D_BORDER"
+}
+resource
+Field
+{
+name "types3"
+rect 270 350 240 30
+fgcolor 0.00 0.00 0.00 1.00
+bgcolor 1.00 1.00 1.00 1.00
+borderstyle "RAISED"
+linkcvar "wzrdtypes"
+//updatecvar
+
+}
+resource
+Button
+{
+title "Wizzard"
+name "types4"
+rect 520 350 100 30
+fgcolor 0.00 0.00 0.00 1.00
+bgcolor 0.50 0.50 0.00 1.00
+borderstyle "3D_BORDER"
+stuffcommand "pushmenu wzrdtypes "
+hovercommand "set lblhlp generate a string of commands"
+clicksound "sound/menu/back.wav"
+hoversound "menu/sound/scroll.wav"
+shader "menu_button_trans"
+hovershader "menu_button_glow"
+
+}
+resource
+ListBox
+{
+name "punish"
+rect 270 130 350 160
+fgcolor 1.00 1.00 1.00 1.00
+bgcolor 0.50 0.50 0.25 0.60
+borderstyle "INDENT_BORDER"
+font facfont-20
+shader "menu/textures/libger.tga"
+additem "Bomb" "exec menu/playerselection/type_bomb.cfg; pushmenu camper_playerselect"
+additem "Fire" "exec menu/playerselection/type_fire.cfg; pushmenu camper_playerselect"
+additem "Light" "exec menu/playerselection/type_light.cfg; pushmenu camper_playerselect"
+additem "Bleed" "exec menu/playerselection/type_bleed.cfg; pushmenu camper_playerselect"
+additem "scale" "exec menu/playerselection/type_scale.cfg; pushmenu camper_playerselect"
+additem "takeall" "exec menu/playerselection/type_takeall.cfg; pushmenu camper_playerselect"
+additem "viewtwist" "exec menu/playerselection/type_viewtwist.cfg; pushmenu camper_playerselect"
+additem "tent" "exec menu/playerselection/type_tent.cfg; pushmenu camper_playerselect"
+additem "random" "exec menu/playerselection/type_random.cfg; pushmenu camper_playerselect"
+additem "tele" "exec menu/playerselection/type_tele.cfg; pushmenu camper_playerselect"
+additem "spin" "exec menu/playerselection/type_spin.cfg; pushmenu camper_playerselect"
+additem "plyometrics" "exec menu/playerselection/type_plyometrics.cfg; pushmenu camper_playerselect"
+additem "corona" "exec menu/playerselection/type_corona.cfg; pushmenu camper_playerselect"
+
+}
+resource
+ListBox
+{
+name "players2"
+rect 445 145 175 240
+fgcolor 0.00 0.00 0.00 1.00
+bgcolor 0.50 0.50 0.50 1.00
+borderstyle "RAISED"
+font verdana-12
+addconfigstringitem "1703" "clrcvar ; set rconfield 19"
+addconfigstringitem "1704" "clrcvar ; set rconfield 20"
+addconfigstringitem "1705" "clrcvar ; set rconfield 21"
+addconfigstringitem "1706" "clrcvar ; set rconfield 22"
+addconfigstringitem "1707" "clrcvar ; set rconfield 23"
+addconfigstringitem "1708" "clrcvar ; set rconfield 24"
+addconfigstringitem "1709" "clrcvar ; set rconfield 25"
+addconfigstringitem "1710" "clrcvar ; set rconfield 26"
+addconfigstringitem "1711" "clrcvar ; set rconfield 27"
+addconfigstringitem "1712" "clrcvar ; set rconfield 28"
+addconfigstringitem "1713" "clrcvar ; set rconfield 29"
+addconfigstringitem "1714" "clrcvar ; set rconfield 30"
+addconfigstringitem "1715" "clrcvar ; set rconfield 31"
+addconfigstringitem "1716" "clrcvar ; set rconfield 32"
+
+additem "All"			 "set rconfield all;"
+additem "All Axis" 		 "set rconfield axis;"
+additem "All Allied" 		 "set rconfield allies;"
+additem "All Spectators" 	 "set rconfield spectators;"
+
+}
+end.

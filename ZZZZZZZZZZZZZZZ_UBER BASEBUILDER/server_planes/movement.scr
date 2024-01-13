@@ -1,0 +1,102 @@
+main local.movement:
+
+	if(self.plane==NULL || self.plane==NIL)
+	{
+		end
+	}
+
+	switch(local.movement)
+	{
+	case "BACKWARD_WALK":
+		self.seat[0] -= 5		
+	break
+	case "FORWARD_WALK":
+		self.seat[0] += 4		
+	break
+	case "LEFT_WALK":
+		self.seat[1] +=2		
+	break
+	case "RIGHT_WALK":
+		self.seat[1] -=2		
+	break
+	case "BACKWARD_RUN":
+		self.speed -= self.deceleration
+	
+		if(self.speed < self.minspeed)
+		{
+			self.speed =  self.minspeed
+		}
+	break
+	case "FORWARD_RUN":
+		self.speed += self.acceleration
+		if(self.speed > self.maxspeed)
+		{
+			self.speed =  self.maxspeed
+		}
+	break
+	case "LEFT_RUN":
+		if(self.z > -180)
+		{
+			self.z -= 20
+		}
+	break
+	case "RIGHT_RUN":
+		if(self.z < 180)
+		{
+			self.z += 20
+		}
+	break
+	case "LEVEL_OUT":
+		self thread level_out
+	break
+	case "JUMP":
+		if(game.game == "AA")
+		{
+			self exec server_planes/parachute.scr::parachute
+		}
+		else
+		{
+			self exec server_planes/parachute_sh.scr::parachute
+		}
+	break
+	}
+end
+
+/*
+level_out:
+
+	while(self.plane.angles[2] != 0.00 && self.plane != NULL)
+	{
+
+		if(self.plane.angles[2] < 180 )
+		{
+			self.extraangle -=5
+		}
+		else
+		{
+			self.extraangle +=5
+		}	
+			
+		if(self.extraangle ==5 || self.extraangle == -5 )
+		{
+			self.extraangle=0
+			break	
+		}
+
+		if(self.plane.angles[2] == 360.00 ||  self.plane.angles[2] == 0.00)
+		{
+			self.extraangle=0
+			break	
+		}
+
+		if(self.plane == NULL || self.plane == NIL || self == NULL || self == NIL )
+		{
+			break		
+		}
+
+		waitframe
+	}
+	
+end
+
+*/

@@ -1,0 +1,15 @@
+main:
+
+if!(self.parachute)
+{
+	end
+}
+
+self.falling = 0
+
+self.parachute detach
+self.parachute anim collapse
+wait 5
+self.parachute remove
+
+end

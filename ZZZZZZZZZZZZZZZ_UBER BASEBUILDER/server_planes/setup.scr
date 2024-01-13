@@ -1,0 +1,6 @@
+main:
+	exec server_planes/sound.scr
+
+	level.planes["allies"] = 0
+	level.planes["axis"] = 0
+end

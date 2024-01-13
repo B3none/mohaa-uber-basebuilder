@@ -1,0 +1,203 @@
+main:
+
+	if (level.run["countdown"] != "1"){end}
+
+	if(level.HTR_setup !=1)
+	{
+		level.HTR_setup = 1
+
+		if (level.run["countdown"] != "1"){end}
+
+		local.gametype = getcvar "g_gametype"
+
+		if(local.gametype == "1" || local.gametype == "0")
+		{
+			end
+		}
+
+		level.round_times = waitexec global/settings.scr::getcmd "countdown-rounds"
+		level.round_times = int level.round_times
+
+		thread changemap
+
+		local.gametypestring = getcvar "g_gametypestring"
+		setcvar "g_gametypestring" "Countdown"
+
+		setcvar "session" local.gametype
+	
+		if(level.roundbased)
+		{
+			level waittill roundstart
+		}
+		else
+		{
+			level waittill spawn
+		}
+
+		local.origin = waitthread getorigin
+
+		if (local.origin == NIL)
+		{
+			setcvar "g_gametypestring" local.gametypestring 
+			println "ERROR: [Countdown] Map origin script not found. Map may not be supported"
+			println "HTR: Map not reacognised. Ending mod"
+			end
+		}
+
+	
+		local.time = waitexec global/settings.scr::getcmd "countdown-time"
+
+		if(local.time == "" || local.time == NIL)
+		{
+			local.time = "03:00"
+		}
+		
+		local.countdown_time[allies] = local.time
+		local.countdown_time[axis] = local.time
+
+		level.hudcolour["axis"] = 0
+		level.hudcolour["allies"] = 0
+
+		if(local.countdown_time[allies].size != 5 || local.countdown_time[axis].size != 5 )
+		{
+			setcvar "g_gametypestring" local.gametypestring 
+			println "ERROR: [Countdown] Time format is incorrect. Ending mod"
+			end
+		}
+
+		setcvar "g_gametypestring" "Countdown"
+	
+		exec global/libmef/mapdesc.scr::setup_map level.map_shortname
+
+		level.clockside = "draw"
+
+		level.radio_model = waitexec global/settings.scr::getcmd "radio-model"
+
+		level.countdown["allies"]["seconds"] = waitexec global/strings.scr::Right 2 local.countdown_time[allies]
+		level.countdown["axis"]["seconds"] = waitexec global/strings.scr::Right 2 local.countdown_time[axis]
+
+		level.countdown["allies"]["minutes"] = waitexec global/strings.scr::Left 2 local.countdown_time[allies]
+		level.countdown["axis"]["minutes"] = waitexec global/strings.scr::Left 2 local.countdown_time[axis]
+			
+		level.countdown["allies"]["seconds"] = int level.countdown["allies"]["seconds"]
+		level.countdown["axis"]["seconds"] = int level.countdown["axis"]["seconds"]
+
+		level.countdown["allies"]["minutes"] = int level.countdown["allies"]["minutes"]
+		level.countdown["axis"]["minutes"] = int level.countdown["axis"]["minutes"]
+
+		exec HTR/player_scan.scr
+
+		local.master= spawn ScriptMaster
+		local.master aliascache snd_binoculars sound/mechanics/Mec_RadioNoise_11.wav soundparms 0.5 0.2 0.9 0.1 160 1600 item auto loaded maps "m moh obj dm team "
+		local.master aliascache m3l2_radio_pickup sound/items/Item_ToolBox_01.wav soundparms 1.5 0.0 1.0 0.0 100 2000 item loaded maps "m3l2 dm moh obj train"
+		//local.master aliascache plantbomb1 sound/items/Item_BangaloreAssemble_01.wav soundparms 1.0 0.0 1.0 0.0 100 2000 item loaded maps "m dm moh obj train"
+
+		exec HTR/radio.scr local.origin
+		exec HTR/hud.scr::countdown
+
+		setcvar "g_obj_alliedtext1" "Countdown 1.5"
+		setcvar "g_obj_alliedtext2" "Find and hold the radio to" 
+		setcvar "g_obj_alliedtext3" "Blow up the axis players" 
+
+		setcvar "g_obj_axistext1" "Countdown 1.5"
+		setcvar "g_obj_axistext2" "Find and hold the radio to" 
+		setcvar "g_obj_axistext3" "Blow up the allied players" 
+		
+		level.dmrespawning = 1
+
+	}
+
+end
+
+getorigin:
+	
+	local.map = level.mapname
+	local.pos = waitexec global/strings.scr::InStr "/" local.map
+	
+	if(local.pos != NIL) //single player map
+	{
+		local.pos = local.map.size - local.pos
+		local.map = waitexec global/strings.scr::Right local.pos local.map
+	}
+
+	local.spot = waitexec ("countdown/" + local.map + ".scr")
+	local.rand = local.spot.size
+	local.rand = randomint(local.rand) 
+	local.spot = local.spot[local.rand]
+
+end local.spot
+
+changemap:
+	
+	//level waittill spawn
+
+	local.rounds = waitexec global/settings.scr::getcmd "countdown-rounds"
+	local.rounds = int local.rounds
+
+	if(local.rounds != 0)
+	{
+
+		level.round_times = getcvar "countdown_times"
+		level.round_times = int level.round_times
+
+		if(level.round_times >= local.rounds)
+		{
+			setcvar "countdown_times" "0"
+
+			while(1)
+			{
+				local.gametype = getcvar "g_gametype"
+				setcvar "g_gametype" "0"
+				bsptransition nextmap
+				setcvar "g_gametype" local.gametype
+				// wait one frame and set all game types again so map changes and doesnt save game
+				waitframe
+				setcvar "g_gametype" "0"
+				bsptransition nextmap
+				setcvar "g_gametype" local.gametype
+				wait 15
+			}
+		}
+	}
+end
+
+/*
+changemap:
+
+	
+	level waittill spawn
+
+	local.rounds = getcvar "countdown_rounds"
+	local.rounds = int local.rounds
+
+	if(local.rounds != 0)
+	{
+
+		level.round_times = getcvar "countdown_times"
+		level.round_times = int level.round_times
+
+		if(level.round_times >= local.rounds)
+		{
+			local.frags = getcvar "fraglimit"
+			setcvar "countdown_times" local.frags
+
+			if(game.game != "AA")
+			{
+				setcvar "fraglimit" "1"	
+				setcvar "g_tow_winstate" "1"	
+				$player[1] auto_join_team
+				$player[1] commanddelay 0.0 addkills 1
+			}
+			else
+			{
+				setcvar "fraglimit" "-1"
+			}
+
+			//setcvar "g_gametype" "4"
+			//teamwin axis
+
+		}
+	}
+end
+
+*/

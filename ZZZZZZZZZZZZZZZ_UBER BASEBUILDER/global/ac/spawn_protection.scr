@@ -1,0 +1,80 @@
+main:
+
+
+	if(self.dmteam == "spectator")
+	{
+		end
+	}
+
+	if(level.run["spawn-protection"]!="1"){end}
+
+
+	local.team = waitexec global/settings.scr::getcmd  "spawn-team" //returns command parameter two
+
+	if(local.team != "both")
+	{
+		if(self.dmteam != local.team)
+		{
+			end
+		}
+	}
+
+	local.print = waitexec global/settings.scr::getcmd "print-sp"
+
+	if(local.print == "1")
+	{
+		self stufftext "locationprint 500 60 Spawn-Protect-On 1"	
+	}
+
+	local.time = waitexec global/settings.scr::getcmd "invulnerabletime"
+
+	local.time = int local.time
+
+	local.lightn = waitexec global/settings.scr::getcmd  "spawn-light" //returns command parameter two
+
+	if(local.lightn=="1")
+	{
+		local.lightcolour = waitexec global/settings.scr::getcmd  "spawn-lightcolour" //returns command parameter two
+
+		local.wordcount = 0
+
+		for(local.i=0;local.i<=local.lightcolour.size - 1;local.i++)
+		{	
+			if(local.lightcolour[local.i]!=" ")
+			{
+				if(local.light[local.wordcount]==NIL)
+				{
+					local.light[local.wordcount]=""
+				}
+
+				local.light[local.wordcount] += local.lightcolour[local.i]
+			}
+			else
+			{	
+				local.wordcount++
+			}
+		}	
+
+		self light local.light[0] local.light[1] local.light[2] local.light[3] 
+	}
+
+
+	self nodamage
+	for(local.i = 0; local.i <= local.time	; local.i = local.i + .1)
+	{
+		wait .1
+		
+		if(self.fireheld == 1 || self.dmteam == "spectator")
+		{
+			break
+		}
+	}
+
+	if(local.print == "1")
+	{
+		self stufftext "locationprint 500 50 Spawn-Protect-Off 1"	
+	}
+
+	self takedamage
+	self light 0 0 0 0 
+end

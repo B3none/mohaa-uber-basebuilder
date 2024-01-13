@@ -1,0 +1,8 @@
+main:
+	// Commands and Settings
+	local.settings = makearray
+	// Music
+		"play-for"			"spectator"			" The players to play the music for. Usage - spectator or all"
+	endarray
+
+end local.settings 

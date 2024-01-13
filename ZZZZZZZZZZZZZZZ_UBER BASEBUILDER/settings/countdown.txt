@@ -1,0 +1,15 @@
+main:
+	local.settings = makearray
+		//command			//setting				//help	
+		"countdown-time"		"03:00"					"Time on countdown clock"
+		"death-location"		"1"					"Like FT and AC, Announce the location to where the radio was dropped"
+		"countdown-locate"		"5"					"If the time is above 0 the location of the radio is announced at this time period"
+		"countdown-light"		"1"					"If 1 the player will glow red when he/she has the radio"
+		"countdown-rounds"		"3"					"Number of rounds before the map changes"
+		"radio-model"			"items/walkietalkie.tik"		"Model to use for the radio"
+		"countdown-idle"		"300"					"Time in seconds the radio waits before respawning"
+	endarray	
+
+end local.settings
+		
+

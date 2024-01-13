@@ -1,0 +1,165 @@
+main:
+
+	//wait for 2 players
+	waitthread waitingforplayers
+	
+		
+	if(level.run["survivor"] != "1"){end}
+
+	//wait level.warmup-time 
+	local.start = waitthread warming
+
+	if(level.run["survivor"] != "1"){end}
+
+	//if it had players
+	if(local.start == 1)
+	{
+		//start the round
+		thread roundstart
+	}
+
+end
+
+roundstart:
+
+	for(local.i = 1; local.i <= $player.size; local.i++)
+	{
+		local.player = $player[local.i]
+		if(local.player.playing == 1)
+		{
+			local.player.lives = level.lives
+			local.player exec survivor/scan_player.scr
+			local.player respawn
+			local.player.forcespawn = 1
+			local.player iprint ( "You have " + level.lives + level.word ) 1
+		}
+		else
+		{
+			local.player iprint "You must wait for the next round" 
+			local.player.playing = 0
+			local.player spectator
+		}
+	}
+
+	if(level.team == 1)
+	{
+		exec Survivor/hud.scr ("Starting battle with " +  level.players["axis"] + " Axis and " + level.players["allies"] + " Allied " + " players") 
+	}
+	else
+	{
+		exec Survivor/hud.scr ("Starting battle with " + level.players + " players") 
+	}
+
+	level.roundstarted = 1
+	wait 3
+
+	if(level.team == 1)
+	{
+		exec Survivor/hud.scr (  level.players["axis"] + " Axis and " + level.players["allies"] + " Allied " + " left") 
+	}
+	else
+	{
+		exec Survivor/hud.scr (level.players + " players left") 
+	}
+	
+
+end
+
+
+waitingforplayers:
+	
+	
+	//if(level.roundbased)
+	//{
+	//	//level waittill roundstart
+	//}
+
+	local.exit = 0
+
+	while(local.exit == 0)
+	{
+		exec Survivor/hud.scr ("Waiting for players") 
+
+		if(level.run["survivor"] != "1"){end}
+
+		if(level.team == 1)
+		{
+			if(level.players["axis"] >= 1 && level.players["allies"] >= 1)
+			{
+				local.exit = 1
+			}
+			
+		}
+		else
+		{
+			if(level.players >=  level.min_players)
+			{
+				local.exit =1
+			}
+
+		}
+
+		wait 1
+	}
+
+	if(level.team == 1)
+	{
+		 exec Survivor/hud.scr ("Found " + level.players["axis"] + " Axis and " + level.players["allies"] + " Allied players") 
+	}
+	else
+	{
+		exec Survivor/hud.scr ("Found " + level.players + " players") 
+	}
+
+	wait 1
+	exec Survivor/hud.scr ("Starting warmup") 
+	wait 1
+end
+
+warming:
+
+	for(local.i = level.warmup_time; local.i > 0;local.i--)
+	{
+			if(level.team == 1)
+			{
+				if(level.players["axis"] < 1 || level.players["allies"] < 1)
+				{
+					local.exit = 1
+				}
+				
+			}
+			else
+			{
+				if(level.players <  level.min_players)
+				{
+					local.exit = 1
+				}
+
+			}
+
+
+			if(local.exit)
+			{
+				thread main
+				end 0
+			}
+			else
+			{
+				if(local.i > 1)
+				{
+					 local.s = "s"
+				}
+				else
+				{
+					 local.s = ""
+				}
+
+				exec Survivor/hud.scr ("Warmup will end in " + local.i + " second" + local.s) 
+			}
+			wait 1
+
+			if(level.run["survivor"] != "1"){end}
+		}
+
+end 1
+

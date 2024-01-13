@@ -1,0 +1,78 @@
+//The mod will choose between a random number of starting positions. 
+//I only added one but you can add as many as you want.
+//By adding them into an array of local.origin and then ending with the local.origin variable.
+//Each tiemyou add a ogiin use the same format btu increase the number by one for the index, for example.
+//
+//main:
+//
+//	local.origin[0] = ( 504 -5128 -447 )
+//	local.origin[1] = ( -1414 162 -127 )
+//	local.origin[2] = ( 120 96 9 )
+//
+//end  local.origin
+
+main:
+
+	local.origin[0] = ( -647.48 3708.94 -447.88 )
+
+	local.origin[1] = ( -1002.84 3773.44 -367.88 )
+
+	local.origin[2] = ( -1257.80 3593.07 -447.88 )
+
+	local.origin[3] = ( -1607.65 2718.48 -431.88 )
+
+	local.origin[4] = ( -2560.47 3438.48 -607.88 )
+
+	local.origin[5] = ( -2648.32 2651.79 -143.88 )
+
+	local.origin[6] = ( -2934.49 2695.65 -110.98 )
+
+	local.origin[7] = ( -2766.86 2227.58 -143.88 )
+
+	local.origin[8] = ( -2801.95 1720.45 -344.31 )
+
+	local.origin[9] = ( -3237.20 2345.24 -130.88 )
+
+	local.origin[10] = ( -3414.59 1576.79 -135.35 )
+
+	local.origin[11] = ( -3701.27 1781.53 -119.80 )
+
+	local.origin[12] = ( -4026.35 1807.13 -127.88 )
+
+	local.origin[13] = ( -4292.98 1810.06 -127.88 )
+
+	local.origin[14] = ( -4542.24 1807.13 -127.88 )
+
+	local.origin[15] = ( -4803.47 1807.13 -127.88 )
+
+	local.origin[16] = ( -4949.08 2350.94 -399.76 )
+
+	local.origin[17] = ( -4328.79 3291.16 -415.88 )
+
+	local.origin[18] = ( -4281.99 3763.54 -435.66 )
+
+	local.origin[19] = ( -3451.45 3944.70 -455.88 )
+
+	local.origin[20] = ( -3063.34 3949.78 -447.88 )
+
+	local.origin[21] = ( -2371.87 4503.42 -391.88 )
+
+	local.origin[22] = ( -1663.71 3916.79 -187.67 )
+
+	local.origin[23] = ( -1476.06 3972.02 -225.74 )
+
+	local.origin[24] = ( -1252.64 3928.96 -235.88 )
+
+	local.origin[25] = ( -2103.41 5497.58 -447.88 )
+
+	local.origin[26] = ( -2615.39 4058.45 -227.50 )
+
+	local.origin[27] = ( -3015.87 2963.89 -159.88 )
+
+	local.origin[28] = ( -3224.24 3101.08 -130.88 )
+
+	local.origin[29] = ( -3390.07 3159.58 -374.64 )
+
+	local.origin[30] = ( -4272.96 1595.03 -399.88 )
+
+end  local.origin

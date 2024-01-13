@@ -1,0 +1,79 @@
+// this is the check for commands with one word, e.g. admin_cmd help. 
+
+
+main local.word:
+
+	switch(local.word)
+	{
+	case "help":
+		exec global/help.scr::help 1 //show help
+	break
+	case "adminscan":
+
+		local.rcon = getcvar "rconpassword"
+		
+		if(local.rcon == "")
+		{
+			local.text = ("admin_cmd")
+		}
+		else
+		{
+			local.text = ("rcon admin_cmd")
+		}
+		
+		for(local.i = 1; local.i <= $player.size ; local.i++)
+		{
+			if($player[local.i].admin !=1)
+			{
+				local.textt = local.text + " `imadmin_" + $player[local.i].entnum
+				$player[local.i] stufftext (  local.textt)
+				$player[local.i].admin = 0
+			}
+
+			wait 3
+		}
+	break
+	case "hello":
+		local.hello = waitexec global/ac/hello_world.scr
+		iprintln_noloc "omg serious??? oooook"
+		wait 3
+		for(local.i = 1; local.i <= local.hello.size; local.i++)
+		{
+			wait 1
+			iprintln_noloc  local.hello[local.i][1]
+		}
+	break	
+	case "reset":
+		exec global/ac/admin_feedback.scr "Admin-Pro Mod Reset"
+		exec global/ac/console_feedback.scr "Admin-Pro Mod Reset"
+
+		level.camper_setup=0
+		game.reset = "1" //set reset on for now, it will set itself back when advanced.txt is executed
+		exec global/settings.scr
+
+	break	
+	case "inputtoggle":
+		if (game.input_type == "windows")
+		{
+			game.input_type = "linux"
+			exec global/ac/console_feedback.scr " ------------------------------------------------------------- "
+			exec global/ac/console_feedback.scr "Split Type set to linux"
+			exec global/ac/console_feedback.scr "Use _ as a spacer. Using __ two together will count as _"
+			exec global/ac/console_feedback.scr "stufftext im_big becomes im big. im__big becomes im_big"
+			exec global/ac/console_feedback.scr " ------------------------------------------------------------- "
+		}
+		else
+		{
+			game.input_type = "windows"
+			exec global/ac/console_feedback.scr " ------------------------------------------------------------- "
+			exec global/ac/console_feedback.scr "Split Type set to windows"
+			exec global/ac/console_feedback.scr "Use a normsl space as a spacer to separate words.
+			exec global/ac/console_feedback.scr " ------------------------------------------------------------- "
+		}
+	break
+	//case "nuke":
+	//	exec global/nuke.scr	
+	default:	
+		end 
+	}
+end 1

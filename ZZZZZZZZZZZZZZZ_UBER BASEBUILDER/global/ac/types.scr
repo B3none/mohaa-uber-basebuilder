@@ -1,0 +1,575 @@
+// Anti camper script by Elgan Sayer
+// 
+// version 1.00
+//
+// Questions should go to www.mods-r-us.net forums or elgan.sayer@gmail.com
+//
+// feel free to pass or tamper with this mod as its for u!
+// 
+// www.mods-r-us.net
+//
+//
+// **************************************************************************************************************************************
+
+
+
+
+
+
+// -------------------------------------------------------------------------------------------------------------------------------------------------------
+// -------------------------------------------------------------------------------------------------------------------------------------------------------
+// -------------------------------------------------------------------------------------------------------------------------------------------------------
+// -------------------------------------------------------------------------------------------------------------------------------------------------------
+// ********************************************************************************************************************************************************************************************************************************************************************
+
+
+main local.duration local.thread local.camping:
+	
+	if(local.camping==1)
+	{
+		if(self.camps==NIL)
+		{
+			self.camps=0
+		}
+
+		self.camps++ 
+
+		local.max =  waitexec global/settings.scr::getcmd "maxcamps" // get index 2 
+		local.maxthread =  waitexec global/settings.scr::getcmd "maxcamps" 4 // get index 4 
+		
+		local.max = int local.max
+
+		if(self.camps==local.max) // if playr has reached max camps
+		{
+			self exec local.maxthread	// run the punishment script
+			self.camps=0 //reset the max camps for this player
+			end	//end player is punished
+		}
+	}
+	
+	if(local.duration == NIL)
+	{
+		local.duration   = waitexec global/settings.scr::getcmd  "duration" //returns command parameter two
+	}
+
+	self waitthread getwhile local.duration local.camping //get the settings
+	
+
+	if(local.thread == NIL)
+	{
+		local.camper_type = waitexec global/settings.scr::getcmd "type" 
+		for(local.t=1;local.t<=game.types.size;local.t++)
+		{
+			if(local.camper_type == game.types[local.t] [1])
+			{
+				local.thread_type = game.types[local.t] [2]
+				self exec local.thread_type 
+				end
+			}
+				
+		}
+	}
+	else
+	{
+		for(local.t=1;local.t<=game.types.size;local.t++)
+		{
+			if(local.thread  == game.types[local.t] [1])
+			{
+				local.thread = game.types[local.t] [2]
+				self exec local.thread 
+				end
+			}
+		}	
+	
+		for(local.i=0;local.i <= local.thread.size;local.i++)
+		{
+			for(local.t=1;local.t<=game.types.size;local.t++)
+			{	
+				if(local.thread[local.i]  == game.types[local.t] [1])
+				{
+					local.thread_path = game.types[local.t] [2]
+					self exec local.thread_path
+				}
+			}	
+		}					
+	}
+
+end
+
+
+getwhile local.duration  local.camping:
+
+	self.end_type = 0	
+
+	if( local.camping == 0 && local.duration == "spot") //dont kill guy and dont have a radius
+	{
+		self thread global/anti_camper.scr::getradius //has no radius check and needs one to suit settings so make one.
+	}
+
+	self thread duration local.duration	
+end 
+
+
+duration local.duration:
+	
+	local.time = 0
+	while(self.dmteam != "spectator" && self != NIL && self != NULL )
+	{
+		wait 1
+		local.time++
+
+		if!(isalive self) 
+		{
+			if(local.duration=="death" || local.duration=="spot" )
+			{
+				self.end_type = 1
+				end
+			}
+		}
+		else if(self.in_radius==0 && local.duration=="spot")
+		{
+			self.end_type = 1
+			end
+		}
+		else if(local.time >= (int  local.duration) && local.duration!="death" && local.duration!="spot")
+		{
+			self.end_type = 1
+			end
+		}
+		
+	}
+	self.end_type = 1
+
+end
+
+// ********************************************************************************************************************************************************************************************************************************************************************
+// -------------------------------------------------------------------------------------------------------------------------------------------------------
+// -------------------------------------------------------------------------------------------------------------------------------------------------------
+// -------------------------------------------------------------------------------------------------------------------------------------------------------
+// -------------------------------------------------------------------------------------------------------------------------------------------------------
+
+
+
+
+bomb:
+
+	local.bomb_mdl = waitexec global/settings.scr::getcmd  "bomb-mdl"  // get the bomb model
+
+	local.player = self
+	local.mine = spawn script_model 
+	local.mine model local.bomb_mdl 
+	local.mine.origin = ( local.player gettagposition "Bip01 R Forearm")//local.player.origin//
+	local.mine notsolid
+
+	local.mine attach local.player "Bip01 R Forearm" 
+	
+	local.silent = waitexec global/settings.scr::getcmd  "silent"  //returns command parameter two
+	local.ticktime = waitexec global/settings.scr::getcmd  "ticktime"  //returns command parameter two
+	
+	local.ticktime = int local.ticktime
+
+	local.player stopwatch local.ticktime
+	
+
+	if(local.silent=="0" && local.ticktime > 5)
+	{	
+		self loopsound camper_bombtick 
+	}
+	
+	if(local.ticktime==5 && local.silent!="1")
+	{
+		self loopsound camper_final_countdown 
+	}
+
+
+	while(local.player.dmteam!= "spectator" && local.player != NIL)
+	{
+		wait 1
+		local.ticktime--
+
+		if(local.ticktime==5  && local.silent!="1" )
+		{
+			self stoploopsound camper_bombtick 
+			self loopsound camper_final_countdown 
+		}
+		else if(local.ticktime==0)
+		{
+			break
+		}
+
+		//if(self.end_type==1)
+		//{
+		//	break
+		//}
+
+
+		if(self.end_type==1)
+		{
+			self stoploopsound camper_bombtick 
+			self stoploopsound camper_final_countdown 
+			local.player stopwatch 0
+			local.mine remove
+			end
+		}
+	}
+
+	self stoploopsound camper_bombtick 
+	self stoploopsound camper_final_countdown 
+
+	local.player stopwatch 0
+	
+	local.bomb_exp_mdl2 = waitexec global/settings.scr::getcmd  "bomb-exp-mdl2"  // get the exp bomb model
+	local.bomb_exp_mdl = waitexec global/settings.scr::getcmd  "bomb-exp-mdl"  // get the exp bomb model
+
+	local.Exp1 = spawn local.bomb_exp_mdl
+	local.Exp2 = spawn local.bomb_exp_mdl2
+	local.Exp1 notsolid
+	local.mine remove
+
+	local.Exp1.origin = local.mine.origin
+	local.Exp1 anim start
+	local.Exp2.origin = local.mine.origin
+	local.Exp2 anim start
+
+	local.player hurt 100
+
+	wait 1
+
+	local.Exp1 remove
+	local.Exp2 remove	 						
+	
+end
+
+
+fire:
+
+
+
+	local.player = self // The player is the self object
+
+	local.fire_mdl  = waitexec global/settings.scr::getcmd  "fire-mdl" 
+
+	local.fire = spawn script_model 
+	local.fire model local.fire_mdl
+	local.fire.origin = local.player.origin
+	local.fire notsolid
+
+	local.fire glue local.player
+	
+	local.hurt  = waitexec global/settings.scr::getcmd  "hurt" //returns command parameter two
+	local.hurt_delay  = waitexec global/settings.scr::getcmd  "hurt-delay" //returns command parameter two
+	
+	local.hurt = int local.hurt //make it a number
+	local.hurt_delay = int local.hurt_delay //make it a number
+	
+	while(local.player.end_type==0)
+	{
+		local.player playsound fire_large
+		local.player hurt local.hurt
+		wait local.hurt_delay
+	}
+
+
+	local.fire remove
+end
+		
+light:
+
+
+
+	local.player = self // The player is the self object
+	
+	local.lightcolour = waitexec global/settings.scr::getcmd  "lightcolour" //returns command parameter two
+
+	
+	local.wordcount = 0
+
+	for(local.i=0;local.i<=local.lightcolour.size - 1;local.i++)
+	{	
+
+		if(local.lightcolour[local.i]!=" ")
+		{
+			if(local.light[local.wordcount]==NIL)
+			{
+				local.light[local.wordcount]=""
+			}
+
+			local.light[local.wordcount] += local.lightcolour[local.i]
+		}
+		else
+		{	
+			local.wordcount++
+		}
+	}	
+
+	local.player light local.light[0] local.light[1] local.light[2] local.light[3] 
+
+	while(local.player.end_type==0)
+	{
+		waitframe
+	}
+
+	local.player light 0 0 0 0
+end
+
+
+bleed:
+
+
+
+	local.player = self // The player is the self object
+	
+	local.hurt  = waitexec global/settings.scr::getcmd  "hurt" //returns command parameter two
+	local.hurt_delay  = waitexec global/settings.scr::getcmd  "hurt-delay" 2 //returns command parameter two
+	
+	local.hurt = int local.hurt //make it a number
+	local.hurt_delay = int local.hurt_delay //make it a number
+
+	while(local.player.end_type==0)
+	{
+		local.player hurt local.hurt
+		wait local.hurt_delay
+	}
+
+
+end
+		
+	
+
+
+scale:
+
+	// this does not  use perfect bounding box.
+
+
+
+	local.player = self // The player is the self object
+	
+	local.scalesize  = waitexec global/settings.scr::getcmd  "scalesize" //returns command parameter two
+	local.scalesize = int local.scalesize //make it a number
+
+	local.player.scale = local.scalesize
+
+	while(local.player.end_type==0)
+	{
+		waitframe
+	}
+
+	
+	local.player.scale = 1
+end 	
+
+takeall: //will take away players weapon constantly deonding on duration setting
+
+
+
+	local.player = self // The player is the self object
+	
+	while(local.player.end_type==0)
+	{
+		local.player takeall
+		waitframe
+	}
+
+
+end 	
+
+	
+
+viewtwist: //will take away players weapon constantly deonding on duration setting
+
+
+
+	local.player = self // The player is the self object
+	
+	while(local.player.end_type==0)
+	{
+		local.viewsize = 100
+		local.view = 1
+		for(local.anglez =0;local.anglez <=360;local.anglez +=.5)
+		{
+			local.viewsize = randomint(100) + 1
+		
+			if(local.viewsize<30)
+			{
+				local.viewsize = 30
+			}
+
+			waitframe
+			local.player.viewangles += ( 0 0 local.anglez )
+			local.player stufftext ("viewsize " + local.viewsize )
+
+			if(local.player.end_type==1)
+			{
+				local.player.viewangles = ( 0 0 0 )
+				local.player stufftext ("viewsize " + 100 )
+				end
+			}
+		}
+		waitframe
+	}
+
+	local.player.viewangles = ( 0 0 0 )
+	local.player stufftext ("viewsize " + 100 )
+
+end 	
+	
+
+tent:
+
+	local.tent_mdl = waitexec global/settings.scr::getcmd  "tent-mdl"  // get the tent model
+
+
+
+	local.player = self // The player is the self object
+
+	local.tent = spawn script_model 
+	local.tent model local.tent_mdl
+	local.tent.origin = local.player.origin
+	local.tent notsolid
+	local.tent.scale = .5
+
+	local.tent glue local.player
+	local.player hide
+
+	
+	while(local.player.end_type==0)
+	{
+		waitframe
+
+		local.player holster //dont let them use the gun
+	}
+
+	local.tent remove
+	local.player show
+
+end
+
+
+
+random:
+
+	local.num = randomint( 1 + game.types.size )
+
+	local.thread = game.types[local.num] [2]
+	self exec local.thread 
+end
+
+tele:
+	
+	local.spot  = waitexec global/settings.scr::getcmd  "tele-spot" 
+	self tele local.spot
+end
+
+
+
+spin:
+
+	local.player = self
+
+
+	local.speed = waitexec global/settings.scr::getcmd  "spin-speed"  // get the speed
+
+	local.speed = int local.speed 
+
+	while(local.player.end_type==0)
+	{
+		waitframe
+		local.player turnupdate local.speed 1
+	}
+
+end
+
+
+plyometrics:
+
+	local.player = self
+
+
+	local.omg = spawn script_origin
+	local.omg.origin = local.player.origin
+	local.omg solid
+
+	local.player notsolid
+	local.omg physics_on	
+
+	local.player glue local.omg 
+
+	local.start = local.player.origin + local.player.forwardvector * 100
+	local.start += ( 0 0 200 )
+
+	local.fwd_vec = angles_toforward local.player.viewangles
+	local.hit_location =  local.start - local.fwd_vec 
+
+	local.dest = trace (local.start + local.fwd_vec * 64) (local.start + local.fwd_vec * 150) 1
+	local.vect = (local.dest - local.player.origin)
+	local.vect = vector_normalize (local.vect)
+
+	local.dist = vector_length (local.player.origin - local.dest)
+			
+	local.vect[0] = local.vect[0] * (local.dist / 1)
+	local.vect[1] = local.vect[1] * (local.dist / 1)
+	local.vect[2] = local.vect[2] * local.dist
+
+	local.vect[0] = local.vect[0] * 4
+	local.vect[1] = local.vect[1] * 4
+
+	local.vect[2] = local.vect[2] + 800
+
+
+	//local.vect[0] = local.vect[0] * 100
+	//local.vect[1] = local.vect[1] * 100
+//
+	//local.vect[2] = local.vect[2] * 100
+
+	local.omg.angles = local.player.angles
+	local.omg.velocity = local.vect
+	local.player.velocity = local.vect
+	
+	local.damage = self.health
+	local.damage --
+
+
+	local.damage = int local.damage
+	local.player takedamage
+	local.player damage local.player local.damage local.player local.player.origin local.player.forwardvector (0 0 0) 10 1 18 -1
+
+	while(local.player.end_type==0)
+	{
+		waitframe
+		local.player.viewangles = local.omg.angles
+		local.omg.angles += ( 10 0 00 )
+
+		if (local.player.origin == local.last || !isalive local.player)
+		{
+			self.end_type = 1 //if the player is stuck exit the type.
+		}
+
+		local.last = local.player.origin
+
+	}
+
+	local.omg remove
+
+end
+
+
+corona:
+
+	local.player = self
+
+	local.corona = spawn script_model
+	local.corona model "models/fx/corona_red.tik"
+	local.corona.origin = self.origin + ( 0 0 100 )
+	local.corona notsolid
+	local.corona scale 2.5
+
+	while(local.player.end_type==0)
+	{
+		waitframe
+		local.corona.origin = self.origin + ( 0 0 100 )
+	}
+		
+	local.corona remove
+end
+

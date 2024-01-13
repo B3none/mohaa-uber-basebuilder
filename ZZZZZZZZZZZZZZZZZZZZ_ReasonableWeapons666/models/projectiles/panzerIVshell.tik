@@ -1,0 +1,125 @@
+TIKI
+
+//used for panzer IV tanks
+
+setup
+{
+	scale 1.0	// Needs to be unnaturally large so it is visible
+	path models/fx/dummy
+	skelmodel dummy3.skd
+}
+
+
+init
+{
+	server
+	{
+		rendereffects 		+dontdraw
+		classname		Projectile
+		setsize			"-4 -4 -4" "4 4 4"
+		speed			4600 //was 6000
+		addownervelocity	0
+		hitdamage		999
+		life			20.0
+		meansofdeath		fire //explosion
+		impactmarkshader	blastmark //--
+		impactmarkradius	50 //
+//		impactmarkorientation	random //--
+		explosionmodel		models/fx/explosionPANZERIVshell.tik
+//		notouchdamage
+		explodeontouch
+		smashthroughglass 64
+//		gravity 0.8
+//		addvelocity 0 0 200
+//		avelocity random 90 random 90 60
+		knockback			800
+		dlight 0.8 0.8 0.2 256 // red green blue radius
+
+		cache gren_boom.spr
+		cache vsssource.spr
+		cache blastmark.spr
+		cache models/fx/explosionPANZERIVshell.tik
+	}
+	client
+	{
+
+		// bright flash << added
+		sfx originspawn
+		(
+			model grenexp_flash.spr
+			color 1 .9 .7
+			scalerate 9
+			life 0.1
+			fade
+		)
+
+		originemitter bazookatrail
+		(
+				model vsssource.spr
+				velocity 10
+				friction 0.85
+				randvel crandom 10 crandom 10 crandom 10
+				accel 0 0 20
+				spawnrate 110
+				color .3 .3 .9
+				spritegridlighting
+				alpha 0.4
+				trailcolor 0.8 0.2 0.1 0.8 // added
+				colorrange 0.1 0.1 0.1 1.0 1.0 1.0
+				fadein 0.1
+				fadedelay 1.0
+				scalemin 0.3
+				scalemax 0.4
+				scalerate 0.5
+				life 6.0 6.5 //was 2.0 2.5
+		)
+
+		// fire ring << added
+		enter commanddelay 0.500 originspawn 
+		(
+				model fire_ring.spr
+				color 1.00 1.00 0.10
+				scale 0.00001  // was 0.50
+				life 0.20
+				wavy 3.00 // added
+				swarm 10.0 1.0 5.0 // added
+				scalerate -0.20 // was 8.00
+				offsetalongaxis 0 0 5 //  0 0 -70
+				fade
+		)
+		// sparks << added
+		delayedsfx 0.1 originspawn
+		(
+			alpha 0.5
+			offset crandom 10 crandom 10 crandom 10
+			count 30
+			model models/fx/bh_metal_fastpiece.tik
+			align
+			randvel crandom 700 crandom 700 crandom 700
+			accel 0 0 -3000
+			life 0.15 0.1
+			scalemin 0.5
+			scalemax 1.5
+			scalerate -0.6
+			fade
+		)
+
+		// animated explosion << added
+		sfx originspawn
+		(
+			model gren_boom.spr
+			randvel 0 0 20
+			alpha 1.0
+			life 0.35
+			scale 1.5
+//			offset 0 0 16
+//			scalerate 1.8
+			fadedelay 0.5
+		)
+	}
+}
+
+animations
+{
+	idle dummy3.skc
+}

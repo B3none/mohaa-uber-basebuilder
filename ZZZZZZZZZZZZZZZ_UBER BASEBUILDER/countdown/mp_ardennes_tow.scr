@@ -1,0 +1,38 @@
+//The mod will choose between a random number of starting positions. 
+//I only added one but you can add as many as you want.
+//By adding them into an array of local.origin and then ending with the local.origin variable.
+//Each tiemyou add a ogiin use the same format btu increase the number by one for the index, for example.
+//
+//main:
+//
+//	local.origin[0] = ( 504 -5128 -447 )
+//	local.origin[1] = ( -1414 162 -127 )
+//	local.origin[2] = ( 120 96 9 )
+//
+//end  local.origin
+
+main:
+
+
+	local.origin[0] = ( -3387.30 1738.30 -27.95 )
+
+	local.origin[1] = ( -2405.67 -2681.34 31.85 )
+
+	local.origin[2] = ( -2680.54 -3721.42 21.59 )
+
+	local.origin[3] = ( -746.59 -2317.11 5.81 )
+
+	local.origin[4] = ( 1805.79 -1002.85 68.47 )
+
+	local.origin[5] = ( 3464.87 12.66 -19.88 )
+
+	local.origin[6] = ( 1505.73 504.79 248.13 )
+
+	local.origin[7] = ( 1620.95 671.13 248.13 )
+
+	local.origin[8] = ( 441.95 893.73 -11.87 )
+
+	local.origin[9] = ( -819.80 1037.98 -95.88 )
+
+	local.origin[10] = ( 1020.87 388.87 148.13 )
+end  local.origin

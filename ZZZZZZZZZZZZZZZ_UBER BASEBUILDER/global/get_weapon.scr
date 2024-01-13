@@ -1,0 +1,16 @@
+main:
+
+	self weaponcommand dual targetname ("weapon" + self.entnum)
+	local.weapon = $("weapon" + self.entnum )
+
+	if(local.weapon != NULL)
+	{
+		self.weapon = local.weapon.model
+		local.weapon targetname ""
+	}
+	else
+	{
+		self.weapon = "models/weapons/unarmed.tik"
+	}
+
+end 

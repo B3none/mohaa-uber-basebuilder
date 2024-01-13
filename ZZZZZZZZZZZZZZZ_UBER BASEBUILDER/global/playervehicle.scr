@@ -1,0 +1,244 @@
+main local.model local.desmodel local.origin local.angles local.health:
+
+local.vehicle = spawn local.model
+local.vehicle.origin = local.origin
+local.vehicle.angles = local.angles
+local.vehicle.desmodel = local.desmodel
+local.vehicle.health = local.health
+local.vehicle.gun = local.vehicle queryturretslotentity 0
+
+local.vehicle thread resetvehicle
+local.vehicle thread vehicledamage
+local.vehicle thread vehicledeath
+
+if(local.vehicle.gun != NIL)
+	local.vehicle.gun remove
+
+local.master = spawn scriptmaster
+
+local.master aliascache sdkfz_snd_idle sound/vehicle/veh_track_idle.wav soundparms 0.5 0.0 1.0 0.0 800 4000 auto loaded maps "0 1 2 3 4 5 6 7 8 9 a b c d e f g h i j k l m n o p q r s t u v w x y z"
+local.master aliascache sdkfz_snd_run sound/vehicle/veh_track_move.wav soundparms 1.5 0.0 1.0 0.0 1000 6000 auto loaded maps "0 1 2 3 4 5 6 7 8 9 a b c d e f g h i j k l m n o p q r s t u v w x y z"
+local.master aliascache sdkfz_snd_idle sound/vehicle/veh_track_on.wav soundparms 1.5 0.0 1.0 0.0 1000 5000 auto loaded maps "0 1 2 3 4 5 6 7 8 9 a b c d e f g h i j k l m n o p q r s t u v w x y z"
+local.master aliascache sdkfz_snd_revup sound/vehicle/veh_track_revup.wav soundparms 1.0 0.0 1.0 0.0 800 4000 auto loaded maps "0 1 2 3 4 5 6 7 8 9 a b c d e f g h i j k l m n o p q r s t u v w x y z"
+local.master aliascache sdkfz_snd_revdown sound/vehicle/veh_track_revdown.wav soundparms 1.0 0.0 1.0 0.0 800 4000 auto loaded maps "0 1 2 3 4 5 6 7 8 9 a b c d e f g h i j k l m n o p q r s t u v w x y z"
+local.master aliascache sdkfz_snd_shift1 sound/vehicle/veh_track_shiftin.wav soundparms 1.0 0.0 1.0 0.0 800 4000 auto loaded maps "0 1 2 3 4 5 6 7 8 9 a b c d e f g h i j k l m n o p q r s t u v w x y z"
+local.master aliascache sdkfz_snd_shift2 sound/vehicle/veh_track_shiftout.wav soundparms 1.0 0.0 1.0 0.0 800 4000 auto loaded maps "0 1 2 3 4 5 6 7 8 9 a b c d e f g h i j k l m n o p q r s t u v w x y z"
+local.master aliascache sdkfz_snd_on sound/vehicle/veh_track_on.wav soundparms 1.0 0.0 1.0 0.0 800 4000 auto loaded maps "0 1 2 3 4 5 6 7 8 9 a b c d e f g h i j k l m n o p q r s t u v w x y z"
+local.master aliascache sdkfz_snd_start sound/vehicle/veh_track_on.wav soundparms 1.0 0.0 1.0 0.0 800 4000 auto loaded maps "0 1 2 3 4 5 6 7 8 9 a b c d e f g h i j k l m n o p q r s t u v w x y z"
+local.master aliascache sdkfz_snd_off sound/vehicle/veh_track_off.wav soundparms 1.0 0.0 1.0 0.0 800 4000 auto loaded maps "0 1 2 3 4 5 6 7 8 9 a b c d e f g h i j k l m n o p q r s t u v w x y z"
+local.master aliascache sdkfz_snd_stop sound/vehicle/veh_track_off.wav soundparms 1.5 0.0 1.0 0.0 1000 6000 auto loaded maps "0 1 2 3 4 5 6 7 8 9 a b c d e f g h i j k l m n o p q r s t u v w x y z"
+local.master aliascache sdkfz_tread_snd_dirt sound/vehicle/veh_tread_grass.wav soundparms 0.25 0.0 1.0 0.0 800 4000 auto loaded maps "0 1 2 3 4 5 6 7 8 9 a b c d e f g h i j k l m n o p q r s t u v w x y z"
+local.master aliascache sdkfz_tread_snd_stone sound/vehicle/veh_tread_metal.wav soundparms 0.25 0.0 1.0 0.0 800 4000 auto loaded maps "0 1 2 3 4 5 6 7 8 9 a b c d e f g h i j k l m n o p q r s t u v w x y z"
+local.master aliascache sdkfz_tread_snd_grass sound/vehicle/veh_tread_grass.wav soundparms 0.25 0.0 1.0 0.0 800 4000 auto loaded maps "0 1 2 3 4 5 6 7 8 9 a b c d e f g h i j k l m n o p q r s t u v w x y z"
+local.master aliascache sdkfz_tread_snd_wood sound/vehicle/veh_tread_metal.wav soundparms 0.25 0.0 1.0 0.0 800 4000 auto loaded maps "0 1 2 3 4 5 6 7 8 9 a b c d e f g h i j k l m n o p q r s t u v w x y z"
+local.master aliascache sdkfz_tread_snd_mud sound/vehicle/veh_tread_grass.wav soundparms 0.25 0.0 1.0 0.0 800 4000 auto loaded maps "0 1 2 3 4 5 6 7 8 9 a b c d e f g h i j k l m n o p q r s t u v w x y z"
+local.master aliascache jeep_snd_idle sound/vehicle/veh_jeep_idle.wav soundparms 0.5 0.0 1.0 0.0 800 4000 auto loaded maps "0 1 2 3 4 5 6 7 8 9 a b c d e f g h i j k l m n o p q r s t u v w x y z"
+local.master aliascache jeep_snd_run sound/vehicle/veh_jeep_move.wav soundparms 0.8 0.0 1.0 0.0 800 4000 auto loaded maps "0 1 2 3 4 5 6 7 8 9 a b c d e f g h i j k l m n o p q r s t u v w x y z"
+local.master aliascache jeep_snd_revup sound/vehicle/veh_jeep_start.wav soundparms 1.2 0.0 1.0 0.0 800 4000 auto loaded maps "0 1 2 3 4 5 6 7 8 9 a b c d e f g h i j k l m n o p q r s t u v w x y z"
+local.master aliascache jeep_snd_revdown sound/vehicle/veh_jeep_revdown.wav soundparms 1.0 0.0 1.0 0.0 800 4000 auto loaded maps "0 1 2 3 4 5 6 7 8 9 a b c d e f g h i j k l m n o p q r s t u v w x y z"
+local.master aliascache jeep_snd_shift1 sound/vehicle/veh_jeep_shiftin.wav soundparms 1.0 0.0 1.0 0.0 800 4000 auto loaded maps "0 1 2 3 4 5 6 7 8 9 a b c d e f g h i j k l m n o p q r s t u v w x y z"
+local.master aliascache jeep_snd_shift2 sound/vehicle/veh_jeep_shiftout.wav soundparms 1.0 0.0 1.0 0.0 800 4000 auto loaded maps "0 1 2 3 4 5 6 7 8 9 a b c d e f g h i j k l m n o p q r s t u v w x y z"
+local.master aliascache jeep_snd_on sound/vehicle/veh_jeep_start.wav soundparms 1.0 0.0 1.0 0.0 800 4000 auto loaded maps "0 1 2 3 4 5 6 7 8 9 a b c d e f g h i j k l m n o p q r s t u v w x y z"
+local.master aliascache jeep_snd_start sound/vehicle/veh_jeep_on.wav soundparms 1.0 0.0 1.0 0.0 800 4000 auto loaded maps "0 1 2 3 4 5 6 7 8 9 a b c d e f g h i j k l m n o p q r s t u v w x y z"
+local.master aliascache jeep_snd_off sound/vehicle/veh_jeep_off.wav soundparms 1.5 0.0 1.0 0.0 800 4000 auto loaded maps "0 1 2 3 4 5 6 7 8 9 a b c d e f g h i j k l m n o p q r s t u v w x y z"
+local.master aliascache jeep_snd_stop sound/vehicle/veh_jeep_off.wav soundparms 1.5 0.0 1.0 0.0 800 4000 auto loaded maps "0 1 2 3 4 5 6 7 8 9 a b c d e f g h i j k l m n o p q r s t u v w x y z"
+local.master aliascache jeep_snd_doorclose sound/mechanics/DoorJeepClose_02.wav soundparms 1.2 0.0 1.0 0.0 800 4000 auto loaded maps "0 1 2 3 4 5 6 7 8 9 a b c d e f g h i j k l m n o p q r s t u v w x y z"
+local.master aliascache jeep_tread_snd_dirt sound/vehicle/veh_tread_grass.wav soundparms 0.28 0.0 1.0 0.0 800 4000 auto loaded maps "0 1 2 3 4 5 6 7 8 9 a b c d e f g h i j k l m n o p q r s t u v w x y z"
+local.master aliascache jeep_tread_snd_stone sound/vehicle/veh_tread_grass.wav soundparms 0.28 0.0 1.0 0.0 800 4000 auto loaded maps "0 1 2 3 4 5 6 7 8 9 a b c d e f g h i j k l m n o p q r s t u v w x y z"
+local.master aliascache jeep_tread_snd_grass sound/vehicle/veh_tread_grass.wav soundparms 0.28 0.0 1.0 0.0 800 4000 auto loaded maps "0 1 2 3 4 5 6 7 8 9 a b c d e f g h i j k l m n o p q r s t u v w x y z"
+local.master aliascache jeep_tread_snd_wood sound/vehicle/veh_tread_grass.wav soundparms 0.28 0.0 1.0 0.0 800 4000 auto loaded maps "0 1 2 3 4 5 6 7 8 9 a b c d e f g h i j k l m n o p q r s t u v w x y z"
+local.master aliascache jeep_tread_snd_mud sound/vehicle/veh_tread_grass.wav soundparms 2.8 0.0 1.0 0.0 800 4000 auto loaded maps "0 1 2 3 4 5 6 7 8 9 a b c d e f g h i j k l m n o p q r s t u v w x y z"
+local.master aliascache snd_idle sound/vehicle/veh_jeep_idle.wav soundparms 0.5 0.0 1.0 0.0 800 4000 auto loaded maps "0 1 2 3 4 5 6 7 8 9 a b c d e f g h i j k l m n o p q r s t u v w x y z"
+local.master aliascache snd_run sound/vehicle/veh_jeep_move.wav soundparms 0.8 0.0 1.0 0.0 800 4000 auto loaded maps "0 1 2 3 4 5 6 7 8 9 a b c d e f g h i j k l m n o p q r s t u v w x y z"
+local.master aliascache snd_revup sound/vehicle/veh_jeep_start.wav soundparms 1.2 0.0 1.0 0.0 800 4000 auto loaded maps "0 1 2 3 4 5 6 7 8 9 a b c d e f g h i j k l m n o p q r s t u v w x y z"
+local.master aliascache snd_revdown sound/vehicle/veh_jeep_revdown.wav soundparms 1.0 0.0 1.0 0.0 800 4000 auto loaded maps "0 1 2 3 4 5 6 7 8 9 a b c d e f g h i j k l m n o p q r s t u v w x y z"
+local.master aliascache snd_shift1 sound/vehicle/veh_jeep_shiftin.wav soundparms 1.0 0.0 1.0 0.0 800 4000 auto loaded maps "0 1 2 3 4 5 6 7 8 9 a b c d e f g h i j k l m n o p q r s t u v w x y z"
+local.master aliascache snd_shift2 sound/vehicle/veh_jeep_shiftout.wav soundparms 1.0 0.0 1.0 0.0 800 4000 auto loaded maps "0 1 2 3 4 5 6 7 8 9 a b c d e f g h i j k l m n o p q r s t u v w x y z"
+local.master aliascache snd_on sound/vehicle/veh_jeep_start.wav soundparms 1.0 0.0 1.0 0.0 800 4000 auto loaded maps "0 1 2 3 4 5 6 7 8 9 a b c d e f g h i j k l m n o p q r s t u v w x y z"
+local.master aliascache snd_start sound/vehicle/veh_jeep_on.wav soundparms 1.0 0.0 1.0 0.0 800 4000 auto loaded maps "0 1 2 3 4 5 6 7 8 9 a b c d e f g h i j k l m n o p q r s t u v w x y z"
+local.master aliascache snd_off sound/vehicle/veh_jeep_off.wav soundparms 1.5 0.0 1.0 0.0 800 4000 auto loaded maps "0 1 2 3 4 5 6 7 8 9 a b c d e f g h i j k l m n o p q r s t u v w x y z"
+local.master aliascache snd_stop sound/vehicle/veh_jeep_off.wav soundparms 1.5 0.0 1.0 0.0 800 4000 auto loaded maps "0 1 2 3 4 5 6 7 8 9 a b c d e f g h i j k l m n o p q r s t u v w x y z"
+local.master aliascache snd_doorclose sound/mechanics/DoorJeepClose_02.wav soundparms 1.2 0.0 1.0 0.0 800 4000 auto loaded maps "0 1 2 3 4 5 6 7 8 9 a b c d e f g h i j k l m n o p q r s t u v w x y z"
+local.master aliascache tread_snd_dirt sound/vehicle/veh_tread_grass.wav soundparms 0.28 0.0 1.0 0.0 800 4000 auto loaded maps "0 1 2 3 4 5 6 7 8 9 a b c d e f g h i j k l m n o p q r s t u v w x y z"
+local.master aliascache tread_snd_stone sound/vehicle/veh_tread_grass.wav soundparms 0.28 0.0 1.0 0.0 800 4000 auto loaded maps "0 1 2 3 4 5 6 7 8 9 a b c d e f g h i j k l m n o p q r s t u v w x y z"
+local.master aliascache tread_snd_grass sound/vehicle/veh_tread_grass.wav soundparms 0.28 0.0 1.0 0.0 800 4000 auto loaded maps "0 1 2 3 4 5 6 7 8 9 a b c d e f g h i j k l m n o p q r s t u v w x y z"
+local.master aliascache tread_snd_wood sound/vehicle/veh_tread_grass.wav soundparms 0.28 0.0 1.0 0.0 800 4000 auto loaded maps "0 1 2 3 4 5 6 7 8 9 a b c d e f g h i j k l m n o p q r s t u v w x y z"
+local.master aliascache tread_snd_mud sound/vehicle/veh_tread_grass.wav soundparms 2.8 0.0 1.0 0.0 800 4000 auto loaded maps "0 1 2 3 4 5 6 7 8 9 a b c d e f g h i j k l m n o p q r s t u v w x y z"
+local.master aliascache opeltruck_snd_idle sound/vehicle/veh_truck_idle.wav soundparms 0.7 0.0 1.0 0.0 300 7000 auto loaded maps "0 1 2 3 4 5 6 7 8 9 a b c d e f g h i j k l m n o p q r s t u v w x y z"
+local.master aliascache opeltruck_snd_run sound/vehicle/veh_truck_move.wav soundparms 1.2 0.0 1.0 0.0 600 4000 auto loaded maps "0 1 2 3 4 5 6 7 8 9 a b c d e f g h i j k l m n o p q r s t u v w x y z"
+local.master aliascache opeltruck_snd_revup sound/vehicle/veh_truck_revup.wav soundparms 1.0 0.0 1.0 0.0 100 4000 auto loaded maps "0 1 2 3 4 5 6 7 8 9 a b c d e f g h i j k l m n o p q r s t u v w x y z"
+local.master aliascache opeltruck_snd_revdown sound/vehicle/veh_truck_revdown.wav soundparms 1.0 0.0 1.0 0.0 100 4000 auto loaded maps "0 1 2 3 4 5 6 7 8 9 a b c d e f g h i j k l m n o p q r s t u v w x y z"
+local.master aliascache opeltruck_snd_shift1 sound/vehicle/veh_truck_shiftin.wav soundparms 1.0 0.0 1.0 0.0 200 4000 auto loaded maps "0 1 2 3 4 5 6 7 8 9 a b c d e f g h i j k l m n o p q r s t u v w x y z"
+local.master aliascache opeltruck_snd_shift2 sound/vehicle/veh_truck_shiftout.wav soundparms 1.0 0.0 1.0 0.0 200 4000 auto loaded maps "0 1 2 3 4 5 6 7 8 9 a b c d e f g h i j k l m n o p q r s t u v w x y z"
+local.master aliascache opeltruck_snd_on sound/vehicle/veh_truck_on.wav soundparms 1.0 0.0 1.0 0.0 100 4000 auto loaded maps "0 1 2 3 4 5 6 7 8 9 a b c d e f g h i j k l m n o p q r s t u v w x y z"
+local.master aliascache opeltruck_snd_start sound/vehicle/veh_truck_on.wav soundparms 1.0 0.0 1.0 0.0 100 4000 auto loaded maps "0 1 2 3 4 5 6 7 8 9 a b c d e f g h i j k l m n o p q r s t u v w x y z"
+local.master aliascache opeltruck_snd_off sound/vehicle/veh_truck_off.wav soundparms 1.0 0.0 1.0 0.0 100 4000 auto loaded maps "0 1 2 3 4 5 6 7 8 9 a b c d e f g h i j k l m n o p q r s t u v w x y z"
+local.master aliascache opeltruck_snd_stop sound/vehicle/veh_truck_off.wav soundparms 1.0 0.0 1.0 0.0 100 4000 auto loaded maps "0 1 2 3 4 5 6 7 8 9 a b c d e f g h i j k l m n o p q r s t u v w x y z"
+local.master aliascache opeltruck_tread_snd_dirt sound/vehicle/veh_tread_grass.wav soundparms 0.25 0.0 1.0 0.0 600 4000 auto loaded maps "0 1 2 3 4 5 6 7 8 9 a b c d e f g h i j k l m n o p q r s t u v w x y z"
+local.master aliascache opeltruck_tread_snd_stone sound/vehicle/veh_tread_grass.wav soundparms 0.25 0.0 1.0 0.0 600 4000 auto loaded maps "0 1 2 3 4 5 6 7 8 9 a b c d e f g h i j k l m n o p q r s t u v w x y z"
+local.master aliascache opeltruck_tread_snd_grass sound/vehicle/veh_tread_grass.wav soundparms 0.25 0.0 1.0 0.0 600 4000 auto loaded maps "0 1 2 3 4 5 6 7 8 9 a b c d e f g h i j k l m n o p q r s t u v w x y z"
+local.master aliascache opeltruck_tread_snd_wood sound/vehicle/veh_tread_grass.wav soundparms 0.25 0.0 1.0 0.0 600 4000 auto loaded maps "0 1 2 3 4 5 6 7 8 9 a b c d e f g h i j k l m n o p q r s t u v w x y z"
+local.master aliascache opeltruck_tread_snd_mud sound/vehicle/veh_tread_grass.wav soundparms 0.25 0.0 1.0 0.0 600 4000 auto loaded maps "0 1 2 3 4 5 6 7 8 9 a b c d e f g h i j k l m n o p q r s t u v w x y z"
+local.master aliascache opeltruck_snd_doorclose sound/mechanics/DoorJeepClose_02.wav soundparms 1.0 0.0 1.0 0.0 400 4000 auto loaded maps "0 1 2 3 4 5 6 7 8 9 a b c d e f g h i j k l m n o p q r s t u v w x y z"
+local.master aliascache opeltruck_snd_dooropen sound/mechanics/DoorJeepOpen_01.wav soundparms 1.0 0.0 1.0 0.0 400 4000 auto loaded maps "0 1 2 3 4 5 6 7 8 9 a b c d e f g h i j k l m n o p q r s t u v w x y z"
+local.master aliascache explode_truck1 sound/weapons/explo/Explo_MetalMed1.wav soundparms 1.2 0.2 0.8 0.2 1500 8000 weapon loaded maps "0 1 2 3 4 5 6 7 8 9 a b c d e f g h i j k l m n o p q r s t u v w x y z"
+local.master aliascache explode_truck2 sound/weapons/explo/Explo_MetalMed2.wav soundparms 1.2 0.2 0.8 0.2 1500 8000 weapon loaded maps "0 1 2 3 4 5 6 7 8 9 a b c d e f g h i j k l m n o p q r s t u v w x y z"
+local.master aliascache explode_truck3 sound/weapons/explo/Explo_MetalMed3.wav soundparms 1.2 0.2 0.8 0.2 1500 8000 weapon loaded maps "0 1 2 3 4 5 6 7 8 9 a b c d e f g h i j k l m n o p q r s t u v w x y z"
+local.master aliascache explode_truck4 sound/weapons/explo/Explo_MetalMed4.wav soundparms 1.2 0.2 0.8 0.2 1500 8000 weapon loaded maps "0 1 2 3 4 5 6 7 8 9 a b c d e f g h i j k l m n o p q r s t u v w x y z"
+local.master aliascache explode_truck5 sound/weapons/explo/Explo_MetalMed5.wav soundparms 1.2 0.2 0.8 0.2 1500 8000 weapon loaded maps "0 1 2 3 4 5 6 7 8 9 a b c d e f g h i j k l m n o p q r s t u v w x y z"
+
+end
+
+resetvehicle:
+
+local.trig = spawn trigger_useonce
+local.trig.origin = self.origin
+local.trig glue self
+local.trig setsize ( -100 -100 -5 ) ( 100 100 100 )
+local.trig waittill trigger
+
+thread playergetin
+
+end
+
+playergetin:
+
+self.driver = parm.other
+
+local.team = self.driver.dmteam
+
+self.driver safeholster 1
+wait 1
+self.driver hide
+self.driver nodamage
+self.driver notsolid
+
+self attachdriverslot 0 self.driver
+
+while(self.driver != NIL)
+{
+	self.driver.viewangles = self.angles + ( 10 0 0 )
+
+	if(self.driver.fireheld)
+		self.driver.viewangles = self.angles + ( 10 180 0 )
+
+	if(self.driver.useheld)
+	{
+		while(self.driver.useheld)
+		{
+			self.driver.viewangles = self.angles + ( 10 0 0 )
+			waitframe
+		}
+
+		self.driver show
+		self.driver solid
+		self.driver takedamage
+
+		self detachdriverslot 0 self.driver
+
+		self.driver.origin = self.origin + ( 0 0 150 )
+		self.driver.viewangles = (self.driver.viewangles[0] self.driver.viewangles[1] 0)
+		self.driver = NIL
+
+		thread resetvehicle
+	}
+
+	if(self.driver.dmteam == spectator)
+	{
+		local.vehicle = spawn self.model
+		local.vehicle.origin = self.origin
+		local.vehicle.angles = self.angles
+		local.vehicle.desmodel = self.desmodel
+		local.vehicle.health = self.health
+		local.vehicle.gun = local.vehicle queryturretslotentity 0
+
+		local.vehicle.gun remove
+
+		local.vehicle thread resetvehicle
+		local.vehicle thread vehicledamage
+		local.vehicle thread vehicledeath
+
+		self detachdriverslot 0 self.driver
+
+		self.driver = NIL
+
+		self remove
+	}
+
+	if(self.driver.dmteam != local.team)
+	{
+		local.vehicle = spawn self.model
+		local.vehicle.origin = self.origin
+		local.vehicle.angles = self.angles
+		local.vehicle.desmodel = self.desmodel
+		local.vehicle.health = self.health
+		local.vehicle.gun = local.vehicle queryturretslotentity 0
+
+		local.vehicle.gun remove
+
+		local.vehicle thread resetvehicle
+		local.vehicle thread vehicledamage
+		local.vehicle thread vehicledeath
+
+		self detachdriverslot 0 self.driver
+
+		self.driver stufftext "reconnect"
+		self.driver = NIL
+
+		self remove
+	}
+	waitframe
+}
+
+end
+
+vehicledamage:
+
+while(isalive self)
+{
+	local.previoushealth = self.health
+
+	if (self.health < local.previoushealth)
+	{
+		self playsound damage_tank
+		exec global/earthquake.scr .2 4 0 0
+	}
+	waitframe
+}
+
+end
+
+vehicledeath:
+
+self waittill death
+self playsound explode_tank
+
+local.desvehicle = spawn script_model
+local.desvehicle model self.desmodel
+local.desvehicle.origin = self.origin
+local.desvehicle.angles = self.angles
+
+if(self.driver != NIL)
+{
+	self.driver show
+	self.driver solid
+	self.driver takedamage
+
+	self detachdriverslot 0 self.driver
+
+	self.driver volumedamage 1000
+	self.driver = NIL
+}
+
+self remove
+
+local.boom = spawn script_model
+local.boom model emitters/explosion_tank.tik
+local.boom.origin = local.desvehicle.origin
+local.boom.angles = local.desvehicle.angles
+local.boom anim start
+radiusdamage local.boom.origin 640 384
+waitframe
+local.boom remove
+
+end

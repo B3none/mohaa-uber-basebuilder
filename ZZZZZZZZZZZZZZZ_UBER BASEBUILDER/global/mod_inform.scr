@@ -1,0 +1,44 @@
+//This script basicaly is to replace the camper mod on message. The admin can tell what mods are on and off so he does not need it.
+//however the players might like to know, so this gives a neater hud draw version to all the players at the start of the map.
+
+// Called from ambient.scr after level wait till spawn. Or from anti_camper.scr if the AP mod is not loaded right.
+
+main local.msg:
+
+	if(game.show_on_mods == 1)
+	{
+		wait 1
+		huddraw_align 80 "right" "bottom"
+		huddraw_alpha 80 1.0
+		huddraw_virtualsize 80 1 
+		huddraw_rect 80 -115 -15 0 0
+		huddraw_color 80 1 0 1
+		huddraw_font 80 verdana-12
+
+		if(local.msg == NIL)
+		{
+			for(local.i = 1;local.i <= game.scripts.size;local.i++)
+			{
+				if(game.scripts[local.i][2] == "1")
+				{
+					local.msg = ( game.scripts[local.i][1] + " " + "On")
+				}
+				else
+				{
+					local.msg = ( game.scripts[local.i][1] + " " + "Off")
+				}
+
+				huddraw_string 80 local.msg 
+
+				wait 1
+			}
+		}
+		else
+		{
+			huddraw_string 80 local.msg 
+			wait 1
+		}
+
+		huddraw_alpha 80 0
+	}
+end

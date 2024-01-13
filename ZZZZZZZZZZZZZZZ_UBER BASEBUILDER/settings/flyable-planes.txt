@@ -1,0 +1,52 @@
+// If you are going to limit the planes in the air "use-teams must be set to "1"
+
+
+main:
+	local.planesettings = makearray
+		"maxspeed"		"90000"		"Max speed of the aircraft"
+		"minspeed"		"0"		"minimum speed of the aircraft"
+		"startspeed"		"350-550" 	"Speed the aircraft starts with"
+		"plane-bombs"		"4"		"Amount of bombs the plane has"
+		"rockets"		"4"		"Plane rocket ammo count"
+		"eject"			"1"		"if 1 the player can eject if 0 they cant."
+		"acceleration"		"20"		"Amount of acceleration upon key press"
+		"deceleration"		"20"		"Amount of deceleration upon key press"
+		"plane-hit-dmg"	 	"15"		"Amount of damage a plane takes when shot (any weapon)"
+		"max-axis"		"0"		"Amount of axis planes allowed in the air at one time, 0 = Dont care"
+		"max-allies"		"0"		"Amount of allies planes allowed in the air at one time, 0 = Dont care"	
+		"trig-delay"		"5"		"Delay to wait after a trigger has been used to re-activate it"
+		"use-teams"		"0"		"If not set 1 any team can use any trigger else a team can only use triggers that link to that team"
+		"plane-bots-damage"		"1000"    "Amount of damage a plane takes when shot by bots(any weapon)"
+	endarray
+
+end local.planesettings
+
+instructions:
+
+	local.instructions = makearray
+	//message							//duration in seconds
+		"You are about to start flying a plane." 			1.5
+		"YOU CAN END THIS MESSAGE BY HOLDING USE." 			1
+		"This prints each time you first fly a plane on a map" 		1.5
+		" "								0.5
+		"Use your mouse to steer the plane" 				1.5
+		"Forward run - Speed up"					1.5
+		"Backward run - Slow down" 					1.5
+		"Left run - Roll left" 						1.5
+		"Right run - Roll right"					1.5
+		"Forward walk - Cam forward" 					1.5
+		"Backward walk - Cam back" 					1.5
+		"Left run - Cam up"						1.5
+		"Right run - Cam down"						1.5
+ 		"USE- Change weapon" 						1.5
+		"Primary fire = Shoot" 						1.5
+		"Secondary fire = drop bomb" 					1.5
+		"Jump = Bail out" 						1.5
+		" "								0.5
+		 "Your about to start flying" 					1.5
+		"3" 								1
+		"2" 								1
+		"1"								1
+	endarray		
+
+end local.instructions

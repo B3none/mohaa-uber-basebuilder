@@ -1,0 +1,6 @@
+main:
+	if(level.run["jetpacks"] == "1")
+	{
+		self exec jetpack/airtank.scr
+	}
+end

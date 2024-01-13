@@ -1,0 +1,245 @@
+// Script for adding on air tank to a playee
+
+main:
+
+	//set max fuel
+	level.jetpack_max_fuel  = 250
+
+	//end if we have a jetpack
+	if(self.using_pack == 1)
+	{
+		end
+	}
+
+	//set using jetpack
+	self.using_pack = 1
+
+
+	//Inform them on how to use the damn thing
+	self iprint "Jump and hold USE(E) to use the jetpack"
+	self iprint "Hold use key with a direction key to boost in that direction"
+
+
+	//think i whent a little bit over the top here(A)
+	local.model = "models/static/static_airtank.tik"
+
+	self attachmodel local.model "Bip01 Spine" 0.5 ("Pairtank" + self.entnum ) 1 -1 -1 -1 -1 ( 25 -5 3 )
+	$("Pairtank" + self.entnum ).angles = ( 270 0 4 )
+      	
+	self attachmodel local.model "Bip01 Spine" 0.5 ("Pairtank2" + self.entnum ) 1 -1 -1 -1 -1 ( 25 -5 -4 )
+	$("Pairtank2" + self.entnum ).angles = ( 270 0 3 )
+
+	 /* causes vertex error , looks gd but cant be botherd with spam
+	local.model = "models/static/switch2.tik"
+
+ 	self attachmodel local.model "Bip01 Spine" 0.5 "airswitch2" 1 -1 -1 -1 -1 ( 15 -5 -1 )
+	$airswitch2.angles = ( 180 90 90 )
+
+	local.model = "models/static/switch1.tik"	   
+
+ 	self attachmodel local.model "Bip01 Spine" 0.5 "airswitch" 1 -1 -1 -1 -1 ( 21 -7 -1 )
+	$airswitch.angles = ( 180 90 90 )
+	*/
+
+	local.model = "emitters/pipe_steam.tik"
+ 	self attachmodel local.model "Bip01 Spine" 0.1 ("tankemitter" + self.entnum ) 1 -1 -1 -1 -1 ( 0 -10 3 )
+	$("tankemitter" + self.entnum ).angles = ( -15 -180 0 )
+										    
+	local.model = "emitters/pipe_steam.tik"
+ 	self attachmodel local.model "Bip01 Spine" 0.1 ("tankemitter2" + self.entnum ) 1 -1 -1 -1 -1 ( 0 -10 -4 )
+	$("tankemitter2" + self.entnum ).angles = ( 15 -180 0 )
+				 
+	local.smoke  = $("tankemitter" + self.entnum )
+	local.smoke2 = $("tankemitter2" + self.entnum )
+	$("Pairtank" + self.entnum ).smoke = ( local.smoke::local.smoke2 )
+	
+	//associate these models with the tank so we can delete them all later
+	//$Pairtank.switches = ( 	$airswitch2::$airswitch )
+	
+	//associate the second tank with first.
+	$("Pairtank" + self.entnum ).twin = $("Pairtank2" + self.entnum )
+	
+	//associate these models with the player
+	self.jetpack = $("Pairtank" + self.entnum )
+
+	//display a widget statebar fuel hud
+	thread display
+		 
+end	
+
+display:
+
+	if(game.game != "AA")
+	{
+		thread display_sh
+		end
+	}
+
+	self stufftext "globalwidgetcommand dday1 shader townhallwindow"
+	self stufftext "globalwidgetcommand dday1 fgcolor 1.00 1.00 1.00 1.00"
+	self stufftext "globalwidgetcommand dday1 bgcolor 0.50 0.50 0.50 0.00"
+	self stufftext "globalwidgetcommand dday1 fadein 0"
+	self stufftext "globalwidgetcommand dday1 menu dday1 640 480 NONE 0"
+	self stufftext "globalwidgetcommand dday1 virtualres 1" 
+	self stufftext "globalwidgetcommand dday1 fullscreen 1" 
+
+	self stufftext "globalwidgetcommand june6 borderstyle NONE"
+	self stufftext "globalwidgetcommand june6 shader textures/hud/healthback"
+	self stufftext "globalwidgetcommand june6 rect 16 420 16 64"
+	self stufftext "globalwidgetcommand june6 fgcolor 1.00 1.00 1.00 1.00"
+	self stufftext "globalwidgetcommand june6 bgcolor 0.00 0.00 0.00 0.00"
+	self stufftext "globalwidgetcommand june6 linkcvar fuel"
+	self stufftext ("globalwidgetcommand june6 statbar vertical 0 " + level.jetpack_max_fuel )
+	self stufftext "globalwidgetcommand june6 statbar_shader textures/hud/healthmeter"
+	self stufftext "globalwidgetcommand june6 statbar_shader_flash textures/hud/healthmeterflash"
+
+
+	self stufftext "globalwidgetcommand dday2 fgcolor 1.00 1.00 1.00 1.00"
+	self stufftext "globalwidgetcommand dday2 bgcolor 0.50 0.50 0.50 0.00"
+	self stufftext "globalwidgetcommand dday2 fadein 0"
+	self stufftext "globalwidgetcommand dday2 menu dday2 640 480 NONE 0"
+	self stufftext "globalwidgetcommand dday2 virtualres 1" 
+	self stufftext "globalwidgetcommand dday2 fullscreen 1" 
+
+	self stufftext "globalwidgetcommand charliesector borderstyle NONE"
+	self stufftext "globalwidgetcommand charliesector textalign left " 
+	self stufftext "globalwidgetcommand charliesector rect 40 470 150 20"
+	self stufftext "globalwidgetcommand charliesector fgcolor 0.70 0.60 0.05 1.00"
+	self stufftext "globalwidgetcommand charliesector bgcolor 0.00 0.00 0.00 0.00"
+	self stufftext "globalwidgetcommand charliesector linkcvar fuel"
+	self stufftext "globalwidgetcommand charliesector font facfont-20"
+	self stufftext "globalwidgetcommand charliesector shader townhallwindow"
+
+	//clear things just incase
+	self stufftext "hidemenu credits1"
+	self stufftext "globalwidgetcommand credits2 name credits1"
+	//now we deal with credits1
+	waitframe
+	//setup credits to use the inner credits1
+	//first setup the credits1
+	self stufftext "globalwidgetcommand credits1 align left bottom" 
+	//self stufftext "globalwidgetcommand credits1 virtualres 1" 
+	//self stufftext "globalwidgetcommand credits1 fullscreen 1" 
+	//self stufftext "globalwidgetcommand credits1 rect 0 0 640 480"
+	//self stufftext "globalwidgetcommand credits1 fgcolor 0.00 0.00 0.00 0.00"
+	//self stufftext "globalwidgetcommand credits1 bgcolor 0.00 0.00 0.00 0.00"
+	//change outer name to credits2
+	self stufftext "globalwidgetcommand credits1 name credits2"	
+	
+
+
+	//now we can change the inner credits1
+	waitframe
+
+	self stufftext "globalwidgetcommand credits1 fgcolor 0.00 0.00 0.00 0.00"
+	self stufftext "globalwidgetcommand credits1 bgcolor 0.00 0.00 0.00 0.00"
+	self stufftext "globalwidgetcommand credits1 shader townhallwindow"
+	self stufftext "globalwidgetcommand credits1 textalign left " 
+	self stufftext "globalwidgetcommand credits1 rect 10 270 150 20"
+	self stufftext "globalwidgetcommand credits1 fgcolor 0.70 0.60 0.05 1.00"
+	self stufftext "globalwidgetcommand credits1 bgcolor 0.00 0.00 0.00 0.00"
+	self stufftext "globalwidgetcommand credits1 linkcvar fuel_message"
+	self stufftext "globalwidgetcommand credits1 font facfont-20"
+
+	self stufftext "showmenu dday2"
+	self stufftext "showmenu dday1"
+	self stufftext "showmenu credits1"
+					   
+	self stufftext ("set fuel_message Jetpack")
+	self stufftext ("set fuel " + level.jetpack_max_fuel )
+
+
+end
+
+
+display_sh:
+
+	self stufftext "globalwidgetcommand bastogne1 shader townhallwindow"
+	self stufftext "globalwidgetcommand bastogne1 fgcolor 1.00 1.00 1.00 1.00"
+	self stufftext "globalwidgetcommand bastogne1 bgcolor 0.50 0.50 0.50 0.00"
+	self stufftext "globalwidgetcommand bastogne1 fadein 0"
+	self stufftext "globalwidgetcommand bastogne1 menu bastogne1 640 480 NONE 0"
+	self stufftext "globalwidgetcommand bastogne1 virtualres 1" 
+	self stufftext "globalwidgetcommand bastogne1 fullscreen 1" 
+
+	self stufftext "globalwidgetcommand june6 borderstyle NONE"
+	self stufftext "globalwidgetcommand june6 shader textures/hud/healthback"
+	self stufftext "globalwidgetcommand june6 rect 16 420 16 64"
+	self stufftext "globalwidgetcommand june6 fgcolor 1.00 1.00 1.00 1.00"
+	self stufftext "globalwidgetcommand june6 bgcolor 0.00 0.00 0.00 0.00"
+	self stufftext "globalwidgetcommand june6 linkcvar fuel"
+	self stufftext ("globalwidgetcommand june6 statbar vertical 0 " + level.jetpack_max_fuel )
+	self stufftext "globalwidgetcommand june6 statbar_shader textures/hud/healthmeter"
+	self stufftext "globalwidgetcommand june6 statbar_shader_flash textures/hud/healthmeterflash"
+
+	self stufftext "globalwidgetcommand bastogne2 fgcolor 1.00 1.00 1.00 1.00"
+	self stufftext "globalwidgetcommand bastogne2 bgcolor 0.50 0.50 0.50 0.00"
+	self stufftext "globalwidgetcommand bastogne2 fadein 0"
+	self stufftext "globalwidgetcommand bastogne2 menu dday2 640 480 NONE 0"
+	self stufftext "globalwidgetcommand bastogne2 virtualres 1" 
+	self stufftext "globalwidgetcommand bastogne2 fullscreen 1" 
+
+	self stufftext "globalwidgetcommand charliesector borderstyle NONE"
+	self stufftext "globalwidgetcommand charliesector textalign left " 
+	self stufftext "globalwidgetcommand charliesector rect 40 470 150 20"
+	self stufftext "globalwidgetcommand charliesector fgcolor 0.70 0.60 0.05 1.00"
+	self stufftext "globalwidgetcommand charliesector bgcolor 0.00 0.00 0.00 0.00"
+	self stufftext "globalwidgetcommand charliesector linkcvar fuel"
+	self stufftext "globalwidgetcommand charliesector font facfont-20"
+	self stufftext "globalwidgetcommand charliesector shader townhallwindow"			  
+				 
+	//clear things just incase
+	self stufftext "hidemenu credits1"
+	self stufftext "globalwidgetcommand credits2 name credits1"
+	//now we deal with credits1
+	waitframe
+	//setup credits to use the inner credits1
+	//first setup the credits1
+	self stufftext "globalwidgetcommand credits1 align left bottom" 
+	//self stufftext "globalwidgetcommand credits1 virtualres 1" 
+	//self stufftext "globalwidgetcommand credits1 fullscreen 1" 
+	//self stufftext "globalwidgetcommand credits1 rect 0 0 640 480"
+	//self stufftext "globalwidgetcommand credits1 fgcolor 0.00 0.00 0.00 0.00"
+	//self stufftext "globalwidgetcommand credits1 bgcolor 0.00 0.00 0.00 0.00"
+	//change outer name to credits2
+	self stufftext "globalwidgetcommand credits1 name credits2"	
+	
+
+
+	//now we can change the inner credits1
+	waitframe
+
+	self stufftext "globalwidgetcommand credits1 fgcolor 0.00 0.00 0.00 0.00"
+	self stufftext "globalwidgetcommand credits1 bgcolor 0.00 0.00 0.00 0.00"
+	self stufftext "globalwidgetcommand credits1 shader townhallwindow"
+	self stufftext "globalwidgetcommand credits1 textalign left " 
+	self stufftext "globalwidgetcommand credits1 rect 10 270 150 20"
+	self stufftext "globalwidgetcommand credits1 fgcolor 0.70 0.60 0.05 1.00"
+	self stufftext "globalwidgetcommand credits1 bgcolor 0.00 0.00 0.00 0.00"
+	self stufftext "globalwidgetcommand credits1 linkcvar fuel_message"
+	self stufftext "globalwidgetcommand credits1 font facfont-20"
+
+	self stufftext "showmenu bastogne2"
+	self stufftext "showmenu bastogne1"
+	self stufftext "showmenu credits1"
+					   
+	self stufftext ("set fuel_message Jetpack")
+	self stufftext ("set fuel " + level.jetpack_max_fuel )
+	
+
+end
+
+ // pERFECT FOR ONE
+/*
+main:
+
+
+		iprintln "MODEL"
+	local.model = "models/static/static_airtank.tik"
+
+	self attachmodel local.model "Bip01 Spine" 0.5 "Pairtank" 1 -1 -1 -1 -1 ( 25 -5 0 )
+	$Pairtank.angles = ( 270 0 10 )
+
+	self.jetpack = $Pairtank
+end	
+*/

@@ -1,0 +1,148 @@
+
+
+main:
+
+setcvar "g_obj_alliedtext1" "m5l1b"
+setcvar "g_obj_alliedtext2" "UBER BASEBUILDER by"
+setcvar "g_obj_alliedtext3" "])ar]{Gen.SearingWolfe"
+setcvar "g_obj_axistext1" "be a member at"
+setcvar "g_obj_axistext2" "www.freewebs.com/"
+setcvar "g_obj_axistext3" "mohaa-DarK-clan"
+
+setcvar "g_scoreboardpic" "m5l1b"
+setcvar "g_gametype" "2"
+setcvar "fraglimit" "0"
+setcvar "timelimit" "50"
+
+setcvar "cheats" "1"
+setcvar "thereisnomonkey" "1"
+
+removeclass actor
+level.script = maps/m5l1b.scr
+thread spawns 
+
+exec alienx/basebuild.scr::main 1000 10000
+
+//--------------------------------------------
+//	Axis spawn points
+//--------------------------------------------
+
+spawn info_player_axis "origin" "3226.65 -111.49 384.21" "angle" "58" "targetname" "ax_1"
+spawn info_player_axis "origin" "3226.65 -211.49 384.21" "angle" "30" "targetname" "ax_2"
+spawn info_player_axis "origin" "3226.65 -311.49 384.21" "angle" "7" "targetname" "ax_3"
+spawn info_player_axis "origin" "3226.65 -411.49 384.21" "angle" "99" "targetname" "ax_4"
+spawn info_player_axis "origin" "3226.65 -511.49 384.21" "angle" "3" "targetname" "ax_5"
+spawn info_player_axis "origin" "3226.65 -611.49 384.21" "angle" "162" "targetname" "ax_6"
+spawn info_player_axis "origin" "3226.65 -711.49 384.21" "angle" "-32" "targetname" "ax_7"
+spawn info_player_axis "origin" "3226.65 -811.49 384.21" "angle" "-10" "targetname" "ax_8"
+spawn info_player_axis "origin" "3226.65 -911.49 384.21" "angle" "-7" "targetname" "ax_9"
+spawn info_player_axis "origin" "3226.65 -1011.49 384.21" "angle" "-81" "targetname" "ax_10"
+//------------------------------------------------
+//	Allied spawn points
+//------------------------------------------------
+
+spawn info_player_allied "origin" "-709.12 -5443.37 93.61" "angle" "-179" "targetname" "Al_1"
+spawn info_player_allied "origin" "-809.12 -5443.37 93.61" "angle" "158" "targetname" "Al_2"
+spawn info_player_allied "origin" "-909.12 -5443.37 93.61" "angle" "143" "targetname" "Al_3"
+spawn info_player_allied "origin" "-1009.12 -5443.37 93.61" "angle" "119" "targetname" "Al_4"
+spawn info_player_allied "origin" "-1109.12 -5443.37 93.61" "angle" "130" "targetname" "Al_5"
+spawn info_player_allied "origin" "-1209.12 -5443.37 93.61" "angle" "101" "targetname" "Al_6"
+spawn info_player_allied "origin" "-1309.12 -5443.37 93.61" "angle" "82" "targetname" "Al_7"
+spawn info_player_allied "origin" "-1409.12 -5443.37 93.61" "angle" "58" "targetname" "Al_8"
+spawn info_player_allied "origin" "-1509.12 -5443.37 93.61" "angle" "86" "targetname" "Al_9"
+spawn info_player_allied "origin" "-1609.12 -5443.37 93.61" "angle" "103" "targetname" "Al_10"
+
+
+level waitTill prespawn
+
+//axis
+exec alienx/basebuild.scr::basebuild ( 2959.45 -431.89 381.87 ) "static/indycrate.tik" 1 0 1 0 90 .5 0 0 1
+exec alienx/basebuild.scr::basebuild ( 2959.45 -331.89 381.87 ) "static/indycrate.tik" 1 1 0 1 90 .5 1 0 1
+exec alienx/basebuild.scr::basebuild ( 2959.45 -231.89 381.87 ) "statweapons/mg42_gun.tik" 1 1 0 0 90 .5 0 0 1
+exec alienx/basebuild.scr::basebuild ( 2959.45 -131.89 381.87 ) "static/sandbag_link_main.tik" 1 0 0 1 90 .5 0 0 1
+exec alienx/basebuild.scr::basebuild ( 2959.45 -31.89 381.87 ) "static/bodies_tarp.tik" 1 1 0 1 90 .5 1 0 1
+exec alienx/basebuild.scr::basebuild ( 2959.45 131.89 425.87 ) "static/bunkertable.tik" 1 1 1 0 90 .5 0 1 1
+exec alienx/basebuild.scr::basebuild ( 2959.45 -531.89 381.87 ) "static/barbwire.tik" 1 0 1 1 90 .5 0 0 1
+exec alienx/basebuild.scr::basebuild ( 2959.45 -631.89 381.87 ) "static/cabinet_large.tik" 1 1 1 1 90 .5 0 0 1
+exec alienx/basebuild.scr::basebuild ( 2959.45 -731.89 381.87 ) "static/sandbag_longsegment.tik" 1 1 1 1 90 .2 0 0 1
+exec alienx/basebuild.scr::basebuild ( 2959.45 -831.89 381.87 ) "static/bodies_tarp.tik" 1 1 1 1 90 .5 0 0 1
+exec alienx/basebuild.scr::basebuild ( 2959.45 -931.89 381.87 ) "static/static_naziflag1.tik" 1 1 1 1 90 .2 0 0 1
+exec alienx/basebuild.scr::basebuild ( 2959.45 -1031.89 381.87 ) "static/bookcase.tik" 1 1 0 1 90 .2 0 0 1
+exec alienx/basebuild.scr::basebuild ( 2959.45 -1131.89 381.87 ) "static/bush_full.tik" 1 0 1 1 90 .5 0 0 1end
+exec alienx/basebuild.scr::basebuild ( 2959.45 -1231.89 381.87 ) "static/banquet_table.tik" 1 1 0 0 90 .5 0 0 1
+
+
+//middle
+exec alienx/basebuild.scr::basebuild ( -1410.98 -866.17 440.95 ) "static/indycrate.tik" 1 0 1 0 90 .5 0 0 1
+exec alienx/basebuild.scr::basebuild ( -1410.98 -766.17 440.95 ) "static/indycrate.tik" 1 1 0 1 90 .5 1 0 1
+exec alienx/basebuild.scr::basebuild ( -1410.98 -666.17 440.95 ) "statweapons/mg42_gun.tik" 1 1 0 0 90 .5 0 0 1
+exec alienx/basebuild.scr::basebuild ( -1410.98 -566.17 440.95 ) "static/sandbag_link_main.tik" 1 0 0 1 90 .5 0 0 1
+exec alienx/basebuild.scr::basebuild ( -1410.98 -466.17 440.95 ) "static/bodies_tarp.tik" 1 1 0 1 90 .5 1 0 1
+exec alienx/basebuild.scr::basebuild ( -1410.98 -366.17 440.95 ) "static/bunkertable.tik" 1 1 1 0 90 .5 0 1 1
+exec alienx/basebuild.scr::basebuild ( -1410.98 -266.17 440.95 ) "static/barbwire.tik" 1 0 1 1 90 .5 0 0 1
+exec alienx/basebuild.scr::basebuild ( -1410.98 -166.17 440.95 ) "static/cabinet_large.tik" 1 1 1 1 90 .5 0 0 1
+exec alienx/basebuild.scr::basebuild ( -1410.98 -66.17 440.95 ) "static/sandbag_longsegment.tik" 1 1 1 1 90 .2 0 0 1
+exec alienx/basebuild.scr::basebuild ( -1410.98 166.17 440.95 ) "static/bodies_tarp.tik" 1 1 1 1 90 .5 0 0 1
+exec alienx/basebuild.scr::basebuild ( -1810.98 266.17 440.95 ) "static/static_naziflag1.tik" 1 1 1 1 90 .2 0 0 1
+exec alienx/basebuild.scr::basebuild ( -1510.98 266.17 440.48 ) "static/bookase.tik" 1 1 0 1 90 .2 0 0 1
+exec alienx/basebuild.scr::basebuild ( -1610.98 266.17 440.48 ) "static/bush_full.tik" 1 0 1 1 90 .5 0 0 1end
+exec alienx/basebuild.scr::basebuild ( -1710.98 266.17 440.48 ) "static/banquet_table.tik" 1 1 0 0 90 .5 0 0 1
+
+
+//allies
+exec alienx/basebuild.scr::basebuild ( -435.13 -5263.13 104.12 ) "static/indycrate.tik" 1 0 1 0 90 .5 0 0 1
+exec alienx/basebuild.scr::basebuild ( -435.13 -5463.13 104.12 ) "static/indycrate.tik" 1 1 0 1 90 .5 1 0 1
+exec alienx/basebuild.scr::basebuild ( -435.13 -5563.13 104.12 ) "statweapons/mg42_gun.tik" 1 1 0 0 90 .5 0 0 1
+exec alienx/basebuild.scr::basebuild ( -435.13 -5663.13 104.12 ) "static/sandbag_link_main.tik" 1 0 0 1 90 .5 0 0 1
+exec alienx/basebuild.scr::basebuild ( -435.13 -5763.13 104.12 ) "static/bodies_tarp.tik" 1 1 0 1 90 .5 1 0 1
+exec alienx/basebuild.scr::basebuild ( -435.13 -5863.13 104.12 ) "emitters/fireandsmoke.tik" 1 1 1 0 90 .5 0 1 1
+exec alienx/basebuild.scr::basebuild ( -635.13 -5263.13 104.12 ) "static/barbwire.tik" 1 0 1 1 90 .5 0 0 1
+exec alienx/basebuild.scr::basebuild ( -735.13 -5263.13 104.12 ) "animal/german_shepherd.tik" 1 1 1 1 90 .5 0 0 1
+exec alienx/basebuild.scr::basebuild ( -835.13 -5263.13 104.12 ) "static/sandbag_longsegment.tik" 1 1 1 1 90 .2 0 0 1
+exec alienx/basebuild.scr::basebuild ( -935.13 -5263.13 104.12 ) "static/bodies_tarp.tik" 1 1 1 1 90 .5 0 0 1
+exec alienx/basebuild.scr::basebuild ( -1035.13 -5263.13 104.12 ) "static/static_naziflag1.tik" 1 1 1 1 90 .2 0 0 1
+exec alienx/basebuild.scr::basebuild ( -1135.13 -5263.13 104.12 ) "static/bookcase.tik" 1 1 0 1 90 .2 0 0 1
+exec alienx/basebuild.scr::basebuild ( -1235.13 -5263.13 104.12 ) "static/bush_full.tik" 1 0 1 1 90 .5 0 0 1end
+exec alienx/basebuild.scr::basebuild ( -1335.13 -5263.13 104.12 ) "static/banquet_table.tik" 1 1 0 0 90 .5 0 0 1
+
+
+exec server_planes/trigger.scr ( -736.59 -6265.33 65.95 ) "allies" .2
+exec server_planes/trigger.scr ( 3271.88 -1087.47 365.56 ) "axis" .2
+
+exec global/jetpack.scr ( -581 -6259 90 ) //allies
+exec global/jetpack.scr ( 3159 -978 371 ) //axis
+
+exec global/dog.scr ( -1689 -973 449 )
+
+exec guidedmissile/spawntrigger.scr ( -907 -6231 92 ) //allies
+exec guidedmissile/spawntrigger.scr ( 3394 -1176 384 ) //axis
+
+//*** Precache Dm Stuff
+exec global/DMprecache.scr
+
+//hud
+exec alienx/hud.scr::main
+
+level.script = maps/m5l1b.scr
+exec global/ambient.scr obj_team5
+
+   	setcvar "r_fastsky" "1"
+	$world farplane 5000
+	$world farplane_color (0 0 0)
+
+exec map_triggers/allweapons.scr ( -1567 -1440 480 )
+exec map_triggers/giant.scr ( -487 -1464 391 )
+exec map_triggers/invisible.scr ( 3199 666 1168 )
+exec map_triggers/invulnerable.scr ( -2066 -808 1140 )
+exec map_triggers/midget.scr ( 96 -856 512 )
+exec map_triggers/normal.scr ( -1120 -2171 480 )
+exec map_triggers/health.scr ( 51 -5928 176 ) ( -2964 -5242 548 ) ( -3509 -2827 568 ) ( -2060 -2583 573 ) ( -976 -2450 480 ) ( -1952 -464 448 ) ( -46 116 592 ) ( 953 597 646 ) ( 3920 1040 672 ) ( 3083 1478 295 )
+
+level waittill spawn
+
+end
+
+
+
+
+

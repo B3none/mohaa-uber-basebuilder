@@ -1,0 +1,60 @@
+// this script just messages the server console (or admin menu.
+
+main local.message local.error:
+
+	if(local.message == NIL || local.message == "")
+	{
+		end
+	}
+
+	if(level.admins)
+	{
+		for(local.i = 0 ; local.i <= level.admins.size ; local.i++)
+		{
+
+			if(level.admins[local.i] != NIL && level.admins[local.i] != NULL)
+			{
+				level.admins[local.i] stufftext ("echo " + local.message)
+			}	
+		}
+	}
+	else
+	{	if(local.error)
+		{
+			if(level.errorlog == NIL)
+			{
+				local.i = 0
+				thread errorlog
+			}
+			else
+			{
+				local.i = level.errorlog.size
+			}
+
+			level.errorlog[local.i] = local.message
+		}
+
+		println local.message
+
+	}
+
+
+end 
+
+
+errorlog:
+
+		while !(level.admins)
+		{
+			wait 2
+		}
+
+
+		if(level.admins)
+		{
+			for(local.i = 0;local.i <= level.errorlog.size - 1; local.i++)
+			{
+				exec global/ac/console_feedback.scr ("ERROR LOG: " + level.errorlog[local.i])
+			}
+		}
+end

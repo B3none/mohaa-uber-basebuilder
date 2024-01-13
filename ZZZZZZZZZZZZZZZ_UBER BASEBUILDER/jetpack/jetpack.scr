@@ -1,0 +1,172 @@
+main:
+	
+	// if they are already using a jetpack,
+	// if they are not holding use
+	// if they did not yet obtain a yetpack , quit
+
+	if(self.useheld != 1 || self.using_pack != 1)
+	{
+		end
+	}
+	 	   
+	if(self.using_pack_already == 1)
+	{
+		//landed so reset soem stuff
+		self.onground = 0
+		//make them float again
+		self gravity .2
+		// Set state
+		self forcelegsstate JETPACK
+		//already running the rest so go home.
+		end
+	}
+			 
+	//stop them using mods thta use use
+	self.no_usemine = 1 //stop them using a mine
+	self.no_usemedic = 1 //stop medics
+
+	//set them to using a jetpack in this script
+	self.using_pack_already = 1
+
+	//Tell script we are using pack in the air
+	self.onground = 0 
+
+	// set fuel at numbers.
+	self.jetpack.fuel = level.jetpack_max_fuel 
+
+	// Set state
+	self forcelegsstate JETPACK
+
+	// change their gravity for effect of floating when not using boosts
+	self gravity .2
+
+	// start playing steam sound
+	//self loopsound jetpack
+
+	//set id to start charging loop
+	local.charge_id	= 1
+
+	local.fuelmsgs = makearray
+	"set fuel_message Ignition Primed"	    //1
+	"set fuel_message Charging"		    //2
+	"set fuel_message Charging."		    //3
+	"set fuel_message Charging.."		    //4
+	"set fuel_message Charging..."		    //5
+	"set fuel_message Charged"		    //6
+	"set fuel_message Jet Pack deactivated"	    //7
+	endarray
+
+	// Set Display
+	self stufftext local.fuelmsgs[1][1] //Ignition Primed
+			
+	// Set team
+	local.team = self.dmteam
+
+	//start main loop 
+  	while(self.jetpack.fuel > 0 && local.team == self.dmteam &&  ( isalive self == 1))
+	{
+		wait 1
+
+		if(self.onground == 1)
+		{
+			if(self.jetpack.fuel < level.jetpack_max_fuel )
+			{
+				self.jetpack.fuel++
+				local.charge_id++
+
+				self stufftext local.fuelmsgs[local.charge_id][1] //charging
+
+				if(local.charge_id ==  5)
+				{
+					local.charge_id	= 1
+				}
+			}
+			else
+			{
+				self stufftext local.fuelmsgs[6][1] //Ignition Primed
+			}
+		}
+		else
+		{  	
+			if(self.jetpack.fuel > 0 )
+			{
+				self.jetpack.fuel--
+			}	
+		}
+
+		if(self.jetpack.fuel >= 0 && self.jetpack.fuel <= level.jetpack_max_fuel )
+		{
+			self stufftext ("set fuel " + self.jetpack.fuel)
+		}
+		else if(self.jetpack.fuel == 0 )
+		{
+			self stufftext ("set fuel Empty")
+		}
+
+		if(self == NIL && self == NULL )
+		{
+			end
+		}
+
+		
+	}
+	
+	//if player buggerd off
+	if(self == NIL || self == NULL)
+	{
+		end
+	}
+
+	self gravity 1
+//	self forcelegsstate STAND
+
+	self stufftext local.fuelmsgs[7][1] //Jet Pack deactivated
+
+	if(self.dmteam != "spectator")
+	{
+		while( self getposition  != "standing")
+		{
+			wait 1
+		}
+	}
+
+	thread delete_tank
+		
+	//self stoploopsound jetpack
+	self.using_pack = 0
+	self.using_pack_already = 0
+
+	self.no_usemine = 0 //  using a mine
+	self.no_usemedic = 0 // medics
+
+	//hide the hud
+	if(game.game == "AA")
+	{
+		self stufftext "hidemenu dday1"
+		self stufftext "hidemenu dday2"
+
+		//self stufftext "globalwidgetcommand credits1 virtualres 0" 
+		//self stufftext "globalwidgetcommand credits1 fullscreen 0" 
+		self stufftext "hidemenu credits1"
+		self stufftext "globalwidgetcommand credits2 name credits1"	
+	}
+	else
+	{
+		self stufftext "hidemenu bastogne2"
+		self stufftext "hidemenu bastogne1"
+
+		//self stufftext "globalwidgetcommand credits1 virtualres 0" 
+		//self stufftext "globalwidgetcommand credits1 fullscreen 0" 
+		self stufftext "hidemenu credits1"
+		self stufftext "globalwidgetcommand credits2 name credits1"	
+	}
+end
+
+delete_tank:
+
+	self.jetpack.smoke[1] delete
+	self.jetpack.smoke[2] delete
+	self.jetpack.twin delete
+	self.jetpack delete
+
+end

@@ -1,0 +1,11 @@
+main local.string local.hud_while:
+
+	huddraw_align 72 left bottom
+	huddraw_font 72 facfont-20
+	huddraw_rect 72 130 -25 100 20
+	huddraw_color 72 1 0 0
+	huddraw_alpha 72 1.0
+	huddraw_string 72 local.string
+	huddraw_virtualsize 72 1
+
+end

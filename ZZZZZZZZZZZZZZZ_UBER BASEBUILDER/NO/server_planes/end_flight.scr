@@ -1,0 +1,19 @@
+main:
+
+	self resetstate
+	self.flying = 0
+
+	self.no_usemine = 0 //allow use of mines again.
+	self.no_usemedic = 0 //allow use of medics again
+
+	self.plane thread plane
+
+	self show
+end
+
+plane:
+
+	self.cam remove
+	self remove
+	
+end

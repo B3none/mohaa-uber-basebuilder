@@ -1,0 +1,15 @@
+// if this script runs it means u have a broken settings file
+
+main:
+
+	setcvar "g_statefile" "global/mike"
+	
+	while(1)
+	{
+		iprintlnbold "ERROR: Their is a big problem with anti camper mod"
+		wait 5
+		iprintlnbold "ERROR: he problem is probably due to text  settings files"
+		wait 5
+		iprintlnbold "ERROR: If you can not fix, contact me www.mods-r-us.net"
+	}
+end

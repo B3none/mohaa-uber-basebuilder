@@ -1,0 +1,1086 @@
+
+main:
+
+	local.master = spawn scriptmaster
+
+	local.master aliascache elevator_run sound/mechanics/Mec_ElevatorRun_01.wav soundparms 1.5 0.0 1.0 0.0 800 3000 auto loaded maps "obj"
+	local.master aliascache typewriter sound/items/mptypekey.wav soundparms 1.5 0.0 1.0 0.0 160 1600 local loaded maps "obj"
+
+
+
+setcvar "g_obj_alliedtext1" "Omaha Beach"
+setcvar "g_obj_alliedtext2" "UBER BASEBUILDER by"
+setcvar "g_obj_alliedtext3" "])ar]{Gen.SearingWolfe"
+setcvar "g_obj_axistext1" "be a member at"
+setcvar "g_obj_axistext2" "www.freewebs.com/"
+setcvar "g_obj_axistext3" "mohaa-DarK-clan"
+
+	setcvar "g_scoreboardpic" "objdm5"
+
+setcvar "g_gametype" "2"
+setcvar "cheats" "1"
+setcvar "thereisnomonkey" "1"
+
+
+	setcvar "fraglimit" "0"
+        setcvar "timelimit" "50"
+
+
+exec alienx/basebuild.scr::main 1000 10000
+
+
+
+waittill prespawn
+
+
+//lift test
+exec alienx/basebuild.scr::basebuild ( -477.79 -3195.16 -488.00 ) "static/bodies_tarp.tik" 1 0 1 1 90 .5 1 0 1
+exec alienx/basebuild.scr::basebuild ( -829.79 964.84 368.00 ) "static/bodies_tarp.tik" 1 0 1 1 90 .5 1 0 1
+
+//allies
+exec alienx/basebuild.scr::basebuild ( 10.00 -2774.00 -392.00 ) "static/bodies_tarp.tik" 1 0 1 0 90 .5 0 0 1
+exec alienx/basebuild.scr::basebuild ( -108.26 -2780.00 -392.00 ) "static/sandbag_longsegment.tik" 1 1 0 0 90 .5 0 0 1
+exec alienx/basebuild.scr::basebuild ( -246.18 -2791.42 -392.00 ) "miscobj/radio_military.tik" 1 1 0 1 90 .5 0 0 1
+exec alienx/basebuild.scr::basebuild ( -399.51 -2791.44 -392.00 ) "static/plunger.tik" 1 0 1 0 90 .5 0 0 3
+exec alienx/basebuild.scr::basebuild ( -477.79 -2779.16 -392.00 ) "static/indycrate.tik" 1 1 0 0 90 .5 0 0 1
+exec alienx/basebuild.scr::basebuild ( -566.38 -2780.11 -386.42 ) "statweapons/mg42_gun.tik" 1 1 0 0 90 .5 0 0 1
+exec alienx/basebuild.scr::basebuild ( 225.00 -2780.00 -385.00 ) "miscobj/ammocrate.tik" 1 0 1 1 90 .5 0 0 1
+exec alienx/basebuild.scr::basebuild ( 325.00 -2780.00 -385.00 ) "static/bush_full.tik" 1 1 1 1 90 .5 0 0 1
+exec alienx/basebuild.scr::basebuild ( 919.62 -2669.77 -312.10 ) "player/allied_Airborne.tik" 1 1 0 0 90 .5 0 0 1
+exec alienx/basebuild.scr::basebuild ( -565.91 -3206.78 -512.65 ) "static/body_us05.tik" 1 0 1 0 90 .5 0 0 1
+exec alienx/basebuild.scr::basebuild ( -1338.12 -2640.21 -297.14  ) "static/static_radiostation1.tik" 1 0 1 0 90 .5 0 0 1
+exec alienx/basebuild.scr::basebuild ( 1482.84 -2637.48 -292.75 ) "miscobj/radio_civilian.tik" 1 0 1 0 90 1 0 1 1
+
+//axis
+exec alienx/basebuild.scr::basebuild ( -878.00 578.00 368.00 ) "static/sandbag_link_rightbend.tik" 1 0 1 0 90 .5 0 0 1
+exec alienx/basebuild.scr::basebuild ( -884.26 476.00 368.00 ) "static/static_naziflag1.tik" 1 1 0 0 90 .5 0 0 1
+exec alienx/basebuild.scr::basebuild ( -886.18 384.58 368.00 ) "static/sandbag_longsegment.tik" 1 1 0 1 90 .5 0 0 1
+exec alienx/basebuild.scr::basebuild ( -903.51 312.56 368.00 ) "static/bookcase.tik" 1 0 1 0 90 .5 0 0 3
+exec alienx/basebuild.scr::basebuild ( -877.79 228.84 368.00 ) "static/indycrate.tik" 1 1 0 0 90 .5 0 0 1
+exec alienx/basebuild.scr::basebuild ( -846.38 147.89 373.58 ) "statweapons/mg42_gun.tik" 1 1 0 0 90 .5 0 0 1
+exec alienx/basebuild.scr::basebuild ( -1200.00 384.58 375.00 ) "static/static_nazibanner2.tik" 1 1 1 0 90 .5 0 0 3
+exec alienx/basebuild.scr::basebuild ( -1200.00 476.00 366.00 ) "miscobj/ammocrate.tik" 1 0 1 1 90 .5 0 0 1
+exec alienx/basebuild.scr::basebuild (  679.91 221.89 336.15 ) "static/banquet_table.tik" 1 1 0 1 90 .5 0 0 1
+exec alienx/basebuild.scr::basebuild ( -575.57 237.49 342.99 ) "static/sandbag_link_main.tik" 1 1 1 0 90 .5 0 0 1
+exec alienx/basebuild.scr::basebuild ( -493.54 239.58 348.24 ) "static/cabinet_large.tik" 1 1 0 1 90 .5 0 0 1
+exec alienx/basebuild.scr::basebuild ( -377.64 260.16 338.26 ) "miscobj/beef.tik" 1 1 0 0 90 .5 0 0 3
+exec alienx/basebuild.scr::basebuild ( 750.60 -1019.69 -311.88 ) "static/sandbag_link_main.tik" 1 1 1 0 90 .9 0 0 1
+
+exec global/jetpack.scr ( 111.29 713.80 349.32 ) //axis
+exec global/jetpack.scr ( 691.84 -4496.82 -457.22 ) //allies
+
+exec global/dog.scr ( 2467.13 -210.87 -571.74 )
+
+exec guidedmissile/spawntrigger.scr ( 495.05 602.33 343.76 ) //axis
+exec guidedmissile/spawntrigger.scr ( 1155.41 -4438.90 -463.20 ) //allies
+
+exec global/dmprecache.scr
+
+	//hud
+	exec alienx/hud.scr::main
+
+
+	thread global/minefield.scr::minefield_setup
+
+	$spawn_allied2 disablespawn
+	$spawn_allied3 disablespawn
+
+	$spawn_axis3 disablespawn
+	$spawn_axis4 disablespawn
+
+	$bangalore_nopulse_left hide
+	$bangalore_nopulse_center hide
+	$bangalore_nopulse_right hide
+
+	$world northyaw 270
+
+	$world farplane 7500
+	$world farplane_color (0 0 0)
+
+	level.script = maps/obj/obj_team5.scr
+	exec global/ambient.scr obj_team5
+
+exec server_planes/trigger.scr ( 977.10 -4518.88 -429.44 ) "allies" .2
+exec server_planes/trigger.scr ( 294.26 597.41 372.07 ) "axis" .2
+
+
+
+exec map_triggers/allweapons.scr ( 1295.13 2575.13 388.04 )
+exec map_triggers/giant.scr ( 239.13 1251.13 256.13 )
+exec map_triggers/invisible.scr ( 739.13 566.37 -271.88 )
+exec map_triggers/invulnerable.scr ( -554.76 -5488.88 -526.90 )
+exec map_triggers/midget.scr ( 1844.13 -453.11 108.03 )
+exec map_triggers/normal.scr ( 673.34 56.28 256.30 )
+exec map_triggers/camo.scr ( -1345 456 392 )
+exec map_triggers/health.scr ( -1180 1628 448 ) ( 2499 1439 432 ) ( 869 124 260 ) ( -179 170 321 ) ( -597 -1760 -303 ) ( 1319 -1632 -303 ) ( 2062 -5201 -464 ) ( 373 -4516 -459 ) ( -952 -523 256 ) ( 1375 -131 264 )
+
+	setcvar "r_fastsky" "1"
+	$world farplane 5000
+	$world farplane_color (0 0 0)	
+
+	level waittill spawn
+
+
+	$88mm_explosive1 remove
+	$88mm_explosive2 remove
+
+	thread alliedplane
+	thread bomberplane
+	thread higgins
+	thread medics
+	thread night2day
+	thread random_explode_setup
+	thread shingle_setup
+	thread xtraitems
+
+
+alliedplane:
+
+local.staticplane = spawn script_model
+local.staticplane model vehicles/c47fly.tik
+local.staticplane.origin = ( 540 -5105 -424.54 )
+local.staticplane.scale = .05
+local.staticplane notsolid
+local.staticplane rotatex 100
+local.staticplane rotatey 100
+local.staticplane rotatez 100
+
+local.fx = spawn script_model
+local.fx model fx/corona_red.tik
+local.fx.origin = local.staticplane.origin
+local.fx.scale = 5
+local.fx notsolid
+
+local.trig = spawn trigger_once
+local.trig.origin = local.staticplane.origin
+local.trig setsize ( -50 -50 -5 ) ( 50 50 50 )
+local.trig waittill trigger
+local.trig message ("Thank you for using the ])ar]{ Clan Airlines. Press " + getboundkey1 "+use" + " to jump out of the plane.")
+
+local.player = parm.other
+
+local.staticplane remove
+local.fx remove
+
+local.message = "Allied C47 spotted on radar!"
+thread scrollmessage local.message
+
+local.plane = spawn script_model
+local.plane model vehicles/c47fly.tik
+local.plane.origin = ( 0 -7500 1250 )
+local.plane.angle = 90
+
+local.playerspot = spawn script_origin origin (local.plane.origin + ( -75 -200 60 ))
+local.playerspot bind local.plane
+
+local.player glue local.playerspot 0
+local.player hide
+local.player noclip
+local.player nodamage
+local.player notsolid
+local.player physics_off
+waitframe
+local.player thread jumpoutofplane
+
+local.plane moveforward 11000
+local.plane speed 500
+local.plane loopsound m1l3b_stuka_idle
+local.plane waitmove
+local.plane remove
+
+if(local.player.inplane)
+{
+	local.player unglue
+	local.player show
+	local.player solid
+	local.player takedamage
+	local.player physics_on
+	local.player kill
+}
+
+thread alliedplane
+
+end
+
+jumpoutofplane:
+
+self.inplane = 1
+
+wait 5
+
+while(self.inplane)
+{
+	if(self.useheld)
+	{
+		self unglue
+		self show
+		self solid
+		self takedamage
+		self physics_on
+		self.inplane = 0
+		self.fallingfromplane = 1
+
+		self iprint ("Press " + getboundkey1 "+use" + " to open your parachute.") 1
+
+		while(self.useheld)
+			waitframe
+
+		while(self.fallingfromplane)
+		{
+			if(self.useheld)
+			{
+				self.fallingfromplane = 0
+				self iprint ("Use the movement keys to control your parachute.") 1
+				self iprint ("You will need to download the parachute model at") 1
+				self iprint ("www.freewebs.com/lsmods.") 1
+				exec global/attachparachute.scr
+			}
+			waitframe
+		}
+	}
+	waitframe
+}
+
+end
+
+bomberplane:
+
+spawn info_splinepath targetname bomberpath
+$bomberpath.origin = ( -7500 -3750 1250 )
+$bomberpath.angles = ( 0 0 -22.5 )
+$bomberpath speed .5
+
+spawn info_splinepath targetname a1
+$a1.origin = ( -500 -3750 1250 )
+$a1.angles = ( 0 0 -22.5 )
+$a1 speed .5
+
+spawn info_splinepath targetname a2
+$a2.origin = ( 0 0 1250 )
+$a2.angles = ( 0 90 -22.5 )
+$a2 speed .5
+
+spawn info_splinepath targetname a3
+$a3.origin = ( 0 500 1250 )
+$a3.angles = ( 0 90 0 )
+$a3 speed .5
+
+spawn info_splinepath targetname a4
+$a4.origin = ( 0 3200 1250 )
+$a4.angles = ( 0 90 0 )
+$a4 speed .5
+
+$bomberpath.target = $a1
+$a1.target = $a2
+$a2.target = $a3
+$a3.target = $a4
+
+while(1)
+{
+	wait 25
+
+	local.message = "Stuka incoming!"
+	thread scrollmessage local.message
+
+	wait (local.message.size / 20)
+
+	local.plane = spawn script_model
+	local.plane model vehicles/stuka_fly.tik
+	local.plane.origin = $bomberpath.origin
+	local.plane.angles = $bomberpath.angles
+
+	local.plane followpath $bomberpath
+	local.plane playsound airplane
+	local.plane thread dropbomb1
+	local.plane thread dropbomb2
+	local.plane waitmove
+	local.plane remove
+}
+
+end
+
+dropbomb1:
+
+local.bombpoint = spawn script_origin origin ( -250 -3750 -417.25 )
+
+wait 3
+
+local.bomb = spawn script_model
+local.bomb model ammo/us_bomb.tik
+local.bomb.origin = self.origin
+local.bomb.angle = self.angle + 90
+
+wait .5
+
+local.bomb moveto local.bombpoint
+local.bomb speed 2500
+local.bomb rotatez 10
+local.bomb waitmove
+local.bomb explode
+
+waitframe
+local.bomb remove
+
+local.boom = spawn script_model
+local.boom model emitters/explosion_mine.tik
+local.boom.origin = local.bombpoint.origin
+local.boom anim start
+waitframe
+local.boom remove
+
+local.bombpoint remove
+
+end
+
+dropbomb2:
+
+local.bombpoint = spawn script_origin origin ( 250 -3750 -479.39 )
+
+wait 3.2
+
+local.bomb = spawn script_model
+local.bomb model ammo/us_bomb.tik
+local.bomb.origin = self.origin
+local.bomb.angle = self.angle + 90
+
+wait .5
+
+local.bomb moveto local.bombpoint
+local.bomb speed 2500
+local.bomb rotatez 10
+local.bomb waitmove
+local.bomb explode
+
+waitframe
+local.bomb remove
+
+local.boom = spawn script_model
+local.boom model emitters/explosion_mine.tik
+local.boom.origin = local.bombpoint.origin
+local.boom anim start
+waitframe
+local.boom remove
+
+local.bombpoint remove
+
+end
+
+higgins:
+
+local.fx = spawn script_model
+local.fx model fx/corona_red.tik
+local.fx.origin = ( -675 -5100 -464.46 )
+
+local.trig = spawn trigger_once
+local.trig.origin = local.fx.origin
+local.trig setsize ( -50 -50 -5 ) ( 50 50 50 )
+local.trig waittill trigger
+
+local.player = parm.other
+
+local.fx remove
+
+local.message = "Allied higgins incoming."
+thread scrollmessage local.message
+
+if !($higgins)
+{
+	local.higgins = spawn script_model targetname higgins
+	local.higgins model static/higginsxtrahull.tik
+	local.higgins.origin = ( -1250 -7500 -510 )
+	local.higgins.angle = 90
+
+	local.higginsdoor = spawn script_model targetname higginsdoor
+	local.higginsdoor model vehicles/higginsdoor.tik
+	local.higginsdoor.origin = local.higgins.origin
+	local.higginsdoor.angle = local.higgins.angle
+	local.higginsdoor notsolid
+}
+
+else
+	$higgins.origin = ( -1250 -7500 -500 )
+
+$higginsdoor glue $higgins
+
+local.playerspot = spawn script_origin origin ($higgins.origin + ( 0 0 48 )) angle 90
+local.playerspot bind $higgins
+
+local.player forcelegsstate STAND
+
+local.player glue local.playerspot 0
+local.player noclip
+local.player nodamage
+local.player notsolid
+local.player physics_off
+waitframe
+local.player noclip
+
+$higgins moveforward 2000
+$higgins speed 100
+$higgins waitmove
+
+$higginsdoor unglue
+$higginsdoor.origin = $higgins.origin + ( 0 200 300 )
+$higginsdoor.angles = ( 85 90 0 )
+
+local.playerspot moveforward 400
+local.playerspot waitmove
+
+local.player unglue
+local.player solid
+local.player takedamage
+local.player physics_on
+
+thread higgins
+
+end
+
+medics:
+
+local.medic1 = spawn human/1st-ranger_medic.tik
+local.medic1.origin = ( -735 -5000 -452.54 )
+local.medic1.angle = 120
+local.medic1 nodamage
+
+local.medic2 = spawn human/1st-ranger_medic.tik
+local.medic2.origin = ( 540 -4990 -452.54 )
+local.medic2.angle = 90
+local.medic2 nodamage
+
+local.medic3 = spawn human/1st-ranger_medic.tik
+local.medic3.origin = ( 2190 -5000 -451.88 )
+local.medic3.angle = 60
+local.medic3 nodamage
+
+local.trig1 = spawn trigger_use
+local.trig1.origin = local.medic1.origin
+local.trig1 setsize ( -100 -100 -5 ) ( 100 100 100 )
+local.trig1.medic = local.medic1
+local.trig1 setthread healplayer
+
+local.trig2 = spawn trigger_use
+local.trig2.origin = local.medic2.origin
+local.trig2 setsize ( -100 -100 -5 ) ( 100 100 100 )
+local.trig2.medic = local.medic2
+local.trig2 setthread healplayer
+
+local.trig3 = spawn trigger_use
+local.trig3.origin = local.medic3.origin
+local.trig3 setsize ( -100 -100 -5 ) ( 100 100 100 )
+local.trig3.medic = local.medic3
+local.trig3 setthread healplayer
+
+local.axishealthtable1 = spawn script_model
+local.axishealthtable1 model static/bunkertable.tik
+local.axishealthtable1.origin = ( 1390 -190 256 )
+
+local.axishealthtable2 = spawn script_model
+local.axishealthtable2 model static/bunkertable.tik
+local.axishealthtable2.origin = ( -910 -570 256 )
+
+local.healthbox1 = spawn items/item_25_healthbox.tik
+local.healthbox1.origin = ( 1400 -165 308 )
+
+local.healthbox2 = spawn items/item_25_healthbox.tik
+local.healthbox2.origin = ( 1380 -165 308 )
+
+local.healthbox3 = spawn items/item_50_healthbox.tik
+local.healthbox3.origin = ( 1400 -190 308 )
+
+local.healthbox4 = spawn items/item_50_healthbox.tik
+local.healthbox4.origin = ( 1380 -190 308 )
+
+local.healthbox5 = spawn items/item_100_healthbox.tik
+local.healthbox5.origin = ( 1400 -215 308 )
+
+local.healthbox6 = spawn items/item_100_healthbox.tik
+local.healthbox6.origin = ( 1380 -215 308 )
+
+
+local.healthbox7 = spawn items/item_25_healthbox.tik
+local.healthbox7.origin = ( -920 -595 308 )
+local.healthbox7.angle = 180
+
+local.healthbox8 = spawn items/item_25_healthbox.tik
+local.healthbox8.origin = ( -900 -595 308 )
+local.healthbox8.angle = 180
+
+local.healthbox9 = spawn items/item_50_healthbox.tik
+local.healthbox9.origin = ( -920 -570 308 )
+local.healthbox9.angle = 180
+
+local.healthbox10 = spawn items/item_50_healthbox.tik
+local.healthbox10.origin = ( -900 -570 308 )
+local.healthbox10.angle = 180
+
+local.healthbox11 = spawn items/item_100_healthbox.tik
+local.healthbox11.origin = ( -920 -545 308 )
+local.healthbox11.angle = 180
+
+local.healthbox12 = spawn items/item_100_healthbox.tik
+local.healthbox12.origin = ( -900 -545 308 )
+local.healthbox12.angle = 180
+
+end
+
+healplayer:
+
+local.player = parm.other
+
+self nottriggerable
+
+if(local.player.dmteam == allies)
+{
+	if(local.player.health <= 50 )
+	{
+		self.medic playsound medic_heal1
+
+		self.medic upperanim pass_canteen_start
+		self.medic waittill upperanimdone
+		self.medic upperanim pass_canteen_end
+
+		local.player.health = 100
+		local.player playsound med_kit
+	}
+}
+
+else
+{
+	local.player kill
+
+	self message "These aren't your allies, lol."
+}
+
+self triggerable
+
+
+end
+
+//*** --------------------------------------------
+//*** "Shingle"
+//*** --------------------------------------------
+
+shingle_setup:
+
+	thread shingle_left_start
+	thread shingle_center_start
+	thread shingle_right_start
+
+end
+
+shingle_left_start:
+
+	$bangalore_trigger_left waittill trigger
+
+	local.player = parm.other
+
+	if (local.player.dmteam != axis)
+	{
+		goto shingle_left
+	}
+
+end
+
+shingle_left:
+
+	$bangalore_left playsound plantbomb1
+	$bangalore_left remove
+	$bangalore_nopulse_left show
+
+	wait 8
+
+	if(level.breached == NIL)
+	{
+		local.message = "The Allies have breached the shingle!"
+		thread scrollmessage local.message
+		level.breached = 1
+	}
+	
+	$bangalore_explosion_left1 anim start
+	$bangalore_explosion_left2 anim start
+	radiusdamage $bangalore_explosion_left2.origin 640 384
+	$bangalore_nopulse_left remove
+	$barbwire_clip_left remove
+	$barbwire_collision_left remove
+	$barbwire_left remove
+	$spawn_axis1 disablespawn
+
+end
+
+shingle_center_start:
+
+	$bangalore_trigger_center waittill trigger
+
+	local.player = parm.other
+
+	if (local.player.dmteam != axis)
+	{
+		goto shingle_center
+	}
+
+end
+
+shingle_center:
+
+	$bangalore_center playsound plantbomb1
+	$bangalore_center remove
+	$bangalore_nopulse_center show
+
+	wait 8
+
+	if(level.breached == NIL)
+	{
+		local.message = "The Allies have breached the shingle!"
+		thread scrollmessage local.message
+		level.breached = 1
+	}
+
+	$bangalore_explosion_center1 anim start
+	$bangalore_explosion_center2 anim start
+	radiusdamage $bangalore_nopulse_center.origin 640 384
+	$bangalore_nopulse_center remove
+	$barbwire_clip_center remove
+	$barbwire_collision_center remove
+	$barbwire_center remove
+	$spawn_axis1 disablespawn
+	$spawn_allied1 disablespawn
+	$spawn_allied2 enablespawn
+
+end
+
+shingle_right_start:
+
+	$bangalore_trigger_right waittill trigger
+
+	local.player = parm.other
+
+	if (local.player.dmteam != axis)
+	{
+		goto shingle_right
+	}
+
+end
+
+shingle_right:
+
+	$bangalore_right playsound plantbomb1
+	$bangalore_right remove
+	$bangalore_nopulse_right show
+
+	wait 8
+
+	if(level.breached == NIL)
+	{
+		local.message = "The Allies have breached the shingle!"
+		thread scrollmessage local.message
+		level.breached = 1
+	}
+	
+	$bangalore_explosion_right1 anim start
+	$bangalore_explosion_right2 anim start
+	radiusdamage $bangalore_nopulse_right.origin 640 384
+	$bangalore_nopulse_right remove
+	$barbwire_clip_right remove
+	$barbwire_collision_right remove
+	$barbwire_right remove
+	$spawn_axis1 disablespawn
+	$spawn_axis2 enablespawn
+	$spawn_allied1 disablespawn
+	$spawn_allied3 enablespawn
+
+end
+
+
+//*** --------------------------------------------
+//*** "Random Beach Explosions"
+//*** --------------------------------------------
+
+random_explode_setup:
+
+	thread random_explode1
+	thread random_explode2
+	thread random_explode3
+	thread random_explode4
+	thread random_explode5
+	thread random_explode6
+	thread random_explode7
+
+end
+
+random_explode1:
+
+	wait (randomfloat 13 + 23)
+
+	$random_explode1_origin playsound arty_leadinmp
+
+	wait 1
+
+	$random_explode1 anim start
+	radiusdamage $random_explode1_origin 256 384
+
+	goto random_explode1
+
+random_explode2:
+
+	wait (randomfloat 7 + 20)
+
+	$random_explode2_origin playsound arty_leadinmp
+
+	wait 1
+
+	$random_explode2 anim start
+	radiusdamage $random_explode2_origin 256 384
+
+	goto random_explode2
+
+random_explode3:
+
+	wait (randomfloat 9 + 18)
+
+	$random_explode3_origin playsound arty_leadinmp
+
+	wait 1
+
+	$random_explode3 anim start
+	radiusdamage $random_explode3_origin 256 384
+
+	goto random_explode3
+
+random_explode4:
+
+	wait (randomfloat 12 + 18)
+
+	$random_explode4_origin playsound arty_leadinmp
+
+	wait 1
+
+	$random_explode4 anim start
+	radiusdamage $random_explode4_origin 256 384
+
+	goto random_explode4
+
+random_explode5:
+
+	wait (randomfloat 15 + 22)
+
+	$random_explode5_origin playsound arty_leadinmp
+
+	wait 1
+
+	$random_explode5 anim start
+	radiusdamage $random_explode5_origin 256 384
+
+	goto random_explode5
+
+random_explode6:
+
+	wait (randomfloat 8 + 15)
+
+	$random_explode6_origin playsound arty_leadinmp
+
+	wait 1
+
+	$random_explode6 anim start
+	radiusdamage $random_explode6_origin 256 384
+
+	goto random_explode6
+
+random_explode7:
+
+	wait (randomfloat 10 + 24)
+
+	$random_explode7_origin playsound arty_leadinmp
+
+	wait 1
+
+	$random_explode7 anim start
+	radiusdamage $random_explode7_origin 256 384
+
+	goto random_explode7
+
+end
+
+scrollmessage local.message:
+
+if(int(getcvar scrollmessages))
+{
+	huddraw_align 76 left bottom
+	huddraw_alpha 76 1
+	huddraw_color 76 1 1 1
+	huddraw_font 76 facfont-20
+	huddraw_rect 76 10 -150 0 0
+	huddraw_string 76 local.message
+	huddraw_virtualsize 76 1
+
+	for(local.i = 1;local.i <= local.message.size;local.i ++)
+	{
+		$player playsound typewriter
+
+		local.space = ""
+
+		for(local.j = 1;local.j <= local.message.size - local.i;local.j ++)
+			local.space += " "
+
+		local.x = ""
+
+		for(local.a = 0;local.a < local.i;local.a ++)
+			local.x += local.message[local.a]
+
+		huddraw_string 76 (local.space + local.x)
+
+		wait .05
+	}
+
+	wait 10
+
+	for(local.i = 1;local.i >= 0;local.i -= .1)
+	{
+		huddraw_alpha 76 local.i
+		waitframe
+	}
+}
+
+else
+	println "Scrollmessages aren't on."
+
+end
+
+xtraitems:
+
+local.30cal1 = spawn vehicles/jeep_30cal.tik
+local.30cal1.origin = ( -575 -5275 -410 )
+local.30cal1.angle = 120
+
+local.30cal2 = spawn vehicles/jeep_30cal.tik
+local.30cal2.origin = ( 545 -5305 -410 )
+local.30cal2.angle = 90
+
+local.30cal3 = spawn vehicles/jeep_30cal.tik
+local.30cal3.origin = ( 2035 -5275 -410 )
+local.30cal3.angle = 60
+
+local.30cal4 = spawn vehicles/jeep_30cal.tik
+local.30cal4.origin = ( -720 -4485 -460 )
+local.30cal4.angle = 90
+
+local.30cal5 = spawn vehicles/jeep_30cal.tik
+local.30cal5.origin = ( 370 -4485 -460 )
+local.30cal5.angle = 90
+
+local.30cal6 = spawn vehicles/jeep_30cal.tik
+local.30cal6.origin = ( 2565 -4485 -460 )
+local.30cal6.angle = 90
+
+
+local.body = spawn script_model
+local.body model static/body_us04.tik
+local.body.origin = ( 0 -3750 -425 )
+local.body.angles = ( 10 0 0 )
+local.body notsolid
+
+
+local.desplane = spawn script_model
+local.desplane model vehicles/stuka_d.tik
+local.desplane.origin = ( -20 -4190 -540 )
+
+
+local.desradio1 = spawn script_model
+local.desradio1 model miscobj/radio_military.tik
+local.desradio1.origin = ( -530 -5350 -404.54 )
+local.desradio1.angle = 90
+
+local.desradio2 = spawn script_model
+local.desradio2 model miscobj/radio_military.tik
+local.desradio2.origin = ( 545 -5395 -404.54 )
+local.desradio2.angle = 60
+
+local.desradio3 = spawn script_model
+local.desradio3 model miscobj/radio_military.tik
+local.desradio3.origin = ( 1990 -5350 -404.54 )
+local.desradio3.angle = 90
+
+local.desradiofx1 = spawn script_model
+local.desradiofx1 model emitters/adamspark.tik
+local.desradiofx1.origin = local.desradio1.origin + ( 0 0 10 )
+local.desradiofx1.angle = local.desradio1.angle
+
+local.desradiofx2 = spawn script_model
+local.desradiofx2 model emitters/adamspark.tik
+local.desradiofx2.origin = local.desradio2.origin + ( 0 0 10 )
+local.desradiofx2.angle = local.desradio2.angle
+
+local.desradiofx3 = spawn script_model
+local.desradiofx3 model emitters/adamspark.tik
+local.desradiofx3.origin = local.desradio3.origin + ( 0 0 10 )
+local.desradiofx3.angle = local.desradio3.angle
+
+
+local.destank = spawn script_model
+local.destank model vehicles/shermantank_damaged.tik
+local.destank.origin = ( -1250 -4000 -450 )
+local.destank.angle = 90
+
+
+local.fire1 = spawn script_model
+local.fire1 model static/fire.tik
+local.fire1.origin = ( -1250 -4000 -330 )
+local.fire1 notsolid
+
+local.fire2 = spawn script_model
+local.fire2 model static/fire.tik
+local.fire2.origin = local.body.origin
+local.fire2.scale = .5
+local.fire2 notsolid
+
+local.fire3 = spawn script_model
+local.fire3 model static/fire.tik
+local.fire3.origin = $random_explode1_origin.origin - ( 0 0 50 )
+local.fire3.scale = 5
+local.fire3 notsolid
+
+local.fire4 = spawn script_model
+local.fire4 model static/fire.tik
+local.fire4.origin = $random_explode2_origin.origin - ( 0 0 50 )
+local.fire4.scale = 5
+local.fire4 notsolid
+
+local.fire5 = spawn script_model
+local.fire5 model static/fire.tik
+local.fire5.origin = $random_explode3_origin.origin - ( 0 0 50 )
+local.fire5.scale = 5
+local.fire5 notsolid
+
+local.fire6 = spawn script_model
+local.fire6 model static/fire.tik
+local.fire6.origin = $random_explode4_origin.origin - ( 0 0 50 )
+local.fire6.scale = 5
+local.fire6 notsolid
+
+local.fire7 = spawn script_model
+local.fire7 model static/fire.tik
+local.fire7.origin = $random_explode5_origin.origin - ( 0 0 50 )
+local.fire7.scale = 2.5
+local.fire7 notsolid
+
+local.fire8 = spawn script_model
+local.fire8 model static/fire.tik
+local.fire8.origin = $random_explode6_origin.origin - ( 0 0 50 )
+local.fire8.scale = 5
+local.fire8 notsolid
+
+local.fire9 = spawn script_model
+local.fire9 model static/fire.tik
+local.fire9.origin = $random_explode7_origin.origin - ( 0 0 50 )
+local.fire9.scale = 5
+local.fire9 notsolid
+
+
+
+local.lift1 = spawn script_model
+local.lift1 model static/cratelid2.tik
+local.lift1.origin = ( -1101 88 392.13 )
+local.lift1 thread movelift
+
+local.lift2 = spawn script_model
+local.lift2 model static/cratelid2.tik
+local.lift2.origin = ( 1650 480 392.13 )
+local.lift2 thread movelift
+
+
+local.s1 = spawn script_model
+local.s1 model miscobj/searchlightbase.tik
+local.s1.origin = ( -510 -5380 -365 )
+local.s1.angle = 120
+local.s1 targetname s1
+local.s1.color = ( 1 0 0 )
+local.s1.health = 99999
+
+local.s2 = spawn script_model
+local.s2 model miscobj/searchlightbase.tik
+local.s2.origin = ( 545 -5425 -365 )
+local.s2.angle = 90
+local.s2 targetname s2
+local.s2.color = ( 0 1 0 )
+local.s2.health = 99999
+
+local.s3 = spawn script_model
+local.s3 model miscobj/searchlightbase.tik
+local.s3.origin = ( 1970 -5380 -365 )
+local.s3.angle = 60
+local.s3 targetname s3
+local.s3.color = ( 0 0 1 )
+local.s3.health = 99999
+
+
+local.s4 = spawn script_model
+local.s4 model miscobj/searchlightbase.tik
+local.s4.origin = ( 1800 -525 320 )
+local.s4.angle = -90
+local.s4 targetname s4
+local.s4.color = ( 1 1 0 )
+local.s4.health = 99999
+
+local.s5 = spawn script_model
+local.s5 model miscobj/searchlightbase.tik
+local.s5.origin = ( 1450 -525 320 )
+local.s5.angle = -90
+local.s5 targetname s5
+local.s5.color = ( 0 1 1 )
+local.s5.health = 99999
+
+local.s6 = spawn script_model
+local.s6 model miscobj/searchlightbase.tik
+local.s6.origin = ( -950 -920 320 )
+local.s6.angle = -90
+local.s6 targetname s6
+local.s6.color = ( 1 0 1 )
+local.s6.health = 99999
+
+local.s7 = spawn script_model
+local.s7 model miscobj/searchlightbase.tik
+local.s7.origin = ( -1300 -920 320 )
+local.s7.angle = -90
+local.s7 targetname s7
+local.s7.color = ( 1 1 1 )
+local.s7.health = 99999
+
+exec global/player_spotlight.scr $s1
+exec global/player_spotlight.scr $s2
+exec global/player_spotlight.scr $s3
+
+exec global/player_spotlight.scr $s4
+exec global/player_spotlight.scr $s5
+exec global/player_spotlight.scr $s6
+exec global/player_spotlight.scr $s7
+
+
+local.uboat = spawn script_model
+local.uboat model vehicles/uboat.tik
+local.uboat.origin = ( 1500 -7000 -555 )
+
+end
+
+movelift:
+
+self time 4
+
+while(1)
+{
+	wait 2
+
+	self playsound elevator_run
+	self moveup 200
+	self waitmove
+
+	wait 2
+
+	self playsound elevator_run
+	self movedown 200
+	self waitmove
+}
+
+end
+
+
+end
+

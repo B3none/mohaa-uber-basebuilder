@@ -1,0 +1,40 @@
+menu "inform" 316 123 FROM_BOTTOM 0.5
+align bottom right
+stopsound "menu/sound/newalert.wav"
+bgcolor 0.50 0.00 0.00 0.00
+
+
+
+
+resource
+Label
+{
+name "Default"
+rect 0 2 164 120
+fgcolor 1.00 1.00 1.00 1.00
+bgcolor 0.50 0.50 0.50 1.00
+borderstyle "RAISED"
+shader "menu/textures/inform.tga"
+
+}
+resource
+Button
+{
+name "Default"
+rect 0 0 164 2
+fgcolor 0.00 0.00 0.00 1.00
+bgcolor 1.00 0.00 0.00 1.00
+borderstyle "RAISED"
+}
+resource
+Label
+{
+title "Player 0"
+name "newadmin"
+rect 32 66 100 30
+fgcolor 0.00 0.00 0.00 1.00
+bgcolor 0.50 0.50 0.50 0.00
+borderstyle "RAISED"
+linkcvar "admins_inform"
+}
+end.

@@ -1,0 +1,150 @@
+main:
+
+	local.team = self.dmteam
+	
+	level.clockside = local.team
+
+	level.hudyellow = local.team
+	
+	local.locate_time = waitexec global/settings.scr::getcmd "countdown-locate"
+	local.locate_time = int local.locate_time
+	
+	local.locate = level.countdown[local.team]["seconds"] - local.locate_time
+
+	if(local.locate <= 0 )
+	{
+		local.locate = local.locate_time - level.countdown[local.team]["seconds"]
+		local.locate = 60 - local.locate_time
+	}	
+
+	while(isalive self && self.dmteam == local.team && self != NULL && self != NIL)
+	{
+
+		local.origin = self.origin
+		wait 1
+	//	level.countdown_seconds[local.team]--
+
+		level.countdown[local.team]["seconds"]--
+
+		if (level.countdown[local.team]["seconds"] <= 0)
+		{
+
+			level.countdown[local.team]["minutes"]--
+
+			if(level.countdown[local.team]["minutes"] <= -1 )
+			{
+				$player stoploopsound final_countdown
+				level.countdown[local.team]["minutes"] = 0
+				exec HTR/hud.scr local.team
+
+				waitthread blow_up local.team
+				$pelvis_bomb delete
+				$pelvis_radio delete
+
+				waitexec HTR/camera.scr local.team
+	
+				
+				end
+			}
+
+			level.countdown[local.team]["seconds"] = 60
+		}
+		else if (level.countdown[local.team]["seconds"] <= 10 && level.countdown[local.team]["minutes"] <= 0 && local.ticking != 1)
+		{
+			$player loopsound final_countdown 
+			level.hudcolour[local.team] = 1
+			local.ticking = 1
+		}
+
+		exec HTR/hud.scr local.team
+	
+		if(local.locate_time != 0)
+		{
+			if(level.countdown[local.team]["seconds"] == local.locate)
+			{
+				local.pos = waitexec global/libmef/mapdesc.scr::get_player_position self.origin
+
+				if(local.pos != "" && local.pos != NULL && local.pos != NIL)
+				{
+					exec HTR/hud.scr::location ("Radio location: " +  local.pos ) local.locate_time
+					local.locate = level.countdown[local.team]["seconds"] - local.locate_time
+
+					if(local.locate <= 0 )
+					{
+						local.locate = local.locate_time - level.countdown[local.team]["seconds"]
+						local.locate = 60 - local.locate_time
+					}
+				}
+			}
+			else
+			{
+			//	exec HTR/hud.scr::location ""
+			}
+
+
+		}
+		//exec HTR/hud.scr local.team
+	}
+
+	$pelvis_radio delete
+
+	self light 0 0 0 0
+
+	exec HTR/radio.scr local.origin
+
+	if (local.ticking == 1)
+	{
+		$player stoploopsound final_countdown
+	}
+
+	level.hudyellow = "none"
+
+
+	exec HTR/hud.scr::countdown
+
+	local.locate_time = waitexec global/settings.scr::getcmd "death-location"
+
+	if(local.locate_time == "1")
+	{
+		local.team  = waitexec global/strings.scr::to_upper local.team  0
+
+		local.pos = waitexec global/libmef/mapdesc.scr::get_player_position self.origin
+		
+		if(local.pos != "" || local.pos != NULL || local.pos != NIL)
+		{
+			iprintlnbold_noloc (local.team  + " have dropped the radio! " + local.pos)
+		}
+		else
+		{
+			iprintlnbold_noloc (local.team  + " have dropped the radio!")
+		}
+	}
+
+end
+
+blow_up local.team:
+
+	for(local.i = 1; local.i <= $player.size; local.i++)
+	{
+		if($player[local.i].dmteam != local.team)
+		{
+			thread boom $player[local.i].origin
+		}
+	}
+end
+
+boom local.place:
+
+	local.Exp3 = spawn "fx/scriptbazookaexplosion.tik"
+	local.Exp4 = spawn "animate/fx_mortar_dirt.tik"
+	local.Exp3 radiusdamage 0
+	local.Exp3.origin = local.place
+	local.Exp4.origin = local.place
+	local.Exp3 anim start
+	local.Exp4 anim start
+
+	wait 1
+	local.Exp3 delete	
+	local.Exp4 delete
+ 
+end

@@ -1,0 +1,11 @@
+// just makes player jump
+
+main:
+	if(game.jump_height == NIL || game.jump_height == NULL)
+	{
+		game.jump_height =  56
+	}
+
+	self jump game.jump_height
+	
+end

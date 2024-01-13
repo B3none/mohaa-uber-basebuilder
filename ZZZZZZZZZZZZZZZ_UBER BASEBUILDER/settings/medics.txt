@@ -1,0 +1,164 @@
+main:
+	local.settings = makearray
+		//command			//setting			//help	
+		"health"			"100"				" Amount of health a player has to give away"
+		"medic-weapons"			"1"				" Use weapon settings for medics. To check if the weapon they have allows medics"
+		"medic-replenish"		"1"				" If 1 the players get their medics health replenished when they respawn. Otherwise they only get the medics health over the round"
+	endarray
+
+end local.settings
+
+maps:
+	//MAPS
+	local.maplist = makeArray
+		//dm maps
+		"dm/mohdm1"
+		"dm/mohdm2"
+		"dm/mohdm3"
+		"dm/mohdm4"
+		"dm/mohdm5"
+		"dm/mohdm6"	
+		"dm/mohdm7"
+		//objective maps
+		"obj/obj_team1"
+		"obj/obj_team2"
+		"obj/obj_team3"
+		"obj/obj_team4"
+		"DM/MP_Bahnhof_DM"
+		"DM/MP_Bazaar_DM"
+		"DM/MP_Brest_DM"
+		"DM/MP_Gewitter_DM"
+		"DM/MP_Holland_DM"		
+		"DM/MP_Stadt_DM"
+		"DM/MP_Unterseite_DM"
+		"DM/MP_Verschneit_DM"
+		//BT only / DM/
+		"DM/MP_Palermo_DM"
+		"DM/mp_malta_dm"
+		//SH + BT /OBJ
+		"OBJ/MP_Ardennes_TOW"
+		"OBJ/MP_Berlin_TOW"
+		"OBJ/MP_Flughafen_TOW"
+		"OBJ/MP_Druckkammern_TOW"
+		//BT only /OBJ
+		"OBJ/MP_Palermo_OBJ"
+		"OBJ/MP_MonteCassino_TOW"
+		"OBJ/MP_MonteBattaglia_TOW"
+		"OBJ/MP_Kasserine_TOW"
+		"OBJ/mp_castello_obj"
+		"OBJ/MP_Bologna_OBJ"
+		//BT only /LIB
+		"LIB/mp_tunisia_lib"
+		"LIB/mp_bizerteharbor_lib"
+		"LIB/mp_anzio_lib"
+		"LIB/mp_ship_lib"
+		//custom maps	
+	endArray
+
+
+
+end local.maplist
+
+
+gametypes:
+	
+	local.gametypes = makeArray
+	//game type #	// String- just for refrence
+		"1"	//FFA	
+		"2"	//TDM
+		"3"	//RBM
+		"4"	//OBJ
+		"5"	//TOW
+		"6"	//LIB
+	endArray
+
+end local.gametypes
+
+// Allow players to plant medics with these weapons. 1 = allow. 0 = dont allow
+// Note: if they holster their weapon or use grenade or pistol it counts as unarmed.
+
+weaponsaa:
+	//if u put them at rediculasly  low times the type will cancel itself out if they camp when camping already
+	local.weapons =  makearray
+		//weapon name			//weapon time			//help
+		"bar" 				"1"			" Allows use of medics with this weapon"			
+		"bazooka" 			"1"			" Allows use of medics with this weapon"
+		"kar98" 			"1"			" Allows use of medics with this weapon"
+		"kar98sniper" 			"1"			" Allows use of medics with this weapon"
+		"m1_garand" 			"1"			" Allows use of medics with this weapon"
+		"mp40" 				"1"			" Allows use of medics with this weapon"
+		"mp44" 				"1"			" Allows use of medics with this weapon"
+		"panzerschreck" 		"1"			" Allows use of medics with this weapon"
+		"shotgun"			"1"			" Allows use of medics with this weapon"
+		"springfield" 			"1"			" Allows use of medics with this weapon"
+		"thompsonsmg" 			"1"			" Allows use of medics with this weapon"
+		"unarmed" 			"1"			" Allows use of medics with this weapon"
+	endarray
+end local.weapons
+
+// Allow players to plant medics with these weapons. 1 = allow. 0 = dont allow
+// Note: if they holster their weapon or use grenade or pistol it counts as unarmed.
+
+weaponssh:
+	local.weapons =  makearray
+		//weapon name			//weapon time			//help
+		"bar" 				"1"			" Allows use of medics with this weapon"
+		"bazooka" 			"1"			" Allows use of medics with this weapon"
+		"kar98" 			"1"			" Allows use of medics with this weapon"
+		"kar98sniper" 			"1"			" Allows use of medics with this weapon"
+		"m1_garand" 			"1"			" Allows use of medics with this weapon"
+		"mp40" 				"1"			" Allows use of medics with this weapon"
+		"mp44" 				"1"			" Allows use of medics with this weapon"
+		"panzerschreck" 		"1"			" Allows use of medics with this weapon"
+		"shotgun"			"1"			" Allows use of medics with this weapon"
+		"springfield" 			"1"			" Allows use of medics with this weapon"
+		"thompsonsmg" 			"1"			" Allows use of medics with this weapon"
+		"enfield" 			"1"			" Allows use of medics with this weapon"
+		"g43" 				"1"			" Allows use of medics with this weapon"
+		"mosin_nagant_rifle" 		"1"			" Allows use of medics with this weapon"
+		"ppsh_smg" 			"1"			" Allows use of medics with this weapon"
+		"sten" 				"1"			" Allows use of medics with this weapon"
+		"svt_rifle" 			"1"			" Allows use of medics with this weapon"
+		"kar98_mortar" 			"1"			" Allows use of medics with this weapon"
+		"unarmed" 			"1"			" Allows use of medics with this weapon"
+	endarray
+end local.weapons
+
+// Allow players to plant medics with these weapons. 1 = allow. 0 = dont allow
+// Note: if they holster their weapon or use grenade or pistol it counts as unarmed.
+
+weaponsbt:
+	local.weapons =  makearray
+		//weapon name			//weapon time			//help
+		"bar"				"1"			" Allows use of medics with this weapon"			
+		"bazooka"			"1"			" Allows use of medics with this weapon"		
+		"delisle"			"1"			" Allows use of medics with this weapon"
+		"enfield"			"1"			" Allows use of medics with this weapon"
+		"g43"				"1"			" Allows use of medics with this weapon"
+		"gr_w_minedetector"		"1"			" Allows use of medics with this weapon"
+		"it_w_breda"			"1"			" Allows use of medics with this weapon"		
+		"it_w_carcano"			"1"			" Allows use of medics with this weapon"
+		"2it_w_howitzerdes"		"1"			" Allows use of medics with this weapon"
+		"it_w_moschetto"		"1"			" Allows use of medics with this weapon"
+		"kar98"				"1"			" Allows use of medics with this weapon"
+		"kar98sniper"			"1"			" Allows use of medics with this weapon"
+		"kar98_mortar"			"1"			" Allows use of medics with this weapon"
+		"m1_garand"			"1"			" Allows use of medics with this weapon"
+		"mosin_nagant_rifle"		"1"			" Allows use of medics with this weapon"
+		"mp40"				"1"			" Allows use of medics with this weapon"
+		"mp44"				"1"			" Allows use of medics with this weapon"
+		"panzerschreck"			"1"			" Allows use of medics with this weapon"
+		"ppsh_smg"			"1"			" Allows use of medics with this weapon"
+		"shotgun"			"1"			" Allows use of medics with this weapon"
+		"springfield"			"1"			" Allows use of medics with this weapon"
+		"sten"				"1"			" Allows use of medics with this weapon"
+		"svt_rifle"			"1"			" Allows use of medics with this weapon"
+		"thompsonsmg"			"1"			" Allows use of medics with this weapon"
+		"1uk_w_l42a1"			"1"			" Allows use of medics with this weapon"
+		"uk_w_piat"			"1"			" Allows use of medics with this weapon"
+		"uk_w_vickers"			"1"			" Allows use of medics with this weapon"
+		"us_w_minedetector"		"1"			" Allows use of medics with this weapon"
+		"unarmed" 			"1"			" Allows use of medics with this weapon"
+	endarray
+end local.weapons
+

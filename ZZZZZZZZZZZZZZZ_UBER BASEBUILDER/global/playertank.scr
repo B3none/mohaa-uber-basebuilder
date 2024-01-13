@@ -1,0 +1,223 @@
+main local.model local.turretmodel local.desmodel local.origin local.angles local.health local.vehiclespeed:
+
+local.tank = spawn local.model
+local.tank.origin = local.origin
+local.tank.angles = local.angles
+local.tank.turretmodel = local.turretmodel
+local.tank.desmodel = local.desmodel
+local.tank.health = local.health
+local.tank vehiclespeed local.vehiclespeed
+
+local.tank.gun = local.tank queryturretslotentity 0
+local.tank thread tankreset
+local.tank thread tankdamage
+local.tank thread tankdeath
+
+local.master = spawn scriptmaster
+
+local.master aliascache king_snd_idle sound/vehicle/veh_tank_idle1.wav soundparms 0.5 0.0 1.0 0.0 800 4000 auto loaded maps "0 1 2 3 4 5 6 7 8 9 a b c d e f g h i j k l m n o p q r s t u v w x y z "
+local.master aliascache king_snd_run sound/vehicle/veh_tank_run1.wav soundparms 1.0 0.0 1.0 0.0 800 4000 auto loaded maps "0 1 2 3 4 5 6 7 8 9 a b c d e f g h i j k l m n o p q r s t u v w x y z "
+local.master aliascache king_snd_revup sound/vehicle/veh_tank_revup1.wav soundparms 1.0 0.0 1.0 0.0 800 4000 auto loaded maps "0 1 2 3 4 5 6 7 8 9 a b c d e f g h i j k l m n o p q r s t u v w x y z "
+local.master aliascache king_snd_revdown sound/vehicle/veh_tank_revdown1.wav soundparms 1.0 0.0 1.0 0.0 800 4000 auto loaded maps "0 1 2 3 4 5 6 7 8 9 a b c d e f g h i j k l m n o p q r s t u v w x y z "
+local.master aliascache king_snd_shift1 sound/vehicle/veh_tank_shift1.wav soundparms 1.0 0.0 1.0 0.0 800 4000 auto loaded maps "0 1 2 3 4 5 6 7 8 9 a b c d e f g h i j k l m n o p q r s t u v w x y z "
+local.master aliascache king_snd_shift2 sound/vehicle/veh_tank_shift2.wav soundparms 1.0 0.0 1.0 0.0 800 4000 auto loaded maps "0 1 2 3 4 5 6 7 8 9 a b c d e f g h i j k l m n o p q r s t u v w x y z "
+local.master aliascache king_snd_shift3 sound/vehicle/veh_tank_shift3.wav soundparms 1.0 0.0 1.0 0.0 800 4000 auto loaded maps "0 1 2 3 4 5 6 7 8 9 a b c d e f g h i j k l m n o p q r s t u v w x y z "
+local.master aliascache king_snd_on sound/vehicle/veh_tank_on1.wav soundparms 1.0 0.0 1.0 0.0 800 4000 auto loaded maps "0 1 2 3 4 5 6 7 8 9 a b c d e f g h i j k l m n o p q r s t u v w x y z "
+local.master aliascache king_snd_start sound/vehicle/veh_tank_on1.wav soundparms 1.0 0.0 1.0 0.0 800 4000 auto loaded maps "0 1 2 3 4 5 6 7 8 9 a b c d e f g h i j k l m n o p q r s t u v w x y z "
+local.master aliascache king_snd_off sound/vehicle/veh_tank_off1.wav soundparms 1.0 0.0 1.0 0.0 800 4000 auto loaded maps "0 1 2 3 4 5 6 7 8 9 a b c d e f g h i j k l m n o p q r s t u v w x y z "
+local.master aliascache king_snd_stop sound/vehicle/veh_tank_off1.wav soundparms 1.5 0.0 1.0 0.0 800 4000 auto loaded maps "0 1 2 3 4 5 6 7 8 9 a b c d e f g h i j k l m n o p q r s t u v w x y z "
+local.master aliascache king_tread_snd_dirt sound/vehicle/veh_tread_grass.wav soundparms 0.25 0.0 1.0 0.0 800 4000 auto loaded maps "0 1 2 3 4 5 6 7 8 9 a b c d e f g h i j k l m n o p q r s t u v w x y z "
+local.master aliascache king_tread_snd_stone sound/vehicle/veh_tread_metal.wav soundparms 0.25 0.0 1.0 0.0 800 4000 auto loaded maps "0 1 2 3 4 5 6 7 8 9 a b c d e f g h i j k l m n o p q r s t u v w x y z "
+local.master aliascache king_tread_snd_grass sound/vehicle/veh_tread_grass.wav soundparms 0.25 0.0 1.0 0.0 800 4000 auto loaded maps "0 1 2 3 4 5 6 7 8 9 a b c d e f g h i j k l m n o p q r s t u v w x y z "
+local.master aliascache king_tread_snd_wood sound/vehicle/veh_tread_metal.wav soundparms 0.25 0.0 1.0 0.0 800 4000 auto loaded maps "0 1 2 3 4 5 6 7 8 9 a b c d e f g h i j k l m n o p q r s t u v w x y z "
+local.master aliascache king_tread_snd_mud sound/vehicle/veh_tread_grass.wav soundparms 0.25 0.0 1.0 0.0 800 4000 auto loaded maps "0 1 2 3 4 5 6 7 8 9 a b c d e f g h i j k l m n o p q r s t u v w x y z "
+local.master aliascache king_snd_doorclose sound/mechanics/DoorHatchClose_02.wav soundparms 1.0 0.0 1.0 0.0 800 4000 auto loaded maps "0 1 2 3 4 5 6 7 8 9 a b c d e f g h i j k l m n o p q r s t u v w x y z "
+local.master aliascache king_vehicle_crash1 sound/mechanics/damage_vehicle_1.wav soundparms 0.5 0.5 0.7 0.5 160 1600 auto loaded maps "0 1 2 3 4 5 6 7 8 9 a b c d e f g h i j k l m n o p q r s t u v w x y z "
+local.master aliascache king_vehicle_crash2 sound/mechanics/damage_vehicle_2.wav soundparms 0.5 0.5 0.7 0.5 160 1600 auto loaded maps "0 1 2 3 4 5 6 7 8 9 a b c d e f g h i j k l m n o p q r s t u v w x y z "
+local.master aliascache king_vehicle_crash3 sound/mechanics/damage_vehicle_3.wav soundparms 0.5 0.5 0.7 0.5 160 1600 auto loaded maps "0 1 2 3 4 5 6 7 8 9 a b c d e f g h i j k l m n o p q r s t u v w x y z "
+local.master aliascache king_vehicle_crash4 sound/mechanics/damage_vehicle_4.wav soundparms 0.5 0.5 0.7 0.5 160 1600 auto loaded maps "0 1 2 3 4 5 6 7 8 9 a b c d e f g h i j k l m n o p q r s t u v w x y z "
+local.master alias tank_idle_training sound/vehicle/veh_tank_idle1.wav soundparms 1.0 0.0 1.0 0.0 800 4000 auto streamed maps "0 1 2 3 4 5 6 7 8 9 a b c d e f g h i j k l m n o p q r s t u v w x y z"
+local.master alias tank_snd_idle sound/vehicle/veh_tank_idle1.wav soundparms 0.5 0.0 1.0 0.0 800 4000 auto streamed maps "0 1 2 3 4 5 6 7 8 9 a b c d e f g h i j k l m n o p q r s t u v w x y z"
+local.master alias tank_snd_run sound/vehicle/veh_tank_run1.wav soundparms 1.0 0.0 1.0 0.0 800 4000 auto streamed maps "0 1 2 3 4 5 6 7 8 9 a b c d e f g h i j k l m n o p q r s t u v w x y z "
+local.master aliascache tank_snd_revup sound/vehicle/veh_tank_revup1.wav soundparms 1.0 0.0 1.0 0.0 800 4000 auto loaded maps "0 1 2 3 4 5 6 7 8 9 a b c d e f g h i j k l m n o p q r s t u v w x y z "
+local.master aliascache tank_snd_revdown sound/vehicle/veh_tank_revdown1.wav soundparms 1.0 0.0 1.0 0.0 800 4000 auto loaded maps "0 1 2 3 4 5 6 7 8 9 a b c d e f g h i j k l m n o p q r s t u v w x y z "
+local.master aliascache tank_snd_shift1 sound/vehicle/veh_tank_shift1.wav soundparms 1.0 0.0 1.0 0.0 800 4000 auto loaded maps "0 1 2 3 4 5 6 7 8 9 a b c d e f g h i j k l m n o p q r s t u v w x y z "
+local.master aliascache tank_snd_shift2 sound/vehicle/veh_tank_shift2.wav soundparms 1.0 0.0 1.0 0.0 800 4000 auto loaded maps "0 1 2 3 4 5 6 7 8 9 a b c d e f g h i j k l m n o p q r s t u v w x y z "
+local.master aliascache tank_snd_shift3 sound/vehicle/veh_tank_shift3.wav soundparms 1.0 0.0 1.0 0.0 800 4000 auto loaded maps "0 1 2 3 4 5 6 7 8 9 a b c d e f g h i j k l m n o p q r s t u v w x y z "
+local.master aliascache tank_snd_on sound/vehicle/veh_tank_on1.wav soundparms 1.0 0.0 1.0 0.0 800 4000 auto loaded maps "0 1 2 3 4 5 6 7 8 9 a b c d e f g h i j k l m n o p q r s t u v w x y z "
+local.master aliascache tank_snd_start sound/vehicle/veh_tank_on1.wav soundparms 1.0 0.0 1.0 0.0 800 4000 auto loaded maps "0 1 2 3 4 5 6 7 8 9 a b c d e f g h i j k l m n o p q r s t u v w x y z "
+local.master aliascache tank_snd_off sound/vehicle/veh_tank_off1.wav soundparms 1.0 0.0 1.0 0.0 800 4000 auto loaded maps "0 1 2 3 4 5 6 7 8 9 a b c d e f g h i j k l m n o p q r s t u v w x y z "
+local.master aliascache tank_snd_stop sound/vehicle/veh_tank_off1.wav soundparms 1.0 0.0 1.0 0.0 1000 4000 auto loaded maps "0 1 2 3 4 5 6 7 8 9 a b c d e f g h i j k l m n o p q r s t u v w x y z "
+local.master aliascache tank_tread_snd_dirt sound/vehicle/veh_tread_grass.wav soundparms 0.25 0.0 1.0 0.0 800 4000 auto loaded maps "0 1 2 3 4 5 6 7 8 9 a b c d e f g h i j k l m n o p q r s t u v w x y z "
+local.master aliascache tank_tread_snd_stone sound/vehicle/veh_tread_metal.wav soundparms 0.25 0.0 1.0 0.0 800 4000 auto loaded maps "0 1 2 3 4 5 6 7 8 9 a b c d e f g h i j k l m n o p q r s t u v w x y z "
+local.master aliascache tank_tread_snd_grass sound/vehicle/veh_tread_grass.wav soundparms 0.25 0.0 1.0 0.0 800 4000 auto loaded maps "0 1 2 3 4 5 6 7 8 9 a b c d e f g h i j k l m n o p q r s t u v w x y z "
+local.master aliascache tank_tread_snd_wood sound/vehicle/veh_tread_metal.wav soundparms 0.25 0.0 1.0 0.0 800 4000 auto loaded maps "0 1 2 3 4 5 6 7 8 9 a b c d e f g h i j k l m n o p q r s t u v w x y z "
+local.master aliascache tank_tread_snd_mud sound/vehicle/veh_tread_grass.wav soundparms 0.25 0.0 1.0 0.0 800 4000 auto loaded maps "0 1 2 3 4 5 6 7 8 9 a b c d e f g h i j k l m n o p q r s t u v w x y z "
+local.master aliascache tank_snd_doorclose sound/mechanics/DoorHatchClose_02.wav soundparms 1.0 0.0 1.0 0.0 800 4000 auto loaded maps "0 1 2 3 4 5 6 7 8 9 a b c d e f g h i j k l m n o p q r s t u v w x y z "
+local.master aliascache tank_snd_dooropen sound/mechanics/DoorHatchClose_02.wav soundparms 1.0 0.0 1.0 0.0 800 4000 auto loaded maps "0 1 2 3 4 5 6 7 8 9 a b c d e f g h i j k l m n o p q r s t u v w x y z"
+local.master aliascache tank_vehicle_crash1 sound/null.wav soundparms 0.7 0.4 1.0 0.5 160 1600 auto loaded maps "m5 "
+local.master aliascache explode_tank1 sound/weapons/explo/Explo_MetalMed1.wav soundparms 0.9 0.2 0.8 0.2 1500 9000 weapon loaded maps "0 1 2 3 4 5 6 7 8 9 a b c d e f g h i j k l m n o p q r s t u v w x y z"
+local.master aliascache explode_tank2 sound/weapons/explo/Explo_MetalMed2.wav soundparms 0.9 0.2 0.8 0.2 1500 9000 weapon loaded maps "0 1 2 3 4 5 6 7 8 9 a b c d e f g h i j k l m n o p q r s t u v w x y z"
+local.master aliascache explode_tank3 sound/weapons/explo/Explo_MetalMed3.wav soundparms 0.9 0.2 0.8 0.2 1500 9000 weapon loaded maps "0 1 2 3 4 5 6 7 8 9 a b c d e f g h i j k l m n o p q r s t u v w x y z"
+local.master aliascache explode_tank4 sound/weapons/explo/Explo_MetalMed4.wav soundparms 0.9 0.2 0.8 0.2 1500 9000 weapon loaded maps "0 1 2 3 4 5 6 7 8 9 a b c d e f g h i j k l m n o p q r s t u v w x y z "
+local.master aliascache damage_tank1 sound/null.wav soundparms 0.7 0.4 0.9 0.2 160 1600 auto loaded maps "m5 "
+local.master aliascache king_snd_fire1 sound/weapons/fire/TankFire1.wav soundparms 1.5 0.0 1.0 0.0 2000 4000 weapon loaded maps "0 1 2 3 4 5 6 7 8 9 a b c d e f g h i j k l m n o p q r s t u v w x y z "
+local.master aliascache king_snd_fire2 sound/weapons/fire/TankCannonFire1.wav soundparms 1.5 0.0 1.0 0.0 2000 4000 weapon loaded maps "0 1 2 3 4 5 6 7 8 9 a b c d e f g h i j k l m n o p q r s t u v w x y z "
+local.master aliascache king_snd_move sound/vehicle/veh_tank_turret1.wav soundparms 0.9 0.2 0.9 0.2 800 4000 auto loaded maps "0 1 2 3 4 5 6 7 8 9 a b c d e f g h i j k l m n o p q r s t u v w x y z "
+local.master aliascache king_snd_turret_up sound/null.wav soundparms 0.7 0.0 1.3 0.2 800 4000 auto loaded maps "0 1 2 3 4 5 6 7 8 9 a b c d e f g h i j k l m n o p q r s t u v w x y z "
+local.master aliascache king_snd_reload sound/null.wav soundparms 0.9 0.2 0.9 0.2 800 4000 auto loaded maps "0 1 2 3 4 5 6 7 8 9 a b c d e f g h i j k l m n o p q r s t u v w x y z "
+local.master aliascache tank_snd_fire1 sound/weapons/fire/TankCannonFire1.wav soundparms 1.5 0.0 1.0 0.0 2000 4000 weapon loaded maps "0 1 2 3 4 5 6 7 8 9 a b c d e f g h i j k l m n o p q r s t u v w x y z"
+local.master aliascache tank_snd_fire2 sound/weapons/fire/Flak88Fire1.wav soundparms 1.5 0.0 1.0 0.0 2000 4000 weapon loaded maps "0 1 2 3 4 5 6 7 8 9 a b c d e f g h i j k l m n o p q r s t u v w x y z"
+local.master aliascache tank_snd_fire3 sound/weapons/fire/Flak88Fire3.wav soundparms 1.5 0.0 1.0 0.0 2000 4000 weapon loaded maps "0 1 2 3 4 5 6 7 8 9 a b c d e f g h i j k l m n o p q r s t u v w x y z"
+local.master aliascache tank_snd_fire4 sound/weapons/fire/Flak88Fire4.wav soundparms 1.5 0.0 1.0 0.0 2000 4000 weapon loaded maps "0 1 2 3 4 5 6 7 8 9 a b c d e f g h i j k l m n o p q r s t u v w x y z"
+local.master aliascache tank_snd_move sound/vehicle/veh_tank_turret1.wav soundparms 0.9 0.2 0.9 0.2 800 4000 auto loaded maps "0 1 2 3 4 5 6 7 8 9 a b c d e f g h i j k l m n o p q r s t u v w x y z"
+
+end
+
+tankreset:
+
+self fullstop
+
+self.gun remove
+waitframe
+self spawnturret 0 self.turretmodel
+self.gun = self queryturretslotentity 0
+
+local.trig = spawn trigger_useonce
+local.trig.origin = self.origin
+local.trig setsize ( -200 -200 -5 ) ( 200 200 200 )
+local.trig waittill trigger
+
+thread playergetin
+
+end
+
+playergetin:
+
+self.driver = parm.other
+
+local.team = self.driver.dmteam
+
+self.driver safeholster 1
+wait 1
+self.driver hide
+self.driver nodamage
+self.driver notsolid
+
+self attachdriverslot 0 self.driver
+self.gun dmprojectile projectiles/tigercannonshell.tik
+
+while(self.driver != NIL)
+{
+	waitframe
+
+	if(self.driver.useheld)
+	{
+		while(self.driver.useheld)
+			waitframe
+
+		cueplayer
+
+		self.driver show
+		self.driver solid
+		self.driver takedamage
+
+		self detachdriverslot 0 self.driver
+
+		self.driver.origin = self.origin + ( 0 0 200 )
+		self.driver.viewangles = (self.angles[0] self.angles[1] 0)
+		self.driver = NIL
+
+		thread tankreset
+	}
+
+	if(self.driver.dmteam == spectator)
+	{
+		local.tank = spawn self.model
+		local.tank.origin = self.origin
+		local.tank.angles = self.angles
+		local.tank.turretmodel = self.turretmodel
+		local.tank.desmodel = self.desmodel
+		local.tank.health = self.health
+
+		local.tank.gun = self queryturretslotentity 0
+		local.tank thread tankreset
+		local.tank thread tankdamage
+		local.tank thread tankdeath
+
+		self.driver = NIL
+		self.gun remove
+		self remove
+	}
+
+	if(self.driver.dmteam != local.team)
+	{
+		local.tank = spawn self.model
+		local.tank.origin = self.origin
+		local.tank.angles = self.angles
+		local.tank.turretmodel = self.turretmodel
+		local.tank.desmodel = self.desmodel
+		local.tank.health = self.health
+
+		local.tank.gun = self queryturretslotentity 0
+		local.tank thread tankreset
+		local.tank thread tankdamage
+		local.tank thread tankdeath
+
+		self.driver stufftext "reconnect"
+		self.driver = NIL
+		self.gun remove
+		self remove
+	}
+}
+
+end
+
+tankdamage:
+
+while(isalive self)
+{
+	waitframe
+
+	local.previoushealth = self.health
+
+	if(local.previoushealth > self.health)
+	{
+		self playsound damage_tank
+		exec global/earthquake.scr .2 4 0 0
+	}
+}
+
+end
+
+tankdeath:
+
+self waittill death
+self playsound explode_tank
+
+local.destank = spawn script_model
+local.destank model self.desmodel
+local.destank.origin = self.origin
+local.destank.angles = self.angles
+
+self.driver show
+self.driver solid
+self.driver takedamage
+
+self detachdriverslot 0 self.driver
+
+self.driver volumedamage 1000
+self.driver = NIL
+
+self.gun remove
+self remove
+
+local.boom = spawn script_model
+local.boom model emitters/explosion_tank.tik
+local.boom.origin = local.destank.origin
+local.boom.angles = local.destank.angles
+local.boom anim start
+waitframe
+local.boom remove
+
+end

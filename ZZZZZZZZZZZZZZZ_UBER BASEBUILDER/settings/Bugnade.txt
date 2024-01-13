@@ -1,0 +1,32 @@
+//
+// Bugnade fix settings file
+//
+//Fix by @(...:.:...)@ / Hal
+//
+//Bugnading is a word to describe the action of holding a grenade 
+//through a door, or sometimes a wall untill it blows up. When it 
+//blows up the holder does not get hurt, as the grenade is physicly 
+//on the other side of the door/wall. This also means anyone on the 
+//other side can get killed by the grenade. This fix detects when a 
+//player has 'bugnaded' and imediatley kills the player and removes 
+//a set amount of kills. This issue effects Spearhead and Breakthrough 
+//only.
+//
+//You can edit the text/values between quotes ( "" ) below to change some settings.
+
+main:
+	level.bugnadesettings = makearray
+	// The number of kills to remove from a player who is detected bugnading.
+	//The player also looses 1 for suiciding, so -3 in total (if you choose -2).
+"-2"
+	//
+	//The message the player says when he is detected bugnading:
+"I was caught bugnading* and it cost me 3 kills."
+	//
+	//The message displayed to all players on the server, explaining what bugnading is:
+"* Bugnading = blowing up grenades through walls/doors, to either prevent your own death, or kill people on the other side"
+	//
+	//The message displayed on the bugnader's screen after he is caught:
+"You have been caught bugnading. E.G you held a grenade in or through a door/wall untill it blew up."
+	endarray
+end 

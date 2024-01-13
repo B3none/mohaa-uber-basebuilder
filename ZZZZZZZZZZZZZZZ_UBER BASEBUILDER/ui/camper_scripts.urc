@@ -1,0 +1,103 @@
+menu "camper_scripts" 430 400 NONE 0
+
+
+
+
+
+resource
+Label
+{
+name "Default"
+rect 0 0 430 400
+fgcolor 0.00 0.00 0.00 1.00
+bgcolor 0.50 0.50 0.25 1.00
+borderstyle "RAISED"
+}
+resource
+ListBox
+{
+name "Default"
+rect 10 60 200 300
+fgcolor 0.00 0.00 0.00 1.00
+bgcolor 0.00 0.50 0.00 1.00
+borderstyle "RAISED"
+additem "camper" "rcon admin_cmd \"camper 1\""
+additem "cvar_forcing" "rcon admin_cmd \"cvar_forcing 1\""
+additem "team_balance" "rcon admin_cmd \"team_balance 1\""
+additem "music" "rcon admin_cmd \"music 1\""
+additem "mines" "rcon admin_cmd \"mine 1\""
+additem "time_alive" "rcon admin_cmd \"time_alive 1\""
+additem "spec_eye" "rcon admin_cmd \"spec_eye 1\""
+additem "spawn_protection" "rcon admin_cmd \"spawn_protection 1\""
+additem "weapons_limiter" "rcon admin_cmd \"weapons_limiter 1\""
+additem "message_center" "rcon admin_cmd \"message_center 1\""
+
+}
+resource
+ListBox
+{
+name "Default"
+rect 220 60 200 300
+fgcolor 0.00 0.00 0.00 1.00
+bgcolor 0.00 0.50 0.00 1.00
+borderstyle "RAISED"
+additem "camper" "rcon admin_cmd \"camper 0\""
+additem "cvar_forcing" "rcon admin_cmd \"cvar_forcing 0\""
+additem "team_balance" "rcon admin_cmd \"team_balance 0\""
+additem "music" "rcon admin_cmd \"music 0\""
+additem "mines" "rcon admin_cmd \"mine 0\""
+additem "time_alive" "rcon admin_cmd \"time_alive 0\""
+additem "spec_eye" "rcon admin_cmd \"spec_eye 0\""
+additem "spawn_protection" "rcon admin_cmd \"spawn_protection 0\""
+additem "weapons_limiter" "rcon admin_cmd \"weapons_limiter 0\""
+additem "message_center" "rcon admin_cmd \"message_center 0\""
+
+}
+resource
+Label
+{
+title "Select a script to turn on or off"
+name "Default"
+rect 20 10 390 20
+fgcolor 0.00 0.00 0.00 1.00
+bgcolor 0.50 0.50 0.00 1.00
+borderstyle "RAISED"
+}
+resource
+Label
+{
+title "Turn off"
+name "Default"
+rect 220 40 200 20
+fgcolor 0.00 0.00 0.00 1.00
+bgcolor 0.50 0.00 1.00 1.00
+borderstyle "3D_BORDER"
+}
+resource
+Label
+{
+title "Turn on"
+name "Default"
+rect 10 40 200 20
+fgcolor 0.00 0.00 0.00 1.00
+bgcolor 0.50 0.00 1.00 1.00
+borderstyle "3D_BORDER"
+}
+resource
+Button
+{
+title "Close"
+name "Default"
+rect 20 370 390 20
+fgcolor 0.00 0.00 0.00 1.00
+bgcolor 0.50 0.50 0.00 1.00
+borderstyle "RAISED"
+stuffcommand "popmenu 0"
+clicksound "sound/menu/back.wav"
+hoversound "menu/sound/scroll.wav"
+font facfont-20
+shader "menu_button_trans"
+hovershader "menu_button_glow"
+
+}
+end.

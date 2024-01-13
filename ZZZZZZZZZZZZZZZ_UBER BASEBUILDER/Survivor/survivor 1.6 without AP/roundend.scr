@@ -1,0 +1,116 @@
+main:
+
+
+	iprintlnbold "The battle is over"
+	
+	local.winner = waitthread get_winner
+
+	wait 1
+	if(local.winner == NIL)
+	{
+		exec Survivor/hud.scr ("It was a draw!")
+		local.dmmanager = spawn DM_Manager
+		local.dmmanager doroundtransition  
+	}
+	else
+	{
+		//increase the times the battle has been won
+		level.round_times = getcvar "survivor_times"
+		level.round_times = int level.round_times
+		level.round_times++
+		setcvar "survivor_times" level.round_times
+
+		if(level.team != 1)
+		{
+			exec Survivor/hud.scr ("We have the Survivor")
+			local.winner dmmessage 0 "I am the winner!"
+
+			local.winner stufftext "playmp3 main/sound/music/medicdance.mp3"
+			local.winner thread playmusicFFA
+		}
+		else
+		{
+			thread playmusic local.winner.dmteam
+		}
+			
+		local.winner waitexec survivor/camera.scr::winner local.winner.dmteam
+	}
+
+	wait 1
+	exec Survivor/hud.scr ("Starting new round")
+	wait 1
+	waitthread inform_players
+	exec survivor/setup.scr::startround
+
+end
+
+
+get_winner:
+	for (local.i = 1;local.i <= $player.size; local.i++ )
+	{	
+		wait 1
+		local.player = $player[local.i]
+
+		if(local.player.dmteam != "spectator" && local.player.playing == 1)
+		{
+			end local.player
+		}
+	}
+
+end
+
+inform_players:
+	
+	for (local.i = 1;local.i <= $player.size; local.i++ )
+	{	
+		local.player = $player[local.i]
+	
+		if(local.player.dmteam != "spectator" && local.player.playing == 0)
+		{
+			local.player iprint "You can now join the new round"
+		}
+	}
+end
+
+playmusic local.team:
+	
+	for (local.i = 1;local.i <= $player.size; local.i++ )
+	{	
+		local.player = $player[local.i]
+	
+		if(local.player.dmteam == local.team && local.player.dmteam != "spectator")
+		{
+			local.player stufftext "playmp3 main/sound/music/medicdance.mp3"
+		}
+		else 
+		{
+			local.player stufftext "playmp3 main/sound/music/mus_17c_failure.mp3"
+		}
+	}
+
+end
+
+playmusicFFA:
+	
+	for (local.i = 1;local.i <= $player.size; local.i++ )
+	{	
+		local.player = $player[local.i]
+	
+		if(local.player.dmteam != self)
+		{
+			local.player stufftext "playmp3 main/sound/music/mus_17c_failure.mp3"
+		}
+	}
+
+end
+
+stopmusic:
+
+	for (local.i = 1;local.i <= $player.size; local.i++ )
+	{	
+		$player[local.i] stufftext "stopmp3"	
+	
+		//if(level.run["music"] != "1" && local.player.dmteam != "spectator"){end}
+		// man sod the spec music on admin-pro:D
+	}
+end

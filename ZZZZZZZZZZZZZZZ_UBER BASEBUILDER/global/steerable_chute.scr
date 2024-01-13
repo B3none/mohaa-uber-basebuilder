@@ -1,0 +1,69 @@
+main local.ask:
+
+	if(local.ask=="LANDED" && self.ejecting!=0)
+	{
+		self gravity 1
+		self.ejecting=0
+		self forcelegsstate STAND
+		self.ejecting=0
+	}
+end
+
+parachute local.cobra_para local.chute:
+
+	local.cobra_para playsound chute
+
+	local.vec = local.cobra_para.velocity
+
+	local.velocity_get = -230 // adjust for descent speed
+
+	local.cobra_para forcelegsstate STAND
+	local.cobra_para forcetorsostate STAND
+	
+	local.cobra_para.ejecting=1
+
+	while(local.cobra_para.ejecting==1)
+	{
+IPRINTLN ""
+		if(local.cobra_para.health>2)
+		{
+			local.vec[0] = local.cobra_para.velocity[0]
+			local.vec[1] = local.cobra_para.velocity[1]
+			local.vec[2] = local.velocity_get
+
+			local.cobra_para.velocity = local.vec
+		}
+		
+		if(local.cobra_para.health<2)
+		{
+			local.cobra_para.ejecting=0
+			local.chute speed 205
+			//local.chute anim collapse
+			local.chute movedown 1500
+			local.chute waitmove
+			local.chute remove
+
+		}
+		
+		if(local.cobra_para.dmteam=="spectator")
+		{
+			local.cobra_para.ejecting=0
+			local.chute remove
+		}
+
+	waitframe
+	}
+	local.cobra_para forcelegsstate CROUCH_IDLE
+	local.chute detach local.cobra_para
+	wait .1
+	local.cobra_para forcelegsstate STAND
+	local.chute speed 50 //90 
+	local.chute movedown 500 
+	local.chute anim collapse
+	local.chute waitmove
+	
+	//local.chute waittill animdone
+	wait 5
+	local.chute remove
+
+end

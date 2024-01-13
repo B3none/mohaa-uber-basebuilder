@@ -1,0 +1,67 @@
+// run the adverts
+// run them how user sets. message printing is in messages.scr - this is so u cna edit how it displays easier
+
+main:
+	
+	if(level.run["message-center"] != "1"){end}
+
+	level waittill spawn
+
+	level.msginginuse=0
+
+	//load the messages
+	local.messages = waitexec game.file["message-center"]::messages
+
+	while(level.run["message-center"] == "1")
+	{
+		local.msgtime = waitexec global/settings.scr::getcmd "advert-time"
+		local.msgtime = int local.msgtime
+
+		if(local.msgtime < 0.05 || local.msgtime == NIL)
+		{
+			local.msgtime = 1
+		}
+
+		local.msgdelay = waitexec global/settings.scr::getcmd "advert-delay"
+		local.msgdelay = int local.msgdelay
+
+		if(local.msgdelay < 0.05 || local.msgdelay == NIL)
+		{
+			local.msgdelay = 1
+		}
+
+		wait local.msgtime	
+
+		for(local.i=1;local.i<=local.messages.size;local.i++)
+		{
+			if(level.run["message-center"] != "1"){end}
+
+			if(local.messages[local.i].size == 4)
+			{
+				local.colour = local.messages[local.i][4]
+			}
+			else
+			{
+				local.colour = "none"	
+			}
+
+			switch(local.messages[local.i][3])
+			{
+			case "fade":
+				waitexec global/ac/messaging/messages_fade.scr local.messages[local.i][1] local.messages[local.i][2] local.colour
+			break
+			case "typewriter":
+				waitexec global/ac/messaging/messages_typewriter.scr local.messages[local.i][1] local.messages[local.i][2] local.colour
+			break
+			case "scroll":
+				waitexec global/ac/messaging/messages_scroll.scr local.messages[local.i][1] local.messages[local.i][2] local.colour
+			break		
+			default:
+				waitexec global/ac/messaging/messages_fade.scr local.messages[local.i][1] local.messages[local.i][2] local.colour
+			}
+
+			wait local.msgdelay
+		}	
+	}
+
+end

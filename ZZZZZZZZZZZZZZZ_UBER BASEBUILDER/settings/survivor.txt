@@ -1,0 +1,10 @@
+main:
+	local.settings = makearray
+		//command			//setting			//help	
+		"survivor-lives"		"3"				"How many lives each round a player gets"
+		"survivor-warmup"		"5"				"Time in seconds to do a warmup before round starts"
+		"survivor-rounds"		"2"				"how many rounds to run before the map changes"
+	endarray
+
+end local.settings
+		

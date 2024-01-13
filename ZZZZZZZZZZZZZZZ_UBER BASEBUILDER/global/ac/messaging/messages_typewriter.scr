@@ -1,0 +1,123 @@
+
+// print the adverts
+main local.msg local.delay local.colour:
+
+	if(level.msginginuse==1)
+	{
+		while(level.msginginuse==1)
+		{
+			wait 1
+		}
+	}
+
+	local.delay = int local.delay
+
+	level.msginginuse=1
+
+	local.font = waitexec global/settings.scr::getcmd  "advert-font" 
+	local.virt = waitexec global/settings.scr::getcmd  "virtualsize" 
+	local.virt = int local.virt
+
+	local.wordcount = 0
+
+	if(local.font == NIL)
+	{
+		local.font = "facfont-20"
+	}
+
+
+	if(local.colour == "none" )
+	{
+		local.lightcolour = waitexec global/settings.scr::getcmd  "advert-colour" 
+		if(local.lightcolour == NIL)
+		{
+			local.light[1] = 1
+			local.light[2] = 0
+			local.light[3] = 1
+		}
+		else
+		{
+			if(local.lightcolour == "random")
+			{
+				local.light = waitexec global/nagle.scr::random_light
+			}
+			else
+			{
+				local.light = waitexec global/nagle.scr::light_from_string local.lightcolour
+			}
+		}
+	}
+	else
+	{
+		if(local.colour == "random")
+		{
+			local.light = waitexec global/nagle.scr::random_light
+		}
+		else
+		{
+			local.light = waitexec global/nagle.scr::light_from_string local.colour
+		}
+	}
+
+
+	if(local.delay == NIL)
+	{
+		local.delay = 2
+	}
+
+
+
+	local.type = ""
+	local.click = waitexec global/settings.scr::getcmd "typewriter-click"
+	
+	local.bl = 0
+	for(local.i= 0; local.i <=  local.msg.size - 1; local.i++)
+	{
+		wait .1
+
+		if(local.click=="1")
+		{
+			$player playsound objective_text2
+		}
+
+		if(local.bl == 0 )
+		{
+			local.blink = "_"
+			local.bl = 1
+		}
+		else
+		{
+			local.blink = ""
+			local.bl = 0
+		}
+
+		local.type = ( local.type + local.msg[local.i] )
+
+		local.lengh = 0
+		local.lengh =  ( local.lengh - local.msg.size )
+
+
+		local.lengh = local.lengh * 3
+		// draw the overlay coloured string
+		huddraw_virtualsize 51 local.virt
+		huddraw_rect 51 local.lengh 200 0 0
+		huddraw_color 51 local.light[1] local.light[2] local.light[3]
+		huddraw_font 51 local.font
+		huddraw_string 51 ( local.type + local.blink )
+		huddraw_align 51 "center" "center"
+		huddraw_alpha 51 1
+	}	
+
+	huddraw_string 51 ( local.type + "")
+
+	wait local.delay
+
+	// display a fade-out
+	for (local.i = 1; local.i >= 0; local.i -= .1)
+	{
+		huddraw_alpha 51 local.i
+		waitframe
+	}
+
+	level.msginginuse=0
+end 

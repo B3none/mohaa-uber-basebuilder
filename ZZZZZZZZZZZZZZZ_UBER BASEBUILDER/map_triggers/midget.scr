@@ -1,0 +1,28 @@
+main local.origin:
+
+local.trig = spawn trigger_multiple
+local.trig.origin = ( local.origin )        
+local.trig setsize ( -10 -10 -10 ) ( 10 10 10 )  
+local.trig setthread  Trigger1 
+local.trig message "you have found the midget trigger"
+local.trig wait 1    
+local.trig delay 0 
+
+Trigger1:  
+self waittill trigger   
+local.player=parm.other 
+if (local.player.isTrigger1==1) 
+end    
+
+local.player.isTrigger1=1  
+local.player.scale = .5  //This makes the player a midget 
+local.player stufftext "say i have found the midget trigger!!!"
+wait 1  
+ 
+local.player.isTrigger1=0
+end  
+
+
+
+
+                                                                                                                           

@@ -1,0 +1,302 @@
+main:
+	
+	if(self.flying == 1)
+	{
+		self.scale = 1
+		end
+	}
+
+	if(self.OWNS == 1)
+	{
+		self.scale = 1
+		self.flying = 0
+		end
+	}
+
+	self.no_usemine = 1 //stop them using a mine
+	self.no_usemedic = 1 //stop medics
+
+	self.flying = 1
+	self takedamage
+
+	local.team = self.dmteam
+
+	if(level.planes_max["allies"]== NIL)
+	{
+		waitexec server_planes/setup.scr
+	}
+
+	level.planes[local.team]++
+
+	local.allies = waitexec global/settings.scr::getcmd "max-allies"
+	local.axis = waitexec global/settings.scr::getcmd "max-axis"
+
+	level.planes_max["allies"] = int local.allies 
+	level.planes_max["axis"] = int local.axis
+
+	if(level.planes[local.team] == level.planes_max[local.team])
+	{
+		exec server_planes/trigger3.scr::from_fly local.team
+	}
+
+	self hide
+	if(self.instructed!=1)
+	{
+		self waitexec server_planes/first_flight_instructions.scr
+	}
+
+	//spawn the plane
+	local.plane = spawn script_model "targetname" ("flyingplane" + self.entnum)
+	if(self.dmteam == "axis")
+	{
+		local.plane model "vehicles/c47fly.tik"
+	}
+	else
+	{
+		local.plane model "vehicles/c47fly.tik"	
+	}
+
+	local.plane.origin = self.plane_start
+	local.plane.scale = self.scale 
+
+
+	if(self.seat==NIL)
+	{
+
+
+		if(local.plane.scale == .75)
+		{
+			self.seat[0] = -335 //3
+			self.seat[1] = 10
+		}
+		else if(local.plane.scale == .2)
+		{
+			self.seat[0] = -115 //3
+			self.seat[1] = -50 //-65
+		}
+		else
+		{
+			self.seat[1] = -65
+		}
+	}
+		
+	if(local.plane.scale == .75)
+	{
+		local.plane setsize ( -100 -100 -5 ) ( 100 100 30 )
+	}
+	else if(local.plane.scale == .2)
+	{
+		local.plane setsize ( -60 -60 -5 ) ( 60 60 10 )
+	}
+
+	local.plane touchtriggers
+
+	local.plane physics_on
+	local.plane.gravity = 0
+
+	//set the plane
+	self.plane = local.plane
+
+	//hmm
+	local.plane takedamage
+
+	self.maxspeed = waitexec global/settings.scr::getcmd "maxspeed"
+	self.minspeed = waitexec global/settings.scr::getcmd "minspeed"
+	local.speed =  waitexec global/settings.scr::getcmd "startspeed"
+	self.candrop =  waitexec global/settings.scr::getcmd "plane-bombs"
+	self.rocket_ammo =  waitexec global/settings.scr::getcmd "rockets"
+	level.plane_hit_damage =  waitexec global/settings.scr::getcmd "plane-hit-dmg"
+	self.acceleration =  waitexec global/settings.scr::getcmd "acceleration"
+	self.deceleration =  waitexec global/settings.scr::getcmd "deceleration"
+	self.health = waitexec global/settings.scr::getcmd "plane-bots-damage"
+
+	self.acceleration = int self.acceleration
+	self.deceleration = int self.deceleration
+
+	//set start speed
+	waitexec server_planes/speedup.scr local.speed self
+
+	self.maxspeed = int self.maxspeed 
+	self.minspeed = int self.minspeed 
+	self.candrop = int self.candrop
+	self.rocket_ammo  = int self.rocket_ammo 
+
+	self solid
+	self forcetorsostate PLANE_TORSO
+	self forcelegsstate STAND
+	self hide
+	self.scale = 1
+	//self gravity 0
+	self.planeweap = 1 
+	self.rocketside=1
+	self.firingrocket=0
+	self.spawnedmg = 0
+	self.extraangle = 0
+	self.in_para_drop=0
+	self.shooting=0	
+	self.shootdelay = 0.10
+	self.changedelay = .3
+	self.canchange = 1 
+	self.ejecting=0	
+
+	//announce Player in plane
+	local.team  = waitexec global/strings.scr::to_upper local.team  0
+	iprintlnbold (local.team  + " Aircraft Spotted On Radar!!!")
+	local.team = self.dmteam
+
+	local.plane.angles = self.viewangles
+//main loop
+	self exec server_planes/plane_crash.scr::plane_crash
+	self exec server_planes/damage.scr::shotdown_setup //setup shot by trigger
+
+	local.plane loopsound fly_snd
+
+	
+	//self exec server_planes/avatar.scr
+
+	self.z = 0
+
+	while(isalive self && self.dmteam == local.team && self.ejecting!=1)
+	{
+		if(self==NIL || self==NULL)
+		{
+			end
+		}
+
+		self waitthread playerkeep
+
+/// set planes angles
+
+
+
+		if(self.viewangles[1] != local.oldangle)
+		{
+			local.viewvec = angles_toforward self.viewangles
+			local.leftdot = vector_dot local.viewvec self.leftvector
+			local.right = 0
+			local.right -= local.leftdot
+			
+			self.z = self.z  + local.right * 10
+
+			local.newangle = local.right * 100 // * 200 //350 //400 //50
+
+
+			local.newangle =  self.viewangles[2] + local.newangle
+			local.plane.angles = ( self.viewangles[0]  self.viewangles[1] local.newangle )
+			
+			local.newangle =  local.newangle / 10
+
+			
+			self.viewangles = ( self.viewangles[0]  self.viewangles[1] self.z )
+
+		}
+		else
+		{
+			
+			if(self.z > 10 || self.z < -10 )
+			{
+				if(self.z >=1)
+				{ 
+					if(self.z > 180)
+					{
+						self.z += 10
+					}
+					else
+					{
+						self.z -= 10
+					}
+				}
+				else if(self.z <= -1)
+				{
+					if(self.z < -180)
+					{
+						self.z -= 10
+					}
+					else
+					{
+						self.z += 10
+					}
+				}
+			}
+			else
+			{
+				if(self.z >=1)
+				{ 
+					self.z -= 1
+				}
+				else if(self.z <= -1)
+				{
+					self.z+= 1
+				}
+			}
+
+			self.viewangles = ( self.viewangles[0]  self.viewangles[1] self.z )
+
+			local.plane.angles = 	self.viewangles
+			
+		}
+
+		local.oldangle = self.viewangles[1]
+
+		if(self.z >= 360)
+		{
+			self.z = 0
+		}
+		else if(self.z <= -360)
+		{
+			self.z = 0
+		}
+
+
+		local.plane.velocity = local.plane.forwardvector * self.speed
+
+		if(self.useheld==1 && self.canchange == 1)
+		{
+			self exec server_planes/damage.scr "CHANGE_WEAPON"
+		}
+		
+		
+		if(self.fireheld==1 && self.shooting != 1)
+		{
+			//local.move = self getmovement
+			//if(local.move != "walking")
+			//{
+				self exec server_planes/damage.scr "SHOOT"	
+			//}
+		}
+				
+		waitframe
+
+//colision
+
+		if(local.origin==self.origin)
+		{
+			self exec server_planes/plane_crash.scr::plane_explode
+			self kill
+			end
+		}
+		
+		local.origin = self.origin
+	}
+	
+	self.no_usemine = 0 //can use a mine again
+	self.no_usemedic = 0 //
+	self.health = 100 // bot setup
+
+////// END OF MAIN LOOOP
+	level.planes[local.team]--
+	self exec server_planes/plane_crash.scr::plane_crashing //crash sequence
+
+	if(self.plane != NIL && self.plane != NULL)
+	{	
+		waitframe
+		self.origin = self.plane.origin + ( 0 10 100 )
+	}
+end
+
+
+playerkeep:
+	local.offset = self.plane.origin + ( 0 0 self.seat[1] ) + self.plane.forwardvector  * self.seat[0] + 0.05 * self.plane.forwardvector * self.speed
+	self.origin = local.offset
+end
+

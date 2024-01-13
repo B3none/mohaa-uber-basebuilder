@@ -1,0 +1,18 @@
+main local.speed local.player:
+
+	local.speed = waitexec global/strings.scr::split_line local.speed 1 "-"
+
+	self.speed = int local.speed[1][1]
+	local.player thread speedup local.speed[1][2] 
+end
+
+speedup local.speed:
+
+	local.speed = int local.speed
+
+	while(self.speed < local.speed)
+	{
+		self.speed += self.acceleration
+		waitframe
+	}
+end

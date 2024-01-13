@@ -1,0 +1,23 @@
+main local.origin:
+
+local.trig = spawn trigger_multiple
+local.trig.origin = ( local.origin )        
+local.trig setsize ( -10 -10 -10 ) ( 10 10 10 )  
+local.trig setthread  Trigger3 
+local.trig message "you have found the normal size trigger"
+local.trig wait 1    
+local.trig delay 0 
+
+Trigger3:
+self waittill trigger
+local.player=parm.other
+if (local.player.isTrigger3==1)
+end
+
+local.player.isTrigger3=1
+local.player.scale = 1        //This makes the player Normal size
+local.player stufftext "say i have found the normal size trigger!!!"
+wait 1
+local.player.isTrigger3=0
+end
+

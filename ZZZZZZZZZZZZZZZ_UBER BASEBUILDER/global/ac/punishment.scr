@@ -1,0 +1,29 @@
+// Anti camper punishment script by Elgan Sayer
+// version 0.00
+//
+// Questions should go to www.mods-r-us.net forums or elgan.sayer@gmail.com
+//
+// feel free to pass or tamper with this mod as its for u!
+// 
+// www.mods-r-us.net
+//
+//
+// **************************************************************************************************************************************
+
+
+// This is the punishment for max camps. it simply kicks the player.
+
+main:
+	
+	self iprint "You are being kicked for camping" 1 //tell him/her
+
+	wait 5
+
+	self stufftext "connect 0 0 0" //kick player
+	wait 3
+
+	if(self)
+	{
+		self stufftext "disconnect" //kick player
+	}
+end

@@ -1,0 +1,59 @@
+// Main include file for 3rd person player models
+setup
+{
+	scale .52	// Set default scale to 16/30.5 since world 
+	setsize			"-2 -2 -2" "2 2 2"
+	radius 20	
+	ischaracter
+}
+
+init
+{
+	client
+	{
+	setsize			"-2 -2 -2" "2 2 2"
+	}
+	server
+	{
+	setsize			"-1 -1 -1" "1 1 .5" // Cache sounds here
+take models/weapons/silencedpistol.tik // Silenced Pistol
+give models/weapons/p38.tik // Walther P38
+give models/weapons/colt45.tik // Colt 45
+give models/weapons/kar98sniper.tik // K98 Sniper
+give models/weapons/kar98.tik // K98
+give models/weapons/mp40.tik // MP40
+give models/weapons/mp44.tik // StG44
+give models/weapons/steilhandgranate.tik // Axis Nade
+take models/weapons/panzerschreck.tik // Panzerschreck
+take models/weapons/springfield.tik // Springfield
+give models/weapons/bar.tik // BAR
+give models/weapons/thompsonsmg.tik // Thmpson
+give models/weapons/m1_garand.tik // M1 Garand
+give models/weapons/m2frag_grenade.tik // Allied Nade
+give models/weapons/bazooka.tik // Bazooka
+take models/weapons/shotgun.tik // Shotgun
+	}
+}
+//
+// base sound folder definitions
+//
+
+//
+// include the animation files for the player
+//
+$include models/player/base/anims_pistol.txt
+$include models/player/base/anims_rifle.txt
+$include models/player/base/anims_smg.txt
+$include models/player/base/anims_mg.txt
+$include models/player/base/anims_grenade.txt
+$include models/player/base/anims_steilhandgranate.txt
+$include models/player/base/anims_bazooka.txt
+$include models/player/base/anims_shotgun.txt
+$include models/player/base/anims_mp40.txt
+$include models/player/base/anims_mp44.txt
+$include models/player/base/anims_misc.txt
+
+$include models/player/base/anims_shared.txt
+
+// need to indicate the end of the tiki file because we have a tiki command at the end
+//end

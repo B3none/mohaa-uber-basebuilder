@@ -1,0 +1,309 @@
+main:
+
+// set scoreboard messages
+//KEEP THESE! DO NOT EDIT THIS BIT!
+setcvar "g_obj_alliedtext1" "m1l1"
+setcvar "g_obj_alliedtext2" "UBER BASEBUILDER by"
+setcvar "g_obj_alliedtext3" "])ar]{Gen.SearingWolfe"
+setcvar "g_obj_axistext1" "be a member at"
+setcvar "g_obj_axistext2" "www.freewebs.com/"
+setcvar "g_obj_axistext3" "mohaa-DarK-clan"
+
+
+setcvar "g_scoreboardpic" "m1l1"
+
+setcvar "g_gametype" "2"
+setcvar "fraglimit" "0"
+setcvar "timelimit" "50"
+setcvar "dmrespawning" "1" 
+setcvar "dmroundlimit" "20" 
+setcvar "level.clockside" "kills" 
+
+setcvar "cheats" "1"
+setcvar "thereisnomonkey" "1"
+
+//------------------------------|time to build
+//----------------------------------|object limit
+exec alienx/basebuild.scr::main 1000 10000
+if(level.roundbased)
+	thread roundbasedthread
+
+//	Axis spawn points
+//--------------------------------------------
+
+spawn info_player_axis "origin" "-5555 443 376" "angle" "58" "targetname" "ax_1"
+spawn info_player_axis "origin" "-5290 -506 482" "angle" "30" "targetname" "ax_2"
+spawn info_player_axis "origin" "-5701 692 376" "angle" "7" "targetname" "ax_3"
+spawn info_player_axis "origin" "-5632 79 378" "angle" "99" "targetname" "ax_4"
+spawn info_player_axis "origin" "-4926 594 390" "angle" "3" "targetname" "ax_5"
+spawn info_player_axis "origin" "-4501 1004 480" "angle" "162" "targetname" "ax_6"
+spawn info_player_axis "origin" "-4802 1115 480" "angle" "-32" "targetname" "ax_7"
+spawn info_player_axis "origin" "-5671 369 440" "angle" "-10" "targetname" "ax_8"
+spawn info_player_axis "origin" "-5722 575 424" "angle" "-7" "targetname" "ax_9"
+spawn info_player_axis "origin" "-5922 1485 432" "angle" "-86" "targetname" "ax_10"
+
+//------------------------------------------------
+//	Allied spawn points
+//------------------------------------------------
+
+spawn info_player_allied "origin" "-4998 -3289 84" "angle" "-179" "targetname" "Al_1"
+spawn info_player_allied "origin" "-2573 -2803 320" "angle" "158" "targetname" "Al_2"
+spawn info_player_allied "origin" "-2650 -4335 98" "angle" "143" "targetname" "Al_3"
+spawn info_player_allied "origin" "-2298 -3846 70" "angle" "119" "targetname" "Al_4"
+spawn info_player_allied "origin" "-1733 -2273 320" "angle" "130" "targetname" "Al_5"
+spawn info_player_allied "origin" "-4524 -2430 100" "angle" "101" "targetname" "Al_6"
+spawn info_player_allied "origin" "-4929 -2618 94" "angle" "82" "targetname" "Al_7"
+spawn info_player_allied "origin" "-4802 -3037 73" "angle" "58" "targetname" "Al_8"
+spawn info_player_allied "origin" "-4011 -3248 149" "angle" "86" "targetname" "Al_9"
+spawn info_player_allied "origin" "-2427 -2986 73" "angle" "103" "targetname" "Al_10"
+
+		exec global/exploder.scr
+	exec global/loadout.scr "maps/m1l1.scr"
+exec global/door_locked.scr
+
+	//removed stuff from sp
+	removeclass actor
+   $hahaha hide
+	$hahaha notsolid
+	$temptruck2 remove
+	$temptruck1 remove
+	$deadtruck remove
+	$truckclip2 remove
+	$2ndtruckclip remove
+	$endshutterR remove
+	$endshutterL remove
+	$door remove
+	$doorL remove
+	$doorR remove
+	$ending_save_player remove
+	$toss remove
+	$clippy remove
+	$door_end_left remove
+	$door_end_right remove
+	$endshutterR2 remove
+	$endshutterL2 remove
+	$endshutterR3 remove
+	$endshutterL3 remove
+	$bazookatarget remove
+	$aispawn remove
+	$mg42target remove
+	$dooropener remove
+	$intro_bazooka_target remove
+	$ignoreme_trigger remove
+	$enemyspawnertrigger remove
+	$kill_roof remove
+	$endtrigger remove
+	$endthelevel remove
+	$jeep_trigger remove
+	$endtriggergun remove
+	$endarea remove
+	$mg42temptrigger remove
+	$intro_bazookatarget remove
+	$lockeddoor remove
+	$door_locked remove
+        $newtruckclip remove
+	 
+level waittill prespawn 
+
+//allies
+exec alienx/basebuild.scr::basebuild ( -1396.75 -3915.47 79.34 ) "static/indycrate.tik" 1 0 1 0 90 .5 0 0 1
+exec alienx/basebuild.scr::basebuild ( -1389.28 -3739.33 61.43 ) "statweapons/mg42_gun.tik" 1 1 0 0 90 .5 0 0 1
+exec alienx/basebuild.scr::basebuild ( -1402.93 -3526.67 48.64 ) "static/sandbag_link_main_winter.tik" 1 0 0 1 90 .5 0 0 1
+exec alienx/basebuild.scr::basebuild ( -1401.90 -3368.61 55.51 ) "static/indycrate.tik" 1 1 0 1 90 .5 1 0 1
+exec alienx/basebuild.scr::basebuild ( -1384.12 -3146.00 98.10) "static/bunkertable.tik" 1 1 1 0 90 .5 0 1 1
+exec alienx/basebuild.scr::basebuild ( -1550.44 -4080.68 86.02 ) "static/barbwire.tik" 1 0 1 1 90 .5 0 0 1
+exec alienx/basebuild.scr::basebuild ( -1697.22 -4194.81 91.84 ) "static/bookcase.tik" 1 1 1 1 90 .5 0 0 1
+exec alienx/basebuild.scr::basebuild ( -1692.38 -4324.43 94.04) "static/sandbag_longsegment.tik" 1 1 1 1 90 .5 0 0 1
+exec alienx/basebuild.scr::basebuild ( -1400.62 -3256.10 57.86) "static/bodies_tarp.tik" 1 1 1 1 90 .5 0 0 1
+
+//axis
+exec alienx/basebuild.scr::basebuild ( -4059.54 291.12 385.96 ) "static/indycrate.tik" 1 0 1 0 90 .5 0 0 1
+exec alienx/basebuild.scr::basebuild ( -4059.13 168.20 376.74  ) "statweapons/mg42_gun.tik" 1 1 0 0 90 .5 0 0 1
+exec alienx/basebuild.scr::basebuild ( -4060.17 75.82 376.47 ) "static/sandbag_link_main_winter.tik" 1 0 0 1 90 .5 0 0 1
+exec alienx/basebuild.scr::basebuild ( -4065.73 -24.48 369.19 ) "static/indycrate.tik" 1 1 0 1 90 .5 1 0 1
+exec alienx/basebuild.scr::basebuild ( -4436.78 -245.03 377.12 ) "static/bunkertable.tik" 1 1 1 0 90 .5 0 1 1
+exec alienx/basebuild.scr::basebuild ( -4445.87 -119.83 380.13 ) "static/barbwire.tik" 1 0 1 1 90 .5 0 0 1
+exec alienx/basebuild.scr::basebuild ( -4440.29 -34.57 380.13 ) "static/static_naziflag1.tik" 1 1 1 1 90 .5 0 0 1
+exec alienx/basebuild.scr::basebuild ( -4439.11 65.72 380.13) "static/sandbag_longsegment.tik" 1 1 1 1 90 .1 0 0 1
+exec alienx/basebuild.scr::basebuild ( -4440.80 159.98 380.15 ) "static/bodies_tarp.tik" 1 1 1 1 90 .5 0 0 1
+exec alienx/basebuild.scr::basebuild ( -4254.65 -801.42 401.07 ) "static/banquet_table.tik" 1 1 1 0 90 .5 0 0 1
+
+exec global/jetpack.scr ( -1922 -3754 43 ) //allies
+exec global/jetpack.scr ( -4331 852 452 ) //axis
+
+exec global/dog.scr ( -5287 -2485 161 )
+
+exec guidedmissile/spawntrigger.scr ( -1797 -3574 32 ) //axis
+exec guidedmissile/spawntrigger.scr ( -4164 737 449 ) //allies
+
+	//*** precache dm stuff
+	exec global/dmprecache.scr
+
+	//hud
+	exec alienx/hud.scr::main
+
+	level.script = maps/m2l1.scr
+	exec global/ambient.scr m1l1
+
+	//exec global/ambient.scr m2l1
+
+	//$world farplane 5000
+	//$world farplane_color (.333 .333 .329)
+
+
+exec map_triggers/allweapons.scr ( -4471 1180 460 )
+exec map_triggers/giant.scr ( -4423 -1784 259 )
+exec map_triggers/invisible.scr ( -4578 -3846 512 )
+exec map_triggers/invulnerable.scr ( -3939 1311 1100 )
+exec map_triggers/midget.scr ( -4781 -2657 75 )
+exec map_triggers/normal.scr ( -2951 -1821 269 )
+exec map_triggers/health.scr ( -6064 1528 440 ) ( -5471 784 376 ) ( -4759 15 372 ) ( -4836 1192 460 ) ( -3487 560 458 ) ( -3205 -390 411 ) ( -5446 -2330 401 ) ( -4544 -3836 97 ) ( -2608 -2856 320 ) ( -1428 -4217 112 )
+
+	setcvar "r_fastsky" "1"
+	$world farplane 5000
+	$world farplane_color (0 0 0)
+
+exec server_planes/trigger.scr ( -4251.69 795.54 447.40 ) "axis" .2
+exec server_planes/trigger.scr ( -1933.83 -3619.44 30.97 ) "allies" .2
+   
+
+	level waittill spawn
+
+
+
+//#########################################
+
+//----------------------------------------------------------------------------------
+level waittill spawn
+//----------------------------------------------------------------------------------
+       
+exec global/Cobra_Airstrike.scr::Radio_Airstrike ( -3779 -3333 189 ) ( 0 0 -20 ) ( -4393 -8905 2166 ) ( -4223 -3419 944 ) ( -4170 4961 3274 ) ( 0 88 0 ) "7" ( -4204 -129 378 ) ( -4242 522 426 ) "6.4"
+
+spawnbazookaguy local.breaksay:
+	$endingexploder thread endingexploder
+
+//	println "spawned bazookaguy"
+
+//	println $bazookaspawner.mdl
+	//local.ent = spawn $bazookaspawner.mdl
+	local.ent = waitthread global/spawner.scr::spawner_activate $bazookaspawner
+	
+//	local.ent.origin = $bazookaspawner.origin
+	local.ent forceactivate
+	local.ent notsolid
+	local.ent exec global/disable_ai.scr
+	local.ent.creator = $bazookaspawner
+//	local.ent thread global/ai.scr::spawncheck
+	local.ent gun "Panzerschrek"
+	local.ent accuracy 100
+	local.ent threatbias 50000
+	local.broke = 0
+
+	while (level.flags[bazooka] == 0)
+	{
+		local.ent runto $bazookaspot
+		thread ambush
+		local.ent waittill movedone
+		local.ent exec global/aimat.scr $bazookatarget //endingexploder
+		wait 0.25
+		local.ent exec global/shoot.scr
+	
+		wait 0.5
+	}
+
+
+	local.ent take weapons/panzerschreck.tik
+	waitframe
+	local.ent item weapons/mp40.tik
+
+	local.ent exec global/enable_ai.scr
+	local.ent solid
+
+	local.ent thread bazookadeath
+end
+
+bazookadeath:
+	self waittill death
+	level.flags[bazooka] = 2
+
+end
+
+spawnending_attack:
+
+	if (isalive level.friendly_end)
+	{
+		println "spawned ending_attack guy"
+
+		local.ent = waitthread global/spawner.scr::spawner_activate $ending_attack
+		
+		local.ent forceactivate
+		local.ent notsolid
+		local.ent exec global/disable_ai.scr
+		local.ent accuracy 100
+		local.ent threatbias 50000
+
+		local.ent runto $ending_attack_spot
+		local.ent waittill movedone
+		local.ent exec global/aimat.scr level.friendly_end
+		wait 0.25
+		local.ent exec global/shoot.scr
+		wait 0.25
+		if (isalive level.friendly_end)
+			level.friendly_end damage $world 35000 $world (0 0 0) (0 0 0) (0 0 0) 0 9 0 0
+
+		local.ent solid
+
+		local.ent exec global/enable_ai.scr
+		local.ent solid
+	}
+end
+
+doorleft:
+self thread rotateup 90
+wait 2
+self thread rotatedown 90
+end
+
+
+doorright:
+self thread rotatedown 90
+wait 2
+self thread rotateup 90
+end
+
+
+door_end_open:
+	$door_end_left playsound gate_iron_open
+
+	$door_end_left time 2
+	$door_end_right time 2
+	$door_end_left thread rotateup 85
+	$door_end_right waitthread rotatedown 85
+	$player thread completedobjective  // continue on your own / Finished
+	exec global/missioncomplete.scr m1l2a 1
+
+
+end
+
+ending_door:
+	
+	if (self.lasttime == NIL)
+		self.lasttime = level.time - 1
+
+	if (level.time > self.lasttime)
+	{
+		self.lasttime = level.time + 1
+		$player playsound door_wood_locked
+		
+		if (level.flags[checkdoor] == 1)
+		{
+			level.flags[checkdoor] = 2
+			$player thread completedobjective // check the door / man the machine gun comes next
+		}
+	}
+end
+
+
+
+
+

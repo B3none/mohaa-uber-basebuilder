@@ -1,0 +1,10 @@
+main:
+	local.master = spawn scriptmaster
+//30cal
+	local.master aliascache jeep_snd_fire sound/weapons/fire/50CalFire2.wav soundparms 1.05 0.2 0.95 0.1 800 4000 weapon loaded maps level.mapname
+	local.master aliascache explode_plane_flying sound/weapons/explo/Explo_MetalMed1.wav soundparms 0.9 0.2 0.8 0.2 1000 8000 weapon loaded maps level.mapname
+	local.master aliascache leadinmp2 sound/weapons/explo/Exp_LeadIn_07.wav soundparms 0.8 0.2 0.7 0.5 160 3000 auto loaded maps level.mapname
+	local.master aliascache fly_snd sound/vehicle/M1_StukaIdle.wav soundparms 1.5 0.5 2.0 0.5 2000 1000 item loaded maps level.mapname
+
+
+end

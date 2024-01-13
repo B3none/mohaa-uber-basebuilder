@@ -1,0 +1,498 @@
+/*
+================================================================================
+Map Description Library
+for Medal Of Honor
+Version 1.1.1 (03/01/05)
+
+Copyright (c) 2003-2005 Mark Follett
+email: mef123@geocities.com
+
+Permission is hereby granted, free of charge, to any person obtaining a copy
+of this software and associated documentation files (the "Software"), to deal
+in the Software without restriction, including without limitation the rights
+to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+copies of the Software, and to permit persons to whom the Software is furnished
+to do so, subject to the following conditions:
+
+The above copyright notice and this permission notice shall be included in all
+copies or substantial portions of the Software.
+
+THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
+SOFTWARE.
+================================================================================
+*/
+
+
+get_player_position local.origin:
+	if (level.map_enabled)
+	{
+		end level.map_sectors[(waitthread find_position local.origin level.map_bsp)][1]
+	}
+end ""
+
+
+get_player_position_abbr local.origin:
+	if (level.map_enabled)
+	{
+		end level.map_sectors[(waitthread find_position local.origin level.map_bsp)][2]
+	}
+end ""
+
+
+// indexing starts at 1!!!
+find_position local.point local.bsp:
+	local.i = ((level.map_chunksize * (local.bsp.size - 1)) + local.bsp[(local.bsp.size - 1)].pd.size)
+
+	while (1)
+	{
+		local.chunknum = 0
+		while (local.i > level.map_chunksize)
+		{
+			local.i = local.i - level.map_chunksize
+			local.chunknum++
+		}
+
+		local.chunk = local.bsp[local.chunknum]
+
+		local.ord = local.chunk.ord[local.i]
+		local.pd = local.chunk.pd[local.i]
+
+		if (local.ord < 6)
+		{
+			if (local.ord > 2)
+			{
+				local.pd = -local.pd
+				local.ord = local.ord - 3
+			}
+
+			if (local.point[local.ord] > local.pd)
+			{
+				local.front = 1
+			} else
+			{
+				local.front = 0
+			}
+		} else
+		{
+			local.j = local.ord - 6
+			local.nachunknum = 0
+			while (local.j > level.map_chunksize)
+			{
+				local.j = local.j - level.map_chunksize
+				local.nachunknum++
+			}
+
+			local.nachunk = local.bsp[local.nachunknum]
+
+			if ((vector_dot local.point ( local.nachunk.pa[local.j] local.nachunk.pb[local.j] local.nachunk.pc[local.j] )) >= local.pd)
+			{
+				local.front = 1
+			} else
+			{
+				local.front = 0
+			}
+		}
+
+		if (local.front == 1)
+		{
+			if (local.chunk.frontid[local.i] == 0)
+			{
+				end local.chunk.frontsec[local.i]
+			} else
+			{
+				local.i = local.chunk.frontid[local.i]
+			}
+		} else
+		{
+			if (local.chunk.backid[local.i] == 0)
+			{
+				end local.chunk.backsec[local.i]
+			} else
+			{
+				local.i = local.chunk.backid[local.i]
+			}
+		}
+	}
+end
+
+
+setup_map local.map:
+	level.map_chunksize = 50
+	
+	switch (local.map)
+	{
+		case "mohdm1":
+		case "mohdm2":
+		case "mohdm3":
+		case "mohdm4":
+		case "mohdm5":
+		case "mohdm6":
+		case "mohdm7":
+		case "obj_team1":
+			local.mapname = local.map
+			break
+			
+		case "obj_team4":
+			local.mapname = "mohdm4"
+			break
+			
+		default:
+			break
+	}
+
+	if (local.mapname != NIL)
+	{
+		waitthread ("setup_bsp_" + local.mapname)
+	}
+
+	if (level.map_sectors != NIL && level.map_bsp != NIL)
+	{
+		level.map_enabled = 1
+	}
+end 1
+
+
+setup_bsp_mohdm1:
+	level.map_sectors[0] = "Center Sector"::"OC"
+	level.map_sectors[1] = "Northeast Bldg"::"NE"
+	level.map_sectors[2] = "Southeast Bldg Cellar"::"SEC"
+	level.map_sectors[3] = "Southeast Bldg Ground Floor"::"SE0"
+	level.map_sectors[4] = "Southeast Bldg First Floor"::"SE1"
+	level.map_sectors[5] = "Northeast Sector"::"ONE"
+	level.map_sectors[6] = "East Bridge"::"BE"
+	level.map_sectors[7] = "Center Bldg Ground Floor"::"C0"
+	level.map_sectors[8] = "Center Bldg First Floor"::"C1"
+	level.map_sectors[9] = "Northwest Bldg"::"NW"
+	level.map_sectors[10] = "Northwest Stone House"::"NWS"
+	level.map_sectors[11] = "South Bridge"::"BS"
+	level.map_sectors[12] = "South Path"::"PS"
+	level.map_sectors[13] = "North Path"::"PN"
+	level.map_sectors[14] = "West Sector"::"OW"
+	level.map_sectors[15] = "East Sector"::"OE"
+	level.map_sectors[16] = "Southeast Sector"::"OSE"
+	level.map_sectors[17] = "Northwest Sector"::"ONW"
+
+	level.map_bsp[0] = spawn Listener
+	level.map_bsp[0].ord = 1::3::1::3::3::1::3::1::2::2::0::2::0::0::1::1::1::2::0::0::1::1::0::2::0::1::1::1::0::1::0::0::1::2::3::3::3::2::0::1::1::2::0::4::0::2::1::3::0::0
+	level.map_bsp[0].pd = 2445::350::1655::545::375::2165::375::1655::384::384::1410::608::1335::1335::2230::2345::1925::384::710::515::2755::2345::950::672::515::2165::2985::1655::1030::1525::255::1455::970::528::545::350::525::384::990::1160::10::384::710::70::930::384::10::580::640::1025
+	level.map_bsp[0].frontid = 0::0::2::0::3::1::0::0::6::0::0::11::12::0::0::0::16::0::0::0::0::0::22::23::24::25::20::27::17::29::30::0::0::33::0::0::0::36::34::31::0::0::0::0::0::45::43::0::47::41
+	level.map_bsp[0].backid = 0::0::0::0::4::5::0::7::8::0::0::0::10::0::14::15::0::0::18::0::0::0::0::0::21::0::26::19::28::13::9::0::32::0::0::35::0::37::38::39::0::0::42::0::44::0::46::0::48::49
+	level.map_bsp[0].frontsec = 12::12::12::11::8::14::7::12::11::8::13::8::13::17::17::9::17::8::13::9::12::9::9::9::14::14::9::13::10::13::13::1::13::1::11::0::0::11::13::8::1::1::1::1::15::1::1::15::1::5
+	level.map_bsp[0].backsec = 14::11::8::12::11::12::12::7::12::7::8::13::8::10::10::17::13::7::8::12::14::14::14::14::12::13::14::8::13::8::12::13::1::13::12::11::12::0::0::0::5::15::15::15::1::15::15::16::15::15
+	level.map_bsp[1] = spawn Listener
+	level.map_bsp[1].ord = 3::1::3::0::3::1::3::1::1::1::3::3::0::3::2::3::1::3::0::3::3::1::3::0::1::3::1::3::3::0::1::2::1::1
+	level.map_bsp[1].pd = 1145::265::265::710::1270::265::1145::520::635::400::265::580::710::1005::168::1005::400::265::710::580::1145::265::225::640::350::1005::635::225::580::640::595::384::135::885
+	level.map_bsp[1].frontid = 0::0::0::0::0::0::0::55::0::0::0::61::0::63::64::0::66::0::0::69::0::0::0::0::70::0::0::0::78::0::80::81::82::40
+	level.map_bsp[1].backid = 0::51::52::53::0::0::56::57::58::0::0::60::62::59::54::0::0::0::68::67::0::71::72::73::74::0::76::0::77::79::75::65::50::83
+	level.map_bsp[1].frontsec = 2::2::0::1::2::3::3::2::3::3::0::3::1::3::3::3::3::6::1::4::4::4::0::1::6::3::4::0::4::1::0::1::0::12
+	level.map_bsp[1].backsec = 16::16::2::0::3::16::16::3::2::4::3::4::0::2::2::4::4::4::6::3::16::16::4::0::0::4::3::4::3::0::6::0::15::4
+end
+
+
+setup_bsp_mohdm2:
+	level.map_sectors[0] = "Off The Map - You found a bug!"::"ERR"
+	level.map_sectors[1] = "Church Tower"::"CHT"
+	level.map_sectors[2] = "Church"::"CH"
+	level.map_sectors[3] = "Church Back"::"CHB"
+	level.map_sectors[4] = "Center Bldg Northeast Ground Floor"::"CNE0"
+	level.map_sectors[5] = "Center Bldg Northeast First Floor"::"CNE1"
+	level.map_sectors[6] = "Center Bldg Southeast Ground Floor"::"CSE0"
+	level.map_sectors[7] = "Center Bldg Southeast First Floor"::"CSE1"
+	level.map_sectors[8] = "Center Bldg Southwest Ground Floor"::"CSW0"
+	level.map_sectors[9] = "Center Bldg Southwest First Floor"::"CSW1"
+	level.map_sectors[10] = "Center Bldg Northwest Ground Floor"::"CNW0"
+	level.map_sectors[11] = "Center Bldg Northwest First Floor"::"CNW1"
+	level.map_sectors[12] = "Center Bldg Northwest Second Floor"::"CNW2"
+	level.map_sectors[13] = "Barn"::"B"
+	level.map_sectors[14] = "South Bldg Ground Floor"::"S0"
+	level.map_sectors[15] = "South Bldg First Floor"::"S1"
+	level.map_sectors[16] = "South Bldg Second Floor"::"S2"
+	level.map_sectors[17] = "East Bldg Ground Floor"::"E0"
+	level.map_sectors[18] = "East Bldg Ruins"::"ER"
+	level.map_sectors[19] = "West Bldg Ruins"::"WR"
+	level.map_sectors[20] = "North Ruins"::"NR"
+	level.map_sectors[21] = "Center Sector"::"OC"
+	level.map_sectors[22] = "North Sector"::"ON"
+	level.map_sectors[23] = "Northeast Sector"::"ONE"
+	level.map_sectors[24] = "East Sector"::"OE"
+	level.map_sectors[25] = "Southeast Sector"::"OSE"
+	level.map_sectors[26] = "South Sector"::"OS"
+	level.map_sectors[27] = "Southwest Sector"::"OSW"
+	level.map_sectors[28] = "West Sector"::"OW"
+	level.map_sectors[29] = "Northwest Sector"::"ONW"
+
+	level.map_bsp[0] = spawn Listener
+	level.map_bsp[0].ord = 2::4::3::4::3::3::7::2::3::4::4::2::2::4::3::4::8::4::3::1::3::1::1::4::4::4::3::4::3::3::4::3::4::4::3::3::3::2::3::3::4::3::4::3::4::0::3::3::3::4
+	level.map_bsp[0].pa = 0.213::0.213::0.693:: -0.707
+	level.map_bsp[0].pb = 0.977::0.977::0.721::0.707
+	level.map_bsp[0].pc = 0::0::0::0
+	level.map_bsp[0].pd = 240::2185::2425::1730::2760::2600:: -1902.427::240::2510::1050::390::220::476::50::3310::1225:: -1902.427::750::3245::1555::2665::1495::315::1345::2945::3390::1925::2265::690::1060::3460::785::3265::2835::550::1575::690::240::1865::1225::2185::840::1075::175::1600::325::550::1075::320::795
+	level.map_bsp[0].frontid = 0::1::0::3::4::0::0::0::8::9::6::0::0::0::0::0::15::14::11::0::0::21::22::23::0::25::26::0::28::0::30::0::29::0::34::35::0::0::38::37::40::0::42::0::0::0::46::0::0::49
+	level.map_bsp[0].backid = 0::0::0::2::0::0::0::0::0::7::10::0::12::13::0::0::16::17::18::0::20::0::19::5::0::0::0::0::0::0::0::31::32::0::33::27::0::0::0::39::36::0::0::0::44::45::43::0::48::47
+	level.map_bsp[0].frontsec = 7::6::7::7::6::9::26::9::8::8::9::15::16::26::26::14::26::15::26::13::13::13::27::26::24::17::17::20::20::23::23::23::23::20::20::23::20::5::4::23::4::1::1::20::22::22::22::1::22::1
+	level.map_bsp[0].backsec = 6::24::25::6::25::26::25::8::26::26::8::14::15::14::14::25::25::14::14::27::27::27::26::7::17::18::24::23::23::18::18::18::18::23::23::24::23::4::24::4::23::21::21::22::20::20::1::21::1::22
+	level.map_bsp[1] = spawn Listener
+	level.map_bsp[1].ord = 4::9::1::3::10::1::1::3::3::3::1::3::3::4::2::2::1::3::4::3
+	level.map_bsp[1].pd = 390:: -19.866::155::1190::951.059::400::795::945::1185::765::1340::445::190::535::240::480::315::1865::1730::2150
+	level.map_bsp[1].frontid = 0::0::0::0::53::0::0::57::0::0::60::52::51::63::0::0::0::64::68::69
+	level.map_bsp[1].backid = 0::0::0::0::54::0::56::55::0::59::58::61::62::50::0::65::66::67::41::24
+	level.map_bsp[1].frontsec = 29::29::28::2::28::3::28::3::19::28::19::29::29::2::11::12::28::28::10::10
+	level.map_bsp[1].backsec = 22::2::21::21::2::2::3::28::28::19::28::3::2::1::10::11::10::10::24::8
+end
+
+
+setup_bsp_mohdm3:
+	level.map_sectors[0] = "Center Sector"::"OC"
+	level.map_sectors[1] = "Pub Ground Floor"::"P0"
+	level.map_sectors[2] = "Pub First Floor"::"P1"
+	level.map_sectors[3] = "Library"::"L"
+	level.map_sectors[4] = "Manor Ground Floor"::"M0"
+	level.map_sectors[5] = "Manor First Floor"::"M1"
+	level.map_sectors[6] = "Manor Front"::"MF"
+	level.map_sectors[7] = "Gallery Entry"::"GE"
+	level.map_sectors[8] = "Gallery Lounge"::"GL"
+	level.map_sectors[9] = "Gallery Stairs"::"GS"
+	level.map_sectors[10] = "Gallery Dining"::"GD"
+	level.map_sectors[11] = "Gallery Balcony"::"GB"
+	level.map_sectors[12] = "Clock Tower"::"CT"
+	level.map_sectors[13] = "South Gate"::"SG"
+	level.map_sectors[14] = "South Sector"::"OS"
+	level.map_sectors[15] = "Pub Front"::"PF"
+	level.map_sectors[16] = "Covered Walkway"::"CW"
+	level.map_sectors[17] = "North Sector"::"ON"
+	level.map_sectors[18] = "Library Front"::"LF"
+	level.map_sectors[19] = "East Sector"::"OE"
+	level.map_sectors[20] = "Pub Balcony"::"PB"
+
+	level.map_bsp[0] = spawn Listener
+	level.map_bsp[0].ord = 2::4::4::4::2::4::0::7::4::8::4::4::9::0::10::0::4::0::4::2::11::12::0::13::0::0::0::0::0::4::4::2::0::14::15::4::4::0::0::0::2::0::0::16::0::4::4::2::0::0
+	level.map_bsp[0].pa = 0.344::0.353:: -0.721:: -0.677::0.995::0.995:: -0.467::0.656::0.447::0.734
+	level.map_bsp[0].pb = -0.939::0.935:: -0.693::0.736:: -0.101::0.102:: -0.884:: -0.755:: -0.894::0.679
+	level.map_bsp[0].pc = 0::0::0::0::0::0::0::0::0::0
+	level.map_bsp[0].pd = 248::3590::2690::1985::144::2615::1950::3277.148::2055:: -1909.298::3520::2615:: -467.571::2740:: -3694.963::2615::2715::2685::2495::208::3671.035::3105.121::3425::343.843::2850::3465::2350::4480::5225::3300::2985::248::5065::3143.620::2681.045::1580::1460::4480::4025::3225::162::1760::1175::848.768::640::750::30::162::390::945
+	level.map_bsp[0].frontid = 0::1::0::0::0::5::6::0::0::9::10::0::0::0::14::15::16::0::18::17::0::21::22::23::24::11::26::3::0::29::0::31::32::0::34::35::0::0::38::39::0::0::42::0::44::45::0::47::0::48
+	level.map_bsp[0].backid = 0::0::2::0::4::0::0::0::8::0::0::0::0::13::0::12::0::0::0::19::0::0::0::0::20::25::7::27::0::0::30::0::28::0::0::0::0::0::37::36::0::0::41::0::0::0::0::0::0::49
+	level.map_bsp[0].frontsec = 5::5::17::8::9::9::9::6::18::6::6::9::9::11::9::11::11::0::9::11::6::6::6::0::0::19::0::17::17::5::17::5::17::18::18::16::3::17::18::3::2::16::15::15::14::13::20::20::15::20
+	level.map_bsp[0].backsec = 4::19::5::9::8::12::12::18::6::19::19::11::11::9::11::9::0::9::0::0::0::0::0::18::11::0::12::18::5::17::5::17::19::16::16::18::18::18::3::16::1::15::2::14::13::14::15::15::13::15
+	level.map_bsp[1] = spawn Listener
+	level.map_bsp[1].ord = 0::4::0::2::0::4::0::4::4::0::1::0::4
+	level.map_bsp[1].pd = 1090::220::1950::144::2060::850::1760::555::1510::1670::120::2685::1895
+	level.map_bsp[1].frontid = 0::51::0::0::0::55::0::57::58::59::43::40::62
+	level.map_bsp[1].backid = 50::46::0::53::0::0::0::56::54::52::60::61::33
+	level.map_bsp[1].frontsec = 15::15::8::10::16::16::16::16::7::7::2::16::7
+	level.map_bsp[1].backsec = 20::14::7::7::7::7::15::7::8::14::13::7::12
+end
+
+
+setup_bsp_mohdm4:
+	level.map_sectors[0] = "Off The Map - You found a bug!"::"ERR"
+	level.map_sectors[1] = "West Sniper House"::"WS"
+	level.map_sectors[2] = "West Bridge"::"WB"
+	level.map_sectors[3] = "Stone House"::"S"
+	level.map_sectors[4] = "Rug House Ground Floor"::"R0"
+	level.map_sectors[5] = "Rug House First Floor"::"R1"
+	level.map_sectors[6] = "Hotel Ground Floor"::"H0"
+	level.map_sectors[7] = "Hotel First Floor"::"H1"
+	level.map_sectors[8] = "Hotel Second Floor"::"H2"
+	level.map_sectors[9] = "Hotel Stairs Ground Floor"::"HS0"
+	level.map_sectors[10] = "Hotel Stairs First Floor"::"HS1"
+	level.map_sectors[11] = "Hotel Stairs Second Floor"::"HS2"
+	level.map_sectors[12] = "Hotel Courtyard"::"HC"
+	level.map_sectors[13] = "Church"::"CH"
+	level.map_sectors[14] = "Sewer"::"SEW"
+	level.map_sectors[15] = "Storage Room"::"ST"
+	level.map_sectors[16] = "East Sniper House Ground Floor"::"ES0"
+	level.map_sectors[17] = "East Sniper House First Floor"::"ES1"
+	level.map_sectors[18] = "South Gate"::"GS"
+	level.map_sectors[19] = "Cart"::"C"
+	level.map_sectors[20] = "West Gate"::"GW"
+	level.map_sectors[21] = "Main Street West"::"MW"
+	level.map_sectors[22] = "Church Back Alley"::"CHA"
+	level.map_sectors[23] = "North Gate"::"GN"
+	level.map_sectors[24] = "Hotel Front"::"HF"
+	level.map_sectors[25] = "Bridge"::"B"
+	level.map_sectors[26] = "River South"::"RS"
+	level.map_sectors[27] = "River North"::"RN"
+	level.map_sectors[28] = "Main Street East"::"ME"
+	level.map_sectors[29] = "East Gate"::"GE"
+
+	level.map_bsp[0] = spawn Listener
+	level.map_bsp[0].ord = 0::0::2::4::3::0::4::2::2::1::0::4::0::1::3::0::0::2::0::3::3::4::2::7::8::1::2::1::2::2::3::3::3::2::3::1::2::2::3::1::3::2::1::3::2::1::3::2::3::1
+	level.map_bsp[0].pa = -0.688:: -0.749
+	level.map_bsp[0].pb = 0.725::0.663
+	level.map_bsp[0].pc = 0::0
+	level.map_bsp[0].pd = 360::930::480::1350::1120::330::1995::608::432::715::1290::715::930::845::315::315::0::240::585::1165::1620::865::728::1142.140::1139.771::1285::462::1155::728::472::500::430::455::472::1080::1515::608::432::1620::1530::1165::240::3850::890::532::3915::730::448::950::3270
+	level.map_bsp[0].frontid = 0::0::2::3::0::4::6::0::8::9::0::0::12::11::0::0::0::16::14::19::20::21::0::23::0::0::24::0::0::29::27::0::0::32::34::35::0::37::38::0::36::0::42::0::44::0::43::0::0::0
+	level.map_bsp[0].backid = 0::0::1::0::0::5::0::0::0::0::0::0::0::13::0::15::0::17::18::10::0::7::0::0::0::25::26::0::0::28::30::0::0::33::0::31::0::0::0::39::40::0::0::0::0::45::46::0::48::49
+	level.map_bsp[0].frontsec = 16::16::17::17::28::17::26::11::10::11::27::27::16::15::25::27::27::25::15::26::11::27::8::7::6::6::7::6::8::7::24::21::21::5::4::4::11::10::11::12::12::19::19::1::1::19::1::2::18::1
+	level.map_bsp[0].backsec = 28::17::28::28::26::28::29::10::9::26::15::16::27::27::26::25::26::27::27::11::26::28::7::24::24::24::6::24::7::24::7::5::4::4::12::6::10::9::12::11::11::14::1::19::19::1::19::18::2::18
+	level.map_bsp[1] = spawn Listener
+	level.map_bsp[1].ord = 3::3::1::1::3::3::2::3::3::3::2::3::1::3::1::1::0::0::1::1::0::0::1::0::1::1::1::0::0::1::0::1::2::3::1
+	level.map_bsp[1].pd = 455::760::3350::3770::1195::840::448::1410::430::455::448::455::2530::735::2850::2405::455::585::2445::1400::585::1290::1660::760::3415::3255::3415::455::1290::1400::585::2445::240::305::870
+	level.map_bsp[1].frontid = 0::51::0::47::54::0::0::57::0::0::59::0::62::63::55::65::0::0::0::0::70::0::69::0::0::75::0::76::0::0::80::78::82::83::84
+	level.map_bsp[1].backid = 0::50::52::53::0::0::56::0::0::0::60::0::61::58::64::41::0::67::68::0::0::71::72::0::0::74::0::77::0::79::0::81::73::66::22
+	level.map_bsp[1].frontsec = 21::18::1::19::2::18::3::3::21::21::5::21::18::18::18::18::21::23::14::14::15::15::23::22::20::22::20::22::23::23::23::22::23::21::23
+	level.map_bsp[1].backsec = 18::1::18::1::18::3::18::18::5::18::18::18::5::3::3::4::14::21::23::15::14::14::14::13::22::13::21::21::15::15::21::23::15::6::27
+end
+
+
+setup_bsp_mohdm5:
+	level.map_sectors[0] = "North Sector"::"N"
+	level.map_sectors[1] = "River West"::"RW"
+	level.map_sectors[2] = "River Center"::"RC"
+	level.map_sectors[3] = "River East"::"RE"
+	level.map_sectors[4] = "West Bridge"::"BW"
+	level.map_sectors[5] = "Center Bridge"::"BC"
+	level.map_sectors[6] = "East Bridge"::"BE"
+	level.map_sectors[7] = "West Sector"::"W"
+	level.map_sectors[8] = "East Sector"::"E"
+	level.map_sectors[9] = "Southeast Sector"::"SE"
+	level.map_sectors[10] = "Southwest Sector"::"SW"
+	level.map_sectors[11] = "South Sector"::"S"
+	level.map_sectors[12] = "Northeast Sector"::"NE"
+	level.map_sectors[13] = "Northwest Sector"::"NW"
+
+	level.map_bsp[0] = spawn Listener
+	level.map_bsp[0].ord = 4::0::7::4::0::8::2::4::4::0::9::10::11::0::0::4::4::2::12::13::4::0::14::4::0::15::0::4::4::4::0::0::4::4::4::0::4::2::16::4::17::4::3::18::4::0::0::4::0
+	level.map_bsp[0].pa = -0.801::0.164::0.980::0.164:: -0.852::0.993::0.997:: -0.834::0.947::0.993::0.344:: -0.353
+	level.map_bsp[0].pb = 0.599:: -0.986::0.198:: -0.986:: -0.524:: -0.117:: -0.082:: -0.552:: -0.321::0.122:: -0.939:: -0.936
+	level.map_bsp[0].pc = 0::0::0::0::0::0::0::0::0::0::0::0
+	level.map_bsp[0].pd = 5895::3720:: -6200.770::5130::2515::5838.630::112::6730::6445::2620::1376.639::5838.630::1473.041::2055::2515::4660::5000::112::3081.980::3150.380::4555::4040:: -1042.544::4440::2555::3549.195::2660::3520::5100::3520::1085::1505::5100::4555::4025::1050::2565::112::729.519::2850::3958.421::4585::395::5042.758::5250::520::200::5465::1735
+	level.map_bsp[0].frontid = 0::0::2::0::4::0::0::7::6::0::5::0::0::11::0::0::16::17::15::0::0::0::22::23::24::0::0::27::28::0::30::0::32::0::31::0::0::37::36::39::0::0::41::0::43::40::0::46::29
+	level.map_bsp[0].backid = 0::1::0::3::0::0::0::0::8::9::10::0::12::13::0::0::0::0::18::0::20::0::0::21::19::0::26::25::14::0::0::0::0::33::34::0::0::0::38::35::0::0::42::0::44::45::0::47::48
+	level.map_bsp[0].frontsec = 0::12::0::0::0::3::6::6::3::12::12::3::8::6::5::2::5::5::5::0::0::13::0::13::5::13::13::13::5::7::7::5::5::11::1::7::1::4::7::4::11::10::11::9::11::1::8::11::2
+	level.map_bsp[0].backsec = 12::0::12::12::2::2::3::3::6::6::3::2::3::8::2::5::2::2::2::5::5::0::13::0::2::7::7::0::0::1::1::11::11::5::11::1::4::1::1::1::10::11::10::11::9::10::9::8::8
+end
+
+
+setup_bsp_mohdm6:
+	level.map_sectors[2] = "Courtyard"::"C"
+	level.map_sectors[3] = "West Bldg First Story South Side"::"W1S"
+	level.map_sectors[4] = "West Bldg Second Story South Side"::"W2S"
+	level.map_sectors[5] = "West Bldg Ground Floor"::"W0"
+	level.map_sectors[6] = "West Bldg Third Story South Side"::"W3S"
+	level.map_sectors[7] = "West Bldg Staircase"::"WS"
+	level.map_sectors[8] = "West Bldg First Story North Side"::"W1N"
+	level.map_sectors[9] = "West Bldg Second Story North Side"::"W2N"
+	level.map_sectors[10] = "West Bldg Third Story North Side"::"W3N"
+	level.map_sectors[11] = "North Bldg Roof"::"NR"
+	level.map_sectors[12] = "Boiler Room"::"B"
+	level.map_sectors[13] = "Locker Room"::"L"
+	level.map_sectors[14] = "North Bldg Roof"::"NR"
+	level.map_sectors[15] = "East Bldg Ground Floor"::"E0"
+	level.map_sectors[16] = "East Bldg First Floor"::"E1"
+	level.map_sectors[17] = "East Bldg Second Floor"::"E2"
+	level.map_sectors[18] = "East Bldg Staircase"::"ES"
+	level.map_sectors[19] = "South Bldg Staircase"::"SS"
+	level.map_sectors[20] = "South Bldg First Floor"::"S1"
+	level.map_sectors[21] = "South Bldg Second Floor"::"S2"
+	level.map_sectors[22] = "South Bldg Third Floor"::"S3"
+
+	level.map_bsp[0] = spawn Listener
+	level.map_bsp[0].ord = 0::2::2::2::0::0::1::0::4::0::2::4::0::4::2::1::2::2::2::2::0::1::1::0::2::2::3::3::4::2::4::2::4::3::2::2::1::1::3::2::2::1::3::3::2::2::2::1::3::2
+	level.map_bsp[0].pd = 480::272::512::32::780::625::415::785::90::500::32::90::785::235::224::180::272::512::272::512::480::900::512::950::32::272::140::360::670::272::650::32::260::925::256::496::390::650::695::272::512::415::250::25::32::272::512::512::545::256
+	level.map_bsp[0].frontid = 0::0::0::3::0::5::6::0::8::0::10::0::12::13::9::7::0::0::0::0::20::18::22::0::0::0::0::27::0::0::30::31::28::33::0::0::36::0::0::0::0::41::42::0::0::0::0::47::48::0
+	level.map_bsp[0].backid = 0::0::2::0::4::1::0::0::0::0::0::0::11::0::14::15::0::17::0::19::0::21::16::23::0::25::26::0::0::0::0::29::32::0::0::35::0::37::38::0::40::0::0::43::0::45::46::44::39::0
+	level.map_bsp[0].frontsec = 2::9::10::8::2::8::8::2::2::12::13::2::2::13::14::2::9::10::9::10::8::8::8::14::16::17::2::16::15::17::16::16::2::16::21::22::21::2::2::4::6::4::4::2::3::4::6::5::5::21
+	level.map_bsp[0].backsec = 7::8::9::2::8::2::2::14::14::13::12::12::12::12::13::13::8::9::8::9::7::7::2::8::2::16::16::2::18::16::18::15::16::19::2::21::2::21::21::2::4::2::2::4::5::3::4::2::2::20
+	level.map_bsp[1] = spawn Listener
+	level.map_bsp[1].ord = 2::1::3::4::0
+	level.map_bsp[1].pd = 496::926::800::145::200
+	level.map_bsp[1].frontid = 0::0::49::53::24
+	level.map_bsp[1].backid = 50::51::52::34::54
+	level.map_bsp[1].frontsec = 22::2::2::20::7
+	level.map_bsp[1].backsec = 21::20::20::2::5
+end
+
+
+setup_bsp_mohdm7:
+	level.map_sectors[0] = "East Path"::"PE"
+	level.map_sectors[1] = "Mosque Courtyard"::"MC"
+	level.map_sectors[2] = "Mosque Roof"::"M1"
+	level.map_sectors[3] = "Mosque Back"::"MB"
+	level.map_sectors[4] = "Mosque Ground Floor"::"M0"
+	level.map_sectors[5] = "Mosque Radio"::"MR"
+	level.map_sectors[6] = "Secret Passage"::"SP"
+	level.map_sectors[7] = "Northwest Bldg"::"NW"
+	level.map_sectors[8] = "Northeast Bldg"::"NE"
+	level.map_sectors[9] = "East Bldg"::"E"
+	level.map_sectors[10] = "Center Bldg Ground Floor"::"C0"
+	level.map_sectors[11] = "Center Bldg Roof"::"C1"
+	level.map_sectors[12] = "Center Passageway"::"CP"
+	level.map_sectors[13] = "Southwest Sector"::"OSW"
+	level.map_sectors[14] = "West Path"::"PW"
+	level.map_sectors[15] = "Northwest Sector"::"ONW"
+	level.map_sectors[16] = "North Sector"::"ON"
+	level.map_sectors[17] = "Center Path"::"PC"
+	level.map_sectors[18] = "Southeast Path"::"PSE"
+
+	level.map_bsp[0] = spawn Listener
+	level.map_bsp[0].ord = 3::3::1::3::3::1::1::3::1::1::1::1::4::1::3::1::3::3::3::4::1::3::1::2::0::0::2::0::3::2::7::4::4::3::5::3::4::3::4::3::0::3::3::1::1::4::3::4::3::0
+	level.map_bsp[0].pa[1] = -0.030
+	level.map_bsp[0].pb[1] = -1.000
+	level.map_bsp[0].pc[1] = 0
+	level.map_bsp[0].pd = 2520::2623::1325::2940::2430::1215::1025::2623::550::760::2087::2125::498::2125::3350::1580::2820::3065::2940::498::550::3350::1325::276::635::1247::24::40::10::40::999.846::1000::1008::1175::57::1230::1380::1470::1245::390::1535::1800::1563::1125::695::400::265::620::390::40
+	level.map_bsp[0].frontid = 0::0::0::0::0::0::6::7::0::8::2::1::12::0::13::0::0::17::0::0::19::21::18::23::0::0::25::0::0::28::0::30::32::0::34::35::0::0::36::33::0::41::0::0::44::45::0::47::48::0
+	level.map_bsp[0].backid = 0::0::0::3::0::5::0::4::0::9::10::11::0::0::14::0::16::0::0::0::20::0::22::15::0::0::26::0::0::29::0::31::27::0::0::0::0::37::38::39::40::0::0::0::43::0::0::0::0::49
+	level.map_bsp[0].frontsec = 13::13::4::4::4::13::13::13::4::5::1::1::6::1::18::2::2::5::2::6::5::18::2::2::8::8::8::16::16::11::0::0::16::0::9::0::9::0::9::11::8::0::17::13::12::12::11::10::11::16
+	level.map_bsp[0].backsec = 1::1::5::5::13::4::4::4::6::4::4::13::18::3::3::5::5::2::5::18::6::3::5::13::0::0::0::11::0::16::16::16::0::9::0::9::0::9::0::0::16::18::12::12::17::18::10::11::10::11
+	level.map_bsp[1] = spawn Listener
+	level.map_bsp[1].ord = 3::2::4::3::1::3::2::1::2::1::0::0::3::2::1::0::0::1::1::1::3::1::3::0::4::3
+	level.map_bsp[1].pd = 10::40::400::950::1855::645::96::1855::96::2050::625::135::630::96::1405::625::200::895::1350::1545::835::225::1335::1535::810::1935
+	level.map_bsp[1].frontid = 0::50::0::52::0::0::56::0::0::0::0::61::62::0::0::0::66::0::67::63::70::71::72::0::74::75
+	level.map_bsp[1].backid = 0::51::0::53::0::0::0::57::0::59::0::60::58::0::64::65::0::0::68::69::55::54::46::73::42::24
+	level.map_bsp[1].frontsec = 16::11::17::10::14::7::7::14::7::7::15::7::15::7::7::15::7::15::7::7::16::16::17::8::18::18
+	level.map_bsp[1].backsec = 10::16::18::18::17::15::15::15::15::15::7::15::14::15::15::7::15::16::15::15::17::10::12::16::0::6
+end
+
+
+setup_bsp_obj_team1:
+	level.map_sectors[0] = "Main Street"::"M"
+	level.map_sectors[1] = "Main Street Ladder House"::"ML"
+	level.map_sectors[2] = "Main Street Tub House"::"MT"
+	level.map_sectors[3] = "Main Street East Bldg"::"MBE"
+	level.map_sectors[4] = "Main Street Corner Bldg"::"MBC"
+	level.map_sectors[5] = "Main Street North Bldg"::"MBN"
+	level.map_sectors[6] = "Main Street Northwest Ruins"::"MNW"
+	level.map_sectors[7] = "Main Street Southeast Ruins"::"MSE"
+	level.map_sectors[8] = "Main Street South Ruins"::"MSR"
+	level.map_sectors[9] = "Main Street North"::"MN"
+	level.map_sectors[10] = "Main Street West"::"MW"
+	level.map_sectors[11] = "Bushes"::"B"
+	level.map_sectors[12] = "Alley West"::"AW"
+	level.map_sectors[13] = "Alley East"::"AE"
+	level.map_sectors[14] = "Alley Sniper House"::"AS"
+	level.map_sectors[15] = "Alley West Bldg"::"ABW"
+	level.map_sectors[16] = "Alley East Bldg"::"ABE"
+	level.map_sectors[17] = "Church Front"::"CF"
+	level.map_sectors[18] = "Church Back"::"CB"
+	level.map_sectors[19] = "Church Cemetary"::"CC"
+	level.map_sectors[20] = "Church Southeast Sector"::"CSE"
+	level.map_sectors[21] = "Church Southwest Sector"::"CSW"
+	level.map_sectors[22] = "Main Street South"::"MS"
+	level.map_sectors[23] = "Alley Center Bldg"::"ABC"
+	level.map_sectors[24] = "Bush Ruins"::"BR"
+
+	level.map_bsp[0] = spawn Listener
+	level.map_bsp[0].ord = 1::0::0::1::1::1::0::1::7::1::0::1::8::1::0::0::9::10::1::1::11::0::12::0::13::14::1::1::1::0::1::1::0::15::16::17::18::1::19::1::20::0::1::1::1::0::1::0::1::0
+	level.map_bsp[0].pa = -0.986:: -0.986:: -0.495::0.527:: -0.878::0.842::0.389::0.514:: -0.243::0.825::0.551::0.966:: -0.250:: -0.227:: -0.765:: -0.631:: -0.692:: -0.692::0.527::0.865:: -0.495:: -0.832:: -0.922
+	level.map_bsp[0].pb = -0.167:: -0.167:: -0.869::0.850::0.479:: -0.539::0.921::0.857::0.970::0.565::0.835::0.259::0.968::0.974:: -0.644::0.776::0.722:: -0.722::0.850:: -0.502:: -0.869:: -0.555:: -0.388
+	level.map_bsp[0].pc = 0::0::0::0::0::0::0::0::0::0::0::0::0::0::0::0::0::0::0::0::0::0::0
+	level.map_bsp[0].pd = 520::3967::5200::1885::2145::1400::4391::1450:: -4912.554::1400::4980::1845:: -4912.554::2430::4410::3445:: -2969.009::2687.163::2720::1005:: -2609.744::3967::724.690::3830::5325.254::5587.424::4265::3360::2870::3755::3265::3300::3445::2170.694::6047.595::5749.808::5742.116::3605::2125.454::2960::1603.267::4135::3900::2760::970::1480::4345::2945::4470::1875
+	level.map_bsp[0].frontid = 0::0::0::0::0::0::6::5::0::0::0::9::0::13::14::0::0::17::16::0::19::15::0::0::0::0::24::0::0::0::30::0::32::0::34::0::0::0::36::0::39::41::27::43::44::0::0::0::0::49
+	level.map_bsp[0].backid = 0::1::2::0::4::0::0::7::0::0::10::11::0::12::8::0::0::0::18::0::20::21::0::23::0::25::26::0::0::0::29::31::28::0::0::35::0::37::38::0::40::33::42::22::3::0::46::0::48::47
+	level.map_bsp[0].frontsec = 13::19::11::12::15::11::11::23::12::11::11::12::12::9::11::12::14::14::3::12::14::15::6::6::6::6::10::9::4::4::9::9::9::6::6::6::5::6::6::5::5::9::6::9::11::22::22::2::10::10
+	level.map_bsp[0].backsec = 19::13::19::23::12::24::16::16::11::24::24::11::9::11::23::3::12::13::12::13::13::12::10::10::9::9::9::3::12::9::4::4::3::9::9::9::9::5::5::9::9::4::9::12::19::8::8::10::2::22
+	level.map_bsp[1] = spawn Listener
+	level.map_bsp[1].ord = 1::4::4::1::0::21::22::0::23::24::0::0::1::0::4::0::0::0::0::1::0::1::1::0::0::1::0::25::1::26::27::1::28::29::1::1::1::1::0
+	level.map_bsp[1].pd = 90::860::805::35::1595:: -1820.086:: -2106.665::2550:: -2096.473:: -1544.152::2430::2350::35::635::805::1300::1480::2945::2745::3955::2300::3350::3360::3190::2535::520::3000::2687.163::1230::2076.191:: -2969.009::2720:: -3450.235:: -2990.949::3385::3775::330::4330::3415
+	level.map_bsp[1].frontid = 0::51::0::0::54::0::56::0::58::59::60::61::0::63::64::62::0::0::68::69::70::0::0::73::74::0::76::0::0::78::80::75::0::83::84::71::86::50::45
+	level.map_bsp[1].backid = 0::0::0::53::52::0::0::0::0::0::57::55::0::0::0::65::0::0::0::0::67::0::0::72::0::0::0::77::0::79::0::81::0::0::82::85::66::87::88
+	level.map_bsp[1].frontsec = 21::17::17::21::20::17::17::19::17::17::19::19::21::18::21::17::0::2::10::10::1::0::0::3::0::13::19::14::12::14::14::7::7::7::0::0::13::10::9
+	level.map_bsp[1].backsec = 17::20::20::17::17::19::19::17::19::19::17::20::18::21::20::20::8::10::1::0::0::3::3::0::7::19::13::13::13::12::12::12::0::0::7::7::19::1::0
+end

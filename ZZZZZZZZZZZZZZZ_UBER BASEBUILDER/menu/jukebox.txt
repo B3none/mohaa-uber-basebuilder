@@ -1,0 +1,22 @@
+
+alias song1 "stopmp3; song1; alias nextsong song2; alias prevsong song10"
+alias song2 "stopmp3; song2; alias nextsong song3; alias prevsong song1"
+alias song3 "stopmp3; song3; alias nextsong song4; alias prevsong song2"
+alias song4 "stopmp3; song4; alias nextsong song5; alias prevsong song3"
+alias song5 "stopmp3; song5; alias nextsong song6; alias prevsong song4"
+alias song6 "stopmp3; song6; alias nextsong song7; alias prevsong song5"
+alias song7 "stopmp3; song7; alias nextsong song8; alias prevsong song6"
+alias song8 "stopmp3; song8; alias nextsong song9; alias prevsong song7"
+alias song9 "stopmp3; song9; alias nextsong song10; alias prevsong song8"
+alias song10 "stopmp3; song10; alias nextsong song11; alias prevsong song9"
+alias song11 "stopmp3; song11; alias nextsong song12; alias prevsong song10"
+alias song12 "stopmp3; song12; alias nextsong song13; alias prevsong song11"
+alias song13 "stopmp3; song13; alias nextsong song14; alias prevsong song12"
+alias song14 "stopmp3; song14; alias nextsong song15; alias prevsong song13"
+alias song15 "stopmp3; song15; alias nextsong song16; alias prevsong song14"
+alias song16 "stopmp3; song16; alias nextsong song1; alias prevsong song15"
+
+alias nextsong "song1"
+alias prevsong "song16"
+
+exec camper_menu/jukebox.txt

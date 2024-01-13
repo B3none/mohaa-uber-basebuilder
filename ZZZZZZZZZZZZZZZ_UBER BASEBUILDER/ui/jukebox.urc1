@@ -1,0 +1,554 @@
+menu "camper_jukebox" 345 487 NONE 0
+align center center
+//vidmode 3
+bgcolor 0 0 0 1 
+borderstyle NONE
+
+virtualres 1
+showcommand "exec menu/jukebox.txt"
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+resource
+Label
+{
+name "Default"
+rect 0 0 346 480
+fgcolor 0.00 0.00 0.00 1.00
+bgcolor 1.00 1.00 1.00 1.00
+borderstyle "RAISED"
+}
+resource
+Button
+{
+name "back"
+rect 7 448 96 24
+fgcolor 1.00 1.00 1.00 1.00
+bgcolor 0.00 0.00 0.00 0.00
+borderstyle "INDENT_BORDER"
+stuffcommand "Popmenu 1"
+shader "textures/mohmenu/back"
+hovershader "textures/mohmenu/back_h"
+clicksound "sound/menu/back.wav"
+ordernumber 4
+hoversound "menu/sound/scroll.wav"
+
+}
+resource
+Button
+{
+title "Audio options"
+name "Default"
+rect 243 448 96 24
+fgcolor 0.00 0.00 0.00 1.00
+bgcolor 0.50 0.50 0.50 1.00
+borderstyle "RAISED"
+stuffcommand "pushmenu audio_options"
+clicksound "menu/sound/apply.wav"
+hoversound "menu/sound/scroll.wav"
+font facfont-20
+shader "menu_button_trans"
+hovershader "menu_button_glow"
+
+}
+resource
+Label
+{
+name "Default"
+rect 7 42 307 20
+fgcolor 0.00 0.00 0.00 1.00
+bgcolor 0.50 0.50 0.50 1.00
+borderstyle "NONE"
+stuffcommand "track1"
+linkcvar "track_title1"
+}
+resource
+Label
+{
+name "Default"
+rect 7 62 307 20
+fgcolor 0.00 0.00 0.00 1.00
+bgcolor 0.50 0.50 0.50 1.00
+borderstyle "NONE"
+stuffcommand "track2"
+linkcvar "track_title2"
+}
+resource
+Label
+{
+name "Default"
+rect 7 82 307 20
+fgcolor 0.00 0.00 0.00 1.00
+bgcolor 0.50 0.50 0.50 1.00
+borderstyle "NONE"
+stuffcommand "track3"
+linkcvar "track_title3"
+}
+resource
+Button
+{
+name "Default"
+rect 319 82 20 20
+fgcolor 1.00 1.00 1.00 1.00
+bgcolor 0.00 0.00 0.00 0.00
+borderstyle "3D_BORDER"
+stuffcommand "track3"
+linkcvar "track_title3"
+shader "menu/textures/media/play_up.tga"
+pressedshader "menu/textures/media/play_dn.tga"
+hovershader "menu_button_glow"
+
+}
+resource
+Label
+{
+name "Default"
+rect 7 102 307 20
+fgcolor 0.00 0.00 0.00 1.00
+bgcolor 0.50 0.50 0.50 1.00
+borderstyle "NONE"
+stuffcommand "track4"
+linkcvar "track_title4"
+}
+resource
+Button
+{
+name "Default"
+rect 319 102 20 20
+fgcolor 1.00 1.00 1.00 1.00
+bgcolor 0.00 0.00 0.00 0.00
+borderstyle "3D_BORDER"
+stuffcommand "track4"
+linkcvar "track_title4"
+shader "menu/textures/media/play_up.tga"
+pressedshader "menu/textures/media/play_dn.tga"
+hovershader "menu_button_glow"
+
+}
+resource
+Label
+{
+name "Default"
+rect 7 122 307 20
+fgcolor 0.00 0.00 0.00 1.00
+bgcolor 0.50 0.50 0.50 1.00
+borderstyle "NONE"
+stuffcommand "track5"
+linkcvar "track_title5"
+}
+resource
+Button
+{
+name "Default"
+rect 319 122 20 20
+fgcolor 1.00 1.00 1.00 1.00
+bgcolor 0.00 0.00 0.00 0.00
+borderstyle "3D_BORDER"
+stuffcommand "track5"
+linkcvar "track_title5"
+shader "menu/textures/media/play_up.tga"
+pressedshader "menu/textures/media/play_dn.tga"
+hovershader "menu_button_glow"
+
+}
+resource
+Label
+{
+name "Default"
+rect 7 142 307 20
+fgcolor 0.00 0.00 0.00 1.00
+bgcolor 0.50 0.50 0.50 1.00
+borderstyle "NONE"
+stuffcommand "track6"
+linkcvar "track_title6"
+}
+resource
+Button
+{
+name "Default"
+rect 319 142 20 20
+fgcolor 1.00 1.00 1.00 1.00
+bgcolor 0.00 0.00 0.00 0.00
+borderstyle "3D_BORDER"
+stuffcommand "track6"
+linkcvar "track_title6"
+shader "menu/textures/media/play_up.tga"
+pressedshader "menu/textures/media/play_dn.tga"
+hovershader "menu_button_glow"
+
+}
+resource
+Label
+{
+name "Default"
+rect 7 162 307 20
+fgcolor 0.00 0.00 0.00 1.00
+bgcolor 0.50 0.50 0.50 1.00
+borderstyle "NONE"
+stuffcommand "track7"
+linkcvar "track_title7"
+}
+resource
+Button
+{
+name "Default"
+rect 319 162 20 20
+fgcolor 1.00 1.00 1.00 1.00
+bgcolor 0.00 0.00 0.00 0.00
+borderstyle "3D_BORDER"
+stuffcommand "track7"
+linkcvar "track_title7"
+shader "menu/textures/media/play_up.tga"
+pressedshader "menu/textures/media/play_dn.tga"
+hovershader "menu_button_glow"
+
+}
+resource
+Label
+{
+name "Default"
+rect 7 182 307 20
+fgcolor 0.00 0.00 0.00 1.00
+bgcolor 0.50 0.50 0.50 1.00
+borderstyle "NONE"
+stuffcommand "track8"
+linkcvar "track_title8"
+}
+resource
+Button
+{
+name "Default"
+rect 319 182 20 20
+fgcolor 1.00 1.00 1.00 1.00
+bgcolor 0.00 0.00 0.00 0.00
+borderstyle "3D_BORDER"
+stuffcommand "track8"
+linkcvar "track_title8"
+shader "menu/textures/media/play_up.tga"
+pressedshader "menu/textures/media/play_dn.tga"
+hovershader "menu_button_glow"
+
+}
+resource
+Label
+{
+name "Default"
+rect 7 202 307 20
+fgcolor 0.00 0.00 0.00 1.00
+bgcolor 0.50 0.50 0.50 1.00
+borderstyle "NONE"
+stuffcommand "track9"
+linkcvar "track_title9"
+}
+resource
+Button
+{
+name "Default"
+rect 319 202 20 20
+fgcolor 1.00 1.00 1.00 1.00
+bgcolor 0.00 0.00 0.00 0.00
+borderstyle "3D_BORDER"
+stuffcommand "track9"
+linkcvar "track_title9"
+shader "menu/textures/media/play_up.tga"
+pressedshader "menu/textures/media/play_dn.tga"
+hovershader "menu_button_glow"
+
+}
+resource
+Label
+{
+name "Default"
+rect 7 222 307 20
+fgcolor 0.00 0.00 0.00 1.00
+bgcolor 0.50 0.50 0.50 1.00
+borderstyle "NONE"
+stuffcommand "track10"
+linkcvar "track_title10"
+}
+resource
+Button
+{
+name "Default"
+rect 319 222 20 20
+fgcolor 1.00 1.00 1.00 1.00
+bgcolor 0.00 0.00 0.00 0.00
+borderstyle "3D_BORDER"
+stuffcommand "track10"
+linkcvar "track_title10"
+shader "menu/textures/media/play_up.tga"
+pressedshader "menu/textures/media/play_dn.tga"
+hovershader "menu_button_glow"
+
+}
+resource
+Button
+{
+name "Default"
+rect 319 242 20 20
+fgcolor 1.00 1.00 1.00 1.00
+bgcolor 0.00 0.00 0.00 0.00
+borderstyle "3D_BORDER"
+stuffcommand "track11"
+linkcvar "track_title11"
+shader "menu/textures/media/play_up.tga"
+pressedshader "menu/textures/media/play_dn.tga"
+hovershader "menu_button_glow"
+
+}
+resource
+Button
+{
+name "Default"
+rect 319 262 20 20
+fgcolor 1.00 1.00 1.00 1.00
+bgcolor 0.00 0.00 0.00 0.00
+borderstyle "3D_BORDER"
+stuffcommand "track12"
+linkcvar "track_title12"
+shader "menu/textures/media/play_up.tga"
+pressedshader "menu/textures/media/play_dn.tga"
+hovershader "menu_button_glow"
+
+}
+resource
+Label
+{
+name "Default"
+rect 7 242 307 20
+fgcolor 0.00 0.00 0.00 1.00
+bgcolor 0.50 0.50 0.50 1.00
+borderstyle "NONE"
+stuffcommand "track11"
+linkcvar "track_title11"
+}
+resource
+Label
+{
+name "Default"
+rect 7 262 307 20
+fgcolor 0.00 0.00 0.00 1.00
+bgcolor 0.50 0.50 0.50 1.00
+borderstyle "NONE"
+stuffcommand "track12"
+linkcvar "track_title12"
+}
+resource
+Label
+{
+name "Default"
+rect 7 282 307 20
+fgcolor 0.00 0.00 0.00 1.00
+bgcolor 0.50 0.50 0.50 1.00
+borderstyle "NONE"
+stuffcommand "track13"
+linkcvar "track_title13"
+}
+resource
+Button
+{
+name "Default"
+rect 319 282 20 20
+fgcolor 1.00 1.00 1.00 1.00
+bgcolor 0.00 0.00 0.00 0.00
+borderstyle "3D_BORDER"
+stuffcommand "track13"
+linkcvar "track_title13"
+shader "menu/textures/media/play_up.tga"
+pressedshader "menu/textures/media/play_dn.tga"
+hovershader "menu_button_glow"
+
+}
+resource
+Button
+{
+name "Default"
+rect 319 302 20 20
+fgcolor 1.00 1.00 1.00 1.00
+bgcolor 0.00 0.00 0.00 0.00
+borderstyle "3D_BORDER"
+stuffcommand "track14"
+linkcvar "track_title14"
+shader "menu/textures/media/play_up.tga"
+pressedshader "menu/textures/media/play_dn.tga"
+hovershader "menu_button_glow"
+
+}
+resource
+Button
+{
+name "Default"
+rect 319 322 20 20
+fgcolor 1.00 1.00 1.00 1.00
+bgcolor 0.00 0.00 0.00 0.00
+borderstyle "3D_BORDER"
+stuffcommand "track15"
+linkcvar "track_title15"
+shader "menu/textures/media/play_up.tga"
+pressedshader "menu/textures/media/play_dn.tga"
+hovershader "menu_button_glow"
+
+}
+resource
+Label
+{
+name "Default"
+rect 7 342 307 20
+fgcolor 0.00 0.00 0.00 1.00
+bgcolor 0.50 0.50 0.50 1.00
+borderstyle "NONE"
+stuffcommand "track16"
+linkcvar "track_title16"
+}
+resource
+Button
+{
+name "Default"
+rect 319 342 20 20
+fgcolor 1.00 1.00 1.00 1.00
+bgcolor 0.00 0.00 0.00 0.00
+borderstyle "3D_BORDER"
+stuffcommand "track16"
+linkcvar "track_title16"
+shader "menu/textures/media/play_up.tga"
+pressedshader "menu/textures/media/play_dn.tga"
+hovershader "menu_button_glow"
+
+}
+resource
+Label
+{
+name "Default"
+rect 7 302 307 20
+fgcolor 0.00 0.00 0.00 1.00
+bgcolor 0.50 0.50 0.50 1.00
+borderstyle "NONE"
+stuffcommand "track14"
+linkcvar "track_title14"
+}
+resource
+Label
+{
+name "Default"
+rect 7 322 307 20
+fgcolor 0.00 0.00 0.00 1.00
+bgcolor 0.50 0.50 0.50 1.00
+borderstyle "NONE"
+stuffcommand "track15"
+linkcvar "track_title15"
+}
+resource
+Button
+{
+name "Default"
+rect 153 371 40 40
+fgcolor 1.00 1.00 1.00 1.00
+bgcolor 0.00 0.00 0.00 1.00
+borderstyle "3D_BORDER"
+stuffcommand "stopmp3"
+shader "menu/textures/media/stop_up.tga"
+pressedshader "menu/textures/media/stop_dn.tga"
+hovershader "menu_button_glow"
+
+}
+resource
+Button
+{
+name "Default"
+rect 103 371 40 40
+fgcolor 1.00 1.00 1.00 1.00
+bgcolor 0.00 0.00 0.00 1.00
+borderstyle "RAISED"
+stuffcommand "nexttrack"
+shader "menu/textures/media/forward_up.tga"
+pressedshader "menu/textures/media/forward_dn.tga"
+hovershader "menu_button_glow"
+
+}
+resource
+Button
+{
+name "Default"
+rect 203 371 40 40
+fgcolor 1.00 1.00 1.00 1.00
+bgcolor 0.00 0.00 0.00 1.00
+borderstyle "RAISED"
+stuffcommand "prevtrack"
+shader "menu/textures/media/back_up.tga"
+pressedshader "menu/textures/media/back_dn.tga"
+hovershader "menu_button_glow"
+
+}
+resource
+Button
+{
+name "Default"
+rect 319 62 20 20
+fgcolor 1.00 1.00 1.00 1.00
+bgcolor 0.00 0.00 0.00 0.00
+borderstyle "3D_BORDER"
+stuffcommand "track2"
+linkcvar "track_title2"
+shader "menu/textures/media/play_up.tga"
+pressedshader "menu/textures/media/play_dn.tga"
+hovershader "menu_button_glow"
+
+}
+resource
+Button
+{
+name "Default"
+rect 319 42 20 20
+fgcolor 1.00 1.00 1.00 1.00
+bgcolor 0.00 0.00 0.00 0.00
+borderstyle "3D_BORDER"
+stuffcommand "track1"
+linkcvar "track_title1"
+shader "menu/textures/media/play_up.tga"
+pressedshader "menu/textures/media/play_dn.tga"
+hovershader "menu_button_glow"
+
+}
+resource
+Field
+{
+title " Type mp3 path and press enter"
+name "Default"
+rect 7 12 307 20
+fgcolor 0.00 0.00 0.00 1.00
+bgcolor 0.50 0.50 0.50 1.00
+borderstyle "RAISED"
+stuffcommand "playmp3"
+linkcvar "ui_pickedsound"
+}
+resource
+Button
+{
+name "Default"
+rect 319 12 20 20
+fgcolor 1.00 1.00 1.00 1.00
+bgcolor 1.00 0.00 0.00 1.00
+borderstyle "3D_BORDER"
+stuffcommand "soundpicker;snd updateinput"
+hovershader "menu_button_glow"
+
+}
+end.

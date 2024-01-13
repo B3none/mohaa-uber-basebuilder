@@ -1,0 +1,14 @@
+main:
+
+if(self.pack == 1)
+{
+self playsound jetpack
+self.velocity += self.upvector * 20
+self.jetpack.smoke[1].scale = 1.0
+self.jetpack.smoke[2].scale = 1.0
+}
+
+end
+
+
+

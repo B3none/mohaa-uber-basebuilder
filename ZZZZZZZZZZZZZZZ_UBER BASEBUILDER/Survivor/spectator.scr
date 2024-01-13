@@ -1,0 +1,27 @@
+main:
+	while(level.roundstarted == 1)
+	{
+		wait 1
+	
+		if(level.run["survivor"] != "1"){end}
+
+		if(self == NULL || self == NIL)
+		{
+			end
+		}
+
+		while(self.dmteam == "spectator")
+		{
+			wait 1
+
+			if(self == NULL || self == NIL)
+			{
+				end
+			}
+		}
+
+		self iprint "You must wait for the next round"
+
+		self spectator
+	}
+end

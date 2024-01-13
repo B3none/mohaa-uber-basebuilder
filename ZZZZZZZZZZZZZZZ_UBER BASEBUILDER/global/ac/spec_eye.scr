@@ -1,0 +1,32 @@
+// edited version of phils spec eye
+
+
+
+main:
+
+	if(level.run["spec-eye"] == "1")
+	{
+		thread SPEC_EYE_ON
+	}
+	else
+	{
+
+		thread SPEC_EYE_OFF
+	}
+end
+
+SPEC_EYE_ON:
+
+         setcvar "g_spectatefollow_forward" "40"
+         setcvar "g_spectatefollow_pitch" "-2"
+         setcvar "g_spectatefollow_right" "3"
+         setcvar "g_spectatefollow_up" "2"
+end
+
+SPEC_EYE_OFF:
+
+         setcvar "g_spectatefollow_forward" "-56"
+         setcvar "g_spectatefollow_right" "0"
+         setcvar "g_spectatefollow_pitch" "2"
+         setcvar "g_spectatefollow_up" "24"
+end

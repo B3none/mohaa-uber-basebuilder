@@ -1,0 +1,156 @@
+header 1 "Action"
+header 2 "Primary"
+header 3 "Alternate"
+
+bind_width 320
+bind_height 208
+bind_fillwidth 5 "textures/mohmenu/metbrd_left"
+bind_commandwidth 161
+bind_commandheight 16
+bind_primarykeywidth 64
+bind_primarykeyheight 16
+bind_alternatekeywidth 64
+bind_alternatekeyheight 16
+
+align centerx centery
+
+titleforegroundcolor 0.4 1 0.25 1
+titlebackgroundcolor 0 0 0 1
+
+activebordercolor 1.0 0.2 0.2 1
+activeforegroundcolor 1 1 1 1
+activebackgroundcolor 0 0 0 1
+
+inactiveforegroundcolor 1 1 1 1
+inactivebackgroundcolor 0.1 0.1 0.1 1
+
+highlightforegroundcolor 0.5 1.0 0.5 1
+highlightbackgroundcolor 0 0 0 1
+
+selectforegroundcolor 1.0 0.5 0.5 1
+selectbackgroundcolor 0 0 0 1
+
+changesound sound/null.wav
+activesound sound/menu/scroll.wav
+entersound  sound/menu/apply.wav
+
+
+binditem "Anti Camper {sfx} 1.00"			"togglemenu camper_main"
+binditem "Screenshot"					"screnshot"
+binditem "Notepad"					"notepad"
+binditem "Editscript"					"editscript"
+binditem "Squad, move in!"				"say *11"
+binditem "Squad, fall back!"				"say *12"
+binditem "Squad, attack right flank!"			"say *13"
+binditem "Squad, attack left flank!"			"say *14"
+binditem "Squad, hold this position!"			"say *15"
+binditem "Squad, covering fire!"			"say *16"
+binditem "Squad, regroup!"				"say *17"
+binditem "Cover me!"					"say *21"
+binditem "I'll cover you!"				"say *22"
+binditem "Follow me!"					"say *23"
+
+binditem "You take point."				"say *24"
+binditem "You take the lead."				"say *25"
+binditem "Taking Fire!  Need some help!"		"say *26"
+binditem "Charge!"					"say *27"
+binditem "Attack!"					"say *28"
+binditem "Open fire!"					"say *29"
+binditem "Yes sir!"					"say *31"
+binditem "No sir!"					"say *32"
+binditem "Enemy Spotted."				"say *33"
+binditem "Sniper!"					"say *34"
+binditem "Grenade! Take Cover!"				"say *35"
+binditem "Great Shot!"					"say *36"
+binditem "Attack!"					"say *37"
+binditem "Thanks."					"say *38"
+binditem "I owe you one."				"say *39"
+binditem "Is that all you've got?"					"say *41"
+binditem "I think they are all out of real men!"			"say *42"
+binditem "Go on and run, you yellow-bellies!"				"say *43"
+binditem "They're a bunch of cowards!"					"say *44"
+binditem "Come back when you've had some target practice!"		"say *45"
+binditem "Come prepared next time!"					"say *46"
+binditem "Try again!"							"say *47"
+binditem "I've seen French school girls shoot better!"			"say *48"
+binditem "That made a mess."						"say *49"
+binditem "He's going to get us killed!"							"say *41"
+binditem "A lot of good men are going to die because of his poor leadership."		"say *42"
+binditem "Good riddance!"								"say *43"
+binditem "That guy is going to get us all killed!"					"say *44"
+binditem "Hey buddy, get down!"								"say *45"
+binditem "Stay out of my foxhole, pal!"							"say *46"
+binditem "Find your own hiding place!"							"say *47"
+binditem "Get out of my way!"								"say *48"
+binditem "lol"						"say lol"
+binditem "Hello everyone!"				"say Hello everyone!"
+binditem "Good Bye"					"say Good Bye"	
+binditem "jukebox"					"togglemenu camper_jukebox"	
+binditem "Stop MP3"					"stopmp3"
+binditem "Cinematic"					"cinematic"
+binditem "Sound Restart"				"snd_restart"
+binditem "Quit Mohaa"					"quit"
+binditem "Main Menu"					"pushmenu main"
+binditem "Controls Menu"				"pushmenu controls"
+binditem "Select Team/Weapon"				"pushmenu dm_main"
+binditem "Previous track"				"prevtrack"
+binditem "Next track"					"nexttrack"
+binditem "3rd Person"					"toggle cg_3rd_person"
+binditem "God Mode"					"dog"
+binditem "Give All"					"wuss"
+binditem "Toggle Full Screen"				"toggle r_fullscreen; vid_restart"
+binditem "No Clip"					"noclip"
+binditem "Fps meter"					"toggle fps"
+binditem "Toggle On"					"ui_hud 1"
+binditem "Toggle Off"					"ui_hud 0"
+binditem "Toggle Compass"				"toggle ui_compass"
+binditem "High"						"exec high.cfg"
+binditem "Low"						"exec low.cfg"
+binditem "medium"					"exec medium.cfg"
+binditem "Toggle Crosshair"				"toggle ui_crosshair"
+binditem "Restart"					"restart"
+binditem "Show bboxes 0"				"sv_showbboxes 0"
+binditem "Show bboxes 1"				"sv_showbboxes 1"
+binditem "Show bboxes 2"				"sv_showbboxes 2"
+binditem "Show bboxes 3"				"sv_showbboxes 3"
+binditem "Show bboxes 4"				"sv_showbboxes 4"
+binditem "logfile off"					"logfile 0"
+binditem "logfile 1"					"logfile 1"
+binditem "logfile 2"					"logfile 2"
+binditem "logfile 3"					"logfile 3"
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

@@ -1,0 +1,1729 @@
+menu "rcon" 640 360 NONE 0
+
+showcommand "set rconfield \"\"; exec menu/rconmenu/showhome.cfg"
+
+
+
+
+
+
+
+
+
+
+
+
+
+			
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+resource
+Label
+{
+name "Default"
+rect 0 0 640 360
+fgcolor 0.00 0.00 0.00 0.00
+bgcolor 0.50 0.50 0.00 0.60
+borderstyle "RAISED"
+}
+resource
+Label
+{
+title "Host Name"
+name "ro3"
+rect 20 100 130 20
+fgcolor 0.00 0.00 0.00 1.00
+bgcolor 0.50 0.50 0.50 1.00
+borderstyle "NONE"
+}
+resource
+Label
+{
+title "E-mail"
+name "ro4"
+rect 20 125 130 20
+fgcolor 0.00 0.00 0.00 1.00
+bgcolor 0.50 0.50 0.50 1.00
+borderstyle "NONE"
+}
+resource
+Label
+{
+title "Connection"
+name "ro5"
+rect 20 150 130 20
+fgcolor 0.00 0.00 0.00 1.00
+bgcolor 0.50 0.50 0.50 1.00
+borderstyle "NONE"
+}
+resource
+Label
+{
+title "master 1"
+name "ro7"
+rect 20 200 130 20
+fgcolor 0.00 0.00 0.00 1.00
+bgcolor 0.50 0.50 0.50 1.00
+borderstyle "NONE"
+}
+resource
+Label
+{
+title "master 2"
+name "ro8"
+rect 20 225 130 20
+fgcolor 0.00 0.00 0.00 1.00
+bgcolor 0.50 0.50 0.50 1.00
+borderstyle "NONE"
+}
+resource
+Label
+{
+title "Game typestr"
+name "ro6"
+rect 20 175 130 20
+fgcolor 0.00 0.00 0.00 1.00
+bgcolor 0.50 0.50 0.50 1.00
+borderstyle "NONE"
+}
+resource
+Label
+{
+title "master 3"
+name "ro9"
+rect 20 250 130 20
+fgcolor 0.00 0.00 0.00 1.00
+bgcolor 0.50 0.50 0.50 1.00
+borderstyle "NONE"
+}
+resource
+Label
+{
+title "URL"
+name "ro2"
+rect 20 75 130 20
+fgcolor 0.00 0.00 0.00 1.00
+bgcolor 0.50 0.50 0.50 1.00
+borderstyle "NONE"
+}
+resource
+Field
+{
+name "ro2b"
+rect 150 75 180 20
+fgcolor 0.00 0.00 0.00 1.00
+bgcolor 1.00 1.00 1.00 1.00
+borderstyle "INDENT_BORDER"
+stuffcommand "rcon  seta url"
+}
+resource
+Field
+{
+name "ro3b"
+rect 150 100 180 20
+fgcolor 0.00 0.00 0.00 1.00
+bgcolor 1.00 1.00 1.00 1.00
+borderstyle "INDENT_BORDER"
+stuffcommand "rcon seta sv_hostname "
+}
+resource
+Field
+{
+name "ro4b"
+rect 150 125 180 20
+fgcolor 0.00 0.00 0.00 1.00
+bgcolor 1.00 1.00 1.00 1.00
+borderstyle "INDENT_BORDER"
+stuffcommand "rcon seta email"
+}
+resource
+Field
+{
+name "ro5b"
+rect 150 150 180 20
+fgcolor 0.00 0.00 0.00 1.00
+bgcolor 1.00 1.00 1.00 1.00
+borderstyle "INDENT_BORDER"
+stuffcommand "rcon seta connection"
+}
+resource
+Field
+{
+name "ro6b"
+rect 150 175 180 20
+fgcolor 0.00 0.00 0.00 1.00
+bgcolor 1.00 1.00 1.00 1.00
+borderstyle "INDENT_BORDER"
+stuffcommand "rcon seta g_gametypestring "
+}
+resource
+Field
+{
+name "ro7b"
+rect 150 200 180 20
+fgcolor 0.00 0.00 0.00 1.00
+bgcolor 1.00 1.00 1.00 1.00
+borderstyle "INDENT_BORDER"
+stuffcommand "rcon sv_master1"
+}
+resource
+Field
+{
+name "ro8b"
+rect 150 225 180 20
+fgcolor 0.00 0.00 0.00 1.00
+bgcolor 1.00 1.00 1.00 1.00
+borderstyle "INDENT_BORDER"
+stuffcommand "rcon sv_master2"
+}
+resource
+Label
+{
+title "Private Password"
+name "ro10"
+rect 335 50 130 20
+fgcolor 0.00 0.00 0.00 1.00
+bgcolor 0.50 0.50 0.50 1.00
+borderstyle "NONE"
+}
+resource
+Label
+{
+title "Rcon Address"
+name "ro12"
+rect 335 100 130 20
+fgcolor 0.00 0.00 0.00 1.00
+bgcolor 0.50 0.50 0.50 1.00
+borderstyle "NONE"
+}
+resource
+PulldownMenuContainer
+{
+title "Config"
+name "ro13"
+rect 335 125 130 20
+fgcolor 0.00 0.00 0.00 1.00
+bgcolor 0.50 0.50 0.50 1.00
+borderstyle "NONE"
+addpopup "config"  "unnamedsoldier.cfg" command "rcon config unnamedsoldier.cfg"
+
+}
+resource
+Label
+{
+title "Rconpassword"
+name "ro11"
+rect 335 75 130 20
+fgcolor 0.00 0.00 0.00 1.00
+bgcolor 0.50 0.50 0.50 1.00
+borderstyle "NONE"
+}
+resource
+Label
+{
+title "MOTD"
+name "ro14"
+rect 335 150 130 20
+fgcolor 0.00 0.00 0.00 1.00
+bgcolor 0.50 0.50 0.50 1.00
+borderstyle "NONE"
+}
+resource
+Label
+{
+title "Your Password"
+name "ro15"
+rect 335 175 130 20
+fgcolor 0.00 0.00 0.00 1.00
+bgcolor 0.50 0.50 0.50 1.00
+borderstyle "NONE"
+}
+resource
+Label
+{
+title "Next Map"
+name "ro16"
+rect 335 200 130 20
+fgcolor 0.00 0.00 0.00 1.00
+bgcolor 0.50 0.50 0.50 1.00
+borderstyle "NONE"
+}
+resource
+PulldownMenuContainer
+{
+title "State File"
+name "ro17"
+rect 335 225 130 20
+fgcolor 0.00 0.00 0.00 1.00
+bgcolor 0.50 0.50 0.50 1.00
+borderstyle "NONE"
+addpopup "State File"  "Default global/mike" command "rcon g_statefile global/mike"
+addpopup "State File"  "AA Anti Camper" command "rcon g_statefile global/anticamper_aa"
+addpopup "State File"  "SH Anti Camper" command "rcon g_statefile global/anticamper_sh"
+addpopup "State File"  "BT Anti Camper" command "rcon g_statefile global/anticamper_bt"
+
+}
+resource
+Label
+{
+title "Admin"
+name "ro1"
+rect 20 50 130 20
+fgcolor 0.00 0.00 0.00 1.00
+bgcolor 0.00 0.50 1.00 1.00
+borderstyle "NONE"
+}
+resource
+Field
+{
+name "ro1b"
+rect 150 50 180 20
+fgcolor 0.00 0.00 0.00 1.00
+bgcolor 1.00 1.00 1.00 1.00
+borderstyle "INDENT_BORDER"
+stuffcommand " rcon seta admin"
+}
+resource
+Field
+{
+name "ro9b"
+rect 150 250 180 20
+fgcolor 0.00 0.00 0.00 1.00
+bgcolor 1.00 1.00 1.00 1.00
+borderstyle "INDENT_BORDER"
+stuffcommand "rcon sv_master3"
+}
+resource
+Field
+{
+name "ro11b"
+rect 465 50 145 20
+fgcolor 0.00 0.00 0.00 1.00
+bgcolor 1.00 1.00 1.00 1.00
+borderstyle "INDENT_BORDER"
+stuffcommand "rcon sv_privatepassword"
+linkcvar "sv_privatepassword"
+}
+resource
+Field
+{
+name "ro12b"
+rect 465 75 145 20
+fgcolor 0.00 0.00 0.00 1.00
+bgcolor 1.00 1.00 1.00 1.00
+borderstyle "INDENT_BORDER"
+stuffcommand "seta rconpassword"
+linkcvar "rconpassword"
+}
+resource
+Field
+{
+name "ro13b"
+rect 465 100 145 20
+fgcolor 0.00 0.00 0.00 1.00
+bgcolor 1.00 1.00 1.00 1.00
+borderstyle "INDENT_BORDER"
+stuffcommand "seta rconAddress "
+linkcvar "rconAddress "
+}
+resource
+Field
+{
+name "ro14b"
+rect 465 125 145 20
+fgcolor 0.00 0.00 0.00 1.00
+bgcolor 1.00 1.00 1.00 1.00
+borderstyle "INDENT_BORDER"
+stuffcommand "seta config "
+}
+resource
+Field
+{
+name "ro15b"
+rect 465 150 145 20
+fgcolor 0.00 0.00 0.00 1.00
+bgcolor 1.00 1.00 1.00 1.00
+borderstyle "INDENT_BORDER"
+stuffcommand "rcon seta g_motd "
+}
+resource
+Field
+{
+name "ro16b"
+rect 465 175 145 20
+fgcolor 0.00 0.00 0.00 1.00
+bgcolor 1.00 1.00 1.00 1.00
+borderstyle "INDENT_BORDER"
+stuffcommand "seta password"
+}
+resource
+Field
+{
+name "ro17b"
+rect 465 200 145 20
+fgcolor 0.00 0.00 0.00 1.00
+bgcolor 1.00 1.00 1.00 1.00
+borderstyle "INDENT_BORDER"
+stuffcommand "rcon nextmap"
+}
+resource
+Field
+{
+name "ro18b"
+rect 465 225 145 20
+fgcolor 0.00 0.00 0.00 1.00
+bgcolor 1.00 1.00 1.00 1.00
+borderstyle "INDENT_BORDER"
+stuffcommand "rcon g_statefile"
+}
+resource
+Field
+{
+name "ro19b"
+rect 465 250 145 20
+fgcolor 0.00 0.00 0.00 1.00
+bgcolor 1.00 1.00 1.00 1.00
+borderstyle "INDENT_BORDER"
+stuffcommand "rcon sv_maplist"
+}
+resource
+PulldownMenuContainer
+{
+title "Map rotation"
+name "ro18"
+rect 335 250 130 20
+fgcolor 0.00 0.00 0.00 1.00
+bgcolor 0.50 0.50 0.50 1.00
+borderstyle "NONE"
+addpopup "Map Rotation" "Default FFA" command "rcon sv_maplist dm/mohdm1 dm/mohdm2 dm/mohdm3 dm/mohdm4 dm/mohdm5 dm/mohdm6 dm/mohdm7"
+addpopup "Map Rotation" "Default obj" command "rcon sv_maplist obj/obj_team1 obj/obj_team2 obj/obj_team3 obj/obj_team4"
+addpopup "Map Rotation" "Default round" command "rcon sv_maplist dm/mohdm1 dm/mohdm2 dm/mohdm3 dm/mohdm4 dm/mohdm5 dm/mohdm6 dm/mohdm7"
+addpopup "Map Rotation" "Default team"" command "rcon sv_maplist dm/mohdm1 dm/mohdm2 dm/mohdm3 dm/mohdm4 dm/mohdm5 dm/mohdm6 dm/mohdm7"
+
+}
+resource
+CheckBox
+{
+title "Allow vote"
+name "o2"
+rect 20 75 160 20
+fgcolor 0.00 0.00 0.00 1.00
+bgcolor 0.50 0.50 0.50 1.00
+borderstyle "NONE"
+unchecked_command "rcon g_allowVote 0"
+checked_command "rcon g_allowVote 1"
+clicksound "menu/sound/apply.wav"
+hovershader "menu_button_glow"
+
+}
+resource
+CheckBox
+{
+title "Force respawn "
+name "o1"
+rect 20 50 160 20
+fgcolor 0.00 0.00 0.00 1.00
+bgcolor 0.50 0.50 0.50 1.00
+borderstyle "NONE"
+unchecked_command "rcon g_forcerespawn 0"
+checked_command "rcon g_forcerespawn 1"
+clicksound "menu/sound/apply.wav"
+hovershader "menu_button_glow"
+
+}
+resource
+CheckBox
+{
+title "Team Damage"
+name "o3"
+rect 20 100 160 20
+fgcolor 0.00 0.00 0.00 1.00
+bgcolor 0.50 0.50 0.50 1.00
+borderstyle "NONE"
+unchecked_command "rcon g_teamdamage 0"
+checked_command "rcon g_teamdamage 1"
+clicksound "menu/sound/apply.wav"
+hovershader "menu_button_glow"
+
+}
+resource
+CheckBox
+{
+title "Use Gamespy"
+name "o4"
+rect 20 125 160 20
+fgcolor 0.00 0.00 0.00 1.00
+bgcolor 0.50 0.50 0.50 1.00
+borderstyle "NONE"
+unchecked_command "rcon sv_gamespy 0"
+checked_command "rcon sv_gamespy 1"
+clicksound "menu/sound/apply.wav"
+hovershader "menu_button_glow"
+
+}
+resource
+CheckBox
+{
+title "Voicechat "
+name "o5"
+rect 20 150 160 20
+fgcolor 0.00 0.00 0.00 1.00
+bgcolor 0.50 0.50 0.50 1.00
+borderstyle "NONE"
+unchecked_command "rcon cg_voicechat 0"
+checked_command "rcon cg_voicechat 1"
+clicksound "menu/sound/apply.wav"
+hovershader "menu_button_glow"
+
+}
+resource
+CheckBox
+{
+title "Syncronous"
+name "o6"
+rect 20 175 160 20
+fgcolor 0.00 0.00 0.00 1.00
+bgcolor 0.50 0.50 0.50 1.00
+borderstyle "NONE"
+unchecked_command "rcon g_syncronousclients 0"
+checked_command "rcon g_syncronousclients 1"
+clicksound "menu/sound/apply.wav"
+hovershader "menu_button_glow"
+
+}
+resource
+CheckBox
+{
+title "Use noipx "
+name "o7"
+rect 20 200 160 20
+fgcolor 0.00 0.00 0.00 1.00
+bgcolor 0.50 0.50 0.50 1.00
+borderstyle "NONE"
+unchecked_command "rcon net_noipx 0"
+checked_command "rcon net_noipx 1"
+clicksound "menu/sound/apply.wav"
+hovershader "menu_button_glow"
+
+}
+resource
+CheckBox
+{
+title "logsync "
+name "o8"
+rect 20 225 160 20
+fgcolor 0.00 0.00 0.00 1.00
+bgcolor 0.50 0.50 0.50 1.00
+borderstyle "NONE"
+unchecked_command "rcon g_logsync 0"
+checked_command "rcon g_logsync 1"
+clicksound "menu/sound/apply.wav"
+hovershader "menu_button_glow"
+
+}
+resource
+CheckBox
+{
+title "Spectate full chat "
+name "o9"
+rect 20 250 160 20
+fgcolor 0.00 0.00 0.00 1.00
+bgcolor 0.50 0.50 0.50 1.00
+borderstyle "NONE"
+unchecked_command "rcon g_spectate_allow_full_chat 0"
+checked_command "rcon g_spectate_allow_full_chat 1"
+clicksound "menu/sound/apply.wav"
+hovershader "menu_button_glow"
+
+}
+resource
+CheckBox
+{
+title "Realism"
+name "o10"
+rect 185 50 160 20
+fgcolor 0.00 0.00 0.00 1.00
+bgcolor 0.50 0.00 0.50 1.00
+borderstyle "NONE"
+unchecked_command "rcon g_realismmode 0"
+checked_command "rcon g_realismmode 1"
+clicksound "menu/sound/apply.wav"
+hovershader "menu_button_glow"
+
+}
+resource
+CheckBox
+{
+title "Health drop"
+name "o11"
+rect 185 75 160 20
+fgcolor 0.00 0.00 0.00 1.00
+bgcolor 0.50 0.00 0.50 1.00
+borderstyle "NONE"
+unchecked_command "rcon g_healthdrop 0"
+checked_command "rcon g_healthdrop 1"
+clicksound "menu/sound/apply.wav"
+hovershader "menu_button_glow"
+
+}
+resource
+CheckBox
+{
+title "Forceteamspectate "
+name "o12"
+rect 186 101 160 20
+fgcolor 0.00 0.00 0.00 1.00
+bgcolor 0.50 0.50 0.50 1.00
+borderstyle "NONE"
+unchecked_command "rcon g_forceteamspectate 0"
+checked_command "rcon g_forceteamspectate 1"
+clicksound "menu/sound/apply.wav"
+hovershader "menu_button_glow"
+
+}
+resource
+CheckBox
+{
+title "Force respawn "
+name "o13"
+rect 185 125 160 20
+fgcolor 0.00 0.00 0.00 1.00
+bgcolor 0.50 0.50 0.50 1.00
+borderstyle "NONE"
+unchecked_command "rcon g_forcerespawn 0"
+checked_command "rcon g_forcerespawn 1"
+clicksound "menu/sound/apply.wav"
+hovershader "menu_button_glow"
+
+}
+resource
+CheckBox
+{
+title "Force ready "
+name "o14"
+rect 185 150 160 20
+fgcolor 0.00 0.00 0.00 1.00
+bgcolor 0.50 0.50 0.50 1.00
+borderstyle "NONE"
+unchecked_command "rcon g_forceready 0"
+checked_command "rcon g_forceready 1"
+clicksound "menu/sound/apply.wav"
+hovershader "menu_button_glow"
+
+}
+resource
+CheckBox
+{
+title "Flood Protect "
+name "o15"
+rect 185 175 160 20
+fgcolor 0.00 0.00 0.00 1.00
+bgcolor 0.50 0.50 0.50 1.00
+borderstyle "NONE"
+unchecked_command "rcon sv_floodProtect 0"
+checked_command "rcon sv_floodProtect 1"
+clicksound "menu/sound/apply.wav"
+hovershader "menu_button_glow"
+
+}
+resource
+Field
+{
+name "s4b"
+rect 155 125 60 20
+fgcolor 0.00 0.00 0.00 1.00
+bgcolor 1.00 1.00 1.00 1.00
+borderstyle "INDENT_BORDER"
+stuffcommand "rcon g_inactiveKick "
+}
+resource
+Field
+{
+name "s5b"
+rect 155 150 60 20
+fgcolor 0.00 0.00 0.00 1.00
+bgcolor 1.00 1.00 1.00 1.00
+borderstyle "INDENT_BORDER"
+stuffcommand "rcon  sv_maxclients "
+clicksound "sound/menu/scroll.wav"
+shader "menu_button_trans"
+hovershader "menu_button_glow"
+
+}
+resource
+Field
+{
+name "s6b"
+rect 155 175 60 20
+fgcolor 0.00 0.00 0.00 1.00
+bgcolor 1.00 1.00 1.00 1.00
+borderstyle "INDENT_BORDER"
+stuffcommand "rcon  sv_privateClients "
+clicksound "sound/menu/scroll.wav"
+shader "menu_button_trans"
+hovershader "menu_button_glow"
+
+}
+resource
+PulldownMenuContainer
+{
+title "Inactive Spectate"
+name "s3"
+rect 25 100 130 20
+fgcolor 0.00 0.00 0.00 1.00
+bgcolor 0.50 0.50 0.50 1.00
+borderstyle "NONE"
+addpopup "Inactive Spectate" "Default 60" command "rcon  g_inactivespectate 60"
+clicksound "menu/sound/apply.wav"
+hovershader "menu_button_glow"
+
+}
+resource
+PulldownMenuContainer
+{
+title "Time Limit"
+name "s2"
+rect 25 75 130 20
+fgcolor 0.00 0.00 0.00 1.00
+bgcolor 0.50 0.50 0.50 1.00
+borderstyle "NONE"
+addpopup "Timelimit" "10" command "rcon  timelimit 10"
+addpopup "Timelimit" "20" command "rcon  timelimit 20"
+addpopup "Timelimit" "30" command "rcon  timelimit 30"
+addpopup "Timelimit" "40" command "rcon  timelimit 40"
+addpopup "Timelimit" "50" command "rcon  timelimit 50"
+addpopup "Timelimit" "60" command "rcon  timelimit 60"
+clicksound "menu/sound/apply.wav"
+hovershader "menu_button_glow"
+
+}
+resource
+Label
+{
+title "Frags"
+name "s1"
+rect 25 50 130 20
+fgcolor 0.00 0.00 0.00 1.00
+bgcolor 0.00 0.50 1.00 1.00
+borderstyle "NONE"
+hide
+
+}
+resource
+Label
+{
+name "Default"
+rect 5 30 630 5
+fgcolor 0.00 0.00 0.00 1.00
+bgcolor 0.50 0.50 0.50 1.00
+borderstyle "RAISED"
+}
+resource
+Label
+{
+name "Default"
+rect 5 285 630 5
+fgcolor 0.00 0.00 0.00 1.00
+bgcolor 0.50 0.50 0.50 1.00
+borderstyle "3D_BORDER"
+}
+resource
+Label
+{
+title "Type rcon commands below and press enter"
+name "Default"
+rect 100 295 300 30
+fgcolor 0.00 0.00 0.00 1.00
+bgcolor 0.50 0.50 0.00 1.00
+borderstyle "NONE"
+}
+resource
+PulldownMenuContainer
+{
+title "Inactive kick"
+name "s4"
+rect 25 125 130 20
+fgcolor 0.00 0.00 0.00 1.00
+bgcolor 0.50 0.50 0.50 1.00
+borderstyle "NONE"
+addpopup "Inactive kick" "Default 900" command "rcon g_inactivekick 900"
+clicksound "menu/sound/apply.wav"
+hovershader "menu_button_glow"
+
+}
+resource
+PulldownMenuContainer
+{
+title "Max players"
+name "s5"
+rect 25 150 130 20
+fgcolor 0.00 0.00 0.00 1.00
+bgcolor 0.50 0.50 0.50 1.00
+borderstyle "NONE"
+addpopup "Max clients" "Default 32" command "rcon sv_maxclients  32"
+clicksound "menu/sound/apply.wav"
+hovershader "menu_button_glow"
+
+}
+resource
+Label
+{
+title "Private Clients "
+name "s6"
+rect 25 175 130 20
+fgcolor 0.00 0.00 0.00 1.00
+bgcolor 0.50 0.50 0.50 1.00
+borderstyle "NONE"
+}
+resource
+PulldownMenuContainer
+{
+title "Max Ping"
+name "s7"
+rect 25 200 130 20
+fgcolor 0.00 0.00 0.00 1.00
+bgcolor 0.50 0.50 0.50 1.00
+borderstyle "NONE"
+addpopup "Max Ping" "default 800" command "rcon sv_maxPing 800"
+clicksound "menu/sound/apply.wav"
+hovershader "menu_button_glow"
+
+}
+resource
+PulldownMenuContainer
+{
+title "Allow join time "
+name "s8"
+rect 25 225 130 20
+fgcolor 0.00 0.00 0.00 1.00
+bgcolor 0.50 0.50 0.50 1.00
+borderstyle "NONE"
+addpopup "Allow join time "  "Default 30" command "rcon g_allowjointime 30"
+clicksound "menu/sound/apply.wav"
+hovershader "menu_button_glow"
+
+}
+resource
+PulldownMenuContainer
+{
+title "Max Rate"
+name "s9"
+rect 25 250 130 20
+fgcolor 0.00 0.00 0.00 1.00
+bgcolor 0.50 0.50 0.50 1.00
+borderstyle "NONE"
+addpopup "Max rate" "formula" command "notepad menu/help/maxrate.cfg"
+clicksound "menu/sound/apply.wav"
+hovershader "menu_button_glow"
+
+}
+resource
+Field
+{
+name "s7b"
+rect 155 200 60 20
+fgcolor 0.00 0.00 0.00 1.00
+bgcolor 1.00 1.00 1.00 1.00
+borderstyle "INDENT_BORDER"
+stuffcommand "rcon  sv_maxPing"
+clicksound "sound/menu/scroll.wav"
+shader "menu_button_trans"
+hovershader "menu_button_glow"
+
+}
+resource
+Field
+{
+name "s8b"
+rect 155 225 60 20
+fgcolor 0.00 0.00 0.00 1.00
+bgcolor 1.00 1.00 1.00 1.00
+borderstyle "INDENT_BORDER"
+stuffcommand "rcon  g_allowjointime "
+clicksound "sound/menu/scroll.wav"
+shader "menu_button_trans"
+hovershader "menu_button_glow"
+clicksound "sound/menu/scroll.wav"
+shader "menu_button_trans"
+hovershader "menu_button_glow"
+
+}
+resource
+Field
+{
+name "s9b"
+rect 155 250 60 20
+fgcolor 0.00 0.00 0.00 1.00
+bgcolor 1.00 1.00 1.00 1.00
+borderstyle "INDENT_BORDER"
+stuffcommand "rcon  sv_maxRate "
+clicksound "sound/menu/scroll.wav"
+shader "menu_button_trans"
+hovershader "menu_button_glow"
+
+}
+resource
+PulldownMenuContainer
+{
+title "Walk Speed"
+name "sb2"
+rect 225 75 130 20
+fgcolor 0.00 0.00 0.00 1.00
+bgcolor 0.50 0.50 0.50 1.00
+borderstyle "NONE"
+addpopup "Walk Speed"  "Default - 150" command "rcon sv_walkspeed 150"
+clicksound "menu/sound/apply.wav"
+hovershader "menu_button_glow"
+
+}
+resource
+PulldownMenuContainer
+{
+title "Spawn Delay"
+name "sb3"
+rect 225 100 130 20
+fgcolor 0.00 0.00 0.00 1.00
+bgcolor 0.50 0.00 0.50 1.00
+borderstyle "NONE"
+addpopup "Spawn Delay"  "Default 120" command "rcon sv_team_spawn_interval 120"
+clicksound "menu/sound/apply.wav"
+hovershader "menu_button_glow"
+
+}
+resource
+PulldownMenuContainer
+{
+title "invulnerable time"
+name "sb5"
+rect 225 150 130 20
+fgcolor 0.00 0.00 0.00 1.00
+bgcolor 0.50 0.00 0.50 1.00
+borderstyle "NONE"
+addpopup "Invulnerable time"  "Default 3.0" command "rcon sv_invulnerabletime 30"
+clicksound "menu/sound/apply.wav"
+hovershader "menu_button_glow"
+
+}
+resource
+PulldownMenuContainer
+{
+title "Max intermition"
+name "sb4"
+rect 225 125 130 20
+fgcolor 0.00 0.00 0.00 1.00
+bgcolor 0.50 0.00 0.50 1.00
+borderstyle "NONE"
+addpopup "Max intermition"  "Default 15" command "rcon  g_maxintermission 15"
+clicksound "menu/sound/apply.wav"
+hovershader "menu_button_glow"
+
+}
+resource
+Label
+{
+title "Round limit"
+name "sb6"
+rect 225 175 130 20
+fgcolor 0.00 0.00 0.00 1.00
+bgcolor 0.50 0.00 0.50 1.00
+borderstyle "NONE"
+}
+resource
+PulldownMenuContainer
+{
+title "Food wait delay"
+name "sb7"
+rect 225 200 130 20
+fgcolor 0.00 0.00 0.00 1.00
+bgcolor 0.50 0.50 0.50 1.00
+borderstyle "NONE"
+addpopup "Food wait delay"  "Default 10" command "rcon flood_persecond 10"
+clicksound "menu/sound/apply.wav"
+hovershader "menu_button_glow"
+
+}
+resource
+PulldownMenuContainer
+{
+title "Flood per second"
+name "sb8"
+rect 225 225 130 20
+fgcolor 0.00 0.00 0.00 1.00
+bgcolor 0.50 0.50 0.50 1.00
+borderstyle "NONE"
+addpopup "Flood per second"  "Default 4" command "rcon flood_waitdelay 4"
+clicksound "menu/sound/apply.wav"
+hovershader "menu_button_glow"
+
+}
+resource
+PulldownMenuContainer
+{
+title "Flood msgs"
+name "sb9"
+rect 225 250 130 20
+fgcolor 0.00 0.00 0.00 1.00
+bgcolor 0.50 0.50 0.50 1.00
+borderstyle "NONE"
+addpopup "Flood msgs"  "Default - 4" command "rcon flood_msgs 4"
+clicksound "menu/sound/apply.wav"
+hovershader "menu_button_glow"
+
+}
+resource
+Field
+{
+name "sb1b"
+rect 355 50 60 20
+fgcolor 0.00 0.00 0.00 1.00
+bgcolor 1.00 1.00 1.00 1.00
+borderstyle "INDENT_BORDER"
+stuffcommand "rcon  sv_runspeed"
+}
+resource
+Field
+{
+name "sb2b"
+rect 355 75 60 20
+fgcolor 0.00 0.00 0.00 1.00
+bgcolor 1.00 1.00 1.00 1.00
+borderstyle "INDENT_BORDER"
+stuffcommand "rcon  sv_walkspeed"
+clicksound "sound/menu/scroll.wav"
+shader "menu_button_trans"
+hovershader "menu_button_glow"
+
+}
+resource
+Field
+{
+name "sb3b"
+rect 355 100 60 20
+fgcolor 0.00 0.00 0.00 1.00
+bgcolor 1.00 1.00 1.00 1.00
+borderstyle "INDENT_BORDER"
+stuffcommand "rcon  sv_team_spawn_interval"
+clicksound "sound/menu/scroll.wav"
+shader "menu_button_trans"
+hovershader "menu_button_glow"
+
+}
+resource
+Field
+{
+name "sb4b"
+rect 355 125 60 20
+fgcolor 0.00 0.00 0.00 1.00
+bgcolor 1.00 1.00 1.00 1.00
+borderstyle "INDENT_BORDER"
+stuffcommand "rcon g_maxintermition"
+clicksound "sound/menu/scroll.wav"
+shader "menu_button_trans"
+hovershader "menu_button_glow"
+
+}
+resource
+Field
+{
+name "sb5b"
+rect 355 150 60 20
+fgcolor 0.00 0.00 0.00 1.00
+bgcolor 1.00 1.00 1.00 1.00
+borderstyle "INDENT_BORDER"
+stuffcommand "rcon sv_invulnerabletime"
+clicksound "sound/menu/scroll.wav"
+shader "menu_button_trans"
+hovershader "menu_button_glow"
+
+}
+resource
+Field
+{
+name "sb7b"
+rect 355 200 60 20
+fgcolor 0.00 0.00 0.00 1.00
+bgcolor 1.00 1.00 1.00 1.00
+borderstyle "INDENT_BORDER"
+stuffcommand "rcon flood_waitdelay "
+clicksound "sound/menu/scroll.wav"
+shader "menu_button_trans"
+hovershader "menu_button_glow"
+
+}
+resource
+Field
+{
+name "sb8b"
+rect 355 225 60 20
+fgcolor 0.00 0.00 0.00 1.00
+bgcolor 1.00 1.00 1.00 1.00
+borderstyle "INDENT_BORDER"
+stuffcommand "rcon flood_persecond "
+clicksound "sound/menu/scroll.wav"
+shader "menu_button_trans"
+hovershader "menu_button_glow"
+
+}
+resource
+Field
+{
+name "sb9b"
+rect 355 250 60 20
+fgcolor 0.00 0.00 0.00 1.00
+bgcolor 1.00 1.00 1.00 1.00
+borderstyle "INDENT_BORDER"
+stuffcommand "rcon flood_msgs"
+clicksound "sound/menu/scroll.wav"
+shader "menu_button_trans"
+hovershader "menu_button_glow"
+
+}
+resource
+PulldownMenuContainer
+{
+title "Zombie time"
+name "sc1"
+rect 425 50 130 20
+fgcolor 0.00 0.00 0.00 1.00
+bgcolor 0.50 0.50 0.50 1.00
+borderstyle "NONE"
+addpopup "Zombie time"  "Default 2" command "rcon sv_zombietime 2"
+clicksound "menu/sound/apply.wav"
+hovershader "menu_button_glow"
+
+}
+resource
+PulldownMenuContainer
+{
+title "Run Speed"
+name "sb1"
+rect 225 50 130 20
+fgcolor 0.00 0.00 0.00 1.00
+bgcolor 0.50 0.50 0.50 1.00
+borderstyle "NONE"
+addpopup "Run Speed"  "Default - 250" command "rcon sv_runspeed 250"
+clicksound "menu/sound/apply.wav"
+hovershader "menu_button_glow"
+
+}
+resource
+PulldownMenuContainer
+{
+title "Reconnect limit "
+name "sc3"
+rect 425 100 130 20
+fgcolor 0.00 0.00 0.00 1.00
+bgcolor 0.50 0.50 0.50 1.00
+borderstyle "NONE"
+addpopup "Reconnect limit "  "Default 3" command "rcon sv_reconnectlimit  3"
+clicksound "menu/sound/apply.wav"
+hovershader "menu_button_glow"
+
+}
+resource
+PulldownMenuContainer
+{
+title "SV FPS"
+name "sc4"
+rect 425 125 130 20
+fgcolor 0.00 0.00 0.00 1.00
+bgcolor 0.50 0.50 0.50 1.00
+borderstyle "NONE"
+addpopup "SV Fps"  "Default 20" command "rcon sv_fps 20"
+clicksound "menu/sound/apply.wav"
+hovershader "menu_button_glow"
+
+}
+resource
+PulldownMenuContainer
+{
+title "Timeout"
+name "sc6"
+rect 425 175 130 20
+fgcolor 0.00 0.00 0.00 1.00
+bgcolor 0.50 0.50 0.50 1.00
+borderstyle "NONE"
+addpopup "Timeout"  "Default 120" command "rcon sv_timeout 120"
+clicksound "menu/sound/apply.wav"
+hovershader "menu_button_glow"
+
+}
+resource
+PulldownMenuContainer
+{
+title "Max player health "
+name "sc7"
+rect 425 200 130 20
+fgcolor 0.00 0.00 0.00 1.00
+bgcolor 0.50 0.50 0.50 1.00
+borderstyle "NONE"
+addpopup "Max player health" "Default - 750" command "rcon  g_maxplayerhealth 750"
+clicksound "menu/sound/apply.wav"
+hovershader "menu_button_glow"
+
+}
+resource
+PulldownMenuContainer
+{
+title "Gametype"
+name "sc9"
+rect 425 250 80 20
+fgcolor 0.00 0.00 0.00 1.00
+bgcolor 0.50 0.50 0.50 1.00
+borderstyle "3D_BORDER"
+addpopup "Gametype"  "SP" command "rcon gametype 0"
+addpopup "Gametype"  "Free For All" command "rcon gametype 1"
+addpopup "Gametype"  "Team Death Match" command "rcon gametype 2"
+addpopup "Gametype"  "Round Based" command "rcon gametype 3"
+addpopup "Gametype"  "Objective" command "rcon gametype 4"
+addpopup "Gametype"  "Tug opf war" command "rcon gametype 5"
+addpopup "Gametype"  "Liberation" command "rcon gametype 6"
+clicksound "menu/sound/apply.wav"
+hovershader "menu_button_glow"
+
+}
+resource
+Field
+{
+name "sc1b"
+rect 555 50 60 20
+fgcolor 0.00 0.00 0.00 1.00
+bgcolor 1.00 1.00 1.00 1.00
+borderstyle "INDENT_BORDER"
+stuffcommand "rcon  sv_zombietime"
+clicksound "sound/menu/scroll.wav"
+shader "menu_button_trans"
+hovershader "menu_button_glow"
+
+}
+resource
+Field
+{
+name "sc2b"
+rect 555 75 60 20
+fgcolor 0.00 0.00 0.00 1.00
+bgcolor 1.00 1.00 1.00 1.00
+borderstyle "INDENT_BORDER"
+stuffcommand "rcon dmflags"
+clicksound "sound/menu/scroll.wav"
+shader "menu_button_trans"
+hovershader "menu_button_glow"
+
+}
+resource
+Field
+{
+name "sc3b"
+rect 555 100 60 20
+fgcolor 0.00 0.00 0.00 1.00
+bgcolor 1.00 1.00 1.00 1.00
+borderstyle "INDENT_BORDER"
+stuffcommand "rcon  sv_reconnectlimit "
+clicksound "sound/menu/scroll.wav"
+shader "menu_button_trans"
+hovershader "menu_button_glow"
+
+}
+resource
+Field
+{
+name "sc4b"
+rect 555 125 60 20
+fgcolor 0.00 0.00 0.00 1.00
+bgcolor 1.00 1.00 1.00 1.00
+borderstyle "INDENT_BORDER"
+stuffcommand "rcon  sv_fps"
+clicksound "sound/menu/scroll.wav"
+shader "menu_button_trans"
+hovershader "menu_button_glow"
+
+}
+resource
+Field
+{
+name "sc5b"
+rect 555 150 60 20
+fgcolor 0.00 0.00 0.00 1.00
+bgcolor 1.00 1.00 1.00 1.00
+borderstyle "INDENT_BORDER"
+stuffcommand "rcon protocol "
+clicksound "sound/menu/scroll.wav"
+shader "menu_button_trans"
+hovershader "menu_button_glow"
+
+}
+resource
+Field
+{
+name "sc7b"
+rect 555 200 60 20
+fgcolor 0.00 0.00 0.00 1.00
+bgcolor 1.00 1.00 1.00 1.00
+borderstyle "INDENT_BORDER"
+stuffcommand "rcon g_maxplayerhealth "
+clicksound "sound/menu/scroll.wav"
+shader "menu_button_trans"
+hovershader "menu_button_glow"
+
+}
+resource
+Field
+{
+name "sc6b"
+rect 555 175 60 20
+fgcolor 0.00 0.00 0.00 1.00
+bgcolor 1.00 1.00 1.00 1.00
+borderstyle "INDENT_BORDER"
+stuffcommand "rcon  sv_timeout"
+clicksound "sound/menu/scroll.wav"
+shader "menu_button_trans"
+hovershader "menu_button_glow"
+
+}
+resource
+PulldownMenuContainer
+{
+title "Heal rate"
+name "sc8"
+rect 425 225 130 20
+fgcolor 0.00 0.00 0.00 1.00
+bgcolor 0.50 0.00 0.50 1.00
+borderstyle "NONE"
+addpopup "Heal rate" "5 per sec" command "set g_healrate 5"
+addpopup "Heal rate" "10 per sec" command "set g_healrate 10"
+addpopup "Heal rate" "20 per sec" command "set g_healrate 20"
+clicksound "menu/sound/apply.wav"
+hovershader "menu_button_glow"
+
+}
+resource
+Label
+{
+title "Exec"
+name "r6"
+rect 25 175 130 20
+fgcolor 0.00 0.00 0.00 1.00
+bgcolor 0.50 0.50 0.50 1.00
+borderstyle "NONE"
+}
+resource
+Field
+{
+name "sb6b"
+rect 355 175 60 20
+fgcolor 0.00 0.00 0.00 1.00
+bgcolor 1.00 1.00 1.00 1.00
+borderstyle "INDENT_BORDER"
+stuffcommand "rcon roundlimit"
+clicksound "sound/menu/scroll.wav"
+shader "menu_button_trans"
+hovershader "menu_button_glow"
+
+}
+resource
+Field
+{
+title "exec"
+name "r6b"
+rect 155 175 130 20
+fgcolor 0.00 0.00 0.00 1.00
+bgcolor 1.00 1.00 1.00 1.00
+borderstyle "NONE"
+stuffcommand "rcon exec"
+clicksound "sound/menu/scroll.wav"
+shader "menu_button_trans"
+hovershader "menu_button_glow"
+
+}
+resource
+Field
+{
+title "map"
+name "r5b"
+rect 155 150 130 20
+fgcolor 0.00 0.00 0.00 1.00
+bgcolor 1.00 1.00 1.00 1.00
+borderstyle "NONE"
+stuffcommand "rcon map"
+clicksound "sound/menu/scroll.wav"
+shader "menu_button_trans"
+hovershader "menu_button_glow"
+
+}
+resource
+Field
+{
+name "s1b"
+rect 155 50 60 20
+fgcolor 0.00 0.00 0.00 1.00
+bgcolor 1.00 1.00 1.00 1.00
+borderstyle "INDENT_BORDER"
+stuffcommand " rcon fraglimit "
+clicksound "sound/menu/scroll.wav"
+shader "menu_button_trans"
+hovershader "menu_button_glow"
+
+}
+resource
+Field
+{
+name "s2b"
+rect 155 75 60 20
+fgcolor 0.00 0.00 0.00 1.00
+bgcolor 1.00 1.00 1.00 1.00
+borderstyle "INDENT_BORDER"
+stuffcommand "rcon  timelimit"
+clicksound "sound/menu/scroll.wav"
+shader "menu_button_trans"
+hovershader "menu_button_glow"
+
+}
+resource
+Field
+{
+name "s3b"
+rect 155 100 60 20
+fgcolor 0.00 0.00 0.00 1.00
+bgcolor 1.00 1.00 1.00 1.00
+borderstyle "INDENT_BORDER"
+stuffcommand "rcon  g_inactiveSpectate "
+clicksound "sound/menu/scroll.wav"
+shader "menu_button_trans"
+hovershader "menu_button_glow"
+
+}
+resource
+PulldownMenuContainer
+{
+title "Protocol"
+name "sc5"
+rect 425 150 130 20
+fgcolor 0.00 0.00 0.00 1.00
+bgcolor 0.50 0.50 0.50 1.00
+borderstyle "NONE"
+addpopup "Protocol"  "Default - 8" command "rcon protocol 8"
+clicksound "menu/sound/apply.wav"
+hovershader "menu_button_glow"
+
+}
+resource
+Button
+{
+title "Clear"
+name "Default"
+rect 405 295 60 60
+fgcolor 0.00 0.00 0.00 1.00
+bgcolor 0.50 0.50 0.50 1.00
+borderstyle "3D_BORDER"
+stuffcommand "reset rconfield"
+clicksound "menu/sound/apply.wav"
+hovershader "menu_button_glow"
+hoversound "menu/sound/scroll.wav"
+
+}
+resource
+Button
+{
+title "Change \n map"
+name "Default"
+rect 470 295 60 60
+fgcolor 0.00 0.00 0.00 1.00
+bgcolor 0.50 0.50 0.50 1.00
+borderstyle "3D_BORDER"
+stuffcommand "pushmenu camper_maps"
+clicksound "menu/sound/apply.wav"
+hovershader "menu_button_glow"
+hoversound "menu/sound/scroll.wav"
+
+}
+resource
+Button
+{
+title "B\na\nc\nk"
+name "Default"
+rect 600 295 30 60
+fgcolor 0.00 0.00 0.00 1.00
+bgcolor 0.50 0.50 0.50 1.00
+borderstyle "3D_BORDER"
+stuffcommand "popmenu 0"
+clicksound "sound/menu/back.wav"
+shader "menu_button_trans"
+hovershader "menu_button_glow"
+hoversound "menu/sound/scroll.wav"
+
+}
+resource
+Button
+{
+title "Server options"
+name "btnoptions"
+rect 245 5 150 20
+fgcolor 0.00 0.00 0.00 1.00
+bgcolor 0.50 0.50 0.50 1.00
+borderstyle "3D_BORDER"
+stuffcommand "exec menu/rconmenu/showoptions.cfg"
+clicksound "menu/sound/apply.wav"
+hovershader "menu_button_glow"
+hoversound "menu/sound/scroll.wav"
+
+}
+resource
+Button
+{
+title "Server Settings"
+name "btnsettings"
+rect 90 5 150 20
+fgcolor 0.00 0.00 0.00 1.00
+bgcolor 0.50 0.50 0.50 1.00
+borderstyle "3D_BORDER"
+stuffcommand "exec menu/rconmenu/showsettings.cfg"
+clicksound "menu/sound/apply.wav"
+hovershader "menu_button_glow"
+hoversound "menu/sound/scroll.wav"
+
+}
+resource
+Button
+{
+title "Home"
+name "btnhome"
+rect 5 5 80 20
+fgcolor 0.00 0.00 0.00 1.00
+bgcolor 0.50 0.50 0.50 1.00
+borderstyle "INDENT_BORDER"
+stuffcommand "exec menu/rconmenu/showhome.cfg"
+clicksound "menu/sound/apply.wav"
+hovershader "menu_button_glow"
+hoversound "menu/sound/scroll.wav"
+
+}
+resource
+Button
+{
+title "Restart server"
+name "r1"
+rect 25 50 130 20
+fgcolor 0.00 0.00 0.00 1.00
+bgcolor 0.50 0.50 0.50 1.00
+borderstyle "NONE"
+stuffcommand "rcon restart"
+clicksound "menu/sound/apply.wav"
+hovershader "menu_button_glow"
+hoversound "menu/sound/scroll.wav"
+
+}
+resource
+Button
+{
+title "Shut Down"
+name "r2"
+rect 25 75 130 20
+fgcolor 0.00 0.00 0.00 1.00
+bgcolor 0.50 0.50 0.50 1.00
+borderstyle "NONE"
+stuffcommand "rcon quit"
+clicksound "menu/sound/apply.wav"
+hovershader "menu_button_glow"
+hoversound "menu/sound/scroll.wav"
+
+}
+resource
+Button
+{
+title "kick Client"
+name "r3"
+rect 25 100 130 20
+fgcolor 0.00 0.00 0.00 1.00
+bgcolor 0.50 0.50 0.50 1.00
+borderstyle "NONE"
+stuffcommand "pushmenu camper_playerselect; exec menu/playerselection/kick.cfg"
+clicksound "menu/sound/apply.wav"
+hovershader "menu_button_glow"
+hoversound "menu/sound/scroll.wav"
+
+}
+resource
+Label
+{
+title "map"
+name "r5"
+rect 25 150 130 20
+fgcolor 0.00 0.00 0.00 1.00
+bgcolor 0.50 0.50 0.50 1.00
+borderstyle "NONE"
+}
+resource
+Button
+{
+title "Status"
+name "r4"
+rect 25 125 130 20
+fgcolor 0.00 0.00 0.00 1.00
+bgcolor 0.50 0.50 0.50 1.00
+borderstyle "NONE"
+//stuffcommand "globalwidgetcommand r4 title \"See Console `\"; rcon status; wait 3000; globalwidgetcommand r4 title Status"
+stuffcommand "globalwidgetcommand r4 title \"See Console `\"; rcon status; wait 3000; globalwidgetcommand r4 title Status"
+clicksound "menu/sound/apply.wav"
+hovershader "menu_button_glow"
+hoversound "menu/sound/scroll.wav"
+
+}
+resource
+PulldownMenuContainer
+{
+title "Dm Flags"
+name "sc2"
+rect 425 75 130 20
+fgcolor 0.00 0.00 0.00 1.00
+bgcolor 0.50 0.50 0.50 1.00
+borderstyle "NONE"
+addpopup "Dm Flags"  "Calculator" command "pushmenu workout_dmflags"
+clicksound "menu/sound/apply.wav"
+hovershader "menu_button_glow"
+
+}
+resource
+Button
+{
+title "Game \n Cmd's"
+name "Default"
+rect 11 295 85 60
+fgcolor 0.00 0.00 0.00 1.00
+bgcolor 0.50 0.50 0.50 1.00
+borderstyle "3D_BORDER"
+stuffcommand "notepad server_cmds.txt"
+clicksound "menu/sound/apply.wav"
+hovershader "menu_button_glow"
+hoversound "menu/sound/scroll.wav"
+
+}
+resource
+Button
+{
+title "Rcon \n settings"
+name "btnrcono"
+rect 535 295 60 60
+fgcolor 0.00 0.00 0.00 1.00
+bgcolor 0.50 0.50 0.50 1.00
+borderstyle "3D_BORDER"
+stuffcommand "exec menu/rconmenu/showrcon.cfg"
+clicksound "menu/sound/apply.wav"
+hovershader "menu_button_glow"
+hoversound "menu/sound/scroll.wav"
+
+}
+resource
+Button
+{
+title "Help"
+name "Default"
+rect 555 5 80 20
+fgcolor 0.00 0.00 0.00 1.00
+bgcolor 0.50 0.50 0.50 1.00
+borderstyle "RAISED"
+stuffcommand "pushmenu camper_help"
+clicksound "menu/sound/apply.wav"
+hovershader "menu_button_glow"
+hoversound "menu/sound/scroll.wav"
+
+}
+resource
+Field
+{
+name "rconfield"
+rect 100 325 300 30
+fgcolor 0.00 0.00 0.00 1.00
+bgcolor 1.00 1.00 1.00 1.00
+borderstyle "INDENT_BORDER"
+stuffcommand "rcon "
+linkcvar "rconfield"
+clicksound "sound/menu/scroll.wav"
+shader "menu_button_trans"
+hovershader "menu_button_glow"
+
+}
+resource
+Button
+{
+title "Camper Rcon"
+name "Default"
+rect 400 5 150 20
+fgcolor 0.00 0.00 0.00 1.00
+bgcolor 0.50 0.50 0.50 1.00
+borderstyle "3D_BORDER"
+stuffcommand "pushmenu camperrcon"
+clicksound "menu/sound/apply.wav"
+hovershader "menu_button_glow"
+hoversound "menu/sound/scroll.wav"
+
+}
+resource
+Label
+{
+title "Admin list"
+name "admin_title"
+rect 355 50 260 20
+fgcolor 0.00 0.00 0.00 1.00
+bgcolor 0.50 0.50 0.50 1.00
+borderstyle "RAISED"
+}
+resource
+ListBox
+{
+name "Admins_list"
+rect 355 70 260 176
+fgcolor 0.00 0.00 0.00 1.00
+bgcolor 0.50 0.50 0.50 1.00
+borderstyle "RAISED"
+}
+resource
+Button
+{
+title "Scan for Admins ( Update)"
+name "admin_scan"
+rect 355 250 260 20
+fgcolor 0.00 0.00 0.00 1.00
+bgcolor 0.50 0.50 0.50 1.00
+borderstyle "RAISED"
+stuffcommand "rcon admin_cmd adminscan"
+}
+end.

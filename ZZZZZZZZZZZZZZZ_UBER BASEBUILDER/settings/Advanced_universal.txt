@@ -1,0 +1,68 @@
+//--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+//
+// Advanced_universal.txt
+// 
+// This file contains the settings that will be used for each map. 
+// other files like Advanced.txt can be made map specific. however this file is not.
+// Its setitngs will be universal. 
+//
+// This file is executed first and then depending on the settings found here. Other files
+// and information is handled accordingly.
+//
+//--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+
+
+//--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+//
+// Extra settings 
+//
+// These are just quick settings for speed 
+// These settings will be executed on load up and will be used for every map. 
+//--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+
+extra_settings:
+		
+	// Reset the settings or not
+	// game.reset = 0 // Dont reset and keep all of settings. Mods on/off modified will keep.
+	// game.reset = 1 // Reset Mods and reload settings. Mods on/off modified will not keep.
+	// game.reset = 2 // keep Mods but reload settings. Mods on/off modified will keep. Settings will be reloaded. This allows 
+	// 		     you to have map specific settings and not loose settings for Mods on and off value.
+
+	game.reset = 0				 // Reset and reload Admin-Pro when map changes.
+
+end
+
+//--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+//
+// Spawn Detection
+//
+// I found because i do not use the dmprecache file and the state file to exec the script to load the scripts
+// the spawn detection does not aquire the scripts needed fast enough. This can be counterd with a wait.
+// However i have decided to move all scripts and their paths needed to be executed into this section of advanced.txt.
+//	
+// The array is worked out first thing. The spawn scripts can then access it. As all the scripts are in this array it will be executing
+// scripts that are not needed if the mod the script is linked to is turned off. The mod scripts should have checks in to counter this.
+// Last thing the spawn array is remade and useless scripts are removed. You must specify with what mod the scripts are linked with. 
+// If "none" is given the script will always be executed.
+//
+// When manualy respawning players via script or via console with the respawn command. The spawn scripts would run the mods "twice". To counter this
+// on the needed scripts only do they get executed if the reload parameter is set 1. Properly scripted mods and respawn commands should not cause problems.
+//	
+// Even if settings/advanced is map specific the spawn scripts will be loaded from  settings/advanced.txt
+//--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+spawn_scripts:
+			//script path				//name to associate with		//reload on forced respawn
+	level.spawn_scripts = makearray	
+		global/ac/mines/hold_check.scr			"mines"					"0"		// Each time a player spawns the mines are executed
+		global/ac/spawn_protection.scr			"spawn-protection"			"1"		// Player Spawn protection script
+	        global/ac/time_alive_count.scr			"time-alive"				"0"		// Inform player how long they lived for
+		global/ac/medics/hold_check.scr			"medics"				"0"		// Allow players to be medics. USe hold script
+		survivor/spawned.scr				"survivor"				"0"		// Survivor game type script to count players
+		weapon_limit/radar.scr				"weapons-limiter"			"1"		// Weapons limiter stuff to change weapons etc
+	endarray	
+
+end 
+

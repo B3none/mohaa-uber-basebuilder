@@ -1,0 +1,60 @@
+
+// this is just stuff that mgiht eb usefull
+
+
+// find player:
+// exec with a id from console or whatever and will return the player
+// returns nil if not found
+
+find_player local.maybeplayer:
+
+	for(local.i=1; local.i <= $player.size; local.i++) //loop through and find the player
+	{   
+		if(local.maybeplayer == string($player[local.i].entnum)) //if the number is what was enterd into console then work
+		{
+			local.player = $player[local.i]
+			end local.player
+		}         
+	}   
+
+end
+
+// RGB light from string
+// Will produce a light from a string
+// returns a array of the light as int
+
+light_from_string local.string:
+
+	//split the line
+	local.light_array = waitexec global/strings.scr::split_line local.string 1
+	// first set is the split words
+	local.light = local.light_array[1]
+	//convert to int
+	local.light = waitexec global/strings.scr::array_to_float local.light
+
+end local.light
+
+// produces a random light 
+// returns a array of the light as int
+
+random_light:
+
+	local.colour_is_pretty = 1
+	while(local.colour_is_pretty == 1)
+	{
+		for(local.i = 1;local.i <= 3;local.i++)
+		{
+			local.light[local.i] = randomfloat(2.0)
+		}
+		
+		local.colour_is_pretty = (int(local.light[1] == 0) && int(local.light[2] == 0) && int(local.light[3] == 0))
+
+		if(local.colour_is_pretty != 1)
+		{				
+			end local.light
+		}
+
+		waitframe
+	}
+
+end local.light

@@ -1,0 +1,29 @@
+main:
+
+	local.avatar = spawn func_beam
+	local.avatar shader ("textures/hud/" + self.dmteam + ".tga") 
+	local.avatar.origin = self.origin
+
+	local.avatar color ( 1.0 1.0 1.0 )
+	local.avatar scale 6
+	local.avatar numsegments 1
+
+//	local.org = spawn script_origin
+//	local.org.origin = self.plane.origin + ( 0 0 100 )
+	
+//	local.org bind  self.plane
+//	local.avatar bind local.org
+//
+	local.avatar activate
+
+
+	while(self.plane != NIl || self.plane != NULL)
+	{
+		waitframe
+		local.avatar.origin =  ( self.plane.origin + ( 0 0 50) )
+		local.avatar endpoint  ( self.plane.origin + ( 0 0 70) )
+	}
+
+	local.avatar remove
+
+end

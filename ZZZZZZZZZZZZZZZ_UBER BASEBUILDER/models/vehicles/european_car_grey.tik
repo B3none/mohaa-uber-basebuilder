@@ -1,0 +1,45 @@
+TIKI
+setup
+{
+	scale 0.52				// Set default scale to 16/30.5 since world is in 16 units per foot and model is in cm's
+	path models/vehicles/car
+	skelmodel car.skd
+	surface carwindow shader carwindow
+	surface car3 shader car
+	surface car2 shader car
+}
+
+init
+{
+   	server
+      	{
+      		classname drivablevehicle
+		//classname VehicleWheelsX2
+      		setsize "-45 -30 0" "45 15 50"
+      		seatoffset "-10 10 -45"
+      		gravity 0.6
+      		canjump
+			vehiclespeed 5000
+			vehiclemass 1500
+			vehicletread 10
+			vehicleradius 0.33
+			vehiclerollingresistance 0.5
+			vehicledrag 0.00001
+			turnrate 10
+			vehiclebouncy 0.2
+			vehiclespringy 0.8
+
+			AnimationSet "bmwbike_"
+			//SoundSet "bmwbike_"
+			SoundSet "jeep_"
+	}
+}
+
+animations
+{
+	idle     car.skc
+}
+
+/*QUAKED vehicle_europe_car-grey (0.5 .25 0.25) (-32 -32 0) (32 32 128)
+Grey European Car
+*/

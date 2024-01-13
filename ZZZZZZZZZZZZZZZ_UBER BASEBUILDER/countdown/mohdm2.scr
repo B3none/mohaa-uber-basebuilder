@@ -1,0 +1,61 @@
+//The mod will choose between a random number of starting positions. 
+//I only added one but you can add as many as you want.
+//By adding them into an array of local.origin and then ending with the local.origin variable.
+//Each tiemyou add a ogiin use the same format btu increase the number by one for the index, for example.
+//
+//main:
+//
+//	local.origin[0] = ( 504 -5128 -447 )
+//	local.origin[1] = ( -1414 162 -127 )
+//	local.origin[2] = ( 120 96 9 )
+//
+//end  local.origin
+
+main:
+
+	local.origin[0] = ( -798.92 -2611.05 -61.88 )
+
+	local.origin[1] = ( -403.24 -1764.55 -30.12 )
+
+	local.origin[2] = ( 123.39 -934.01 -71.56 )
+
+	local.origin[3] = ( -770.52 -622.89 40.13 )
+
+	local.origin[4] = ( -227.13 -4.92 40.13 )
+
+	local.origin[5] = ( -1051.94 1.62 40.13 )
+
+	local.origin[6] = ( -2051.03 -781.71 16.13 )
+
+	local.origin[7] = ( -2488.87 -415.13 16.13 )
+
+	local.origin[8] = ( -1984.13 -1686.27 16.13 )
+
+	local.origin[9] = ( -2119.48 -1000.62 240.13 )
+
+	local.origin[10] = ( -1247.13 -1965.30 8.13 )
+
+	local.origin[11] = ( -3560.88 -616.87 8.12 )
+
+	local.origin[12] = ( -3367.08 -71.13 220.13 )
+
+	local.origin[13] = ( -3341.59 -255.38 476.13 )
+
+	local.origin[14] = ( -2813.03 -551.00 199.01 )
+
+	local.origin[15] = ( -2269.70 -846.65 240.13 )
+
+	local.origin[16] = ( -2128.51 -1335.31 480.13 )
+
+	local.origin[17] = ( -1988.20 -499.34 240.13 )
+
+	local.origin[18] = ( -104.86 -1678.01 94.00 )
+
+	local.origin[19] = ( -1553.36 -2802.43 -53.00 )
+
+	local.origin[20] = ( -2275.13 1840.87 216.13 )
+
+	local.origin[21] = ( -1569 -525 -27)
+
+end  local.origin
+

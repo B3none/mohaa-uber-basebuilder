@@ -1,0 +1,29 @@
+// this script foces cvars
+
+main:
+
+	if(level.run["cvar-forcing"]!="1"){end}
+		
+	
+	local.cvars = waitexec game.file["cvar-forcing"]::cvar_force
+
+	if!(local.cvars.size)
+	{
+		end
+	}
+
+	while(level.run["cvar-forcing"] =="1")
+	{
+		wait 1
+		for(local.i= 1; local.i <= $player.size; local.i ++)
+		{
+			wait 1
+			for(local.c = 1; local.c <= local.cvars.size; local.c++)
+			{
+				wait 1
+				$player[local.i] stufftext (local.cvars[local.c][1] + " " + local.cvars[local.c][2])
+				if(level.run["cvar-forcing"]!="1"){end}
+			}
+		}
+	}
+end

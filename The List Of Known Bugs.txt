@@ -1,0 +1,35 @@
+<><><>Info<><><>
+
+This is the list of the bugs that I was unable to fix.
+
+<><><><><><><><><><>
+
+<><><>The List<><><>
+
+-Plane - Sometimes the bombs don't work (drop the bombs by right clicking)
+
+-Plane - Sometimes, when you crash your plane into a wall, you will fall out, and won't be dead. It's almost like surviving a plane crash, but eventually you automatically kill yourself, lol.
+
+-Plane - When you keep speeding up, you will suddenly fly really slow, then when you slow down, you will suddenly fly really fast.
+
+-Jetpack - When you are in the air, and you die, the jetpack instantly detaches from your back, and you fall really fast to the ground. It's pretty funny to see.
+
+-Dog Trigger - When you are a dog, you can bite (by left clicking) and killl your teammates, even when friendly fire is turned off.
+
+-Giant Trigger - If you shoot at almost any part of the giant's body, they won't get hurt. You have to shoot somewhere on the left or right knee for the person to get hurt.
+
+-Guided Missile - If you are flying a plane, then fly into the Guided Missile trigger, you will turn into a guided missile while you are flying a plane. The missile will collide with the plane, and blow you up. Then when you respawn, you are stuck and can't move. Teamswitching and committing suicide won't get you out of this bug. You'll have to reconnect to the server.
+
+-Moveable Health Trigger - If you get enough health (about 30000), your health will suddenly become -30000 health. Anyone that shoots you will only decrease this health, meaning you cannot die.
+
+-Moveable Health Trigger - When you get the health trigger, it will randomly move to another spot. Sometimes though, it will randomly pick the same spot, meaning you get the health trigger twice in one spot.
+
+-Lifts - If you place the ending point of a lift onto someone's head, it will start crushing the person, making them lose health while they can't move. Consider this as being face lifted.
+
+-70 Second Countdown - When you add time during the countdown, the number will be stuck onto the screen and the music will still be playing, until it ends. If you stop the building, the music will still be playing until the end of it.
+
+-Cheats - If you type cmd dog into the console during building, you won't be able to die, of course, but when building is over, cheats are automatically deactivated. Since cheats are deactivated, you can't turn off cmd dog, and you will be permanently invincible.
+
+(Note: These are definitely not all the bugs, but these are the ones that are the most common.)
+
+<><><><><><><><><><>

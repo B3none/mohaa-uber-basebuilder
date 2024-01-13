@@ -1,0 +1,19 @@
+<><><>Info<><><>
+
+The flyable plane is something that turns you into a plane, and you are able to fly around and shoot people with it.
+
+<><><><><><><><><><>
+
+<><><>Controls<><><>
+
+Use Key - Switch between MG42 gun, 30CAL gun, and Rockets. 
+Right Click - Drop bombs (although it normally doesn't work, for some reason). 
+Move your mouse up, down, left, and right - Steer the plane.
+Left Click - Fire your currently selected weapon.
+W - Speed up.
+S - Slow down.
+A - Barrel roll Left.
+D - Barrel roll right.
+Space Bar - Jump out of plane.
+
+<><><><><><><><><><>

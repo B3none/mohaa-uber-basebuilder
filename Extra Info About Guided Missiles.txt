@@ -1,0 +1,12 @@
+<><><>Info<><><>
+
+The Guided Missile is a little missile that you fly around in and blow people up. When you crash into someone, they will explode.
+
+<><><><><><><><><><>
+
+<><><>Controls<><><>
+
+Look Left, Right, Up, and Down - Steer the missile.
+Left Click - Fire your missile in a straight line into someone.
+
+<><><><><><><><><><>

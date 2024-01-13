@@ -1,0 +1,5 @@
+<><><>Info<><><>
+
+For some reason, I've forgotten to tell everyone that you can use cheats during basebuilder. When you are building, you can use cheats such as noclip. Just type cmd noclip into the console, and you will be in noclip. The thing is, when building is over, all the cheats become useless. This is because cheats automatically become deactivated when the building time hits 0. NOTE: You must type CMD before any command, or it will not work. (example: cmd noclip) (example: cmd dog) (example: cmd fullheal)
+
+<><><><><><><><><><>

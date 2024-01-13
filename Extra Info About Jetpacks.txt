@@ -1,0 +1,12 @@
+<><><>Info<><><>
+
+The jetpack is a trigger that attaches a jetpack to your back. You are able to lift off, fly around and shoot people with your own guns.
+
+<><><><><><><><><><>
+
+<><><>Controls<><><>
+
+Jump and hold Use Key - Lift off the ground.
+Hold Use key (when in the air) - Propel yourself forward.
+
+<><><><><><><><><><>

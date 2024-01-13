@@ -1,0 +1,5 @@
+<><><>Info<><><>
+
+This is an old feature, but I'm just reminding people about it. When 70 seconds are left for the building time, you will hear dramatic music playing, and some colored numbers will appear on the middle of your screen. Every 10 seconds the color changes. When it hits 10 seconds, every second after that will change color, finally ending with a black number 1.
+
+<><><><><><><><><><>

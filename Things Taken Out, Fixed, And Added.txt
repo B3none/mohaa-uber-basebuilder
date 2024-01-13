@@ -1,0 +1,37 @@
+<><><>Info<><><>
+
+This is the text file that talks about everything taken out, fixed, or added. They will not be in full sentences, so try to understand what it means. There will also be a reason for why it was fixed, added, or taken out. Here's the format (subject - reason) Basically the reason comes after the  -
+
+<><><><><><><><><><>
+
+<><><>Things Taken Out<><><>
+
+-Killer Spotlights - Everyone would use them to kill people while they were building. You can't get kills when you shine it on someone, because the game will think the shining person is killing himself.Mi
+-Mini Flak88s - Did not work with the other players in the server. The mini flak88 and the view you see from it was completely clientside. Other people would see it as a giant flak88, and they couldn't see where they're shooting.
+
+<><><><><><><><><><>
+
+<><><>Things Added In<><><>
+
+-Camouflage Trigger - Thought it was a good idea to make someone turn into a bush, when one of the basebuilder objects is a bush as well. This makes it ideal for someone to hide in their bushes.
+-Moveable Health Triggers - Considering the rigged weapon mod, lots of people die in one shot. If they find a health trigger, they would gain 500 extra health, keeping them in the battlefield for a just little longer.
+-Capture The Church Mod - Maybe some maps could include something else other than just basebuilder, that way it could make the basebuilder mod a little bit more interesting.
+-m1l3b Vehicle Wars (unfinished) - This is an unfinished non basebuilder map. I couldn't do any more of this without the help of a good experienced modder. So for now, it stays unfinished. See the full story at http://medalofhonor.filefront.com/news/SearingWolfe_Requires_Help_With_A_Mod_Called_Uber_Basebuilder;42949
+-Single Player Basebuilder Maps - Most of these maps have been unfinished for all of my previous versions, but now they are all finished.
+-Admin_Pro Menu - Some parts of my mod (jetpack and planes) were from Elgan's Admin_Pro Menu. I've decided to include his Admin Menu into my mod, that way you could see the full effects of the planes, jetpacks, and the parachute model.
+-Two extra plane triggers - These are just some different planes that you can fly in Vehicle Wars and m4l0.
+
+(Note: I probably forgot some)
+
+<><><><><><><><><><>
+
+<><><>Things Fixed<><><>
+
+-Basebuilder Item Placement - Some items on some maps were misplaced, or the model path was wrong. I went through every map to make sure all the items were fixed.
+-Guided Missile - Normally, you would have a normal time limit in flying, but I fixed it so you can have unlimited flight, but one bullet will make you explode.
+-Jetpack - Probably not noticable, but i fixed the purpulsion and I set it so you can fly faster.
+-Secret Triggers Placement - Some triggers  on some maps were misplaced, meaning that you couldn't get to them. Well, I went through all the maps to make sure that every trigger was where it is supposed to be.
+
+(Note: There are TONS more, but it's not worth my time to list them all. The ones above are probably the major ones, and the ones I can think of off the back of my head)
+
+<><><><><><><><><><>

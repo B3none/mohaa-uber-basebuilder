@@ -1,0 +1,43 @@
+<><><>Info<><><>
+
+This is a weapon mod that spices up your server, if you want it. Before anyone hates it, it is NOT a realism mod. Even though it says ReasonableWeapons, doesn't mean that they are. Some weapons are more rigged than others. Rigged Weapon means that it is a weapon that you either can't get unless you find the all weapons trigger, or you can only get it if you pick it. Normal Weapon means that you start out with it. All the weapons have scopes, except for the grenades, colt 45, and walter p38.
+
+<><><><><><><><><><>
+
+<><><>What The Weapons Do<><><>
+
+Hi-Standard Silenced - Rigged Weapon - Shoots very fast. One hit kill. You run very fast when holding this weapon.
+	*Hi-Standard Silenced Bash - Does no damage. Double right click to scope.
+
+Colt 45 - Normal Weapon - Shoots fast. Takes multiple shots to kill someone. When you shoot someone, they get launched away from you.
+	*Colt 45 Bash - Long ranged bash. One hit kill.
+
+Walter P38 - Normal Weapon - Shoots fast. Takes multiple shots to kill someone. When you shoot someone, they get launched towards you.
+	*Walter P38 Bash - Long ranged bash. One hit kill.
+
+M1 Garand - Normal Weapon - Shoots fast. Two hit kill.
+
+Mauser Kar 98  - Normal Weapon -  Shoots fast. Two hit kill.
+
+KAR 98 Sniper - Normal Weapon - Shoots fast. Two hit kill.
+
+Springfield Sniper - Rigged Weapon - Shoots fast. Two hit kill. This shoots flaming rockets at people.
+
+Thompson - Normal Weapon - Shoots very fast. Takes several shots to kill someone.
+
+MP40 - Normal Weapon - Shoots very fast. Takes several shots to kill someone.
+
+BAR - Normal Weapon - Shoots very fast. Takes several shots to kill someone.
+
+StG44 - Normal Weapon - Shoots very fast. Takes several shots to kill someone.
+
+Bazooka - Normal Weapon - Shoots moderately fast. One hit kill. The explosion radius is big. It shoots rockets that fly in an arc. (good for shooting over walls that people use to hide behind)
+
+Panzerschreck - Rigged Weapon - Shoots almost fast.  One hit kill. The explosion radius is big. Rockets do NOT fly in an arc. (better than bazooka)
+
+Shotgun - Rigged Weapon - Shoots at moderate speed. One hit kill. Shoots several bullets at a time.
+
+Frag Grenade and Steilhandgranate*Left Click Fire* - Normal Weapon - Throws a vapor grenade. People will loose health very fast when they are in the smoke cloud.
+Frag Grenade and Steilhandgranate*Right Click Fire* - Normal Weapon - Throws a flaming grenade. Two throws and someone's dead. Thrown very fast in a straight line.
+
+<><><><><><><><><><>

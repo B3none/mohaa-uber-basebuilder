@@ -1,0 +1,17 @@
+<><><>Info<><><>
+
+This is one of my favorite triggers. The trigger looks like a spinning health box with a green light under it. When you find it, you will gain 500 health, and the trigger will randomly move to another spot. There are 10 other spots on every map that it can move to. Sometimes though, it will randomly move to another spot, but that randomed spot is the same spot as last time, meaning that it will move to the same spot twice, and you get the health spot twice in one spot, so you get 1000 health. Getting the health spot twice in one spot is rare, but 3 times in one spot, is extremely rare. I've never gotten 4 in a row before though. When you get so much health (around 30000 health) your health will suddenly go below 0, to something like -30000 health or something. This is a bug, but a very fun one. Your screen will be a little shaky, because the game thinks you are the living dead, since your health is below 0. You won't be able to die, because when someone shoots you, your negative health increases farther from 0. If you keep getting the health trigger, your negative health decreases closer to 0. When you hit 0, you die, lol. You can achieve negative health on only a few maps, because on a few maps, like m4l1 anad m2l2b, the health triggers are right next to each other.
+
+<><><><><><><><><><>
+
+<><><>Advantages<><><>
+
+You gain health, making it harder and longer for people to kill you.
+
+<><><><><><><><><><>
+
+<><><>Disadvantages<><><>
+
+There are no disadvantages to gaining health.
+
+<><><><><><><><><><>

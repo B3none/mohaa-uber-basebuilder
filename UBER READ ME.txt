@@ -1,0 +1,102 @@
+*****************************************************************************UBER BASEBUILDER 6.0*****************************************************************************
+<><><>Intro<><><>
+
+Hello everyone! after months of bug fixing, and adding new features to UBER BASEBUILDER, I welcome you version 6! This mod includes the full basebuilder mod on every single map yes, even the void level xD! If you are currently running this mod on another server, this is a MUST for your UBER BASEBUILDER server. It also includes Elgan's Admin Menu, since much of the mod was based off basebuilder and the admin pro (planes, jetpacks, etc.). If you don't want the admin pro, you don't have to use it. You can go into your controls and set a key for the Admin_Menu if you want. Also, when you are building, you can use cheats like noclip to help you build. You must type cmd noclip in console for it to work. When building is over, cheats are automatically deactivated, so you can't use dog or noclip after building. THIS MOD WILL ONLY FULLY WORK ON MEDAL OF HONOR ALLIED ASSAULT!
+
+<><><><><><><><><><>
+
+<><><>Features & Credit<><><>
+
+Admin_Menu, And All of Its Features - Elgan
+Planes - Elgan
+Jetpacks - Elgan
+Guided Missile - Sorridstroker
+Dog Trigger - Sorridstroker
+Normal Size Trigger - Me
+Midget Trigger - Me
+Giant Trigger - Me
+All Weapons Trigger - Me
+Invisible Trigger - Me
+Invulnerable Trigger - Me
+Camouflage Trigger - Me
+Movable Health Trigger - Me
+Basebuilder/Items and Map Scripting - Me
+Faster Building - Me
+70 Second Countdown - Me
+The Falls Basebuilder - Me
+Uber Death Sounds - Me
+Reasonable Weapons, And Skins - Me, And My Member, IcE1337
+Two Extra Flyable Planes - Me (these can be found on m1l3b and m4l0)
+Capture The Church Mod - Mostly Ice1337, but modifications on that, by Me
+The Ability To Use Cheats Like Noclip During Basebuilder, Then Get Deactivated When Builder Is Over - Me
+
+(there are much more features than I can post on here btw, but these are the major ones)
+(Note: Be sure to read the Extra Info readmes in the .zip file too, they give a lot of info about specific features)
+
+<><><><><><><><><><>
+
+<><><>How To Install<><><>
+
+I'm going to type out the step-by-step directions for how to install this (just in case noobs see this). Open up the .zip file that you downloaded, and put the UBER BASEBUILDER .pk3 file into your MOHAA\main folder (usually at C:\Program Files\EA GAMES\MOHAA\main). To get into C: you have to open My Computer and click Local Disk [C:]. If you want some really cool modded weapons, put the ReasonableWeapons666 into your MOHAA\main folder as well. And just a reminder, this mod only FULLY works for Allied Assault.
+
+<><><><><><><><><><>
+
+<><><>How To Uninstall<><><>
+
+To Uninstall this, simply delete or take the UBER BASEBUILDER.pk3 out of your MOHAA\main folder. To uninstall the weapons, take it out of your MOHAA\main too. Make sure to keep these files too, just in case you want to play it again :D
+
+<><><><><><><><><><>
+
+<><><>Frequently Asked Questions<><><>
+
+Q. This mod doesn't work.
+A. Check and see if there aren't any other mods interfering with mine.
+
+Q. The Falls Basebuilder doesn't work.
+A. Make sure you have the actual map, it can be found at http://medalofhonor.filefront.com/file/The_Falls;17835
+
+Q. Some of the features you posted about aren't in here.
+A. Make sure you are playing my mod on Allied Assault, it definitely won't work perfectly on Spearhead or Breakthrough.
+
+Q. The weapon mod isn't working.
+A. Again, check and see if there aren't any other mods interfering with mine.
+
+Q. I've looked through your mod, and some scripts that are in here aren't on any levels.
+A. This is absolutely true. These are unfinished pieces of my mod that I cannot finish without someone else's help. see http://medalofhonor.filefront.com/news/SearingWolfe_Requires_Help_With_A_Mod_Called_Uber_Basebuilder;42949 for the full story.
+
+Q. Am I allowed to mod this mod?
+A. Yes, just as long as you give credit to me, and the other names in the Credits.
+
+<><><><><><><><><><>
+
+<><><>])ar]{ Clan<><><>
+
+My full name in mohaa is ])ar]{Gen.SearingWolfe. This is because I am the owner of the ])ar]{ clan. The ])ar]{ clan runs this mod on our server. If you would like to join, please do not post in the forums on our website, because I never really check it, lol. I'd suggest getting xfire (link on the website), adding me as a friend, and asking me if you would like to join. By the way, the website is at http://www.freewebs.com/mohaa-dark-clan/
+
+<><><><><><><><><><>
+
+<><><>Server<><><>
+
+The ])ar]{ clan also runs a server too. The server name is ])ar]{ Clan's Server. The gametype is *****UBER BASEBUILDER*****. The I.P. address is 68.36.8.164:12203. More info on the server at http://www.freewebs.com/mohaa-dark-clan/
+
+<><><><><><><><><><>
+
+<><><>Other Readmes<><><>
+
+I can't post all the readmes on this website, so for all the extra information you want to know about the other features in my mod, be sure to read the other readmes in the .zip file that you are downloading. I also give away some important info that might just help you beat someone else, so I would recommend reading all of them.
+
+<><><><><><><><><><>
+
+<><><>More Screenshots<><><>
+
+If you want more screenshots then what's on here now, you'll have to read the readme named Want More Screenshots.txt in the .zip file. I don't want to post my clan's website with the other screenshots, because I don't want mohfiles to think I'm advertising.
+
+<><><>Feedback<><><>
+
+Please leave some feedback about my mod if you like it or not. Trust me, you won't hurt my feelings.
+
+Xfire username is: searingwolfe
+
+
+
+<><><>Have Fun Everyone!!!<><><>

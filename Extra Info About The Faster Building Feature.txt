@@ -1,0 +1,13 @@
+<><><>Info<><><>
+
+This is a simple feature that makes you build things a lot faster. Normally you would wait 3 seconds to put an item, or respawn after you placed a lift, none of this happens in my mod. You just simply left click, and you placed the object. Read the controls for specific kinds of objects.
+
+<><><><><><><><><><>
+
+<><><>Controls<><><>
+
+For Normal Objects: Left click to place
+For Lifts: Left click on the ground or wherever you want the lift to stop when it hits the bottom. Then click in the sky or wherever you want the lift to stop when it hits the stop. It's a little hard to explain.
+For Teleporters: Left click to place its starting point (the white beam you walk into to teleport). Then left click somewhere else to place wherever you want to teleport to (the destination of the teleporter). 
+
+<><><><><><><><><><>
